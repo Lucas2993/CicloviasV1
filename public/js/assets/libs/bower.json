@@ -1,0 +1,26 @@
+{
+  "name": "libs",
+  "homepage": "https://github.com/LucasAbella29/CicloviasV1",
+  "authors": [
+    "Lucas <lucas.gabriel2993@gmail.com>"
+  ],
+  "description": "Librerias necesarias para ejecutar Ciclovias",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "2.1.3",
+    "angular-route": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular": "1.5.8",
+    "angular-openlayers-directive": "^1.19.3",
+    "bootstrap": "3.3.7"
+  }
+}

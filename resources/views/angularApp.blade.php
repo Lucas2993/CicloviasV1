@@ -1,33 +1,50 @@
 <!DOCTYPE html>
-<!-- <html ng-app='demoapp'> -->
 <html ng-app='cicloviasApp'>
   <head>
-    <title>[%title%]</title>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
-    <script src="http://tombatossals.github.io/angular-openlayers-directive/bower_components/openlayers3/build/ol.js"></script>
-    <link rel="stylesheet" href="http://tombatossals.github.io/angular-openlayers-directive/bower_components/openlayers3/build/ol.css">
-    <script src="http://tombatossals.github.io/angular-openlayers-directive/dist/angular-openlayers-directive.min.js"></script>
+    <title>[[title]]</title>
 
-    <!-- Librerias y css de bootstrap (componentes visuales)-->
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Styles -->
+    <!-- Estilos externos -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ URL::asset('js/assets/libs/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 
-    <!-- path de los controladores y modulos -->
-    <script src="{{ URL::asset('js/AngularApp/principal/ruteo.js') }}"></script>
-    <script src="{{ URL::asset('js/AngularApp/principal/otrasRutas.js') }}"></script>
-    <script src="{{ URL::asset('js/AngularApp/controllers/map.js') }}"></script>
-    <script src="{{ URL::asset('js/AngularApp/components/compEncabezado.js') }}"></script>
-    <script src="{{ URL::asset('js/AngularApp/controllers/bootstrapModule.js') }}"></script>
-    <script src="{{ URL::asset('js/AngularApp/principal/CicloviasAppMod.js') }}"></script>
+    <!-- OpenLayers -->
+    <link rel="stylesheet" href="{{ URL::asset('js/assets/libs/bower_components/openlayers/ol.css') }}">
 
-    </script>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/session.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/style.css') }}"> -->
 
-    </script>
+
+    <!-- Scripts -->
+    <!-- Librerias externas -->
+    <!-- AngularJS -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular/angular.min.js') }}"></script>
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular-sanitize/angular-sanitize.min.js') }}"></script>
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular-route/angular-route.min.js') }}"></script>
+
+    <!-- OpenLayers -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/openlayers/ol.js') }}"></script>
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js') }}"></script>
+
+    <!-- UI-Bootstrap -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
+
+    <!-- jQuery (necesaria para Bootstrap) -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <!-- Controladores y modulos propios -->
+    <script src="{{ URL::asset('js/CicloviasApp/app.module.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/app.routes.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
+
   </head>
   <body>
-    <encabezado></encabezado>
+    <navigation></navigation>
     <div class="container" ng-view=""></div>
   </body>
 </html>

@@ -3,8 +3,8 @@
 
 (function () {
 	'use strict';
-	angular.module('Encabezado', [])
-	.component('encabezado', {
-		templateUrl: '/CicloviasV1/public/js/AngularApp/templates/encabezado.html'
+	angular.module('navigationbar', [])
+	.component('navigation', {
+		templateUrl: '/CicloviasV1/public/js/CicloviasApp/shared/navigationbar/navigationbarView.html'
 	})
 })()
