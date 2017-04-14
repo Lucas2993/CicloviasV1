@@ -2,21 +2,25 @@
 (function () {
 	'use strict';
 	angular.module('routes', [])
-		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-								var base_route = '/CicloviasV1/public/js/CicloviasApp/';
-                $routeProvider
+		.config(['$routeProvider', '$locationProvider', '$windowProvider', function ($routeProvider, $locationProvider, $windowProvider) {
+								var $window = $windowProvider.$get(); // Se obtiene $window para poder usar location.
+								// Se obtiene la ruta base (siempre descartando index.php si estuviera debido a que
+								// no es una carpeta valida).
+								var base_route = $window.location.pathname.split('index.php')[0];
+
+								$routeProvider
                         .when('/login', {
-                            templateUrl: base_route + 'components/login_register/loginView.html'
+                            templateUrl: base_route + 'js/CicloviasApp/components/login_register/loginView.html'
                         })
                         .when('/register', {
-                            templateUrl: base_route + 'components/login_register/registerView.html'
+                            templateUrl: base_route + 'js/CicloviasApp/components/login_register/registerView.html'
                         })
                         .when('/map', {
-                            templateUrl: base_route + 'components/map/mapView.html',
+                            templateUrl: base_route + 'js/CicloviasApp/components/map/mapView.html',
                             controller: 'MapController'
                         })
 												.when('/home', {
-                            templateUrl: base_route + 'components/home/homeView.html'
+                            templateUrl: base_route + 'js/CicloviasApp/components/home/homeView.html'
                         })
                         .otherwise({
                             redirectTo: '/home'
