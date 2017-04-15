@@ -39,7 +39,7 @@
     <!-- Controladores y modulos propios -->
     <script src="{{ URL::asset('js/CicloviasApp/app.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/shared/navigationbar/navigationbarModule.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
 
   </head>

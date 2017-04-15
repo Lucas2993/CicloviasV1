@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\modelos\Centrality;
+use App\Models\Centrality;
 use App\modelos\GeoPoint;
 
 class CentralitySeeder extends Seeder

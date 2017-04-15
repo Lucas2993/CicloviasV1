@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\modelos\Centrality;
+use App\Models\Centrality;
 
 /**
   *Crontoller creado por JLDEVIA el 14/04/2017.
