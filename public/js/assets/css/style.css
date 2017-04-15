@@ -1,87 +1,90 @@
+<style>.angular-openlayers-map {
+    /*width: 1240px;
+    height: 680px;*/
+    /*height: 90px;*/
+}
 
-<style>
+.affix {
+    top: 20px;
+}
 
-  .angular-openlayers-map {
-    width: 840px;
-    height: 680px;
-  }
+#control {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+#cont {
+    background-color: #f1f1f1;
+}
+
+#sidebar {
+    background-color: #f1f1f1;
+}
 
 
-  /* Remove the navbar's default margin-bottom and rounded borders */
-  .navbar {
+/* Remove the navbar's default margin-bottom and rounded borders */
+
+.navbar {
     margin-bottom: 0;
     border-radius: 0;
     width: 100%;
-  }
-  /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-/*.row.content {height: 450px}*/
-
-/* Set gray background color and 100% height */
-/*.sidenav {
-  padding-top: 20px;
-  background-color: #f1f1f1;
-  height: 100%;
-}*/
-
-/* Set black background color, white text and some padding */
-footer {
-  background-color:  #ccccb3;
-  color: black;
-  margin-bottom: 0;
-  border-radius: 0;
-  width:100%;
-  position : absolute;
-  bottom:0;
-  left:0;
-
 }
 
-
 .container-fluid-map {
-  margin-bottom: 0;
-  border-radius: 0;*/
-     /*background-color: #40ff00;*/
-  /*padding: 0px;*/
-     /*width: 1075px;
+    margin-bottom: 0;
+    border-radius: 0;
+    */
+    /*width: 100%;*/
+    /*height: 90%;*/
+    /*background-color: #40ff00;*/
+    /*padding: 0px;*/
+    /*width: 1075px;
        height: 576px;*/
 }
 
-/*.container-flui  d-left {
-  margin-bottom: 0;
-  border-radius: 0;
-  padding: 0px;*/
-  /*background-color: #cc0000;*/
-  /*width: 100%;*/
-/*}*/
-
-
 .container-fluid-p {
-  margin-bottom: 0;
-  border-radius: 0;
-  /*height: 100%;*/
+    margin-bottom: 0;
+    border-radius: 0;
+    /*height: 100%;*/
 }
 
 
-
-
-body {
+/*body {
   padding-top: 50px;
-}
+}*/
+
+
 /*
  * Style tweaks
  * --------------------------------------------------
  */
-html,
-body {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
-  height: 100%;
+
+html, body {
+    overflow-x: hidden;
+    /* Prevent scroll on narrow devices */
+    height: 100%;
 }
+
 body {
-  padding-top: 70px;
+    padding-top: 55px;
+    height: 100%;
+    background-color: #f1f1f1;
 }
+
 footer {
-  padding: 30px 0;
+    /*padding: 20px 0;*/
+    background-color: #ccccb3;
+    color: black;
+    margin-bottom: 0;
+    border-radius: 0;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
+
 
 /*
  * Off Canvas
@@ -93,104 +96,98 @@ footer {
  * (For now I will ignore that for mobile users and also not worry about
  * screen re-sizing popping the menu out.)
  */
+
 @media screen and (min-width: 768px) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all .25s ease-out;
-       -moz-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-  }
-
-  .row-offcanvas-right {
-    right: 25%;
-  }
-
-  .row-offcanvas-left {
-    left: 25%;
-  }
-
-  .row-offcanvas-right .sidebar-offcanvas {
-    right: -25%; /* 3 columns */
-   background-color: rgb(255, 255, 255);
-  }
-
-  .row-offcanvas-left .sidebar-offcanvas {
-    left: -25%; /* 3 columns */
-   background-color: rgb(255, 255, 255);
-  }
-
-  .row-offcanvas-right.active {
-    right: 0; /* 3 columns */
-  }
-
-  .row-offcanvas-left.active {
-    left: 0; /* 3 columns */
-  }
-
-  .row-offcanvas-right.active .sidebar-offcanvas {
-   background-color: rgb(254, 254, 254);
-  }
-  .row-offcanvas-left.active .sidebar-offcanvas {
-   background-color: rgb(254, 254, 254);
-  }
-
-.row-offcanvas .content {
-    width: 75%; /* 9 columns */
-    -webkit-transition: all .25s ease-out;
-       -moz-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-
-  }
-
-  .row-offcanvas.active .content {
-    width: 100%; /* 12 columns */
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 25%; /* 3 columns */
-  }
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+    .row-offcanvas-right {
+        right: 0;
+    }
+    .row-offcanvas-left {
+        left: 0;
+    }
+    .row-offcanvas-right .sidebar-offcanvas {
+        right: -25%;
+        /* 3 columns */
+        background-color: rgb(255, 255, 255);
+    }
+    .row-offcanvas-left .sidebar-offcanvas {
+        left: -25%;
+        /* 3 columns */
+        background-color: rgb(255, 255, 255);
+    }
+    .row-offcanvas-right.active {
+        right: 25%;
+        /* 3 columns */
+    }
+    .row-offcanvas-left.active {
+        left: 25%;
+        /* 3 columns */
+    }
+    .row-offcanvas-right.active .sidebar-offcanvas {
+        background-color: rgb(254, 254, 254);
+    }
+    .row-offcanvas-left.active .sidebar-offcanvas {
+        background-color: rgb(254, 254, 254);
+    }
+    .row-offcanvas .content {
+        width: 75%;
+        /* 9 columns */
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+    .row-offcanvas.active .content {
+        width: 100%;
+        /* 12 columns */
+    }
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 25%;
+        /* 3 columns */
+    }
 }
+
 @media screen and (max-width: 767px) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all .25s ease-out;
-       -moz-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-  }
-
-  .row-offcanvas-right {
-    right: 0;
-  }
-
-  .row-offcanvas-left {
-    left: 0;
-  }
-
-  .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -50%; /* 6 columns */
-  }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -50%; /* 6 columns */
-  }
-
-  .row-offcanvas-right.active {
-    right: 50%; /* 6 columns */
-  }
-
-  .row-offcanvas-left.active {
-    left: 50%; /* 6 columns */
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 50%; /* 6 columns */
-  }
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+    .row-offcanvas-right {
+        right: 0;
+    }
+    .row-offcanvas-left {
+        left: 0;
+    }
+    .row-offcanvas-right .sidebar-offcanvas {
+        right: -50%;
+        /* 6 columns */
+    }
+    .row-offcanvas-left .sidebar-offcanvas {
+        left: -50%;
+        /* 6 columns */
+    }
+    .row-offcanvas-right.active {
+        right: 50%;
+        /* 6 columns */
+    }
+    .row-offcanvas-left.active {
+        left: 50%;
+        /* 6 columns */
+    }
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        /* 6 columns */
+    }
 }
 
 </style>
