@@ -1,5 +1,5 @@
 /* Modulo principal de la aplicacion con el ruteo general de la aplicacion */
-(function () {
+// (function () {
 	'use strict';
 	angular.module('routes', [])
 		.config(['$routeProvider', '$locationProvider', '$windowProvider', function ($routeProvider, $locationProvider, $windowProvider) {
@@ -26,4 +26,4 @@
                             redirectTo: '/home'
                         });
             }]);
-})()
+// })()

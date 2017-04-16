@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Centrality;
-use App\modelos\GeoPoint;
+use App\Models\GeoPoint;
 
 class CentralitySeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class CentralitySeeder extends Seeder
 
       $punto1 = new GeoPoint;
       $punto1->latitude = -42.7672777;
-      $punto1->length = -65.036735;
+      $punto1->longitude = -65.036735;
 
       $centralidad1->geoPoint()->save($punto1);
       //------------------------------------
@@ -33,7 +33,7 @@ class CentralitySeeder extends Seeder
 
       $punto2 = new GeoPoint;
       $punto2->latitude = -42.7653271;
-      $punto2->length = -65.0410575;
+      $punto2->longitude = -65.0410575;
 
       $centralidad2->geoPoint()->save($punto2);
       //------------------------------------
@@ -46,7 +46,7 @@ class CentralitySeeder extends Seeder
 
       $punto3 = new GeoPoint;
       $punto3->latitude = -42.7859094;
-      $punto3->length = -65.0057736;
+      $punto3->longitude = -65.0057736;
 
       $centralidad3->geoPoint()->save($punto3);
       //------------------------------------

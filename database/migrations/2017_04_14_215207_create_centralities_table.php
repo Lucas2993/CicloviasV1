@@ -16,7 +16,7 @@ class CreateCentralitiesTable extends Migration
         Schema::create('centralities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->string('location');
+            $table->string('location')->nullable()->default(null);
             $table->timestamps();
         });
     }

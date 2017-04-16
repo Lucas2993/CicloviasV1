@@ -17,7 +17,7 @@ class CreateGeopointsTable extends Migration
             $table->increments('id');
             $table->integer('centrality_id')->unsigned()->nullable();
             $table->double('latitude', 15, 8);
-            $table->double('length', 15, 8);
+            $table->double('longitude', 15, 8);
             $table->foreign('centrality_id')
                   ->references('id')->on('centralities')
                   ->onDelete('cascade');

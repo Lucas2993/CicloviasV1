@@ -42,24 +42,17 @@
     <script src="{{ URL::asset('js/CicloviasApp/app.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarController.js') }}"></script>
+
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
-
-    <script>
-        function desactive() {
-            document.getElementById("row-offcanvas").classList.remove("active");
-            console.log("des");
-        }
-
-        function active() {
-            document.getElementById("row-offcanvas").classList.toggle("active");
-        }
-    </script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapService.js') }}"></script>
 
   </head>
   <body>
     <navigation></navigation>
-    <!-- <div class="container" ng-view=""></div> -->
-            <div class="" ng-view=""></div>
+
+    <div class="" ng-view=""></div>
+
     <footer class="container-fluid text-right">
         <p>@Universidad Nacional de la Patagonia San Juan Bosco</p>
     </footer>

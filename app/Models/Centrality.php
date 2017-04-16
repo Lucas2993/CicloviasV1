@@ -1,6 +1,6 @@
 <?php
 
-namespace App\modelos;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,6 @@ class Centrality extends Model
   protected $table = 'centralities';
 
   public function geoPoint(){
-    return $this->hasOne('App\modelos\GeoPoint');
+    return $this->hasOne('App\Models\GeoPoint');
   }
 }

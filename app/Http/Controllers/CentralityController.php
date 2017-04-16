@@ -21,7 +21,7 @@ class CentralityController extends Controller
     {
       $result = Centrality::with([
         'geoPoint'=> function ($query){
-          $query->get(['latitude', 'length']);
+          $query->get(['latitude', 'longitude']);
         }
         ])->get(['id','name', 'location']);
       return response($result->toJson(), 200)

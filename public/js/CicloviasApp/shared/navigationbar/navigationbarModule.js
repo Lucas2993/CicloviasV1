@@ -5,6 +5,7 @@
 	'use strict';
 	angular.module('navigationbar', [])
 	.component('navigation', {
-		templateUrl: '/CicloviasV1/public/js/CicloviasApp/shared/navigationbar/navigationbarView.html'
+		templateUrl: '/CicloviasV1/public/js/CicloviasApp/shared/navigationbar/navigationbarView.html',
+		controller: 'NavController'
 	})
 })()

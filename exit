@@ -1,0 +1,96 @@
+[33mcommit 128776761a099fbd93e2fd21c2ec0d93dfb5689d[m
+Merge: 975bba6 2e8eef2
+Author: emanuel mallon <emanuelsm18@gmail.com>
+Date:   Sat Apr 15 13:04:39 2017 -0300
+
+    Merge branch 'master' of https://github.com/LucasAbella29/CicloviasV1
+
+[33mcommit 975bba6ad518baf887a75e00190ff6439f79e914[m
+Author: emanuel mallon <emanuelsm18@gmail.com>
+Date:   Sat Apr 15 13:04:18 2017 -0300
+
+    view v1
+
+[33mcommit 2e8eef286992321f16b61efae4c6384efbf9862a[m
+Author: Lucas <lucas.gabriel2993@gmail.com>
+Date:   Sat Apr 15 11:38:11 2017 -0300
+
+    Correccion de errores
+    
+    - Ya quedo arreglado el problema del .gitignore y restauradas las carpetas como las teniamos originalmente.
+    - Realice un cambio en la carpeta "modelos" ya que por lo pactado se tiene que llamar "Models".
+    - Hecho el cambio anterior ya refresque las referencias para que no haya problemas.
+
+[33mcommit b4bd67928b2a21337a253fbdad28ebeecaa7b7a7[m
+Author: José Luis Devia <jldevia81@gmail.com>
+Date:   Sat Apr 15 10:23:22 2017 -0300
+
+    Commit del 15/04/2017. jldevia. H.U: Capa de centralidades.
+    
+    - Se agregaron dos migraciones: create_centralities_table
+    y create_geopoints_table para la creación de las tablas de "Centralidades"
+    y "GeoPoints". Para la tabla "Zonas" agregar una columna a "GeoPoints"
+    que apunte a dicha.
+    - Se agrego un Seeder (Generador de datos) para cargar 3 centralidades
+    de prueba.
+    - Se agregaron 2 modelos: "Centrality" y "GeoPoint".
+    - Se creo un api Rest para recuperar todas las centralidades. El formato
+    de la respuesta de este servicio es JSON (obvio).
+    - Se definio las rutas a dichos servicios REST.
+
+[33mcommit b1a9d7f46ec3eae10d221b0db94d33d1e32a3b33[m
+Merge: 6303d02 434dcff
+Author: José Luis Devia <jldevia81@gmail.com>
+Date:   Fri Apr 14 11:51:46 2017 -0300
+
+    Merge branch 'master' of https://github.com/LucasAbella29/CicloviasV1
+
+[33mcommit 6303d02b6f6b70df75af0ee1a82b1b5342c86689[m
+Author: José Luis Devia <jldevia81@gmail.com>
+Date:   Fri Apr 14 11:51:07 2017 -0300
+
+    Commit del 14/04/2017.
+
+[33mcommit 434dcffdb1cac1aead8db2b7effc796cec802256[m
+Author: Lucas <lucas.gabriel2993@gmail.com>
+Date:   Fri Apr 14 00:40:07 2017 -0300
+
+    Correccion de rutas
+    
+    Quedo corregido un problema con respecto a la ruta en donde se ponia el proyecto dentro del servidor. Ya no es obligatorio ponerlo dentro de la carpeta base de las aplicaciones a usar en el servidor.
+
+[33mcommit 3477c2952dd7f61dbb051489b6675b9d6ea21630[m
+Author: Lucas <lucas.gabriel2993@gmail.com>
+Date:   Thu Apr 13 11:16:45 2017 -0300
+
+    Cambios generales en la extructura e incorporacion de Bower
+    
+    Se incorporo la nueva estructura de directorios correspondiente con el ejemplo de la pagina:
+    
+    https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+    
+    Se tuvieron que redefinir los nombres para poder compatibilizar con lo charlado sobre los criterios en los nombres. Tambien se incorporo la pantalla principal para poder separar el mapa de la misma.
+    
+    Se incorporo el gestor de dependecias Bower para las librerias web necesarias. El archivo bower.json define las versiones y para instalar hay que ejecutar dentro de la carpeta libs "bower install".
+
+[33mcommit 4c0d892067f4c36f71ec0e75eb55a05051f4e9fa[m
+Author: Lucas <lucas.gabriel2993@gmail.com>
+Date:   Tue Apr 11 10:30:01 2017 -0300
+
+    Incorporacion del proyecto angular y el template
+    
+    Se incorporo la estructura de carpetas correspondiente a la aplicacion Angular a utilizar. Dentro se encuentra el template con el mapa incorporado. Se cambiaron las llaves dobles de angular "{{}}" por "[%%]".
+
+[33mcommit 117893bba1aef75ab75fbd234a9d74ccca0eeb44[m
+Author: Lucas Abella <lucas.gabriel2993@gmail.com>
+Date:   Thu Apr 6 18:31:01 2017 -0300
+
+    Segundo commit
+    
+    Esto agrega todos los archivos necesarios
+
+[33mcommit eeaf6930502894e2214965061dd3b41bbaf2c186[m
+Author: Lucas Abella <lucas.gabriel2993@gmail.com>
+Date:   Thu Apr 6 18:06:03 2017 -0300
+
+    Primer commit
