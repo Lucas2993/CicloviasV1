@@ -12,7 +12,15 @@ class Centrality extends Model
 {
   protected $table = 'centralities';
 
-  public function geoPoint(){
+  /**
+ * The attributes that are mass assignable.
+ *
+ */
+ protected $fillable = [
+   'name', 'location', 'point'
+ ];
+
+  public function geopoint(){
     return $this->hasOne('App\Models\GeoPoint');
   }
 }

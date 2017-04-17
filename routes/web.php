@@ -22,4 +22,6 @@ Route::get('/','AngularAppController@index');
 *Agregado por JLDEVIA el 14/04/2017.
 *H.U: Capas de centralidades.
 */
-Route::resource('centrality', 'CentralityController', ['except' => ['create']]);
+Route::resource('api/centrality', 'CentralityController', ['except' => ['create', 'edit']]);
+
+Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit']]);
