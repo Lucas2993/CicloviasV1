@@ -27,8 +27,8 @@
         <!-- Mapa -->
         <div id="container-fluid-map" >
             <openlayers lat=[[latitude]] lon=[[longitude]] zoom=[[zoom]]>
-                <!-- <ol-marker ng-repeat="mark in markers" lat="mark.lat" lon="mark.lon" message=[[mark.mensaje]]>
-                </ol-marker> -->
+                <ol-marker ng-repeat="mark in markers" lat="mark.point.latitude" lon="mark.point.longitude" message=[[mark.name]]>
+                </ol-marker>
             </openlayers>
         </div>
         <!-- fin mapa -->

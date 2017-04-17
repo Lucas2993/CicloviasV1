@@ -19,7 +19,10 @@ class CentralityController extends Controller
      */
     public function index(){
         $centralities = Centrality::all();
-
+        // Se obtienen los puntos correspodientes.
+        foreach($centralities as $centrality){
+            $centrality->point = $centrality->geopoint()->get()[0];
+        }
         return $centralities;
     }
 

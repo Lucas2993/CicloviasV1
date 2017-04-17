@@ -54,8 +54,8 @@ class ZoneTest extends TestCase{
         $this->assertTrue(count($points) == 2);
 
         // Se eliminan los datos usados.
-        // GeoPoint::destroy($point_1->id);
-        // GeoPoint::destroy($point_2->id);
-        // Zone::destroy($zone->id);
+        GeoPoint::destroy($point_1->id);
+        GeoPoint::destroy($point_2->id);
+        Zone::destroy($zone->id);
     }
 }

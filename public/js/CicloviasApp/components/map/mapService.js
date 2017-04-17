@@ -4,7 +4,7 @@
         .factory('MapSrv', ['$http', function($http) {
             return {
                 findAll: function(callback) {
-                    $http.get('http://localhost/CicloviasV1/public/centrality')
+                    $http.get('api/centrality')
                         .then(
                             function(res) {
                                 return callback(false, res.data)
