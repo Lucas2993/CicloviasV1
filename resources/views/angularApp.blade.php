@@ -43,6 +43,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/shared/pagefooter/pagefooterModule.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapService.js') }}"></script>
@@ -53,8 +54,6 @@
 
     <div class="" ng-view=""></div>
 
-    <footer class="container-fluid text-right">
-        <p>@Universidad Nacional de la Patagonia San Juan Bosco</p>
-    </footer>
+    <footer></footer>
   </body>
 </html>

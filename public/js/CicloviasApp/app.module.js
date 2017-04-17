@@ -10,6 +10,7 @@ var App= angular.module('cicloviasApp', [
 
     // Propios
     'navigationbar',
+    'pagefooter',
     'routes',
     'mapModule'
 ]).config(['$interpolateProvider', function($interpolateProvider) {
@@ -21,4 +22,3 @@ var App= angular.module('cicloviasApp', [
     }
 ])
 // })();
-  
