@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder{
      */
     public function run(){
       Model::unguard();
-      $this->call(CentralitySeeder::class);
+      //$this->call(CentralitySeeder::class);
+      $this->call(ZoneSeeder::class);
       Model::reguard();
 
     }
