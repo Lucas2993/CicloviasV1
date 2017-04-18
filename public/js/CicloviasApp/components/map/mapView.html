@@ -10,12 +10,12 @@
                 <div class="panel-body">
                     <form>
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-model="checkboxModel.valueCentralities" ng-change= "verCapaCentralidades()"> Ver capa de centralidades</label>
+                            <label><input type="checkbox" ng-model="checkboxModel.centralitiesValue" ng-change= "toogleCentralitiesLayer()"> Ver capa de centralidades</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox"> Ver capa de zonas</label>
+                            <label><input type="checkbox" ng-model="checkboxModel.zonesValue" ng-change= "toogleZonesLayer()" > Ver capa de zonas</label>
                         </div>
-                        <button  class="btn btn-primary" ng-click="verCapaCentralidades()" >Probar</button>
+                        <button  class="btn btn-primary"  >Probar</button>
                         <!-- <h1>{{myWelcome}}</h1> -->
 
                     </form>
@@ -26,11 +26,6 @@
         </nav>
         <!-- Mapa -->
         <div id="container-fluid-map" >
-
-            <!-- <openlayers lat=[[latitude]] lon=[[longitude]] zoom=[[zoom]]> -->
-                <!-- <ol-marker ng-repeat="mark in markers" lat="mark.lat" lon="mark.lon" message=[[mark.mensaje]]>
-                </ol-marker> -->
-            <!-- </openlayers> -->
             <div id="map" class="map"></div>
         </div>
         <!-- fin mapa -->

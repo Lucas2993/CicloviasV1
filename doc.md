@@ -47,3 +47,5 @@ php artisan make:seeder UsersTableSeeder
 
 #Una vez definidos los ficheros de semillas, cuando queramos ejecutarlos para rellenar de datos la base de datos tendremos que usar el siguiente comando de Artisan:
 php artisan db:seed
+
+# Si lanza el error [ReflectionException] Class Database\Seeds\ZoneSeeder does not exist, entonces borrar el seeder y crearlo manualmente, claro salvando su contenido                             

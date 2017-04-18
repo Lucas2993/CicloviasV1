@@ -15,16 +15,18 @@
 
         // ngModel de checkbox
         vm.checkboxModel = {
-            valueCentralities: false,
+            centralitiesValue: false,
+            zonesValue : false
         };
 
-        var capaMapaFondo = new ol.layer.Tile({
+        // Capa basica del mapa brindado por OSM
+        var OSMLayer = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
 
-
+        // Cronstructor de mapa base
         vm.map = new ol.Map({
-            layers: [capaMapaFondo],
+            layers: [OSMLayer],
             target: 'map',
             view: new ol.View({
                 projection: 'EPSG:4326',
@@ -35,18 +37,33 @@
 
 
         // Busca todas las centralidades de la BD
-        vm.findAll = function() {
-            service.findAll(function(err, res) {
+        vm.findAllCentralities = function() {
+            service.findAllCentralities(function(err, res) {
                 if (err) {
-                    return alert('Ocurrió un error buscando los puntos: ' + err)
+                    return alert('Ocurrió un error buscando las centralidades: ' + err)
                 }
                 console.log(res);
                 vm.centralitiesJson = res;
                 vm.generateCentralitiesPoints(vm.centralitiesJson);
             });
         }
-        vm.findAll();
 
+        vm.findAllZones = function() {
+            service.findAllZones(function(err, res) {
+                if (err) {
+                    return alert('Ocurrió un error buscando las zonas: ' + err)
+                }
+                console.log(res);
+                // vm.centralitiesJson = res;
+                // vm.generateCentralitiesPoints(vm.centralitiesJson);
+            });
+        }
+
+        vm.findAllCentralities();
+        vm.findAllZones();
+
+
+        // Estilo de los iconos de una centralidad
         var iconStyle = new ol.style.Style({
             //   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
             image: new ol.style.Icon(({
@@ -57,39 +74,45 @@
             }))
         });
 
-
+        // Contructor de punto perteneciente a un mapa de OSM
         vm.generatePoint = function(lon, lat) {
             return new ol.Feature({
                 geometry: new ol.geom.Point([lon, lat])
             });
         }
 
-
+//      Generacion de Capa de Centralidades a partir del json recibido desde el service
         vm.generateCentralitiesPoints = function(centralitiesJson) {
             var vector = [];
-            var punto;
+            var point;
+            // Recorre el json, mientras va generando puntos y los agrega a un vector
             for (var i = 0; i < centralitiesJson.length; i++) {
-                punto = vm.generatePoint(centralitiesJson[i].point.longitude, centralitiesJson[i].point.latitude);
-                punto.setStyle(iconStyle);
-                vector.push(punto);
+                point = vm.generatePoint(centralitiesJson[i].point.longitude, centralitiesJson[i].point.latitude);
+                point.setStyle(iconStyle);
+                vector.push(point);
             }
-            var puntosCentralidades = new ol.source.Vector({
+            var centralitiesPoints = new ol.source.Vector({
                 features: vector
             });
-            vm.capaCentralidades = new ol.layer.Vector({
-                source: puntosCentralidades
+            vm.centralitiesLayer = new ol.layer.Vector({
+                source: centralitiesPoints
             });
-            vm.map.addLayer(vm.capaCentralidades);
-            vm.capaCentralidades.setVisible(false);
+            // Se agrega la capa de Centralidades al mapa
+            vm.map.addLayer(vm.centralitiesLayer);
+            vm.centralitiesLayer.setVisible(false);
         }
 
         // Toogle de capa de centralidades
-        vm.verCapaCentralidades = function() {
-            if (vm.capaCentralidades.getVisible()) {
-                vm.capaCentralidades.setVisible(false);
+        vm.toogleCentralitiesLayer = function() {
+            if (vm.centralitiesLayer.getVisible()) {
+                vm.centralitiesLayer.setVisible(false);
             } else {
-                vm.capaCentralidades.setVisible(true);
+                vm.centralitiesLayer.setVisible(true);
             }
+        }
+        // Toogle de capa de zonas
+        vm.toogleZonesLayer = function() {
+            console.log("zones");
         }
 
     } // fin Constructor
