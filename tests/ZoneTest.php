@@ -12,8 +12,8 @@ class ZoneTest extends TestCase{
 
     public function testModel(){
         // Se crean dos nuevos puntos y se los incluye en un arreglo.
-        $point_1 = new GeoPoint(['latitude' => '-42.7672777','longitude' => '-65.036735']);
-        $point_2 = new GeoPoint(['latitude' => '-42.036735','longitude' => '-65.7672777']);
+        $point_1 = new GeoPoint(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '1']);
+        $point_2 = new GeoPoint(['latitude' => '-42.036735','longitude' => '-65.7672777', 'order' => '2']);
         $points = array($point_1, $point_2);
         // Se crea una zona incorporando el arreglo de puntos.
         $zone = new Zone(['name' => 'Nueva zona','description' => 'Alta zona', 'points' => $points]);
@@ -41,8 +41,8 @@ class ZoneTest extends TestCase{
         // Se crea y persiste una nueva zona.
         $zone = Zone::create(['name' => 'Nueva zona','description' => 'Alta zona']);
         // Se crean y persisten dos nuevos puntos.
-        $point_1 = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735']);
-        $point_2 = GeoPoint::create(['latitude' => '-42.036735','longitude' => '-65.7672777']);
+        $point_1 = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '1']);
+        $point_2 = GeoPoint::create(['latitude' => '-42.036735','longitude' => '-65.7672777', 'order' => '2']);
         // Se asocian los nuevos puntos
         $zone->geopoints()->save($point_1);
         $zone->geopoints()->save($point_2);
@@ -52,6 +52,8 @@ class ZoneTest extends TestCase{
         $points = $zone_db->geopoints()->get();
         // Se corrobora que los dos puntos asignados esten.
         $this->assertTrue(count($points) == 2);
+        $this->assertTrue($points[0]->order == '1');
+        $this->assertTrue($points[1]->order == '2');
 
         // Se eliminan los datos usados.
         GeoPoint::destroy($point_1->id);

@@ -18,7 +18,7 @@ class CentralityTest extends TestCase
         // Se crea y persiste una nueva zona.
         $centrality = Centrality::create(['name' => 'Plaza','location' => 'Alta plaza']);
         // Se crean y persisten dos nuevos puntos.
-        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735']);
+        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '-1']);
         // Se asocian los nuevos puntos
         $centrality->geopoint()->save($point);
         // Se recupera la zona recientemente guardada.
@@ -28,6 +28,7 @@ class CentralityTest extends TestCase
         // Se corrobora que los dos puntos asignados esten.
         $this->assertTrue($point['latitude'] == '-42.7672777');
         $this->assertTrue($point['longitude'] == '-65.036735');
+        $this->assertTrue($point['order'] == '-1');
 
         // Se eliminan los datos usados.
         GeoPoint::destroy($point->id);
