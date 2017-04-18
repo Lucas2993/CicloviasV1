@@ -10,12 +10,12 @@
                 <div class="panel-body">
                     <form>
                         <div class="checkbox">
-                            <label><input type="checkbox"> Ver capa de centralidades</label>
+                            <label><input type="checkbox" ng-model="checkboxModel.valueCentralities" ng-change= "verCapaCentralidades()"> Ver capa de centralidades</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox"> Ver capa de zonas</label>
                         </div>
-                        <button  class="btn btn-primary" ng-click="[[find()]]" >Probar</button>
+                        <button  class="btn btn-primary" ng-click="verCapaCentralidades()" >Probar</button>
                         <!-- <h1>{{myWelcome}}</h1> -->
 
                     </form>

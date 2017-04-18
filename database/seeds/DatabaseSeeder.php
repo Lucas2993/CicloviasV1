@@ -17,6 +17,5 @@ class DatabaseSeeder extends Seeder{
       Model::unguard();
       $this->call(CentralitySeeder::class);
       Model::reguard();
-
     }
 }

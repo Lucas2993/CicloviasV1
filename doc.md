@@ -41,3 +41,9 @@ php artisan migrate:refresh
 
 #Además si queremos comprobar el estado de las migraciones, para ver las que ya están instaladas y las que quedan pendientes, podemos ejecutar:
 php artisan migrate:status
+
+# para crear el fichero de inicialización de la tabla de usuarios haríamos:
+php artisan make:seeder UsersTableSeeder
+
+#Una vez definidos los ficheros de semillas, cuando queramos ejecutarlos para rellenar de datos la base de datos tendremos que usar el siguiente comando de Artisan:
+php artisan db:seed
