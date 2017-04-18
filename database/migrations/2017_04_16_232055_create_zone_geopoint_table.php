@@ -15,9 +15,9 @@ class CreateZoneGeopointTable extends Migration
     {
         Schema::create('geo_point_zone', function (Blueprint $table) {
             $table->integer('geo_point_id')->unsigned()->nullable();
+            $table->integer('zone_id')->unsigned()->nullable();
             $table->foreign('geo_point_id')->references('id')
             ->on('geo_points')->onDelete('cascade');
-            $table->integer('zone_id')->unsigned()->nullable();
             $table->foreign('zone_id')->references('id')
                                         ->on('zones')->onDelete('cascade');
             $table->timestamps();
