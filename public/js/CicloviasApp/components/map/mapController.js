@@ -47,15 +47,15 @@
                 vm.generateCentralitiesPoints(vm.centralitiesJson);
             });
         }
-
+        // Busca todas las zonas de la BD
         vm.findAllZones = function() {
             service.findAllZones(function(err, res) {
                 if (err) {
                     return alert('Ocurrió un error buscando las zonas: ' + err)
                 }
                 console.log(res);
-                // vm.centralitiesJson = res;
-                // vm.generateCentralitiesPoints(vm.centralitiesJson);
+                vm.zonesJson = res;
+                vm.createLayerZone(res);
             });
         }
 
@@ -112,8 +112,108 @@
         }
         // Toogle de capa de zonas
         vm.toogleZonesLayer = function() {
+          if (vm.zonesLayer.getVisible()) {
+              vm.zonesLayer.setVisible(false);
+          } else {
+              vm.zonesLayer.setVisible(true);
+          }
             console.log("zones");
         }
+
+        //*************************** AGREGAR *****************************************
+        vm.getStyleText = function(nameZone){
+           return new ol.style.Text({
+              text: nameZone});
+        }
+
+        vm.getPolygonLayer = function(style){
+           return new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: 'blue',
+              width: 1
+            }),
+            fill: new ol.style.Fill({
+              color: 'rgba(0, 0, 255, 0.1)'
+            }),
+            text: style
+          });
+        }
+
+        vm.getLayerZones = function(vectorZone, styleZone){
+           return new ol.layer.Vector({
+               source: new ol.source.Vector({
+                   features: vectorZone
+               }),
+               style: styleZone
+           });
+        }
+
+        vm.getPointZone = function(lon, lat) {
+           var point = [lon, lat];
+             return point;
+         }
+
+         console.log(vm.getPointZone(-65.057715, -42.7814254));
+
+         // recupera solo la long y lat de los puntos recibidos
+         vm.getVectorPointZone = function(pointsZone){
+            var vectorPointsZone = [];
+            for (var i = 0; i < pointsZone.length; i++) {
+               vectorPointsZone.push(vm.getPointZone(pointsZone[i].longitude,pointsZone[i].latitude));
+            }
+            vectorPointsZone.push(vm.getPointZone(pointsZone[0].longitude,pointsZone[0].latitude));
+            return vectorPointsZone;
+         }
+
+          // Recupera los datos necesarios recibidos del servidor para contruir el dibujo de la zona
+         vm.getInfoZone = function(dateZonesJson) {
+            var vectorInfoZone = [];
+            var vectorPointsZone = [];
+            for (var i = 0; i < dateZonesJson.length; i++) {
+               vectorPointsZone = vm.getVectorPointZone(dateZonesJson[i].points);
+                var infoZone = new Object();
+                infoZone.name = dateZonesJson[i].name;
+                infoZone.points = vectorPointsZone;
+               vectorInfoZone.push(infoZone);
+            }
+             return vectorInfoZone;
+         }
+
+          //  trae los dibujos(polygon) necesarios para mostrar las zonas
+         vm.getDrawsZone = function(infoZone) {
+             var vectorDrawsZone = [];
+             for (var i = 0; i < infoZone.length; i++) {
+                var draw = new ol.Feature({
+                   geometry: new ol.geom.Polygon([
+                           infoZone[i].points
+                   ])
+               });
+               vectorDrawsZone.push(draw);
+             }
+             return vectorDrawsZone;
+         }
+
+         // se recibe solo la info necesaria de cada zona para realizar el grafico
+         vm.createLayerZone = function(infoServer) {
+            // recuperams solo los datos que nos interesan
+            var infoZones = vm.getInfoZone(infoServer);
+            // console.log(infoZones[0].points);
+            // 1ro determinamos el estilo del texto, con su info de cada zona(por ahora va ser el mismo para todos)
+            var styleText = vm.getStyleText('ZONA');
+            // una vez creado el estilo de texto vamos a creaer el estilo del polygono de cada zona
+            var stylePolygon = vm.getPolygonLayer(styleText);
+            // creamos los dibujos de cada zona (polygon)
+            var vectorDrawsZone = vm.getDrawsZone(infoZones);
+            // console.log('cant de polygonos: '+vectorDrawsZone.length);
+            vm.zonesLayer = vm.getLayerZones(vectorDrawsZone, stylePolygon);
+            // console.log(vm.zonesLayer);
+            vm.map.addLayer(vm.zonesLayer);
+            vm.zonesLayer.setVisible(false);
+         }
+
+
+
+
 
     } // fin Constructor
 })()

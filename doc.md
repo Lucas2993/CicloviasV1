@@ -21,7 +21,7 @@ Luego:
 
 y listo, deberia funcionar bien.
 
-Base de datos
+#Base de datos
 
 #A continuación vamos a crear la tabla de migraciones. En la siguiente sección veremos en detalle que es esto, de momento solo decir que Laravel utiliza las migraciones para poder definir y crear las tablas de la base de datos desde código, y de esta manera tener un control de las versiones de las mismas.
 

@@ -14,10 +14,10 @@
                     public function run()
                     {
                         //----------Zona 1: Barrio Peron ---------------
-                        $punto1 = GeoPoint::create(['latitude'=>'-42.7871448', 'longitude'=>'-65.0697815']);
-                        $punto2 = GeoPoint::create(['latitude'=>'-42.7891147', 'longitude'=>'-65.0686872']);
-                        $punto3 = GeoPoint::create(['latitude'=>'-42.7917497', 'longitude'=>'-65.0731744']);
-                        $punto4 = GeoPoint::create(['latitude'=>'-42.78765', 'longitude'=>'-65.0755313']);
+                        $punto1 = GeoPoint::create(['latitude'=>'-42.78331734275442', 'longitude'=>'-65.07126427408525']);
+                        $punto2 = GeoPoint::create(['latitude'=>'-42.79028536229976', 'longitude'=>'-65.06689294394323']);
+                        $punto3 = GeoPoint::create(['latitude'=>'-42.792878577243364', 'longitude'=>'-65.0746773850567']);
+                        $punto4 = GeoPoint::create(['latitude'=>'-42.785929057923745', 'longitude'=>'-65.07881737467119']);
 
                         $zona1 = Zone::create([
                           'name'=>'Barrio Peron',
@@ -30,14 +30,14 @@
                       //--------------------------------
 
                       //----------Zona 2: Zona Inventada 1---------------
-                        $punto5 = GeoPoint::create(['latitude'=>'-42.7814254', 'longitude'=>'-65.057715']);
-                        $punto6 = GeoPoint::create(['latitude'=>'-42.7804549', 'longitude'=>'-65.0607623']);
-                        $punto7 = GeoPoint::create(['latitude'=>'-42.7854272', 'longitude'=>'-65.0568768']);
-                        $punto8 = GeoPoint::create(['latitude'=>'-42.7841716', 'longitude'=>'-65.0528535']);
+                        $punto5 = GeoPoint::create(['latitude'=>'-42.78331734275442', 'longitude'=>'-65.07126427408525']);
+                        $punto6 = GeoPoint::create(['latitude'=>'-42.79028536229976', 'longitude'=>'-65.06689294394323']);
+                        $punto7 = GeoPoint::create(['latitude'=>'-42.788525161905554', 'longitude'=>'-65.0617189627535']);
+                        $punto8 = GeoPoint::create(['latitude'=>'-42.78165315963107', 'longitude'=>'-65.06635918434927']);
 
                         $zona2 = Zone::create([
-                          'name'=>'Zona Inventada 1',
-                          'description'=>'Gales-Alem y Santiago y Bs. As.'
+                          'name'=>'Barrio San Miguel',
+                          'description'=>'Gales-Villarino y R.Gimenez/Periodista Chubutence.'
                         ]);
 
                         $zona2->geopoints()->save($punto5);
