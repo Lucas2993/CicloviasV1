@@ -44,10 +44,6 @@
                 vm.markers = res;
             });
         }
-
         vm.findAll();
-
-
-
     } // fin Constructor
 })()

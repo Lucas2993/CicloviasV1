@@ -10,5 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 */
 class GeoPoint extends Model
 {
-  protected $table = 'geopoints';
+  protected $table = 'geo_points';
+
+  protected $fillable = [
+    'latitude', 'longitude'
+  ];
+
+  public function zones(){
+      return $this->belongsToMany('App\Models\Zone');
+  }
 }

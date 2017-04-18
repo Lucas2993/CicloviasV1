@@ -13,7 +13,7 @@ class CreateGeopointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('geopoints', function (Blueprint $table) {
+        Schema::create('geo_points', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('centrality_id')->unsigned()->nullable();
             $table->double('latitude', 15, 8);
