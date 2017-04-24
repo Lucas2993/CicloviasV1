@@ -16,7 +16,7 @@ class CentralitySeeder extends Seeder
       //Se agrega centralidad 1
       $centralidad1 = new Centrality;
       $centralidad1->name = 'Plaza';
-      $centralidad2->location = 'En algun lugar de la ciudad';
+      $centralidad1->location = 'En algun lugar de la ciudad';
       $centralidad1->save();
 
       $punto1 = new GeoPoint;
