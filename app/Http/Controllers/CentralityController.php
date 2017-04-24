@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Models\Centrality;
+use App\Models\GeoPoint;
 
 /**
   *Crontoller creado por JLDEVIA el 14/04/2017.
@@ -32,9 +35,39 @@ class CentralityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $centrality = Centrality::create(Request::all());
+    public function store(Request $request){
+        $v = Validator::make($request->all(), [
+                'name' => 'required|string|max:100',
+                'location' => 'required|string|max:255',
+                'latitude' => 'required|numeric|min:-85|max:85',
+                'longitude' => 'required|numeric|min:-180|max:180',
+        ]);
+
+        if ($v->fails()){
+            $messages  = $v->errors()->getMessages();
+            $errors = [];
+            foreach ($messages as $message) {
+                array_push($errors, $message);
+            }
+            // return ['errors' => $errors];
+            return response()->json(['errors' => $errors], 400);
+
+        }
+
+        $params_points = $request->all();
+        $params_centrality = $request->all();
+
+        unset($params_points['name']);
+        unset($params_points['location']);
+        unset($params_centrality['latitude']);
+        unset($params_centrality['longitude']);
+
+        $params_points['order'] = '-1';
+
+        $centrality = Centrality::create($params_centrality);
+        $point = GeoPoint::create($params_points);
+        $centrality->geopoint()->save($point);
+
         return $centrality;
     }
 
@@ -56,11 +89,37 @@ class CentralityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $id){
+    public function update($id, Request $request){
+        $v = Validator::make($request->all(), [
+                'name' => 'required|string|max:100',
+                'location' => 'required|string|max:255',
+                'latitude' => 'required|numeric|min:-85|max:85',
+                'longitude' => 'required|numeric|min:-180|max:180',
+        ]);
+
+        if ($v->fails()){
+            $messages  = $v->errors()->getMessages();
+            $errors = [];
+            foreach ($messages as $message) {
+                array_push($errors, $message);
+            }
+            // return ['errors' => $errors];
+            return response()->json(['errors' => $errors], 400);
+
+        }
+
         $centrality = Centrality::find($id);
-        $centrality->name = Request::input('name');
-        $centrality->location = Request::input('location');
+
+        $centrality->name = $request->input('name');
+        $centrality->location = $request->input('location');
         $centrality->save();
+
+        $point = $centrality->geopoint()->get()[0];
+
+        $point->latitude = $request->input('latitude');
+        $point->longitude = $request->input('longitude');
+
+        $centrality->geopoint()->save($point);
 
         return $centrality;
     }
