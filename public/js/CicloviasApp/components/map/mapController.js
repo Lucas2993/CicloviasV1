@@ -16,7 +16,7 @@
         // ngModel de checkbox
         vm.checkboxModel = {
             centralitiesValue: false,
-            zonesValue : false
+            zonesValue: false
         };
 
         // Capa basica del mapa brindado por OSM
@@ -75,19 +75,22 @@
         });
 
         // Contructor de punto perteneciente a un mapa de OSM
-        vm.generatePoint = function(lon, lat) {
+        vm.generatePoint = function(lon, lat, centralityName) {
             return new ol.Feature({
-                geometry: new ol.geom.Point([lon, lat])
+                geometry: new ol.geom.Point([lon, lat]),
+                name: centralityName,
             });
         }
 
-//      Generacion de Capa de Centralidades a partir del json recibido desde el service
+        //      Generacion de Capa de Centralidades a partir del json recibido desde el service
         vm.generateCentralitiesPoints = function(centralitiesJson) {
             var vector = [];
             var point;
+            var name;
             // Recorre el json, mientras va generando puntos y los agrega a un vector
             for (var i = 0; i < centralitiesJson.length; i++) {
-                point = vm.generatePoint(centralitiesJson[i].point.longitude, centralitiesJson[i].point.latitude);
+                name = centralitiesJson[i].name;
+                point = vm.generatePoint(centralitiesJson[i].point.longitude, centralitiesJson[i].point.latitude, name);
                 point.setStyle(iconStyle);
                 vector.push(point);
             }
@@ -112,89 +115,90 @@
         }
         // Toogle de capa de zonas
         vm.toogleZonesLayer = function() {
-          if (vm.zonesLayer.getVisible()) {
-              vm.zonesLayer.setVisible(false);
-          } else {
-              vm.zonesLayer.setVisible(true);
-          }
+            if (vm.zonesLayer.getVisible()) {
+                vm.zonesLayer.setVisible(false);
+            } else {
+                vm.zonesLayer.setVisible(true);
+            }
             console.log("zones");
         }
 
         //*************************** AGREGAR *****************************************
-        vm.getStyleText = function(nameZone){
-           return new ol.style.Text({
-              text: nameZone});
+        vm.getStyleText = function(nameZone) {
+            return new ol.style.Text({
+                text: nameZone
+            });
         }
 
-        vm.getPolygonLayer = function(style){
-           return new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: 'blue',
-              width: 1
-            }),
-            fill: new ol.style.Fill({
-              color: 'rgba(0, 0, 255, 0.1)'
-            }),
-            text: style
-          });
+        vm.getPolygonLayer = function(style) {
+            return new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'blue',
+                    width: 1
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(0, 0, 255, 0.1)'
+                }),
+                text: style
+            });
         }
 
-        vm.getLayerZones = function(vectorZone, styleZone){
-           return new ol.layer.Vector({
-               source: new ol.source.Vector({
-                   features: vectorZone
-               }),
-               style: styleZone
-           });
+        vm.getLayerZones = function(vectorZone, styleZone) {
+            return new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: vectorZone
+                }),
+                style: styleZone
+            });
         }
 
         vm.getPointZone = function(lon, lat) {
-           var point = [lon, lat];
-             return point;
-         }
+            var point = [lon, lat];
+            return point;
+        }
 
-         console.log(vm.getPointZone(-65.057715, -42.7814254));
+        console.log(vm.getPointZone(-65.057715, -42.7814254));
 
-         // recupera solo la long y lat de los puntos recibidos
-         vm.getVectorPointZone = function(pointsZone){
+        // recupera solo la long y lat de los puntos recibidos
+        vm.getVectorPointZone = function(pointsZone) {
             var vectorPointsZone = [];
             for (var i = 0; i < pointsZone.length; i++) {
-               vectorPointsZone.push(vm.getPointZone(pointsZone[i].longitude,pointsZone[i].latitude));
+                vectorPointsZone.push(vm.getPointZone(pointsZone[i].longitude, pointsZone[i].latitude));
             }
-            vectorPointsZone.push(vm.getPointZone(pointsZone[0].longitude,pointsZone[0].latitude));
+            vectorPointsZone.push(vm.getPointZone(pointsZone[0].longitude, pointsZone[0].latitude));
             return vectorPointsZone;
-         }
+        }
 
-          // Recupera los datos necesarios recibidos del servidor para contruir el dibujo de la zona
-         vm.getInfoZone = function(dateZonesJson) {
+        // Recupera los datos necesarios recibidos del servidor para contruir el dibujo de la zona
+        vm.getInfoZone = function(dateZonesJson) {
             var vectorInfoZone = [];
             var vectorPointsZone = [];
             for (var i = 0; i < dateZonesJson.length; i++) {
-               vectorPointsZone = vm.getVectorPointZone(dateZonesJson[i].points);
+                vectorPointsZone = vm.getVectorPointZone(dateZonesJson[i].points);
                 var infoZone = new Object();
                 infoZone.name = dateZonesJson[i].name;
                 infoZone.points = vectorPointsZone;
-               vectorInfoZone.push(infoZone);
+                vectorInfoZone.push(infoZone);
             }
-             return vectorInfoZone;
-         }
+            return vectorInfoZone;
+        }
 
-          //  trae los dibujos(polygon) necesarios para mostrar las zonas
-         vm.getDrawsZone = function(infoZone) {
-             var vectorDrawsZone = [];
-             for (var i = 0; i < infoZone.length; i++) {
+        //  trae los dibujos(polygon) necesarios para mostrar las zonas
+        vm.getDrawsZone = function(infoZone) {
+            var vectorDrawsZone = [];
+            for (var i = 0; i < infoZone.length; i++) {
                 var draw = new ol.Feature({
-                   geometry: new ol.geom.Polygon([
-                           infoZone[i].points
-                   ])
-               });
-               vectorDrawsZone.push(draw);
-             }
-             return vectorDrawsZone;
-         }
+                    geometry: new ol.geom.Polygon([
+                        infoZone[i].points
+                    ])
+                });
+                vectorDrawsZone.push(draw);
+            }
+            return vectorDrawsZone;
+        }
 
-         // se recibe solo la info necesaria de cada zona para realizar el grafico
-         vm.createLayerZone = function(infoServer) {
+        // se recibe solo la info necesaria de cada zona para realizar el grafico
+        vm.createLayerZone = function(infoServer) {
             // recuperams solo los datos que nos interesan
             var infoZones = vm.getInfoZone(infoServer);
             // console.log(infoZones[0].points);
@@ -209,9 +213,44 @@
             // console.log(vm.zonesLayer);
             vm.map.addLayer(vm.zonesLayer);
             vm.zonesLayer.setVisible(false);
-         }
+        }
 
 
+
+
+        var element = document.getElementById('popup');
+
+        var popup = new ol.Overlay({
+            element: element,
+            positioning: 'bottom-center',
+            stopEvent: false,
+            offset: [0, -50]
+        });
+        vm.map.addOverlay(popup);
+
+        // display popup on click
+        vm.map.on('click', function(evt) {
+            var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
+                function(feature) {
+                  if (feature) {
+
+                      var coordinates = feature.getGeometry().getCoordinates();
+                      var name =feature.get('name').toString();
+                      popup.setPosition(coordinates);
+                      // popup.getContent.setValue(name);
+                      $(element).popover({
+                          'placement': 'top',
+                          'html': true,
+                          'content': name
+                      });
+                      $(element).popover('show');
+                  } else {
+                      $(element).popover('destroy');
+                  }
+                    return feature;
+                });
+
+        });
 
 
 
