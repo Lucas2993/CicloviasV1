@@ -6,7 +6,7 @@
             return {
 
                 findAllCentralities: function(callback) {
-                    $http.get('http://localhost/CicloviasV1/public/api/centrality')
+                    $http.get('api/centrality')
                         .then(
                             function(res) {
                                 return callback(false, res.data)
@@ -18,7 +18,7 @@
                 },
 
                 findAllZones: function(callback) {
-                    $http.get('http://localhost/CicloviasV1/public/api/zone')
+                    $http.get('api/zone')
                         .then(
                             function(res) {
                                 return callback(false, res.data)

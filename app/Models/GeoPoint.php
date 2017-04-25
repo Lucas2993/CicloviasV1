@@ -13,7 +13,7 @@ class GeoPoint extends Model
   protected $table = 'geo_points';
 
   protected $fillable = [
-    'latitude', 'longitude'
+    'latitude', 'longitude', 'order'
   ];
 
   public function zones(){
