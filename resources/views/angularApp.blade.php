@@ -39,14 +39,20 @@
     <script src="{{ URL::asset('js/assets/libs/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
     <!-- Controladores y modulos propios -->
+    <script src="{{ URL::asset('js/CicloviasApp/app.routes.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/pagefooter/pagefooterModule.js') }}"></script>
 
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapService.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.srvDataServer.js') }}"></script>
+
+    <!-- Constantes de la aplicacion -->
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/app.routes.constants.js') }}"></script>
 
   </head>
   <body>
