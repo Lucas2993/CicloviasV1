@@ -78,7 +78,7 @@
         vm.generatePoint = function(lon, lat, centralityName) {
             return new ol.Feature({
                 geometry: new ol.geom.Point([lon, lat]),
-                name: centralityName,
+                name: centralityName
             });
         }
 
@@ -94,6 +94,7 @@
                 point.setStyle(iconStyle);
                 vector.push(point);
             }
+            console.log(vector);
             var centralitiesPoints = new ol.source.Vector({
                 features: vector
             });
@@ -214,45 +215,6 @@
             vm.map.addLayer(vm.zonesLayer);
             vm.zonesLayer.setVisible(false);
         }
-
-
-
-
-        var element = document.getElementById('popup');
-
-        var popup = new ol.Overlay({
-            element: element,
-            positioning: 'bottom-center',
-            stopEvent: false,
-            offset: [0, -50]
-        });
-        vm.map.addOverlay(popup);
-
-        // display popup on click
-        vm.map.on('click', function(evt) {
-            var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
-                function(feature) {
-                  if (feature) {
-
-                      var coordinates = feature.getGeometry().getCoordinates();
-                      var name =feature.get('name').toString();
-                      popup.setPosition(coordinates);
-                      // popup.getContent.setValue(name);
-                      $(element).popover({
-                          'placement': 'top',
-                          'html': true,
-                          'content': name
-                      });
-                      $(element).popover('show');
-                  } else {
-                      $(element).popover('destroy');
-                  }
-                    return feature;
-                });
-
-        });
-
-
 
     } // fin Constructor
 })()
