@@ -3,9 +3,12 @@
 (function() {
     'use strict';
 
-    angular.module('mapModule', []).controller('MapController', ['$scope', 'MapSrv', MapController]);
+    // angular.module('mapModule', [])
+    // Se llama al modulo "mapModule"(), seria una especie de get
+    angular.module('mapModule')
+    .controller('MapController', ['$scope', 'MapSrv', MapController]);
 
-    function MapController(vm, service) {
+    function MapController(vm, srvDataServer) {
 
         vm.latitude = '-42.77000141404137';
         vm.longitude = '-65.0339126586914';
@@ -38,7 +41,7 @@
 
         // Busca todas las centralidades de la BD
         vm.findAllCentralities = function() {
-            service.findAllCentralities(function(err, res) {
+            srvDataServer.findAllCentralities(function(err, res) {
                 if (err) {
                     return alert('Ocurrió un error buscando las centralidades: ' + err)
                 }
@@ -49,7 +52,7 @@
         }
         // Busca todas las zonas de la BD
         vm.findAllZones = function() {
-            service.findAllZones(function(err, res) {
+            srvDataServer.findAllZones(function(err, res) {
                 if (err) {
                     return alert('Ocurrió un error buscando las zonas: ' + err)
                 }
@@ -65,7 +68,6 @@
 
         // Estilo de los iconos de una centralidad
         var iconStyle = new ol.style.Style({
-            //   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
             image: new ol.style.Icon(({
                 anchor: [0.5, 46],
                 anchorXUnits: 'fraction',
