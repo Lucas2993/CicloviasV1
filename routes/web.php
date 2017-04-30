@@ -24,4 +24,6 @@ Route::get('/','AngularAppController@index');
 */
 Route::resource('api/centrality', 'CentralityController', ['except' => ['create', 'edit']]);
 
+Route::resource('api/journey', 'JourneyController', ['create', 'edit']);
+
 Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit']]);

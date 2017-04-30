@@ -5,8 +5,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-// use Database\Seeds\CentralitySeeder;
-// use Database\Seeds\ZoneSeeder;
 
 class DatabaseSeeder extends Seeder{
     /**
@@ -16,8 +14,9 @@ class DatabaseSeeder extends Seeder{
      */
     public function run(){
       Model::unguard();
-      $this->call(CentralitySeeder::class);
-      $this->call(ZoneSeeder::class);
+      //$this->call(CentralitySeeder::class);
+      //$this->call(ZoneSeeder::class);
+      $this->call(JourneySeeder::class);
       Model::reguard();
     }
 }
