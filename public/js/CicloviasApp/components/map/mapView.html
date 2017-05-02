@@ -1,21 +1,26 @@
 <!-- componentes que determinan las tabs que se muestran en la pantalla de inicio de la app -->
 <!-- Contenedor del mapa -->
 
-<div class="container-fluid" id="cont"  >
+<div class="container-fluid" id="cont">
     <div class="row row-offcanvas row-offcanvas-left" id="row-offcanvas">
         <!-- Panel de control -->
         <nav class="col-sm-3 sidebar-offcanvas" id="sidebar">
-            <div class="panel panel-primary" id="control" >
+            <div class="panel panel-primary" id="control">
                 <div class="panel-heading">Panel de control</div>
                 <div class="panel-body">
                     <form>
-                        <div class="checkbox">
+                        <div>
                             <label><input type="checkbox" ng-model="checkboxModel.centralitiesValue" ng-change= "toogleCentralitiesLayer()"> Ver capa de centralidades</label>
                         </div>
-                        <div class="checkbox">
+                        <div class="checkbox" ng-repeat="c in centralitiesJson">
+                            <label>
+                              <input type="checkbox" checklist-model="c.name"  checklist-value="c.id" > [[c.name]]
+                          </label>
+                        </div>
+                        <div>
                             <label><input type="checkbox" ng-model="checkboxModel.zonesValue" ng-change= "toogleZonesLayer()" > Ver capa de zonas</label>
                         </div>
-                        <button  class="btn btn-primary"  >Probar</button>
+                        <button class="btn btn-primary" ng-click="">Probar</button>
                         <!-- <h1>{{myWelcome}}</h1> -->
 
                     </form>
@@ -25,9 +30,10 @@
             <!-- fin panel de control -->
         </nav>
         <!-- Mapa -->
-        <div id="container-fluid-map" >
-            <div id="map" class="map"><div id="popup"></div>
+        <div id="container-fluid-map">
+            <div id="map" class="map">
+                <div id="popup"></div>
+            </div>
+            <!-- fin mapa -->
         </div>
-        <!-- fin mapa -->
     </div>
-</div>

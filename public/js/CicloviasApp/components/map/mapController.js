@@ -6,7 +6,7 @@
     // angular.module('mapModule', [])
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-    .controller('MapController', ['$scope', 'MapSrv', MapController]);
+        .controller('MapController', ['$scope', 'MapSrv', MapController]);
 
     function MapController(vm, srvDataServer) {
 
@@ -123,7 +123,6 @@
             } else {
                 vm.zonesLayer.setVisible(true);
             }
-            console.log("zones");
         }
 
         //*************************** AGREGAR *****************************************
@@ -218,5 +217,61 @@
             vm.zonesLayer.setVisible(false);
         }
 
+
+        //
+        // var source = new ol.source.Vector({
+        //     wrapX: false
+        // });
+        //
+        // var vector = new ol.layer.Vector({
+        //     source: source
+        // });
+        //
+        // vm.map.addLayer(vector);
+        //
+        // var draw; // global so we can remove it later
+        // function addInteraction() {
+        //     draw = new ol.interaction.Draw({
+        //         source: source,
+        //         type: "Point"
+        //     });
+        //     vm.map.addInteraction(draw);
+        // }
+        //
+        // vm.getSource = function () {
+        //   console.log(vector.getSource());
+        // }
+        //
+        // addInteraction();
+
+        //
+        // var element = document.getElementById('popup');
+        //
+        // var popup = new ol.Overlay({
+        //     element: element,
+        //     positioning: 'bottom-center',
+        //     stopEvent: false,
+        //     offset: [0, -50],
+        //      delay: 3000,
+        // });
+        // vm.map.addOverlay(popup);
+        //
+        //
+        // display popup on click
+        vm.map.on('click', function(evt) {
+            var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
+                function(feature) {
+                    var coordinates = feature.getGeometry().getCoordinates();
+                    var popup = new ol.Overlay.Popup({
+                        // insertFirst: false
+                    });
+                    vm.map.addOverlay(popup);
+                    popup.show(evt.coordinate, feature.get('name'));
+                    return feature;
+                });
+        });
+
+
     } // fin Constructor
+
 })()
