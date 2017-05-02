@@ -48,7 +48,14 @@
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.srvDataServer.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.creatorMap.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.feature.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.drawZones.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.point.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/promise/promise.data.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.zone.js') }}"></script>
 
     <!-- Constantes de la aplicacion -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>
