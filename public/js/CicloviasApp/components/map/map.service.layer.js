@@ -114,7 +114,8 @@
                     source: new ol.source.Vector({
                     features: vectorDraw
                     }),
-                    style: styleDraw
+                    style: styleDraw,
+                    visible: false
                  });
 
                 //  return vm.getLayerZone(draw, styleDraw);

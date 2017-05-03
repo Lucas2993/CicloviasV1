@@ -48,6 +48,7 @@
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     console.log('datos de promise ZONES: ' + res.data);
+                    console.log('datos de promise ZONES color: ' + ((res.data)[0]).color);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -57,7 +58,7 @@
             return promise;
         };
 
-        
+
         function getTrips() {
             var defered = $q.defer();
             var promise = defered.promise;
