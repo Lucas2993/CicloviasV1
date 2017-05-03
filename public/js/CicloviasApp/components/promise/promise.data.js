@@ -56,7 +56,8 @@
             defered.reject(err)
         }
     );
-}
+    return promise;
+};
 
 function saveCentrality(newCentrality) {
     var defered = $q.defer();
