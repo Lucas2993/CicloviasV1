@@ -5,18 +5,42 @@
     angular.module('mapModule')
         .factory('dataServer', ['$http', '$q', 'path', dataServer]);
 
-    function dataServer($http, $q, path) {
-        var service = {
-            getCentralities: getCentralities,
-            getZones: getZones,
-            getTrips: getTrips,
-            saveCentrality: saveCentrality,
-            deleteCentrality: deleteCentrality,
-            updateCentrality: updateCentrality
+        function dataServer($http, $q, path){
+            var service = {
+                // Zonas
+                getZones: getZones,
 
-        };
-        return service;
+                // Centralidades
+                getCentralities: getCentralities,
+                saveCentrality: saveCentrality,
+                updateCentrality: updateCentrality,
+                deleteCentrality: deleteCentrality
+            };
+            return service;
 
+            // dado los puntos de una zona, devuelve un vector con esos puntos
+            function getZones() {
+                var defered = $q.defer();
+                var promise = defered.promise;
+
+                $http({
+                    method: 'GET',
+                    url: path.ZONE
+                }).then(function successCallback(res) {
+                            defered.resolve(res.data);
+                            console.log('datos de promise ZONES: '+res.data);
+                        },
+                        function errorCallback(err) {
+                            defered.reject(err)
+                        }
+                    );
+
+                return promise;
+            };
+
+            function getCentralities() {
+                var defered = $q.defer();
+                var promise = defered.promise;
 
         function getCentralities() {
             var defered = $q.defer();
@@ -34,25 +58,65 @@
                 }
             );
 
-            return promise;
-        };
+            function saveCentrality(newCentrality) {
+                var defered = $q.defer();
+                var promise = defered.promise;
 
-        // dado los puntos de una zona, devuelve un vector con esos puntos
-        function getZones() {
-            var defered = $q.defer();
-            var promise = defered.promise;
+                $http({
+                    method: 'POST',
+                    url: path.CENTRALITY,
+                    data: newCentrality
+                }).then(function successCallback(res) {
+                            defered.resolve(res.data);
+                            // console.log('datos de promise CENTRALITY: '+res.data);
+                        },
+                        function errorCallback(err) {
+                            defered.reject(err)
+                        }
+                    );
 
-            $http({
-                method: 'GET',
-                url: path.ZONE
-            }).then(function successCallback(res) {
-                    defered.resolve(res.data);
-                    console.log('datos de promise ZONES: ' + res.data);
-                },
-                function errorCallback(err) {
-                    defered.reject(err)
-                }
-            );
+                return promise;
+            };
+
+            function updateCentrality(centrality) {
+                var defered = $q.defer();
+                var promise = defered.promise;
+
+                $http({
+                    method: 'PUT',
+                    url: path.CENTRALITY+'/'+centrality.id,
+                    data: centrality
+                }).then(function successCallback(res) {
+                            defered.resolve(res.data);
+                            // console.log('datos de promise CENTRALITY: '+res.data);
+                        },
+                        function errorCallback(err) {
+                            defered.reject(err)
+                        }
+                    );
+
+                return promise;
+            };
+
+            function deleteCentrality(centralityId) {
+                var defered = $q.defer();
+                var promise = defered.promise;
+
+                $http({
+                    method: 'DELETE',
+                    url: path.CENTRALITY+'/'+centralityId,
+                }).then(function successCallback(res) {
+                            defered.resolve(res.data);
+                            // console.log('datos de promise CENTRALITY: '+res.data);
+                        },
+                        function errorCallback(err) {
+                            defered.reject(err)
+                        }
+                    );
+
+                return promise;
+            };
+        }
 
             return promise;
         };
