@@ -19,4 +19,9 @@ class GeoPoint extends Model
   public function zones(){
       return $this->belongsToMany('App\Models\Zone');
   }
+
+  public function trips(){
+      return $this->belongsToMany('App\Models\Trip');
+  }
+
 }
