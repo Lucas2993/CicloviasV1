@@ -13,9 +13,11 @@
             return service;
 
             // crea y devuelve un punto con long y lat
-            function getPoint(lon, lat) {
+            function getPoint(lon, lat,object) {
                 var point = new ol.Feature({
-                          geometry: new ol.geom.Point([lon, lat])
+                          geometry: new ol.geom.Point([lon, lat]),
+                                          object: object,
+                                          
                       });
 
                 return point;

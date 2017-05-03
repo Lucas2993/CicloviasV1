@@ -18,7 +18,7 @@
                 var point;
                 // Recorre el json, mientras va generando puntos y los agrega a un vector
                 for (var i = 0; i < pointsJson.length; i++) {
-                    point = creatorFeature.getPoint(pointsJson[i].point.longitude, pointsJson[i].point.latitude);
+                    point = creatorFeature.getPoint(pointsJson[i].point.longitude, pointsJson[i].point.latitude,pointsJson[i]);
                     point.setStyle(stylePoint);
                     vectorCentralities.push(point);
                 }
