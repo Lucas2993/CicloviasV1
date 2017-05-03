@@ -80,6 +80,11 @@
                                       <div>
                                           <label><input type="checkbox" ng-model="checkboxModel.zonesValue" ng-change= "toogleZonesLayer()" > Ver capa de zonas</label>
                                       </div>
+                                       <div class="checkbox" ng-repeat="zone in zonesJson">
+                                           <label>
+                                               <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="selectedZone" ng-change= "selectZone(zone.name)"> [[zone.name]]
+                                           </label>
+                                        </div>
                                   </form>
                               </div>
                           </div>

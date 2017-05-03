@@ -4,9 +4,9 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', MapController]);
+    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
 
-    function MapController(vm, creatorMap, srvLayers, dataServer) {
+    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
 
         // ********************* declaracion de variables y metodos *********************
         vm.map = creatorMap.getMap();
@@ -19,6 +19,9 @@
 
         vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
         vm.toogleZonesLayer = toogleZonesLayer;
+
+        // ********************************** NUEVO *******************************
+        vm.selectZone = selectZone;
 
         vm.checkboxModel = {
             centralitiesValue: false,
@@ -49,6 +52,7 @@
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las CENTRALIDADES");
                 })
         }
+
         // Busca todas las zonas de la BD
         function findAllZones() {
             dataServer.getZones()
@@ -73,7 +77,6 @@
 
         //      Generacion de Capa de Zonas a partir del json recibido desde el service
         function createLayerZone(infoZoneJson) {
-            // vm.zonesLayer = srvLayers.getLayerZones(infoZoneJson);
             vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
             vm.map.addLayer(vm.zonesLayer);
             vm.zonesLayer.setVisible(false);
@@ -81,22 +84,26 @@
 
         // Toogle de capa de centralidades
         function toogleCentralitiesLayer() {
-            if (vm.centralitiesLayer.getVisible()) {
-                vm.centralitiesLayer.setVisible(false);
-            } else {
-                vm.centralitiesLayer.setVisible(true);
-            }
+            adminLayers.viewLayer(vm.centralitiesLayer);
         }
 
         // Toogle de capa de zonas
         function toogleZonesLayer() {
-            if (vm.zonesLayer.getVisible()) {
-                vm.zonesLayer.setVisible(false);
-            } else {
-                vm.zonesLayer.setVisible(true);
-            }
+            adminLayers.viewLayer(vm.zonesLayer);
         }
 
+        // permite la visualizacion o no de una zona
+        function selectZone(nameZone){
+            var zoneSelected = adminLayers.findLayerZone(nameZone, vm.zonesLayer);
+            if(zoneSelected == null){
+                console.log("ERROR: la zona "+nameZone+" no se encuentra disponible.");
+            }
+            console.log("Zona seleccionada: "+nameZone);
+            adminLayers.viewLayer(zoneSelected);
+        }
+
+        // ****************************** Lucas y ema ***************************************
+        // **********************************************************************************
         // display popup on click
         vm.map.on('click', function(evt) {
             var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
@@ -113,11 +120,8 @@
         });
 
         // Lucas
-
         // Aca empieza lo que agregue para el ABM de centralidades.
-
         // Incorporacion de agregar centralidad
-
         // Esta bandera se usa para saber si el usuario se encuentra seleccionando un punto para una nueva centralidad.
         vm.isSelecting = false;
 

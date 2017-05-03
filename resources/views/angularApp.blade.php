@@ -59,6 +59,8 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/promise/promise.data.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.zone.js') }}"></script>
 
+    <script src="{{ URL::asset('js/CicloviasApp/components/layers/layers.administrator.js') }}"></script>
+
     <!-- Constantes de la aplicacion -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.constants.js') }}"></script>
