@@ -74,13 +74,12 @@
                 var infoZones = srvZone.getDataZones(infoZoneJson);
 
                 // por cada zona generamos una capa
-                // for (var i = 0; i < infoZones.length; i++) {
-                for (var i = 0; i < 2; i++) {
+                for (var i = 0; i < infoZones.length; i++) {
+                // for (var i = 0; i < 2; i++) {
                     var newLayer = generateZone(infoZones[i]);
                     console.log('capa '+i+' : '+newLayer.getVisible());
                     vectorLayers.push(newLayer);
                  }
-                //  vectorLayers.push(vm.capaCentralidades);
                  console.log('paso generateZone()');
                  // creo un groupLayer que contendra todas las zonas
                  groupLayerZones = new ol.layer.Group({
@@ -100,7 +99,8 @@
                      ])
                  });
                  // crea el stylo del dibujo
-                 var styleDraw = creatorStyle.getStylePolygon('blue', creatorStyle.getStyleText(infoZone.name));
+                //  var styleDraw = creatorStyle.getStylePolygon('blue', creatorStyle.getStyleText(infoZone.name));
+                var styleDraw = creatorStyle.getStylePolygon(infoZone.color, creatorStyle.getStyleText(infoZone.name));
 
                 //  getStylePolygon(vm.getStyleText(infoZone.name), 'green');
 

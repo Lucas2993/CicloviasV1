@@ -22,6 +22,7 @@
                    vectorPointsZone = getVectorPointZone(dateZonesJson[i].points);
                    var infoZone = new Object();
                    infoZone.name = dateZonesJson[i].name;
+                   infoZone.color = dateZonesJson[i].color;
                    infoZone.points = vectorPointsZone;
                    vectorInfoZone.push(infoZone);
                 }
