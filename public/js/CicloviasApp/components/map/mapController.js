@@ -73,7 +73,8 @@
 
 //      Generacion de Capa de Zonas a partir del json recibido desde el service
         function createLayerZone(infoZoneJson) {
-            vm.zonesLayer = srvLayers.getLayerZones(infoZoneJson);
+            // vm.zonesLayer = srvLayers.getLayerZones(infoZoneJson);
+            vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
             vm.map.addLayer(vm.zonesLayer);
             vm.zonesLayer.setVisible(false);
           }
