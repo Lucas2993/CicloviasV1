@@ -4,6 +4,7 @@
     angular.module('mapModule')
     .constant('path',{
         CENTRALITY: 'api/centrality',
+        TRIP:'api/trip',
         ZONE: 'api/zone'
     })
     .constant('propiertiesMap',{

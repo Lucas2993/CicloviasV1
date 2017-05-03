@@ -13,7 +13,7 @@ class Zone extends Model{
  *
  */
  protected $fillable = [
-   'name', 'description', 'points'
+   'name', 'description', 'color', 'points'
  ];
 
   public function geopoints(){
