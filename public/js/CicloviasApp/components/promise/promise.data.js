@@ -9,6 +9,7 @@
         var service = {
             getCentralities: getCentralities,
             getZones: getZones,
+            getTrips: getTrips,
             saveCentrality: saveCentrality,
             deleteCentrality: deleteCentrality,
             updateCentrality: updateCentrality
@@ -47,6 +48,26 @@
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     console.log('datos de promise ZONES: ' + res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+
+            return promise;
+        };
+
+        
+        function getTrips() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise TRIP: ' + res.data);
                 },
                 function errorCallback(err) {
                     defered.reject(err)

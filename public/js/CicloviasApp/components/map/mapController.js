@@ -16,6 +16,7 @@
 
         vm.findAllCentralities = findAllCentralities;
         vm.findAllZones = findAllZones;
+        vm.findAllTrips= findAllTrips;
 
         vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
         vm.toogleZonesLayer = toogleZonesLayer;
@@ -27,11 +28,13 @@
 
         var generateCentralitiesPoints;
         var createLayerZone;
+        var createLayerTrip;
 
         // ************************ inicializacion de datos del mapa ************************
         // **********************************************************************************
         vm.findAllCentralities();
         vm.findAllZones();
+        vm.findAllTrips();
 
         // **********************************************************************************
         // ************************ Descripcion de las funciones ************************
@@ -60,6 +63,20 @@
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");
+                })
+        }
+
+        // Busca todas los recorridos de la BD
+        function findAllTrips() {
+            dataServer.getTrips()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.tripsJson = data;
+                    console.log("Datos recuperados prom TRIPS con EXITO! = " + data);
+                    //createLayerTrip(vm.tripsJson);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
                 })
         }
 
