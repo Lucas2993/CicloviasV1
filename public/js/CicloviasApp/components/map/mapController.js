@@ -262,6 +262,33 @@
             });
         }
 
+        // dataServer.saveCentrality(vm.newCentrality)
+        //     .then(function(data) {
+        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+        //         console.log("Se guardo correctamente la centralidad "+data.id);
+        //     })
+        //     .catch(function(err) {
+        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
+        //     })
+
+        // dataServer.updateCentrality(vm.newCentrality)
+        //     .then(function(data) {
+        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+        //         console.log("Se guardo correctamente la centralidad "+data.id);
+        //     })
+        //     .catch(function(err) {
+        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
+        //     })
+
+        // dataServer.deleteCentrality(vm.newCentrality.id)
+        //     .then(function(data) {
+        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+        //         console.log("Se guardo borro la centralidad "+vm.newCentrality.id);
+        //     })
+        //     .catch(function(err) {
+        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
+        //     })
+
     } // fin Constructor
 
 })()
