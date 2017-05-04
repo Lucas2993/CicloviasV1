@@ -20,7 +20,8 @@ class ZoneSeeder extends Seeder
 
         $zona1 = Zone::create([
             'name'=>'Barrio Peron',
-            'description'=>'Gales-Villarino y R.Gimenez/Reinal'
+            'description'=>'Gales-Villarino y R.Gimenez/Reinal',
+            'color' =>'orange'
         ]);
         $zona1->geopoints()->save($punto1);
         $zona1->geopoints()->save($punto2);
@@ -36,7 +37,8 @@ class ZoneSeeder extends Seeder
 
         $zona2 = Zone::create([
             'name'=>'Barrio San Miguel',
-            'description'=>'Gales-Villarino y R.Gimenez/Periodista Chubutence.'
+            'description'=>'Gales-Villarino y R.Gimenez/Periodista Chubutense.',
+            'color' =>'green'
         ]);
 
         $zona2->geopoints()->save($punto5);
@@ -53,7 +55,8 @@ class ZoneSeeder extends Seeder
 
         $zona3 = new Zone([
             'name'=>'Zona Inventada 2',
-            'description'=>'Villarino-Lewis Jone y L. Piedra Buena y J.B Justo'
+            'description'=>'Villarino-Lewis Jones y L. Piedra Buena y J.B Justo',
+            'color' =>'yellow'
         ]);
         $zona3->geopoints()->save($punto9);
         $zona3->geopoints()->save($punto10);
@@ -70,7 +73,8 @@ class ZoneSeeder extends Seeder
 
         $zona4 = new Zone([
             'name'=>'Zona Inventada 3',
-            'description'=>'Fragata Sarmiento-E.Roberts y A. J.A Roca-Bv Almte Brown.'
+            'description'=>'Fragata Sarmiento-E.Roberts y A. J.A Roca-Bv Almte Brown.',
+            'color' =>'blue'
         ]);
         $zona4->geopoints()->save($punto13);
         $zona4->geopoints()->save($punto14);

@@ -7,7 +7,8 @@
 
         function creatorPoints(creatorStyle, creatorFeature){
             var service = {
-                getVectorPointCentralities: getVectorPointCentralities
+                getVectorPointCentralities: getVectorPointCentralities,
+                getPointCentrality : getPointCentrality
             };
             return service;
 
@@ -25,6 +26,14 @@
                 return vectorCentralities;
             };
 
+            function getPointCentrality(pointJson){
+              var stylePoint = creatorStyle.getStylePoint();
+              var point;
+                  point = creatorFeature.getPoint(pointJson.point.longitude, pointJson.point.latitude,pointJson);
+                  point.setStyle(stylePoint);
+              return point;
+            }
         }
 
 })()
+cd

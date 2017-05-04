@@ -11,15 +11,15 @@
 
         var service = {
             getMap: getMap,
-            addLayer: addLayer
+            // addLayer: addLayer
         };
         return service;
 
         // crea y devuelve una capa del tipo Tile
         function getMap() {
-            if (map == null) {
-                return createMap();
-            }
+            // if (map == null) {
+                map = createMap();
+            // }
             return map;
         };
 
@@ -40,10 +40,6 @@
             return map;
         }
 
-
-        function addLayer(layer) {
-            map.addLayer(layer);
-        }
     }
 
 })()

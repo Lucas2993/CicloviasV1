@@ -41,6 +41,7 @@ class ZoneController extends Controller{
         $Zone = Zone::find($id);
         $Zone->name = Request::input('name');
         $Zone->description = Request::input('description');
+        $Zone->color = Request::input('color');
         $Zone->save();
 
         return $Zone;

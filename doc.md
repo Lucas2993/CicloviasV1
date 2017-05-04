@@ -26,3 +26,12 @@ php artisan make:seeder UsersTableSeeder
 php artisan db:seed
 
 # Si lanza el error [ReflectionException] Class Database\Seeds\ZoneSeeder does not exist, entonces borrar el seeder y crearlo manualmente, claro salvando su contenido                             
+
+# Si lanza la excepcion "[ReflectionException]  Class TripSeeder does not exist", al ejecutar "php artisan db:seed", entonces ejecutar :
+composer dump-autoload
+## Hacer pelota la BD - "ejecutando en phpMyAdmin"
+DROP TABLE `geo_point_journey`, `geo_point_trip`, `geo_point_zone`, `zones`,`journeys`, `trips`, `geo_points`,`centralities`,`users` , `migrations`, `password_resets`;
+## luego
+php artisan migrate:install
+php artisan migrate
+php artisan db:seed

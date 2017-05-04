@@ -23,8 +23,8 @@
                                                     templateUrl: base_route + path.REGISTER_VIEW
                                                 })
                                                 .when('/map', {
-                                                    templateUrl: base_route + path.MAP_VIEW 
-                                                    // controller: 'MapController'
+                                                    templateUrl: base_route + path.MAP_VIEW,
+                                                    controller: 'MapController'
                                                 })
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW

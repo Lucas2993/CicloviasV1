@@ -4,9 +4,9 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', MapController]);
+        .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
 
-    function MapController(vm, creatorMap, srvLayers, dataServer) {
+    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
 
         // ********************* declaracion de variables y metodos *********************
         vm.map = creatorMap.getMap();
@@ -16,22 +16,31 @@
 
         vm.findAllCentralities = findAllCentralities;
         vm.findAllZones = findAllZones;
+        vm.findAllTrips = findAllTrips;
 
         vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
         vm.toogleZonesLayer = toogleZonesLayer;
 
+        // ********************************** NUEVO *******************************
+        vm.selectZone = selectZone;
+        vm.selectCentrality = selectCentrality;
+
+        vm.checkAll = checkAll;
+
         vm.checkboxModel = {
-            centralitiesValue: false,
-            zonesValue: false
+            value: false,
+
         };
 
         var generateCentralitiesPoints;
         var createLayerZone;
+        var createLayerTrip;
 
         // ************************ inicializacion de datos del mapa ************************
         // **********************************************************************************
         vm.findAllCentralities();
         vm.findAllZones();
+        vm.findAllTrips();
 
         // **********************************************************************************
         // ************************ Descripcion de las funciones ************************
@@ -49,6 +58,7 @@
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las CENTRALIDADES");
                 })
         }
+
         // Busca todas las zonas de la BD
         function findAllZones() {
             dataServer.getZones()
@@ -63,39 +73,85 @@
                 })
         }
 
+        // Busca todas los recorridos de la BD
+        function findAllTrips() {
+            dataServer.getTrips()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.tripsJson = data;
+                    console.log("Datos recuperados prom TRIPS con EXITO! = " + data);
+                    //createLayerTrip(vm.tripsJson);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+                })
+        }
+
         //      Generacion de Capa de Centralidades a partir del json recibido desde el service
         function generateCentralitiesPoints(centralitiesJson) {
             // Se crea y agrega la capa de Centralidades al mapa
             vm.centralitiesLayer = srvLayers.getLayerMarker(centralitiesJson);
+            vm.centralitiesLayerTest = srvLayers.getLayerMarker(centralitiesJson);
+
             vm.map.addLayer(vm.centralitiesLayer);
-            vm.centralitiesLayer.setVisible(false);
+            vm.map.addLayer(vm.centralitiesLayerTest);
+
+            vm.centralitiesLayer.setVisible(true);
         }
 
         //      Generacion de Capa de Zonas a partir del json recibido desde el service
         function createLayerZone(infoZoneJson) {
-            vm.zonesLayer = srvLayers.getLayerZones(infoZoneJson);
+            vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
             vm.map.addLayer(vm.zonesLayer);
             vm.zonesLayer.setVisible(false);
         }
 
         // Toogle de capa de centralidades
         function toogleCentralitiesLayer() {
-            if (vm.centralitiesLayer.getVisible()) {
-                vm.centralitiesLayer.setVisible(false);
-            } else {
-                vm.centralitiesLayer.setVisible(true);
-            }
+            adminLayers.viewLayer(vm.centralitiesLayer);
         }
 
         // Toogle de capa de zonas
         function toogleZonesLayer() {
-            if (vm.zonesLayer.getVisible()) {
-                vm.zonesLayer.setVisible(false);
-            } else {
-                vm.zonesLayer.setVisible(true);
-            }
+            adminLayers.viewLayer(vm.zonesLayer);
         }
 
+        // permite la visualizacion o no de una zona
+        function selectZone(nameZone) {
+            var zoneSelected = adminLayers.findLayerZone(nameZone, vm.zonesLayer);
+            if (zoneSelected == null) {
+                console.log("ERROR: la zona " + nameZone + " no se encuentra disponible.");
+            }
+            console.log("Zona seleccionada: " + nameZone);
+            adminLayers.viewLayer(zoneSelected);
+        }
+
+        // permite la visualizacion o no de una zona
+        function selectCentrality(centrality) {
+            var centralitySelected = adminLayers.viewCentrality(centrality, vm.centralitiesLayer);
+            if (centralitySelected == null) {
+                console.log("ERROR: la centralidad " + centrality + " no se encuentra disponible.");
+            }
+
+        }
+        vm.selectedAll = false;
+
+        function checkAll() {
+            if (vm.selectedAll) {
+                vm.selectedAll = false;
+                vm.centralitiesLayer.getSource().clear();
+            } else {
+                vm.selectedAll = true;
+                adminLayers.addCentralities(vm.centralitiesJson, vm.centralitiesLayer);
+            }
+
+            angular.forEach(vm.centralitiesJson, function(centrality) {
+                centrality.selected = vm.selectedAll;
+            });
+        }
+
+        // ****************************** Lucas y ema ***************************************
+        // **********************************************************************************
         // display popup on click
         vm.map.on('click', function(evt) {
             var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
@@ -106,67 +162,67 @@
                     });
                     vm.map.addOverlay(popup);
 
-                    popup.show(evt.coordinate,feature.get('object').name);
+                    popup.show(evt.coordinate, feature.get('object').name);
                     return feature;
                 });
         });
 
         // Lucas
-
         // Aca empieza lo que agregue para el ABM de centralidades.
-
         // Incorporacion de agregar centralidad
-
         // Esta bandera se usa para saber si el usuario se encuentra seleccionando un punto para una nueva centralidad.
         vm.isSelecting = false;
 
         // Modelo de una nueva centralidad (inicializacion).
         vm.newCentrality = {
-            name : '',
-            location : '',
-            latitude : '',
-            longitude : ''
+            name: '',
+            location: '',
+            latitude: '',
+            longitude: ''
         }
 
         // Cuando el usuario quiere crear una nueva centralidad de ajustan las banderas y se inicializa la centralidad.
-        vm.cetralitySelection = function(){
-          vm.isSelecting = true;
-          vm.isEditing = false;
-          vm.centralityReset();
+        vm.centralitySelection = function() {
+            vm.isSelecting = true;
+            vm.isEditing = false;
+            vm.centralityReset();
         }
 
         // Cuando se cancela se resetea la centralidad y sus correspondientes banderas.
-        vm.centralityCancel = function(){
-          vm.isSelecting = false;
-          vm.isEditing = false;
-          vm.centralityReset();
+        vm.centralityCancel = function() {
+            vm.isSelecting = false;
+            vm.isEditing = false;
+            vm.centralityReset();
         }
 
         // Se inicializa nuevamente la centralidad.
-        vm.centralityReset = function(){
+        vm.centralityReset = function() {
             vm.newCentrality = {
-                name : '',
-                location : '',
-                latitude : '',
-                longitude : ''
+                name: '',
+                location: '',
+                latitude: '',
+                longitude: ''
             }
         }
 
-        // Se llama al servicio y se guarda la nueva centralidad.
-        vm.centralitySave = function(){
-            dataServer.saveCentrality(vm.newCentrality, function(err, res){
-  				if(err){
-  					return alert('Ocurrió un error: ' + err)
-  				}
-  				alert('Se guardó correctamente la centralidad: ' + res.id)
-                // Una vez guardada, se intentan recuperar todas las centralidades nuevamente para
-                // obtener los cambios realizados.
-                vm.findAllCentralities();
-  			});
-            // Se resetea la centralidad y sus banderas.
-            vm.centralityCancel();
 
+        // Busca todas las zonas de la BD
+        vm.centralitySave = function() {
+            dataServer.saveCentrality(vm.newCentrality)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se guardó correctamente la centralidad: ' + data.id)
+                    vm.centralitiesJson.push(data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    // vm.$apply();
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
         }
+
 
         // Se captura el evento de click dentro del mapa.
         vm.map.on('click', function(evt) {
@@ -174,71 +230,89 @@
             vm.callbackMarkersOnClick(evt.pixel);
 
             // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
-            if(vm.isSelecting || vm.isEditing){
-              var coordinate = evt.coordinate;
-              vm.newCentrality.longitude = coordinate[0];
-              vm.newCentrality.latitude = coordinate[1];
-              console.log('Selected point: '+coordinate);
-              // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
-              vm.$apply();
+            if (vm.isSelecting || vm.isEditing) {
+                var coordinate = evt.coordinate;
+                vm.newCentrality.longitude = coordinate[0];
+                vm.newCentrality.latitude = coordinate[1];
+                console.log('Selected point: ' + coordinate);
+                // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
+                vm.$apply();
+            }
+            if(vm.isSelecting){
+              
             }
         });
 
         // Modificacion y borrado de una centralidad.
-        vm.callbackMarkersOnClick =  function(pixel){
+        vm.callbackMarkersOnClick = function(pixel) {
             // Determina que elemento se clickeo (indicador de centralidad).
-            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer){
+            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
                 // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
                 vm.searchCentrality(feature);
             })
         }
 
-//nooooooooooooooooooo
+        //nooooooooooooooooooo
 
         // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
-        vm.searchCentrality = function(point){
+        vm.searchCentrality = function(point) {
             vm.centralityEdit();
             vm.newCentrality = point.get('object');
             vm.$apply();
         }
 
         // Cuando se edita se resetea la centralidad y se establece la bandera de edicion.
-        vm.centralityEdit = function(){
-          vm.isSelecting = false;
-          vm.isEditing = true;
-          vm.centralityReset();
+        vm.centralityEdit = function() {
+            vm.isSelecting = false;
+            vm.isEditing = true;
+            vm.centralityReset();
         }
 
         // Bandera para indicar que se esta editando una centralidad.
         vm.isEditing = false;
 
-        // Se realiza el llamado al servicio de borrado para borrar una centralidad.
-        vm.centralityDelete = function(){
-            dataServer.deleteCentrality(vm.newCentrality.id, function(err, res){
-  				if(err){
-  					return alert('Ocurrió un error: ' + err)
-  				}
-  				alert('Se elimino correctamente la centralidad: ' + vm.newCentrality.id)
-                // Al haber borrado una centralidad se obtienen nuevamente las centralidades para obtener los cambios.
-                vm.findAllCentralities();
-                // Se limpia el modelo y sus banderas.
-                vm.centralityCancel;
-  			});
+
+        vm.centralityDelete = function() {
+            dataServer.deleteCentrality(vm.newCentrality.id)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se elimino correctamente la centralidad: ' + data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
+
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
         }
 
-        // Se realiza el llamado al servicio de actualizacion para actualizar una centralidad.
-        vm.centralityUpdate = function(){
-            dataServer.updateCentrality(vm.newCentrality, function(err, res){
-                if(err){
-                    return alert('Ocurrió un error: ' + err)
-                }
-                alert('Se actualizo correctamente la centralidad: ' + vm.newCentrality.id)
-                // Al haber actualizado una centralidad se obtienen nuevamente las centralidades para obtener los cambios.
-                vm.findAllCentralities();
-                // Se limpia el modelo y sus banderas.
-                vm.centralityCancel;
-            });
+
+        function findById(item) {
+            return item.id == vm.newCentrality.id;
         }
+
+        vm.centralityUpdate = function() {
+            dataServer.updateCentrality(vm.newCentrality)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se modifico correctamente la centralidad: ' + data.id);
+                    // var cent = vm.centralitiesJson.find(findById);
+                    // adminLayers.viewCentrality(cent, vm.centralitiesLayer);
+                    vm.centralitiesJson.push(data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    // vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
+
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
+        }
+
 
     } // fin Constructor
 
