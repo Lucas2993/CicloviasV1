@@ -4,17 +4,19 @@
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
 
-        .factory('srvLayers', ['creatorPoints','creatorStyle','serviceDrawZone','srvZone', srvLayers]);
+        .factory('srvLayers', ['creatorPoints','creatorStyle','serviceDrawZone','srvZone','serviceTrip', srvLayers]);
 
-        function srvLayers(creatorPoints, creatorStyle, serviceDrawZone, srvZone){
+        function srvLayers(creatorPoints, creatorStyle, serviceDrawZone, srvZone, serviceTrip){
             var service = {
                 getLayerTile: getLayerTile,
                 getLayerMarker: getLayerMarker,
                 getLayerZones: getLayerZones,
-                getGroupLayerZones: getGroupLayerZones
+                getGroupLayerZones: getGroupLayerZones,
+                getLayerTrips: getLayerTrips
             };
 
             var generateZone;
+            var getInfoTrips;
 
             return service;
 
@@ -99,10 +101,7 @@
                      ])
                  });
                  // crea el stylo del dibujo
-                //  var styleDraw = creatorStyle.getStylePolygon('blue', creatorStyle.getStyleText(infoZone.name));
                 var styleDraw = creatorStyle.getStylePolygon(infoZone.color, creatorStyle.getStyleText(infoZone.name));
-
-                //  getStylePolygon(vm.getStyleText(infoZone.name), 'green');
 
                  console.log('Nombre de las zonas: '+infoZone.name);
                  console.log('Cantidad de puntos: '+infoZone.points.length);
@@ -120,6 +119,55 @@
 
                 //  return vm.getLayerZone(draw, styleDraw);
               }
+
+              // crea y devuelve la capa de recorridos
+            function getLayerTrips(dataJsonTrips){
+                // recuperamos los datos q nos competen
+                  var arrayCoord = getInfoTrips(dataJsonTrips);
+
+                  var vectorSourceNew = serviceTrip.getSource(arrayCoord);
+                  var styleLayer = creatorStyle.getStyleTrip();
+
+                  var layerTrips = new ol.layer.Vector({
+                    source: vectorSourceNew,
+                    style: styleLayer,
+                    visible: false
+                  });
+
+                  console.log("Capa de trayectos NUEVA visible: "+layerTrips.getVisible());
+
+                  return layerTrips;
+              }
+
+              // crea y devuelve un vector con los datos de las zonas
+              function getInfoTrips(dataJsonTrips) {
+                      var arrayPointsTrips = [];
+                      var arrayLontLat = [];
+                      var arrayInfoTrips = [];
+
+                      // obtenemos nada mas q los puntos de las zonas con sus datos
+                      for (var i = 0; i < dataJsonTrips.length; i++) {
+                          arrayPointsTrips.push((dataJsonTrips[i]).points);
+                      }
+
+                      var setPoints;
+                      var longLat;
+
+                      // rescatams solo los long y lat de cada punto de cada cjto de puntos
+                      for (var i = 0; i < arrayPointsTrips.length; i++) {
+                          setPoints = arrayPointsTrips[i];
+                          // por cada conjunto de puntos rescatams sus long y lat de cada punto
+                          for (var j = 0; j < setPoints.length; j++) {
+                              longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                              arrayLontLat.push(longLat);
+                          }
+                          // agregamos el cjot de puntos de cada recorrido al cjto de recorridos
+                          arrayInfoTrips.push(arrayLontLat);
+                          // reseteamos la variable auxiliar
+                          arrayLontLat = [];
+                      }
+                      return arrayInfoTrips;
+              };
         }
 
 })()

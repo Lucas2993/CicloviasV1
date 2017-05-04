@@ -89,6 +89,17 @@
                               </div>
                           </div>
 
+                        <!-- menu de opciones de recorridos -->
+                          <div uib-accordion-group class="panel-primary" heading="Recorridos" is-open="false">
+                              <div class="panel-body">
+                                  <form>
+                                      <div>
+                                          <label><input type="checkbox" ng-model="selectRecorrido" ng-change= "viewLayerTrips()" > Ver capa de recorridos</label>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+
             </uib-accordion>
 
             <!-- fin panel de control -->

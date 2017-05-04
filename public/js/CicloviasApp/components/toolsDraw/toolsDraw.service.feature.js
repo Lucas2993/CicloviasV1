@@ -8,7 +8,8 @@
         function creatorFeature(){
             var service = {
                 getPoint: getPoint,
-                getPolygon: getPolygon
+                getPolygon: getPolygon,
+                getFeatureGeom: getFeatureGeom
             };
             return service;
 
@@ -17,7 +18,7 @@
                 var point = new ol.Feature({
                           geometry: new ol.geom.Point([lon, lat]),
                                           object: object,
-                                          
+
                       });
 
                 return point;
@@ -32,6 +33,14 @@
                        });
                 return polygon;
             };
+
+            // crea un feature a partir de cualquier objeto del tipo ol.geom
+            function getFeatureGeom(geom){
+                var feature = new ol.Feature({
+                    geometry: geom
+                });
+                return feature;
+            }
         }
 
 })()

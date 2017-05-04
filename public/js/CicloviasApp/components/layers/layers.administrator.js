@@ -15,7 +15,6 @@
 
             // maneja la visualizacion de una capa
             function viewLayer(layer) {
-                console.log("entro al admin de capas!!");
                 if (layer.getVisible()) {
                     layer.setVisible(false);
                 } else {
@@ -26,7 +25,6 @@
             // busca una capa dentro de un grupo de capas (por medio del nombre)
             // si no encuentra la capa devuelve null
             function findLayerZone(nameZone, groupLayer) {
-                console.log("entro a buscar la zona!!");
                 var layerZones = groupLayer.getLayers().getArray();
                 var name;
                 var layer = null;
@@ -34,7 +32,6 @@
                 for (var i = 0; i < layerZones.length; i++) {
                     name = layerZones[i].getStyle().getText().getText();
                     if(angular.equals(name, nameZone)){
-                        console.log("Se encontro la zona, service.");
                         layer = layerZones[i];
                     }
                 }

@@ -11,6 +11,7 @@
                 getStyleBorder: getStyleBorder,
                 getStyleFill: getStyleFill,
                 getStylePoint: getStylePoint,
+                getStyleTrip: getStyleTrip,
                 getStylePolygon: getStylePolygon
             };
             return service;
@@ -65,6 +66,14 @@
                     text: styleText
                });
                return stylePolygon;
+            };
+
+            function getStyleTrip(){
+                var styleLine = new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: 'red', width: 3}),
+                });
+
+                return styleLine;
             };
         }
 

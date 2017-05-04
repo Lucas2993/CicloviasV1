@@ -4,9 +4,12 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
+    // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
+    //
+    // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
+    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
 
-    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
+    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip) {
 
         // ********************* declaracion de variables y metodos *********************
         vm.map = creatorMap.getMap();
@@ -77,7 +80,9 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsJson = data;
                     console.log("Datos recuperados prom TRIPS con EXITO! = " + data);
-                    //createLayerTrip(vm.tripsJson);
+                    // proceso y genracion de capa de recorridos
+                    vm.layerTrips = srvLayers.getLayerTrips(vm.tripsJson);
+                    vm.map.addLayer(vm.layerTrips);
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
@@ -262,32 +267,14 @@
             });
         }
 
-        // dataServer.saveCentrality(vm.newCentrality)
-        //     .then(function(data) {
-        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-        //         console.log("Se guardo correctamente la centralidad "+data.id);
-        //     })
-        //     .catch(function(err) {
-        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
-        //     })
+        // ******************************************************************************************
+        // ****************************** capa de trayectos *****************************************
+        vm.layerTrips;
+        vm.viewLayerTrips = viewLayerTrips;
 
-        // dataServer.updateCentrality(vm.newCentrality)
-        //     .then(function(data) {
-        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-        //         console.log("Se guardo correctamente la centralidad "+data.id);
-        //     })
-        //     .catch(function(err) {
-        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
-        //     })
-
-        // dataServer.deleteCentrality(vm.newCentrality.id)
-        //     .then(function(data) {
-        //         // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-        //         console.log("Se guardo borro la centralidad "+vm.newCentrality.id);
-        //     })
-        //     .catch(function(err) {
-        //         console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar la CENTRALIDAD");
-        //     })
+        function viewLayerTrips(){
+            adminLayers.viewLayer(vm.layerTrips);
+        }
 
     } // fin Constructor
 
