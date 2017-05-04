@@ -49,8 +49,11 @@
     <script src="{{ URL::asset('js/CicloviasApp/shared/pagefooter/pagefooterModule.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapCentralityController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapCentralityEditController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapZoneController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.creatorMap.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.feature.js') }}"></script>

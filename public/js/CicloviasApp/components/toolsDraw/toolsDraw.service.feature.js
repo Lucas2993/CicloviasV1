@@ -16,8 +16,7 @@
             function getPoint(lon, lat,object) {
                 var point = new ol.Feature({
                           geometry: new ol.geom.Point([lon, lat]),
-                                          object: object,
-                                          
+                                          object: object,                                        
                       });
 
                 return point;

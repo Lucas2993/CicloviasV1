@@ -23,6 +23,7 @@
               return layer;
             };
 
+
             // crea y devuelve la capa de los marcadoresr
             function getLayerMarker (centralitiesJson) {
                 var vectorPointsCentralities = creatorPoints.getVectorPointCentralities(centralitiesJson);

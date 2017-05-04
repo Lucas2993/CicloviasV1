@@ -3,31 +3,47 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .factory('creatorMap', ['propiertiesMap', creatorMap]);
+        .service('creatorMap', ['propiertiesMap', creatorMap]);
 
-        function creatorMap(propiertiesMap){
-            var service = {
-                getMap: getMap
-            };
-            return service;
+    function creatorMap(propiertiesMap) {
 
-            // crea y devuelve una capa del tipo Tile
-            function getMap () {
-                  var OSMLayer = new ol.layer.Tile({
-                          source: new ol.source.OSM()
-                  });
+        var map = null;
 
-                  var map = new ol.Map({
-                          layers: [OSMLayer],
-                          target: 'map',
-                          view: new ol.View({
-                              projection: propiertiesMap.PROJECTION,
-                              center: [propiertiesMap.LONG_CENTER, propiertiesMap.LAT_CENTER],
-                              zoom: propiertiesMap.ZOOM
-                          })
-                      });
-                  return map;
-            };
+        var service = {
+            getMap: getMap,
+            addLayer: addLayer
+        };
+        return service;
+
+        // crea y devuelve una capa del tipo Tile
+        function getMap() {
+            if (map == null) {
+                return createMap();
+            }
+            return map;
+        };
+
+        function createMap() {
+            var OSMLayer = new ol.layer.Tile({
+                source: new ol.source.OSM()
+            });
+
+            map = new ol.Map({
+                layers: [OSMLayer],
+                target: 'map',
+                view: new ol.View({
+                    projection: propiertiesMap.PROJECTION,
+                    center: [propiertiesMap.LONG_CENTER, propiertiesMap.LAT_CENTER],
+                    zoom: propiertiesMap.ZOOM
+                })
+            });
+            return map;
         }
+
+
+        function addLayer(layer) {
+            map.addLayer(layer);
+        }
+    }
 
 })()
