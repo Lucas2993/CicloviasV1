@@ -15,13 +15,13 @@ class TripSeeder extends Seeder
     public function run()
     {
       //----------Recorrido N°1 ---------------
-      $punto1 = GeoPoint::create(['latitude'=>'-42.785076', 'longitude'=>'-65.005561','order' => '1']);
-      $punto2 = GeoPoint::create(['latitude'=>'-42.781499', 'longitude'=>'-65.017525','order' => '2']);
-      $punto3 = GeoPoint::create(['latitude'=>'-42.783389', 'longitude'=>'-65.023125','order' => '3']);
+      $punto1 = GeoPoint::create(['latitude'=>'-42.78505366189581', 'longitude'=>'-65.00609294918218','order' => '1']);
+      $punto2 = GeoPoint::create(['latitude'=>'-42.78147877687065', 'longitude'=>'-65.0175513460938','order' => '2']);
+      $punto3 = GeoPoint::create(['latitude'=>'-42.78338435801508', 'longitude'=>'-65.02320544269719','order' => '3']);
 
       $trip1 = Trip::create([
           'name'=>'Recorrido 1',
-          'description'=>'Vemos si llegamos a la casa de Demian'
+          'description'=>'UNPSJB a la casa de Demian'
       ]);
       $trip1->geopoints()->save($punto1);
       $trip1->geopoints()->save($punto2);
@@ -29,15 +29,15 @@ class TripSeeder extends Seeder
 
       //----------Recorrido N°2 ---------------
 
-      $punto4 = GeoPoint::create(['latitude'=>'-42.765440', 'longitude'=>'-65.042246','order' => '1']);
-      $punto5 = GeoPoint::create(['latitude'=>'-42.766695', 'longitude'=>'-65.040116','order' => '2']);
-      $punto6 = GeoPoint::create(['latitude'=>'-42.765135', 'longitude'=>'-65.035529','order' => '3']);
-      $punto7 = GeoPoint::create(['latitude'=>'-42.767117', 'longitude'=>'-65.034334','order' => '4']);
-      $punto8 = GeoPoint::create(['latitude'=>'-42.766791', 'longitude'=>'-65.0422839','order' => '5']);
+      $punto4 = GeoPoint::create(['latitude'=>'-42.765932713793624', 'longitude'=>'-65.04119770076909','order' => '1']);
+      $punto5 = GeoPoint::create(['latitude'=>'-42.76669671991541', 'longitude'=>'-65.04009799507298','order' => '2']);
+      $punto6 = GeoPoint::create(['latitude'=>'-42.76513719225123', 'longitude'=>'-65.0355436041657','order' => '3']);
+      $punto7 = GeoPoint::create(['latitude'=>'-42.76710234820214', 'longitude'=>'-65.03435270336308','order' => '4']);
+      $punto8 = GeoPoint::create(['latitude'=>'-42.76659432788915', 'longitude'=>'-65.03293113258519','order' => '5']);
 
       $trip2 = Trip::create([
           'name'=>'Recorrido 2',
-          'description'=>'Vemos si llegamos a la Galesa'
+          'description'=>'Terminal a monumento a los colonos galeses'
       ]);
       $trip2->geopoints()->save($punto4);
       $trip2->geopoints()->save($punto5);
@@ -47,15 +47,15 @@ class TripSeeder extends Seeder
 
       //----------Recorrido N°3 ---------------
 
-      $punto9 = GeoPoint::create(['latitude'=>'-42.771438', 'longitude'=>'-65.036437','order' => '1']);
-      $punto10 = GeoPoint::create(['latitude'=>'-42.769603', 'longitude'=>'-65.031114','order' => '2']);
-      $punto11 = GeoPoint::create(['latitude'=>'-42.766754', 'longitude'=>'-65.026641','order' => '3']);
-      $punto12 = GeoPoint::create(['latitude'=>'-42.775887', 'longitude'=>'-65.024195','order' => '4']);
-      $punto13 = GeoPoint::create(['latitude'=>'-42.774946', 'longitude'=>'-65.025466','order' => '5']);
+      $punto9 = GeoPoint::create(['latitude'=>'-42.772765114262484', 'longitude'=>'-65.04040913131871','order' => '1']);
+      $punto10 = GeoPoint::create(['latitude'=>'-42.7700519342084', 'longitude'=>'-65.03244833496251','order' => '2']);
+      $punto11 = GeoPoint::create(['latitude'=>'-42.77719494233547', 'longitude'=>'-65.02794222381749','order' => '3']);
+      $punto12 = GeoPoint::create(['latitude'=>'-42.77596643510379', 'longitude'=>'-65.02440170791783','order' => '4']);
+      $punto13 = GeoPoint::create(['latitude'=>'-42.77496628621933', 'longitude'=>'-65.02548532035985','order' => '5']);
 
       $trip3 = Trip::create([
           'name'=>'Recorrido 3',
-          'description'=>'Vemos si llegamos a algún sitio'
+          'description'=>'YPF J.B. Justo a parador Yoaquina'
       ]);
       $trip3->geopoints()->save($punto9);
       $trip3->geopoints()->save($punto10);
