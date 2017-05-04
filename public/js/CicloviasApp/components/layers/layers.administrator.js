@@ -57,14 +57,16 @@
                     feacture = feactures[i];
                     layer.getSource().removeFeature(feacture);
                     break;
+
                 }
-            }
-            if (feacture == null) {
-                var point = creatorPoints.getPointCentrality(centrality);
-                layer.getSource().addFeature(point);
-            }
-            return feacture;
-        };
+              }
+                if (feacture == null) {
+                    var point = creatorPoints.getPointCentrality(centrality);
+                    layer.getSource().addFeature(point);
+                }
+                return feacture;
+
+        }
 
         function addCentralities(centralitiesJson, layer) {
             var points = creatorPoints.getVectorPointCentralities(centralitiesJson);

@@ -62,6 +62,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.point.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/promise/promise.data.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/trip/trip.service.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/layers/layers.administrator.js') }}"></script>
 
