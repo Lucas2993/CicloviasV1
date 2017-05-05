@@ -17,6 +17,7 @@ class CreateZonesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('description', 200);
+            $table->string('color', 100);
             $table->timestamps();
         });
     }

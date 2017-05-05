@@ -67,7 +67,7 @@ class CentralityController extends Controller
         $centrality = Centrality::create($params_centrality);
         $point = GeoPoint::create($params_points);
         $centrality->geopoint()->save($point);
-
+        $centrality->point = $centrality->geopoint()->get()[0];
         return $centrality;
     }
 
@@ -79,7 +79,7 @@ class CentralityController extends Controller
      */
     public function show($id){
         $centrality = Centrality::find($id);
-
+        $centrality->point = $centrality->geopoint()->get()[0];
         return $centrality;
     }
 
@@ -120,7 +120,7 @@ class CentralityController extends Controller
         $point->longitude = $request->input('longitude');
 
         $centrality->geopoint()->save($point);
-
+        $centrality->point = $centrality->geopoint()->get()[0];
         return $centrality;
     }
 
@@ -131,6 +131,9 @@ class CentralityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
+        $centrality = Centrality::find($id);
+        $centrality->point = $centrality->geopoint()->get()[0];
         Centrality::destroy($id);
+        return $centrality;
     }
 }

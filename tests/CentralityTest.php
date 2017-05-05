@@ -132,8 +132,8 @@ class CentralityTest extends TestCase
         // Se solicita actualizar el registro mediante los datos anteriormente establecidos.
         $response = $this->call('PUT','/api/centrality/'.$centrality->id, $data);
         // Se verifica que la operacion haya sido exitosa.
-        $this->assertEquals(200, $response->status());
         // Se obtiene el registro cambiado para verificar los cambios.
+        $this->assertEquals(200, $response->status());
         $new_centrality = Centrality::find($centrality->id);
         // Se verifica que los cambios hayan sido realizados.
         $this->assertTrue($new_centrality->name == 'Plaza1');

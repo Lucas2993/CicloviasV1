@@ -1,221 +1,333 @@
-/* Modulo del mapa que permite la representacion del mismo en la pagina y que cuenta con los datos
+/* Controlador que permite la representacion del mapa en la pagina y que cuenta con los datos
    necesarios para esto */
 (function() {
     'use strict';
-
-    // angular.module('mapModule', [])
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-    .controller('MapController', ['$scope', 'MapSrv', MapController]);
+        // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
+    // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
+    //
+    // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
+    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
 
-    function MapController(vm, srvDataServer) {
+    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip) {
 
-        vm.latitude = '-42.77000141404137';
-        vm.longitude = '-65.0339126586914';
-        vm.zoom = 13;
-        // vector de centralidades recibido desde Service
+        // ********************* declaracion de variables y metodos *********************
+        vm.map = creatorMap.getMap();
+
         vm.centralitiesJson = [];
+        vm.checkboxModel;
 
-        // ngModel de checkbox
+        vm.findAllCentralities = findAllCentralities;
+        vm.findAllZones = findAllZones;
+        vm.findAllTrips = findAllTrips;
+
+        vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
+        vm.toogleZonesLayer = toogleZonesLayer;
+
+        // ********************************** NUEVO *******************************
+        vm.selectZone = selectZone;
+        vm.selectCentrality = selectCentrality;
+
+        vm.checkAll = checkAll;
+
         vm.checkboxModel = {
-            centralitiesValue: false,
-            zonesValue : false
+            value: false,
+
         };
 
-        // Capa basica del mapa brindado por OSM
-        var OSMLayer = new ol.layer.Tile({
-            source: new ol.source.OSM()
-        });
+        var generateCentralitiesPoints;
+        var createLayerZone;
+        var createLayerTrip;
 
-        // Cronstructor de mapa base
-        vm.map = new ol.Map({
-            layers: [OSMLayer],
-            target: 'map',
-            view: new ol.View({
-                projection: 'EPSG:4326',
-                center: [-65.0339126586914, -42.77000141404137],
-                zoom: vm.zoom
-            })
-        });
-
-
-        // Busca todas las centralidades de la BD
-        vm.findAllCentralities = function() {
-            srvDataServer.findAllCentralities(function(err, res) {
-                if (err) {
-                    return alert('Ocurrió un error buscando las centralidades: ' + err)
-                }
-                console.log(res);
-                vm.centralitiesJson = res;
-                vm.generateCentralitiesPoints(vm.centralitiesJson);
-            });
-        }
-        // Busca todas las zonas de la BD
-        vm.findAllZones = function() {
-            srvDataServer.findAllZones(function(err, res) {
-                if (err) {
-                    return alert('Ocurrió un error buscando las zonas: ' + err)
-                }
-                console.log(res);
-                vm.zonesJson = res;
-                vm.createLayerZone(res);
-            });
-        }
-
+        // ************************ inicializacion de datos del mapa ************************
+        // **********************************************************************************
         vm.findAllCentralities();
         vm.findAllZones();
+        vm.findAllTrips();
 
+        // **********************************************************************************
+        // ************************ Descripcion de las funciones ************************
 
-        // Estilo de los iconos de una centralidad
-        var iconStyle = new ol.style.Style({
-            image: new ol.style.Icon(({
-                anchor: [0.5, 46],
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'pixels',
-                src: 'https://openlayers.org/en/v4.1.0/examples/data/icon.png'
-            }))
-        });
-
-        // Contructor de punto perteneciente a un mapa de OSM
-        vm.generatePoint = function(lon, lat) {
-            return new ol.Feature({
-                geometry: new ol.geom.Point([lon, lat])
-            });
+        // Busca todas las centralidades de la BD
+        function findAllCentralities() {
+            dataServer.getCentralities()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.centralitiesJson = data;
+                    console.log("Datos recuperados con EXITO! = " + data);
+                    generateCentralitiesPoints(vm.centralitiesJson);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las CENTRALIDADES");
+                })
         }
 
-//      Generacion de Capa de Centralidades a partir del json recibido desde el service
-        vm.generateCentralitiesPoints = function(centralitiesJson) {
-            var vector = [];
-            var point;
-            // Recorre el json, mientras va generando puntos y los agrega a un vector
-            for (var i = 0; i < centralitiesJson.length; i++) {
-                point = vm.generatePoint(centralitiesJson[i].point.longitude, centralitiesJson[i].point.latitude);
-                point.setStyle(iconStyle);
-                vector.push(point);
-            }
-            var centralitiesPoints = new ol.source.Vector({
-                features: vector
-            });
-            vm.centralitiesLayer = new ol.layer.Vector({
-                source: centralitiesPoints
-            });
-            // Se agrega la capa de Centralidades al mapa
+        // Busca todas las zonas de la BD
+        function findAllZones() {
+            dataServer.getZones()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.zonesJson = data;
+                    console.log("Datos recuperados prom ZONES con EXITO! = " + data);
+                    createLayerZone(vm.zonesJson);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");
+                })
+        }
+
+        // Busca todas los recorridos de la BD
+        function findAllTrips() {
+            dataServer.getTrips()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.tripsJson = data;
+                    console.log("Datos recuperados prom TRIPS con EXITO! = " + data);
+                    // proceso y genracion de capa de recorridos
+                    vm.layerTrips = srvLayers.getLayerTrips(vm.tripsJson);
+                    vm.map.addLayer(vm.layerTrips);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+                })
+        }
+
+        //      Generacion de Capa de Centralidades a partir del json recibido desde el service
+        function generateCentralitiesPoints(centralitiesJson) {
+            // Se crea y agrega la capa de Centralidades al mapa
+            vm.centralitiesLayer = srvLayers.getLayerMarker(centralitiesJson);
+            vm.centralitiesLayerTest = srvLayers.getLayerMarker(centralitiesJson);
+
             vm.map.addLayer(vm.centralitiesLayer);
-            vm.centralitiesLayer.setVisible(false);
+            vm.map.addLayer(vm.centralitiesLayerTest);
+
+            vm.centralitiesLayer.setVisible(true);
+        }
+
+        //      Generacion de Capa de Zonas a partir del json recibido desde el service
+        function createLayerZone(infoZoneJson) {
+            vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
+            vm.map.addLayer(vm.zonesLayer);
+            vm.zonesLayer.setVisible(false);
         }
 
         // Toogle de capa de centralidades
-        vm.toogleCentralitiesLayer = function() {
-            if (vm.centralitiesLayer.getVisible()) {
-                vm.centralitiesLayer.setVisible(false);
-            } else {
-                vm.centralitiesLayer.setVisible(true);
-            }
+        function toogleCentralitiesLayer() {
+            adminLayers.viewLayer(vm.centralitiesLayer);
         }
+
         // Toogle de capa de zonas
-        vm.toogleZonesLayer = function() {
-          if (vm.zonesLayer.getVisible()) {
-              vm.zonesLayer.setVisible(false);
-          } else {
-              vm.zonesLayer.setVisible(true);
-          }
-            console.log("zones");
+        function toogleZonesLayer() {
+            adminLayers.viewLayer(vm.zonesLayer);
         }
 
-        //*************************** AGREGAR *****************************************
-        vm.getStyleText = function(nameZone){
-           return new ol.style.Text({
-              text: nameZone});
-        }
-
-        vm.getPolygonLayer = function(style){
-           return new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: 'blue',
-              width: 1
-            }),
-            fill: new ol.style.Fill({
-              color: 'rgba(0, 0, 255, 0.1)'
-            }),
-            text: style
-          });
-        }
-
-        vm.getLayerZones = function(vectorZone, styleZone){
-           return new ol.layer.Vector({
-               source: new ol.source.Vector({
-                   features: vectorZone
-               }),
-               style: styleZone
-           });
-        }
-
-        vm.getPointZone = function(lon, lat) {
-           var point = [lon, lat];
-             return point;
-         }
-
-         console.log(vm.getPointZone(-65.057715, -42.7814254));
-
-         // recupera solo la long y lat de los puntos recibidos
-         vm.getVectorPointZone = function(pointsZone){
-            var vectorPointsZone = [];
-            for (var i = 0; i < pointsZone.length; i++) {
-               vectorPointsZone.push(vm.getPointZone(pointsZone[i].longitude,pointsZone[i].latitude));
+        // permite la visualizacion o no de una zona
+        function selectZone(nameZone) {
+            var zoneSelected = adminLayers.findLayerZone(nameZone, vm.zonesLayer);
+            if (zoneSelected == null) {
+                console.log("ERROR: la zona " + nameZone + " no se encuentra disponible.");
             }
-            vectorPointsZone.push(vm.getPointZone(pointsZone[0].longitude,pointsZone[0].latitude));
-            return vectorPointsZone;
-         }
+            console.log("Zona seleccionada: " + nameZone);
+            adminLayers.viewLayer(zoneSelected);
+        }
 
-          // Recupera los datos necesarios recibidos del servidor para contruir el dibujo de la zona
-         vm.getInfoZone = function(dateZonesJson) {
-            var vectorInfoZone = [];
-            var vectorPointsZone = [];
-            for (var i = 0; i < dateZonesJson.length; i++) {
-               vectorPointsZone = vm.getVectorPointZone(dateZonesJson[i].points);
-                var infoZone = new Object();
-                infoZone.name = dateZonesJson[i].name;
-                infoZone.points = vectorPointsZone;
-               vectorInfoZone.push(infoZone);
+        // permite la visualizacion o no de una zona
+        function selectCentrality(centrality) {
+            var centralitySelected = adminLayers.viewCentrality(centrality, vm.centralitiesLayer);
+            if (centralitySelected == null) {
+                console.log("ERROR: la centralidad " + centrality + " no se encuentra disponible.");
             }
-             return vectorInfoZone;
-         }
 
-          //  trae los dibujos(polygon) necesarios para mostrar las zonas
-         vm.getDrawsZone = function(infoZone) {
-             var vectorDrawsZone = [];
-             for (var i = 0; i < infoZone.length; i++) {
-                var draw = new ol.Feature({
-                   geometry: new ol.geom.Polygon([
-                           infoZone[i].points
-                   ])
-               });
-               vectorDrawsZone.push(draw);
-             }
-             return vectorDrawsZone;
-         }
+        }
+        vm.selectedAll = false;
 
-         // se recibe solo la info necesaria de cada zona para realizar el grafico
-         vm.createLayerZone = function(infoServer) {
-            // recuperams solo los datos que nos interesan
-            var infoZones = vm.getInfoZone(infoServer);
-            // console.log(infoZones[0].points);
-            // 1ro determinamos el estilo del texto, con su info de cada zona(por ahora va ser el mismo para todos)
-            var styleText = vm.getStyleText('ZONA');
-            // una vez creado el estilo de texto vamos a creaer el estilo del polygono de cada zona
-            var stylePolygon = vm.getPolygonLayer(styleText);
-            // creamos los dibujos de cada zona (polygon)
-            var vectorDrawsZone = vm.getDrawsZone(infoZones);
-            // console.log('cant de polygonos: '+vectorDrawsZone.length);
-            vm.zonesLayer = vm.getLayerZones(vectorDrawsZone, stylePolygon);
-            // console.log(vm.zonesLayer);
-            vm.map.addLayer(vm.zonesLayer);
-            vm.zonesLayer.setVisible(false);
-         }
+        function checkAll() {
+            if (vm.selectedAll) {
+                vm.selectedAll = false;
+                vm.centralitiesLayer.getSource().clear();
+            } else {
+                vm.selectedAll = true;
+                adminLayers.addCentralities(vm.centralitiesJson, vm.centralitiesLayer);
+            }
+
+            angular.forEach(vm.centralitiesJson, function(centrality) {
+                centrality.selected = vm.selectedAll;
+            });
+        }
+
+        // ****************************** Lucas y ema ***************************************
+        // **********************************************************************************
+        // display popup on click
+        vm.map.on('click', function(evt) {
+            var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
+                function(feature) {
+                    var coordinates = feature.getGeometry().getCoordinates();
+                    var popup = new ol.Overlay.Popup({
+                        // insertFirst: false
+                    });
+                    vm.map.addOverlay(popup);
+
+                    popup.show(evt.coordinate, feature.get('object').name);
+                    return feature;
+                });
+        });
+
+        // Lucas
+        // Aca empieza lo que agregue para el ABM de centralidades.
+        // Incorporacion de agregar centralidad
+        // Esta bandera se usa para saber si el usuario se encuentra seleccionando un punto para una nueva centralidad.
+        vm.isSelecting = false;
+
+        // Modelo de una nueva centralidad (inicializacion).
+        vm.newCentrality = {
+            name: '',
+            location: '',
+            latitude: '',
+            longitude: ''
+        }
+
+        // Cuando el usuario quiere crear una nueva centralidad de ajustan las banderas y se inicializa la centralidad.
+        vm.centralitySelection = function() {
+            vm.isSelecting = true;
+            vm.isEditing = false;
+            vm.centralityReset();
+        }
+
+        // Cuando se cancela se resetea la centralidad y sus correspondientes banderas.
+        vm.centralityCancel = function() {
+            vm.isSelecting = false;
+            vm.isEditing = false;
+            vm.centralityReset();
+        }
+
+        // Se inicializa nuevamente la centralidad.
+        vm.centralityReset = function() {
+            vm.newCentrality = {
+                name: '',
+                location: '',
+                latitude: '',
+                longitude: ''
+            }
+        }
 
 
+        // Busca todas las zonas de la BD
+        vm.centralitySave = function() {
+            dataServer.saveCentrality(vm.newCentrality)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se guardó correctamente la centralidad: ' + data.id)
+                    vm.centralitiesJson.push(data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    // vm.$apply();
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
+        }
 
 
+        // Se captura el evento de click dentro del mapa.
+        vm.map.on('click', function(evt) {
+            // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
+            vm.callbackMarkersOnClick(evt.pixel);
+
+            // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
+            if (vm.isSelecting || vm.isEditing) {
+                var coordinate = evt.coordinate;
+                vm.newCentrality.longitude = coordinate[0];
+                vm.newCentrality.latitude = coordinate[1];
+                console.log('Selected point: ' + coordinate);
+                // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
+                vm.$apply();
+            }
+            if(vm.isSelecting){
+
+            }
+        });
+
+        // Modificacion y borrado de una centralidad.
+        vm.callbackMarkersOnClick = function(pixel) {
+            // Determina que elemento se clickeo (indicador de centralidad).
+            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+                // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
+                vm.searchCentrality(feature);
+            })
+        }
+
+        //nooooooooooooooooooo
+
+        // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
+        vm.searchCentrality = function(point) {
+            vm.centralityEdit();
+            vm.newCentrality = point.get('object');
+            vm.$apply();
+        }
+
+        // Cuando se edita se resetea la centralidad y se establece la bandera de edicion.
+        vm.centralityEdit = function() {
+            vm.isSelecting = false;
+            vm.isEditing = true;
+            vm.centralityReset();
+        }
+
+        // Bandera para indicar que se esta editando una centralidad.
+        vm.isEditing = false;
+
+
+        vm.centralityDelete = function() {
+            dataServer.deleteCentrality(vm.newCentrality.id)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se elimino correctamente la centralidad: ' + data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
+
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
+        }
+
+
+        function findById(item) {
+            return item.id == vm.newCentrality.id;
+        }
+
+        vm.centralityUpdate = function() {
+            dataServer.updateCentrality(vm.newCentrality)
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    console.log(data);
+                    alert('Se modifico correctamente la centralidad: ' + data.id);
+                    // var cent = vm.centralitiesJson.find(findById);
+                    // adminLayers.viewCentrality(cent, vm.centralitiesLayer);
+                    vm.centralitiesJson.push(data);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    adminLayers.viewCentrality(data, vm.centralitiesLayer);
+                    // vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
+
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al guardar centrality");
+                });
+            vm.centralityCancel();
+        }
+
+        // ******************************************************************************************
+        // ****************************** capa de trayectos *****************************************
+        vm.layerTrips;
+        vm.viewLayerTrips = viewLayerTrips;
+
+        function viewLayerTrips(){
+            adminLayers.viewLayer(vm.layerTrips);
+        }
 
     } // fin Constructor
+
 })()
