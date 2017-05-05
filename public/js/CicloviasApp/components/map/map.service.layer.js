@@ -13,6 +13,7 @@
                 getLayerZones: getLayerZones,
                 getGroupLayerZones: getGroupLayerZones,
                 getLayerTrips: getLayerTrips,
+                getLayerTripsOld: getLayerTripsOld,
                 getLayerJourney: getLayerJourney,
                 getVectorFeatures: getVectorFeatures
             };
@@ -141,6 +142,24 @@
 
                   return layerTrips;
               }
+
+              function getLayerTripsOld(dataJsonTrips){
+                  // recuperamos los datos q nos competen
+                  var arrayCoord = getInfoTrips(dataJsonTrips);
+
+                    var vectorSourceNew = serviceTrip.getSource(arrayCoord);
+                    var styleLayer = creatorStyle.getStyleTrip();
+
+                    var layerTrips = new ol.layer.Vector({
+                      source: vectorSourceNew,
+                      style: styleLayer,
+                      visible: false
+                    });
+
+                    console.log("Capa de trayectos NUEVA visible: "+layerTrips.getVisible());
+
+                    return layerTrips;
+                }
 
 
               function getVectorFeatures(dataJsonTrips){

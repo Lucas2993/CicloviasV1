@@ -14,7 +14,8 @@
             addCentralities: addCentralities,
             addTrips: addTrips,
             enableAllZone: enableAllZone,
-            disableAllZone: disableAllZone
+            disableAllZone: disableAllZone,
+            addPoint: addPoint
         };
 
         return service;
@@ -100,15 +101,13 @@
                     feacture = feactures[i];
                     layer.getSource().removeFeature(feacture);
                     break;
-
                 }
-              }
+             }
                 if (feacture == null) {
                     var point = creatorPoints.getPointCentrality(centrality);
                     layer.getSource().addFeature(point);
                 }
                 return feacture;
-
         }
 
         function addCentralities(centralitiesJson, layer) {
@@ -121,6 +120,13 @@
             console.log("Nro de features: "+vectorFeatureTrips.length);
             layer.getSource().addFeatures(vectorFeatureTrips);
         }
-    }
+
+        function addPoint(latitude,longitude,data, layer) {
+            var point = creatorPoints.getPoint(latitude, longitude, data);
+            console.log(point);
+            layer.getSource().addFeature(point);
+        }
+
+    }// fin Layer.Administrator
 
 })()
