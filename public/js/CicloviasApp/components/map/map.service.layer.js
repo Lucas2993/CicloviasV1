@@ -148,7 +148,8 @@
                   var arrayCoord = getInfoTrips(dataJsonTrips);
 
                     var vectorSourceNew = serviceTrip.getSource(arrayCoord);
-                    var styleLayer = creatorStyle.getStyleTrip();
+                    // var styleLayer = creatorStyle.getStyleTrip();
+                    var styleLayer = creatorStyle.getStyleTripCloseToPoint();
 
                     var layerTrips = new ol.layer.Vector({
                       source: vectorSourceNew,
@@ -242,7 +243,8 @@
                     //   var arrayCoord = getInfoTrips2(dataJsonTrips);
 
                         var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
-                        var styleLayer = creatorStyle.getStyleTrip();
+                        // var styleLayer = creatorStyle.getStyleTrip();
+                        var styleLayer = creatorStyle.getStyleJourney();
 
                         // var vectorSourceVacio = new ol.source.Vector({
                         // });

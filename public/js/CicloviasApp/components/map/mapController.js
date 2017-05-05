@@ -395,10 +395,10 @@
         }
 
 
-                vm.viewLayerJournies = viewLayerJournies;
-                function viewLayerJournies(){
-                    adminLayers.viewLayer(vm.layerJournies);
-                }
+        vm.viewLayerJournies = viewLayerJournies;
+        function viewLayerJournies(){
+            adminLayers.viewLayer(vm.layerJournies);
+        }
 
         // ******************************************************************************************
         // ****************************** capa de trayectos *****************************************
@@ -463,7 +463,7 @@
                 // Se hace visible la capa.
                 adminLayers.viewLayer(vm.layerTripsCloseToPoint);
                 // console.log(" capa de punto visible: "+vm.layerTripsCloseToPoint.getVisible());
-                vm.layerTripsCloseToPoint.setVisible(true);
+                vm.layerTripsCloseToPoint.setVisible(vm.selectTripCloseToPoint.checkbox);
                 // console.log(" capa de punto visible: "+vm.layerTripsCloseToPoint.getVisible());
             }
         }
