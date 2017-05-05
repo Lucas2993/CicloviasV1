@@ -1,3 +1,4 @@
+
 // Creacion de los dibujos de las zonas
 (function() {
     'use strict';
@@ -12,6 +13,7 @@
 
             // Trips
             getTrips:getTrips,
+            getTripsCloseToPoint:getTripsCloseToPoint,
 
             // Centralidades
             getCentralities: getCentralities,
@@ -96,7 +98,7 @@
                     defered.reject(err)
                 }
             );
-            
+
             return promise;
         };
 
@@ -126,6 +128,24 @@
             $http({
                 method: 'GET',
                 url: path.TRIP
+            }).then(function successCallback(res) {
+                defered.resolve(res.data);
+                console.log('datos de promise TRIP: ' + res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getTripsCloseToPoint(point) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP + '/closeToPoint/' + point.latitude + '/' + point.longitude
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
                 console.log('datos de promise TRIP: ' + res.data);

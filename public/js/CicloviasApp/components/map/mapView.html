@@ -9,7 +9,7 @@
             <uib-accordion close-others="true">
 
                 <!-- Se agrego uib-accordion que se utiliza para los menues retractiles. -->
-                <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="false">
+                <div uib-accordion-group class="panel-primary" heading="Centralidades">
                     <!-- <div class="panel-body" ng-controller="mapCentralityController"> -->
                     <div class="panel-body">
                         <form>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <!-- menu de opciones de recorridos cercanos -->
-                <div uib-accordion-group class="panel-primary" heading="Recorridos Cercanos" is-open="true">
+                <!-- <div uib-accordion-group class="panel-primary" heading="Recorridos Cercanos" >
                     <div class="panel-body">
                         <form>
 
@@ -107,8 +107,32 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
 
+
+                <!-- Menu de seleccion de un punto para conocer los recorridos cercanos -->
+                <div uib-accordion-group class="panel-primary" heading="Recorridos cercanos a un punto" is-open="false">
+                    <div class="panel-body">
+                        <form>
+                            <div>
+                                <div class="text-center form-group">
+                                    <label><input type="checkbox" ng-disabled="!isLayerCloseToPointCreated" ng-model="selectTripCloseToPoint.checkbox" ng-change="viewTripsCloseToPoint()" > Ver capa de recorridos cercanos</label>
+                                </div>
+                                <div class="container form-group">
+                                    <p>[[selectedPoint.latitude == 0 && selectedPoint.longitude == 0 ? 'No hay un punto seleccionado' : 'Punto Seleccionado:']]</p>
+                                    <p>Latitud: [[selectedPoint.latitude == 0 ? '-' : selectedPoint.latitude]]</p>
+                                    <p>Longitud: [[selectedPoint.longitude == 0 ? '-' : selectedPoint.longitude]]</p>
+                                </div>
+                                <div class="text-center form-group">
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="getTripsCloseToSelectedPoint()">Ver recorridos cercanos</button>
+                                </div>
+                                <div class="text-center form-group">
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="resetLayerCloseToPoint()">Limpiar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
             </uib-accordion>
 

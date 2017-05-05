@@ -4,10 +4,6 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
-        // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
-        //
-        // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
         .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
 
     function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip) {
@@ -246,25 +242,30 @@
             // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
             vm.callbackMarkersOnClick(evt.pixel);
 
+            var coordinate = evt.coordinate;
+
+            vm.selectedPoint.longitude = coordinate[0];
+            vm.selectedPoint.latitude = coordinate[1];
+
             // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
             var coordinate = evt.coordinate;
             if (vm.isSelecting || vm.isEditing) {
-
                 vm.newCentrality.longitude = coordinate[0];
                 vm.newCentrality.latitude = coordinate[1];
                 console.log('Selected point: ' + coordinate);
-                // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
-                vm.$apply();
             }
+            vm.$apply();
+            //
+            // if (vm.isSelectingPoint) {
+            //     console.log("selectedPoin");
+            //     vm.centralitiesLayerTest.getSource().clear();
+            //     adminLayers.addPoint(coordinate[1], coordinate[0], null, vm.centralitiesLayerTest);
+            //     vm.isSelectingPoint = false;
+            //     // adminLayers.viewCentrality(data, vm.centralitiesLayerTest);
+            //     // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
+            //     vm.$apply();
+            // }
 
-            if (vm.isSelectingPoint) {
-                console.log("selectedPoin");
-                vm.centralitiesLayerTest.getSource().clear();
-                adminLayers.addPoint(coordinate[1], coordinate[0], null, vm.centralitiesLayerTest);
-                vm.isSelectingPoint = false;
-                // adminLayers.viewCentrality(data, vm.centralitiesLayerTest);
-
-            }
         });
 
         // Modificacion y borrado de una centralidad.
@@ -337,17 +338,102 @@
         // ****************************** capa de trayectos *****************************************
         vm.layerTrips;
         vm.viewLayerTrips = viewLayerTrips;
+        vm.getTripsCloseToSelectedPoint = getTripsCloseToSelectedPoint;
+        vm.viewTripsCloseToPoint = viewTripsCloseToPoint;
+        vm.resetLayerCloseToPoint = resetLayerCloseToPoint;
+
+
 
         function viewLayerTrips() {
             adminLayers.viewLayer(vm.layerTrips);
         }
 
-        vm.isSelectingPoint = false;
+        vm.selectedPoint = {
+            latitude: '0',
+            longitude: '0'
+        };
 
         // Cuando el usuario quiere crear una nueva centralidad de ajustan las banderas y se inicializa la centralidad.
+
+        // ******************************************************************************************
+        // ****************************** Recorridos cerca de un punto ******************************
+
+        // Se construye un modelo para capturar todos los puntos
+
+
+        // Este metodo se encarga de obtener todos los recorridos cercanos a un
+        // punto seleccionado y agregarlos en una capa.
+        function getTripsCloseToSelectedPoint() {
+            dataServer.getTripsCloseToPoint(vm.selectedPoint)
+                .then(function(data) {
+                    vm.tripsclosetopointJson = data;
+                    console.log("Datos recuperados prom TRIPS cercanos a un punto con EXITO! = " + data);
+                    // Se establece que la capa de recorridos cercanos a un punto no se mostrara (valor del checkbox).
+                    vm.selectTripCloseToPoint.checkbox = false;
+                    // Si la capa ya fue creada anteriormente se la elimina para poder crear una nueva actualizada.
+                    if (vm.isLayerCloseToPointCreated) {
+                        vm.map.removeLayer(vm.layerTripsCloseToPoint);
+                        vm.isLayerCloseToPointCreated = false;
+                    }
+                    // Se crea una nueva capa de recorridos con los datos obtenidos.
+                    vm.layerTripsCloseToPoint = srvLayers.getLayerTrips(vm.tripsclosetopointJson);
+                    // Se indica que una nueva capa de recorridos cercanos a un punto se ha creado.
+                    vm.isLayerCloseToPointCreated = true;
+                    // Se agrega la capa nueva al mapa.
+                    vm.map.addLayer(vm.layerTripsCloseToPoint);
+                    // Se establce que la capa de recorridos cercanos a un punto se mostrara (valor del checkbox).
+                    vm.selectTripCloseToPoint.checkbox = true;
+                    // Se muestra la nueva capa.
+                    vm.viewTripsCloseToPoint();
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS cercanos a un punto");
+                })
+        }
+
+        // Este metodo se encarga de mostrar la capa de recorridos cercanos a un punto (si existe).
+        function viewTripsCloseToPoint() {
+            // Se comprueba que la capa existe.
+            if (vm.isLayerCloseToPointCreated) {
+                // Se hace visible la capa.
+                adminLayers.viewLayer(vm.layerTripsCloseToPoint);
+            }
+        }
+
+        // Modelo para usar con el checkbox (es necesario declararlo asi).
+        vm.selectTripCloseToPoint = {
+            checkbox: false
+        }
+
+        // Bandera que indica si la capa de recorridos cercanos a un punto esta creada.
+        vm.isLayerCloseToPointCreated = false;
+
+        // Este metodo resetea todo lo relacionado con los recorridos cercanos a un punto.
+        function resetLayerCloseToPoint() {
+            // Si la capa esta creada, es removida.
+            if (vm.isLayerCloseToPointCreated) {
+                // Se remueve la capa del mapa.
+                vm.map.removeLayer(vm.layerTripsCloseToPoint);
+            }
+            // Se indica que la capa ya no existe.
+            vm.isLayerCloseToPointCreated = false;
+            // Se desmarca el checkbox.
+            vm.selectTripCloseToPoint.checkbox = false;
+            // Se reinicia el punto seleccionado.
+            vm.selectedPoint = {
+                latitude: '0',
+                longitude: '0'
+            };
+        }
+
+        //
+        // Funciones EMAAAAAAAAAAAAAAAAAAAAa
+        vm.isSelectingPoint = false;
         vm.centralitySelectionPoint = function() {
             vm.isSelectingPoint = true;
         }
+
+
     } // fin Constructor
 
 })()
