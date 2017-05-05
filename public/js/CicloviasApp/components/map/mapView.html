@@ -9,7 +9,7 @@
             <uib-accordion close-others="true">
 
                 <!-- Se agrego uib-accordion que se utiliza para los menues retractiles. -->
-                <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="true">
+                <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="false">
                     <!-- <div class="panel-body" ng-controller="mapCentralityController"> -->
                     <div class="panel-body">
                         <form>
@@ -93,6 +93,22 @@
                         </form>
                     </div>
                 </div>
+                <!-- menu de opciones de recorridos cercanos -->
+                <div uib-accordion-group class="panel-primary" heading="Recorridos Cercanos" is-open="true">
+                    <div class="panel-body">
+                        <form>
+
+                            <div class="text-left">
+                                <h3> <small> Seleccione un punto para ver sus recorridos cercanos </small></h3>
+                            </div>
+                            <div class="text-left">
+                                <button class="btn btn-primary" ng-disabled="isSelectingPoint" ng-click="centralitySelectionPoint()">Seleccionar Punto</button>
+                                <button class="btn btn-success"  ng-click="">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
 
             </uib-accordion>
 

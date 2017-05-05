@@ -11,6 +11,7 @@
             findLayerZone: findLayerZone,
             viewCentrality: viewCentrality,
             addCentralities: addCentralities,
+            addPoint: addPoint
         };
 
         return service;
@@ -57,7 +58,6 @@
                     feacture = feactures[i];
                     layer.getSource().removeFeature(feacture);
                     break;
-
                 }
               }
                 if (feacture == null) {
@@ -65,13 +65,19 @@
                     layer.getSource().addFeature(point);
                 }
                 return feacture;
-
         }
 
         function addCentralities(centralitiesJson, layer) {
             var points = creatorPoints.getVectorPointCentralities(centralitiesJson);
             layer.getSource().addFeatures(points);
         }
-    }
+
+        function addPoint(latitude,longitude,data, layer) {
+            var point = creatorPoints.getPoint(latitude, longitude, data);
+            console.log(point);
+            layer.getSource().addFeature(point);
+        }
+
+    }// fin Layer.Administrator
 
 })()

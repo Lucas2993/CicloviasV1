@@ -5,10 +5,10 @@
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
         // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
-    // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
-    //
-    // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
-    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
+        // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
+        //
+        // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
+        .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
 
     function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip) {
 
@@ -97,12 +97,13 @@
         function generateCentralitiesPoints(centralitiesJson) {
             // Se crea y agrega la capa de Centralidades al mapa
             vm.centralitiesLayer = srvLayers.getLayerMarker(centralitiesJson);
+
             vm.centralitiesLayerTest = srvLayers.getLayerMarker(centralitiesJson);
 
             vm.map.addLayer(vm.centralitiesLayer);
             vm.map.addLayer(vm.centralitiesLayerTest);
 
-            vm.centralitiesLayer.setVisible(true);
+            vm.centralitiesLayerTest.setVisible(true);
         }
 
         //      Generacion de Capa de Zonas a partir del json recibido desde el service
@@ -135,9 +136,9 @@
         // permite la visualizacion o no de una zona
         function selectCentrality(centrality) {
             var centralitySelected = adminLayers.viewCentrality(centrality, vm.centralitiesLayer);
-            if (centralitySelected == null) {
-                console.log("ERROR: la centralidad " + centrality + " no se encuentra disponible.");
-            }
+            // if (centralitySelected == null) {
+            //     console.log("ERROR: la centralidad " + centrality + " no se encuentra disponible.");
+            // }
 
         }
         vm.selectedAll = false;
@@ -159,24 +160,34 @@
         // ****************************** Lucas y ema ***************************************
         // **********************************************************************************
         // display popup on click
+        var popup = null;
         vm.map.on('click', function(evt) {
             var feature = vm.map.forEachFeatureAtPixel(evt.pixel,
                 function(feature) {
+                    if (popup != null) {
+                        console.log("entra");
+                        // popup.closer.blur();
+                        popup.container.style.display = 'none';
+                    }
                     var coordinates = feature.getGeometry().getCoordinates();
-                    var popup = new ol.Overlay.Popup({
+                    popup = new ol.Overlay.Popup({
                         // insertFirst: false
                     });
                     vm.map.addOverlay(popup);
-
                     popup.show(evt.coordinate, feature.get('object').name);
+                    setTimeout(function() {
+                        popup.container.style.display = 'none';
+                        popup = null;
+                    }, 3000);
+
                     return feature;
                 });
         });
 
         // Lucas
         // Aca empieza lo que agregue para el ABM de centralidades.
-        // Incorporacion de agregar centralidad
         // Esta bandera se usa para saber si el usuario se encuentra seleccionando un punto para una nueva centralidad.
+        // Incorporacion de agregar centralidad
         vm.isSelecting = false;
 
         // Modelo de una nueva centralidad (inicializacion).
@@ -236,15 +247,22 @@
             vm.callbackMarkersOnClick(evt.pixel);
 
             // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
+            var coordinate = evt.coordinate;
             if (vm.isSelecting || vm.isEditing) {
-                var coordinate = evt.coordinate;
+
                 vm.newCentrality.longitude = coordinate[0];
                 vm.newCentrality.latitude = coordinate[1];
                 console.log('Selected point: ' + coordinate);
                 // Se fuerza la aplicacion de los cambios dentro de angular para refrescar la vista.
                 vm.$apply();
             }
-            if(vm.isSelecting){
+
+            if (vm.isSelectingPoint) {
+                console.log("selectedPoin");
+                vm.centralitiesLayerTest.getSource().clear();
+                adminLayers.addPoint(coordinate[1], coordinate[0], null, vm.centralitiesLayerTest);
+                vm.isSelectingPoint = false;
+                // adminLayers.viewCentrality(data, vm.centralitiesLayerTest);
 
             }
         });
@@ -295,10 +313,6 @@
         }
 
 
-        function findById(item) {
-            return item.id == vm.newCentrality.id;
-        }
-
         vm.centralityUpdate = function() {
             dataServer.updateCentrality(vm.newCentrality)
                 .then(function(data) {
@@ -324,10 +338,16 @@
         vm.layerTrips;
         vm.viewLayerTrips = viewLayerTrips;
 
-        function viewLayerTrips(){
+        function viewLayerTrips() {
             adminLayers.viewLayer(vm.layerTrips);
         }
 
+        vm.isSelectingPoint = false;
+
+        // Cuando el usuario quiere crear una nueva centralidad de ajustan las banderas y se inicializa la centralidad.
+        vm.centralitySelectionPoint = function() {
+            vm.isSelectingPoint = true;
+        }
     } // fin Constructor
 
 })()
