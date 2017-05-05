@@ -9,6 +9,8 @@ use App\Models\Trip;
 
 class TripTest extends TestCase
 {
+  use DatabaseMigrations;
+
   public function testModel(){
       // Se crean dos nuevos puntos y se los incluye en un arreglo.
       $point_1 = new GeoPoint(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '1']);
@@ -60,4 +62,197 @@ class TripTest extends TestCase
       Trip::destroy($trip->id);
   }
 
+  /**
+  * Test de service GET "api/trip/closeToPoint/{latitude}/{longitude}" que recupera los puntos cercanos
+  * al punto pasado como parametro. Por cercano se entiende menos de 300 mts.
+  * Creado por JLDEVIA.
+  * @test
+  * @return void
+  */
+  public function getCloseToPoint(){
+    $this->generarDatosPrueba();
+
+    $this->getJson('api/trip/closeToPoint/-42.767517/-65.037274')
+          ->seeJson([
+            'name' => 'Recorrido 3',
+            'name' => 'Recorrido 4'
+          ]);
+  }
+
+  private function generarDatosPrueba(){
+    /*-------Recorrido 1------------*/
+    $trip = Trip::create(['name' => 'Recorrido 1','description' => 'Por la costanera']);
+
+    $punto1 = new GeoPoint([
+      'latitude' => '-42.763750',
+      'longitude' => '-65.034813',
+      'order' => '1'
+    ]);
+
+    $punto2 = new GeoPoint([
+      'latitude' => '-42.766617',
+      'longitude' => '-65.032968',
+      'order' => '2'
+    ]);
+
+    $punto3 = new GeoPoint([
+      'latitude' => '-42.769571',
+      'longitude' => '-65.031133',
+      'order' => '3'
+    ]);
+
+    $punto4 = new GeoPoint([
+      'latitude' => '-42.769449',
+      'longitude' => '-65.030656',
+      'order' => '4'
+    ]);
+
+    $punto5 = new GeoPoint([
+      'latitude' => '-42.771575',
+      'longitude' => '-65.028677',
+      'order' => '5'
+    ]);
+
+    $trip->geopoints()->save($punto1);
+    $trip->geopoints()->save($punto2);
+    $trip->geopoints()->save($punto3);
+    $trip->geopoints()->save($punto4);
+    $trip->geopoints()->save($punto5);
+    /*-------------------------------*/
+
+    /*-------Recorrido 2------------*/
+    $trip = Trip::create(['name' => 'Recorrido 2','description' => 'De mi casa a la facultad']);
+
+    $punto1 = new GeoPoint([
+      'latitude' => '-42.781429',
+      'longitude' => '-65.040457',
+      'order' => '1'
+    ]);
+
+    $punto2 = new GeoPoint([
+      'latitude' => '-42.779508',
+      'longitude' => '-65.034846',
+      'order' => '2'
+    ]);
+
+    $punto3 = new GeoPoint([
+      'latitude' => '-42.783492',
+      'longitude' => '-65.032099',
+      'order' => '3'
+    ]);
+
+    $punto4 = new GeoPoint([
+      'latitude' => '-42.780767',
+      'longitude' => '-65.024127',
+      'order' => '4'
+    ]);
+
+    $punto5 = new GeoPoint([
+      'latitude' => '-42.782413',
+      'longitude' => '-65.023033',
+      'order' => '5'
+    ]);
+
+    $punto6 = new GeoPoint([
+      'latitude' => '-42.780846',
+      'longitude' => '-65.018055',
+      'order' => '6'
+    ]);
+
+    $punto7 = new GeoPoint([
+      'latitude' => '-42.782822',
+      'longitude' => '-65.015008',
+      'order' => '7'
+    ]);
+
+    $punto8 = new GeoPoint([
+      'latitude' => '-42.785050',
+      'longitude' => '-65.005556',
+      'order' => '8'
+    ]);
+
+    $trip->geopoints()->save($punto1);
+    $trip->geopoints()->save($punto2);
+    $trip->geopoints()->save($punto3);
+    $trip->geopoints()->save($punto4);
+    $trip->geopoints()->save($punto5);
+    $trip->geopoints()->save($punto6);
+    $trip->geopoints()->save($punto7);
+    $trip->geopoints()->save($punto8);
+    /*-------------------------------*/
+
+    /*-------Recorrido 3------------*/
+    $trip = Trip::create(['name' => 'Recorrido 3','description' => 'De la terminal a la plaza del centro']);
+
+    $punto1 = new GeoPoint([
+      'latitude' => '-42.765430',
+      'longitude' => '-65.040688',
+      'order' => '1'
+    ]);
+
+    $punto2 = new GeoPoint([
+      'latitude' => '-42.764098',
+      'longitude' => '-65.039454',
+      'order' => '2'
+    ]);
+
+    $punto3 = new GeoPoint([
+      'latitude' => '-42.765157',
+      'longitude' => '-65.038781',
+      'order' => '3'
+    ]);
+
+    $punto4 = new GeoPoint([
+      'latitude' => '-42.767016',
+      'longitude' => '-65.037579',
+      'order' => '4'
+    ]);
+
+    $trip->geopoints()->save($punto1);
+    $trip->geopoints()->save($punto2);
+    $trip->geopoints()->save($punto3);
+    $trip->geopoints()->save($punto4);
+    /*-------------------------------*/
+
+    /*-------Recorrido 4------------*/
+    $trip = Trip::create(['name' => 'Recorrido 4','description' => 'De la Helice hasta la plaza del centro']);
+
+    $punto1 = new GeoPoint([
+      'latitude' => '-42.767016',
+      'longitude' => '-65.037579',
+      'order' => '1'
+    ]);
+
+    $punto2 = new GeoPoint([
+      'latitude' => '-42.767016',
+      'longitude' => '-65.037579',
+      'order' => '2'
+    ]);
+
+    $punto3 = new GeoPoint([
+      'latitude' => '-42.768577',
+      'longitude' => '-65.031735',
+      'order' => '3'
+    ]);
+
+    $punto4 = new GeoPoint([
+      'latitude' => '-42.769510',
+      'longitude' => '-65.034440',
+      'order' => '4'
+    ]);
+
+    $punto5 = new GeoPoint([
+      'latitude' => '-42.767431',
+      'longitude' => '-65.035749',
+      'order' => '5'
+    ]);
+
+    $trip->geopoints()->save($punto1);
+    $trip->geopoints()->save($punto2);
+    $trip->geopoints()->save($punto3);
+    $trip->geopoints()->save($punto4);
+    $trip->geopoints()->save($punto5);
+    /*-------------------------------*/
+
+  }
 }
