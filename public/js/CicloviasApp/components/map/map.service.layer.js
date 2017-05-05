@@ -12,11 +12,14 @@
                 getLayerMarker: getLayerMarker,
                 getLayerZones: getLayerZones,
                 getGroupLayerZones: getGroupLayerZones,
-                getLayerTrips: getLayerTrips
+                getLayerTrips: getLayerTrips,
+                getLayerJourney: getLayerJourney,
+                getVectorFeatures: getVectorFeatures
             };
 
             var generateZone;
             var getInfoTrips;
+            var getInfoTrips2;
 
             return service;
 
@@ -29,11 +32,9 @@
               return layer;
             };
 
-
             // crea y devuelve la capa de los marcadoresr
             function getLayerMarker (centralitiesJson) {
-                var vectorPointsCentralities ;
-                // = creatorPoints.getVectorPointCentralities(centralitiesJson);
+                var vectorPointsCentralities;
 
                 var centralitiesPoints = new ol.source.Vector({
                     features: vectorPointsCentralities
@@ -51,7 +52,6 @@
                 var infoZones = srvZone.getDataZones(infoZoneJson);
                 // 1ro determinamos el estilo del texto, con su info de cada zona(por ahora va ser el mismo para todos)
                 var styleText = creatorStyle.getStyleText('NEW_ZONA_R');
-                // var styleText = creatorStyle.getStyleText(infoZones[0].name);
                 // una vez creado el estilo de texto vamos a creaer el estilo del polygono de cada zona
                 var stylePolygon = creatorStyle.getStylePolygon("blue",styleText);
                 // creamos los dibujos de cada zona (polygon)
@@ -79,7 +79,6 @@
 
                 // por cada zona generamos una capa
                 for (var i = 0; i < infoZones.length; i++) {
-                // for (var i = 0; i < 2; i++) {
                     var newLayer = generateZone(infoZones[i]);
                     console.log('capa '+i+' : '+newLayer.getVisible());
                     vectorLayers.push(newLayer);
@@ -119,26 +118,37 @@
                     visible: false
                  });
 
-                //  return vm.getLayerZone(draw, styleDraw);
               }
 
               // crea y devuelve la capa de recorridos
             function getLayerTrips(dataJsonTrips){
                 // recuperamos los datos q nos competen
-                  var arrayCoord = getInfoTrips(dataJsonTrips);
+                var arrayCoord = getInfoTrips2(dataJsonTrips);
 
-                  var vectorSourceNew = serviceTrip.getSource(arrayCoord);
+                  var vectorSourceNew = serviceTrip.getSource2(arrayCoord);
                   var styleLayer = creatorStyle.getStyleTrip();
 
+                  var vectorSourceVacio = new ol.source.Vector({
+                  });
+
                   var layerTrips = new ol.layer.Vector({
-                    source: vectorSourceNew,
-                    style: styleLayer,
-                    visible: false
+                    source: vectorSourceVacio,
+                    style: styleLayer
+                    // visible: false
                   });
 
                   console.log("Capa de trayectos NUEVA visible: "+layerTrips.getVisible());
 
                   return layerTrips;
+              }
+
+
+              function getVectorFeatures(dataJsonTrips){
+                // recuperamos los datos q nos competen
+                var arrayCoord = getInfoTrips2(dataJsonTrips);
+                var vectorFeaturesTrip = serviceTrip.getFeatures(arrayCoord);
+
+                return vectorFeaturesTrip;
               }
 
               // crea y devuelve un vector con los datos de las zonas
@@ -170,6 +180,64 @@
                       }
                       return arrayInfoTrips;
               };
+
+              // crea y devuelve un vector con los datos de las zonas
+              function getInfoTrips2(dataJsonTrips) {
+                      var arrayPointsTrips = [];
+                      var arrayLontLat = [];
+                      var arrayInfoTrips = [];
+
+                      // obtenemos nada mas q los puntos de las zonas con sus datos
+                      for (var i = 0; i < dataJsonTrips.length; i++) {
+                          arrayPointsTrips.push((dataJsonTrips[i]).points);
+                      }
+
+                      var setPoints;
+                      var longLat;
+                      var idAux;
+
+                      // rescatams solo los long y lat de cada punto de cada cjto de puntos
+                      for (var i = 0; i < arrayPointsTrips.length; i++) {
+                          setPoints = arrayPointsTrips[i];
+                          // por cada conjunto de puntos rescatams sus long y lat de cada punto
+                          for (var j = 0; j < setPoints.length; j++) {
+                              longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                              arrayLontLat.push(longLat);
+                          }
+                          // agregamos el cjot de puntos de cada recorrido al cjto de recorridos
+                          var dataTrip = new Object();
+                          idAux = i+1;
+                          dataTrip.id = idAux;
+                          dataTrip.points = arrayLontLat;
+
+                          arrayInfoTrips.push(dataTrip);
+                          console.log("id guardado: "+i+" cant de puntos: "+(dataTrip.points).length);
+                          // reseteamos la variable auxiliar
+                          arrayLontLat = [];
+                      }
+                      return arrayInfoTrips;
+              };
+
+              function getLayerJourney(dataJsonJourney){
+                      // recuperamos los datos q nos competen
+                    //   var arrayCoord = getInfoTrips2(dataJsonTrips);
+
+                        var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
+                        var styleLayer = creatorStyle.getStyleTrip();
+
+                        // var vectorSourceVacio = new ol.source.Vector({
+                        // });
+
+                        var layerJournies = new ol.layer.Vector({
+                          source: vectorSourceJourney,
+                          style: styleLayer,
+                          visible: false
+                        });
+
+                        console.log("Capa de trayectos NUEVA visible: "+layerJournies.getVisible());
+
+                        return layerJournies;
+              }
         }
 
 })()

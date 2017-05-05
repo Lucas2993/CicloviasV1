@@ -9,21 +9,18 @@
             <uib-accordion close-others="true">
 
                 <!-- Se agrego uib-accordion que se utiliza para los menues retractiles. -->
-                <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="true">
+                <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="false">
                     <!-- <div class="panel-body" ng-controller="mapCentralityController"> -->
                     <div class="panel-body">
                         <form>
                             <div>
                                 <label>
-                                  <!-- <input type="checkbox" ng-model="checkboxModel.centralitiesValue" ng-change= "toogleCentralitiesLayer()"> VER TODAS -->
                                   <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"> VER TODAS
                                 </label>
                             </div>
                             <div class="checkbox" ng-repeat="centrality in centralitiesJson">
                                 <label>
-                                        <!-- <input type="checkbox" checklist-model="centrality.name"  checklist-value="centrality.id" > [[centrality.name]] -->
                                         <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
-                                        <!-- checklist-model="zonesJson"  checklist-value="zone.id" ng-model="selectedZone" ng-change= "selectZone(zone.name)"> [[zone.name]] -->
                                     </label>
                             </div>
                         </form>
@@ -72,12 +69,12 @@
                     <div class="panel-body">
                         <form>
                             <div>
-                                <label><input type="checkbox" ng-model="checkboxModel.zonesValue" ng-change= "toogleZonesLayer()" > Ver capa de zonas</label>
+                                <label><input type="checkbox" ng-model="checkboxModel.zonesValue" ng-change= "toogleZonesLayer()" > Ver todas</label>
                             </div>
                             <div class="checkbox" ng-repeat="zone in zonesJson">
                                 <label>
-                                               <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="selectedZone" ng-change= "selectZone(zone.name)"> [[zone.name]]
-                                           </label>
+                                   <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="zone.selected" ng-change= "selectZone(zone.name, zone.selected)"> [[zone.name]]
+                                </label>
                             </div>
                         </form>
                     </div>
@@ -88,7 +85,23 @@
                     <div class="panel-body">
                         <form>
                             <div>
-                                <label><input type="checkbox" ng-model="selectRecorrido" ng-change= "viewLayerTrips()" > Ver capa de recorridos</label>
+                                <label><input type="checkbox" ng-model="selectRecorrido" ng-change= "viewLayerTrips()" > Ver todos los recorridos</label>
+                            </div>
+                            <div class="checkbox" ng-repeat="trip in tripsJson">
+                                <label>
+                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip, trip.selected)"> [[trip.name]]
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- menu de opciones de recorridos -->
+                <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="true">
+                    <div class="panel-body">
+                        <form>
+                            <div>
+                                <label><input type="checkbox" ng-model="selectJourney" ng-change= "viewLayerJournies()" > Ver trayectos</label>
                             </div>
                         </form>
                     </div>

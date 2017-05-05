@@ -8,9 +8,9 @@
     // .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', MapController]);
     //
     // function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
-    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', MapController]);
+    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', 'adminTrip', MapController]);
 
-    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip) {
+    function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip, adminTrip) {
 
         // ********************* declaracion de variables y metodos *********************
         vm.map = creatorMap.getMap();
@@ -21,6 +21,7 @@
         vm.findAllCentralities = findAllCentralities;
         vm.findAllZones = findAllZones;
         vm.findAllTrips = findAllTrips;
+        vm.findAllJourney = findAllJourney;
 
         vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
         vm.toogleZonesLayer = toogleZonesLayer;
@@ -45,6 +46,7 @@
         vm.findAllCentralities();
         vm.findAllZones();
         vm.findAllTrips();
+        vm.findAllJourney();
 
         // **********************************************************************************
         // ************************ Descripcion de las funciones ************************
@@ -93,6 +95,22 @@
                 })
         }
 
+        // Busca todas los trayectos de la BD
+        function findAllJourney() {
+            dataServer.getJourneys()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.journiesJson = data;
+                    console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
+                    // proceso y genracion de capa de recorridos
+                    vm.layerJournies = srvLayers.getLayerJourney(vm.journiesJson);
+                    vm.map.addLayer(vm.layerJournies);
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+                })
+        }
+
         //      Generacion de Capa de Centralidades a partir del json recibido desde el service
         function generateCentralitiesPoints(centralitiesJson) {
             // Se crea y agrega la capa de Centralidades al mapa
@@ -109,7 +127,7 @@
         function createLayerZone(infoZoneJson) {
             vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
             vm.map.addLayer(vm.zonesLayer);
-            vm.zonesLayer.setVisible(false);
+            // vm.zonesLayer.setVisible(false);
         }
 
         // Toogle de capa de centralidades
@@ -117,22 +135,39 @@
             adminLayers.viewLayer(vm.centralitiesLayer);
         }
 
+        vm.selectedAllZones = false;
         // Toogle de capa de zonas
         function toogleZonesLayer() {
-            adminLayers.viewLayer(vm.zonesLayer);
+            // adminLayers.viewLayer(vm.zonesLayer);
+            // for (var i = 0; i < array.length; i++) {
+            //     array[i]
+            // }
+            if(vm.selectedAllZones){
+                adminLayers.disableAllZone(vm.zonesLayer);
+                vm.selectedAllZones = false;
+            }
+            else{
+                adminLayers.enableAllZone(vm.zonesLayer);
+                vm.selectedAllZones = true;
+            }
+            angular.forEach(vm.zonesJson, function(zone) {
+                zone.selected = vm.selectedAllZones;
+            });
         }
 
         // permite la visualizacion o no de una zona
-        function selectZone(nameZone) {
+        function selectZone(nameZone, seleccion) {
             var zoneSelected = adminLayers.findLayerZone(nameZone, vm.zonesLayer);
             if (zoneSelected == null) {
                 console.log("ERROR: la zona " + nameZone + " no se encuentra disponible.");
             }
             console.log("Zona seleccionada: " + nameZone);
-            adminLayers.viewLayer(zoneSelected);
+
+            console.log("MODEL selected: "+seleccion);
+            zoneSelected.setVisible(seleccion);
         }
 
-        // permite la visualizacion o no de una zona
+        // permite la visualizacion o no de una centralidad
         function selectCentrality(centrality) {
             var centralitySelected = adminLayers.viewCentrality(centrality, vm.centralitiesLayer);
             if (centralitySelected == null) {
@@ -323,9 +358,33 @@
         // ****************************** capa de trayectos *****************************************
         vm.layerTrips;
         vm.viewLayerTrips = viewLayerTrips;
+        vm.selectAllTrips = false;
 
         function viewLayerTrips(){
-            adminLayers.viewLayer(vm.layerTrips);
+            // adminLayers.viewLayer(vm.layerTrips);
+            if (vm.selectAllTrips) {
+                vm.selectAllTrips = false;
+                vm.layerTrips.getSource().clear();
+            } else {
+                vm.selectAllTrips = true;
+                adminLayers.addTrips(vm.tripsJson, vm.layerTrips);
+            }
+
+            angular.forEach(vm.tripsJson, function(trip) {
+                trip.selected = vm.selectAllTrips;
+            });
+        }
+
+        vm.selectTrip = selectTrip;
+
+        function selectTrip(trip){
+            console.log("entro a la seleccion de recorridos");
+            adminTrip.viewTrip(trip, vm.layerTrips);
+        }
+
+        vm.viewLayerJournies = viewLayerJournies;
+        function viewLayerJournies(){
+            adminLayers.viewLayer(vm.layerJournies);
         }
 
     } // fin Constructor

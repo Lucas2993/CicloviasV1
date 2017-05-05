@@ -9,7 +9,9 @@
             var service = {
                 getPoint: getPoint,
                 getPolygon: getPolygon,
-                getFeatureGeom: getFeatureGeom
+                getFeatureGeom: getFeatureGeom,
+                getFeatureGeomId: getFeatureGeomId,
+                getFeatureTripJson: getFeatureTripJson
             };
             return service;
 
@@ -39,6 +41,43 @@
                 var feature = new ol.Feature({
                     geometry: geom
                 });
+                return feature;
+            }
+
+            // crea un feature a partir de cualquier objeto del tipo ol.geom
+            function getFeatureGeomId(geom, id){
+                var feature = new ol.Feature({
+                    geometry: geom
+                });
+                // le asignamos un ID
+                feature.setId(id);
+                console.log("id del feature creado: "+feature.getId());
+                return feature;
+            }
+
+            // crea un feature de trip a partir de los datos en formato json de los recorridos
+            function getFeatureTripJson(tripsJson){
+                var arrayLontLat = [];
+
+                var pointsTripJson = tripsJson.points;
+
+                var longLat;
+                var geomTrip;
+
+                // rescatams solo los long y lat de cada punto
+                for (var i = 0; i < pointsTripJson.length; i++) {
+                    longLat = [(pointsTripJson[i]).longitude, (pointsTripJson[i]).latitude];
+                    arrayLontLat.push(longLat);
+                }
+
+                geomTrip = new ol.geom.LineString(arrayLontLat);
+
+                var feature = new ol.Feature({
+                    geometry: geomTrip
+                });
+                // le asignamos un ID
+                feature.setId(tripsJson.id);
+                console.log("id del trayecto del JSON creado: "+feature.getId());
                 return feature;
             }
         }
