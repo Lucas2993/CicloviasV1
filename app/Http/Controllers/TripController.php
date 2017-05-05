@@ -83,8 +83,8 @@ class TripController extends Controller
     $lat = $latitude;
     $long = $longitude;
 
-    echo($lat."\n");
-    echo($long."\n");
+    // echo($lat."\n");
+    // echo($long."\n");
 
     //Constantes utilizadas para acotar la busqueda de recorridos.
     $min_lat = $lat + 0.0035;
@@ -104,6 +104,8 @@ class TripController extends Controller
         $distancia = $this->CalculateDistance($lat, $long, $point->latitude, $point->longitude);
         if ($distancia <= 0.3) {
           $result[] = $trip;
+          $trip->points = $trip->geopoints;
+          unset($trip->geopoints);
           break;
         }
       }
