@@ -337,16 +337,16 @@
         // ******************************************************************************************
         // ****************************** capa de trayectos *****************************************
         vm.layerTrips;
-        vm.viewLayerTrips = viewLayerTrips;
+        // vm.viewLayerTrips = viewLayerTrips;
         vm.getTripsCloseToSelectedPoint = getTripsCloseToSelectedPoint;
         vm.viewTripsCloseToPoint = viewTripsCloseToPoint;
         vm.resetLayerCloseToPoint = resetLayerCloseToPoint;
 
 
 
-        function viewLayerTrips() {
-            adminLayers.viewLayer(vm.layerTrips);
-        }
+        // function viewLayerTrips() {
+        //     adminLayers.viewLayer(vm.layerTrips);
+        // }
 
         vm.selectedPoint = {
             latitude: '0',
@@ -364,6 +364,7 @@
         // Este metodo se encarga de obtener todos los recorridos cercanos a un
         // punto seleccionado y agregarlos en una capa.
         function getTripsCloseToSelectedPoint() {
+            console.log(vm.selectedPoint);
             dataServer.getTripsCloseToPoint(vm.selectedPoint)
                 .then(function(data) {
                     vm.tripsclosetopointJson = data;
@@ -397,6 +398,7 @@
             if (vm.isLayerCloseToPointCreated) {
                 // Se hace visible la capa.
                 adminLayers.viewLayer(vm.layerTripsCloseToPoint);
+                console.log(vm.layerTripsCloseToPoint.getVisible());
             }
         }
 
