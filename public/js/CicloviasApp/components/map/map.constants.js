@@ -5,6 +5,7 @@
     .constant('path',{
         CENTRALITY: 'api/centrality',
         TRIP:'api/trip',
+        JOURNEY: 'api/journey',
         ZONE: 'api/zone'
     })
     .constant('propiertiesMap',{

@@ -15,6 +15,9 @@
             getTrips:getTrips,
             getTripsCloseToPoint:getTripsCloseToPoint,
 
+            // Journey
+            getJourneys: getJourneys,
+
             // Centralidades
             getCentralities: getCentralities,
             saveCentrality: saveCentrality,
@@ -53,7 +56,7 @@
                 url: path.CENTRALITY
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
-                console.log('datos de promise CENTRALITY: ' + res.data);
+                console.log('datos de promise CENTRALITY: ');
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -131,6 +134,24 @@
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
                 console.log('datos de promise TRIP: ' + res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getJourneys() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.JOURNEY
+            }).then(function successCallback(res) {
+                defered.resolve(res.data);
+                console.log('datos de promise JOURNEY: ' + res.data);
                 },
                 function errorCallback(err) {
                     defered.reject(err)

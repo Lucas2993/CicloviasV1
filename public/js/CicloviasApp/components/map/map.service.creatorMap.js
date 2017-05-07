@@ -11,18 +11,18 @@
 
         var service = {
             getMap: getMap,
-            // addLayer: addLayer
+            clearMap: clearMap
         };
         return service;
 
-        // crea y devuelve una capa del tipo Tile
+        // Retorna un mapa
         function getMap() {
-            // if (map == null) {
+            if (map == null) {
                 map = createMap();
-            // }
+            }
             return map;
         };
-
+        // Constructor de mapa
         function createMap() {
             var OSMLayer = new ol.layer.Tile({
                 source: new ol.source.OSM()
@@ -40,6 +40,10 @@
             return map;
         }
 
+        // Se limpia el mapa al cambiar de vista
+        function clearMap() {
+            map = null;
+        }
     }
 
 })()

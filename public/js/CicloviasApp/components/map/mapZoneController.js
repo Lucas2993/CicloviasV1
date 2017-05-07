@@ -4,34 +4,21 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapZoneController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', MapZoneController]);
+        .controller('mapZoneController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer','adminLayers', MapZoneController]);
 
-    function MapZoneController(vm, creatorMap, srvLayers, dataServer) {
+    function MapZoneController(vm, creatorMap, srvLayers, dataServer,adminLayers) {
 
         // ********************* declaracion de variables y metodos *********************
-        // vm.map = creatorMap.getMap();
+        vm.map = creatorMap.getMap();
 
-        // vm.centralitiesJson = [];
-        vm.checkboxModel;
-
-        // vm.findAllCentralities = findAllCentralities;
         vm.findAllZones = findAllZones;
-
-        // vm.toogleCentralitiesLayer = toogleCentralitiesLayer;
+        vm.selectZone = selectZone;
         vm.toogleZonesLayer = toogleZonesLayer;
-
-        vm.checkboxModel = {
-            // centralitiesValue: false,
-            zonesValue: false
-        };
-
-        // var createLayerZone;
-        // var generateCentralitiesPoints;
 
         // ************************ inicializacion de datos del mapa ************************
         // **********************************************************************************
-        // vm.findAllCentralities();
         vm.findAllZones();
+
 
         // **********************************************************************************
         // ************************ Descripcion de las funciones ************************
@@ -50,23 +37,42 @@
                 })
         }
 
-        // //      Generacion de Capa de Zonas a partir del json recibido desde el service
+        //      Generacion de Capa de Zonas a partir del json recibido desde el service
         function createLayerZone(infoZoneJson) {
-            creatorMap.getMap();
-            vm.zonesLayer = srvLayers.getLayerZones(infoZoneJson);
-            creatorMap.addLayer(vm.zonesLayer);
-            vm.zonesLayer.setVisible(false);
+            vm.zonesLayer = srvLayers.getGroupLayerZones(infoZoneJson);
+            vm.map.addLayer(vm.zonesLayer);
+            // vm.zonesLayer.setVisible(false);
         }
 
-        // // Toogle de capa de zonas
+
+        vm.selectedAllZones = false;
+        // Toogle de capa de zonas
         function toogleZonesLayer() {
-            if (vm.zonesLayer.getVisible()) {
-                vm.zonesLayer.setVisible(false);
+          console.log("toogle zones");
+            if (vm.selectedAllZones) {
+                adminLayers.disableAllZone(vm.zonesLayer);
+                vm.selectedAllZones = false;
             } else {
-                vm.zonesLayer.setVisible(true);
+                adminLayers.enableAllZone(vm.zonesLayer);
+                vm.selectedAllZones = true;
             }
+            angular.forEach(vm.zonesJson, function(zone) {
+                zone.selected = vm.selectedAllZones;
+            });
+        }
+
+        // permite la visualizacion o no de una zona
+        function selectZone(nameZone, seleccion) {
+            var zoneSelected = adminLayers.findLayerZone(nameZone, vm.zonesLayer);
+            if (zoneSelected == null) {
+                console.log("ERROR: la zona " + nameZone + " no se encuentra disponible.");
+            }
+            console.log("Zona seleccionada: " + nameZone);
+
+            console.log("MODEL selected: " + seleccion);
+            zoneSelected.setVisible(seleccion);
         }
 
     } // fin Constructor
 
-  })()
+})()

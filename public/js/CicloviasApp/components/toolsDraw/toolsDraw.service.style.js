@@ -12,7 +12,9 @@
                 getStyleFill: getStyleFill,
                 getStylePoint: getStylePoint,
                 getStyleTrip: getStyleTrip,
-                getStylePolygon: getStylePolygon
+                getStylePolygon: getStylePolygon,
+                getStyleJourney: getStyleJourney,
+                getStyleTripCloseToPoint: getStyleTripCloseToPoint
             };
             return service;
 
@@ -70,11 +72,27 @@
 
             function getStyleTrip(){
                 var styleLine = new ol.style.Style({
-                    stroke: new ol.style.Stroke({color: 'red', width: 3}),
+                    stroke: new ol.style.Stroke({color: 'red', width: 4}),
                 });
 
                 return styleLine;
             };
+
+            function getStyleJourney(){
+                var style = new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: 'blue', width: 3}),
+                });
+
+                return style;
+            }
+
+            function getStyleTripCloseToPoint(){
+                var style = new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: 'yellow', width: 2}),
+                });
+
+                return style;
+            }
         }
 
 })()
