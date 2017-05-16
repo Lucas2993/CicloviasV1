@@ -8,6 +8,8 @@
 
     function MapTripController(vm, creatorMap, srvLayers, dataServer, adminLayers,adminTrip) {
 
+        // ******************* DECLARACION DE VARIABLES Y FUNCIONES *********************
+        
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ********************************** PUBLICO ***********************************
         vm.map = creatorMap.getMap();

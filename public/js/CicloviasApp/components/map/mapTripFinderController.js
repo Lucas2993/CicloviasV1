@@ -4,57 +4,72 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapTripFinderController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality', 'dataServer','adminLayers', 'serviceTrip', 'adminTrip', 'adminMenu', MapTripFinderController]);
+    .controller('mapTripFinderController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer','adminLayers', 'adminMenu', MapTripFinderController]);
 
-    function MapTripFinderController(vm, creatorMap, srvLayers, srvLayersCentrality, dataServer,adminLayers,  serviceTrip, adminTrip, adminMenu) {
+function MapTripFinderController(vm, creatorMap, srvLayers, dataServer,adminLayers, adminMenu) {
 
-        // ********************* declaracion de variables y metodos *********************
+        // ********************* DECLARACION DE VARIABLES Y FUNCIONES *********************
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ********************************** PUBLICO ***********************************
-
         vm.map = creatorMap.getMap();
-
-        // ******************************************************************************************
-        // ****************************** capa de trayectos *****************************************
-        vm.getTripsCloseToSelectedPoint = getTripsCloseToSelectedPoint;
-        vm.viewTripsCloseToPoint = viewTripsCloseToPoint;
-        vm.resetLayerCloseToPoint = resetLayerCloseToPoint;
-
-        // ===============>>>>>> FLAGS <<<<<===============
-        // bandera que indica si el menu se encuentra abierto o cerrado
-        vm.openMenuTripFinder = false;
-
+        // usada para almacenar los datos recuperados del servidor, para no volver a pedir los datos
+        vm.tripsclosetopointJson;
+        // capa que muestra los recorridos cercanos a un punto
+        vm.layerTripsCloseToPoint;
+        // donde se almacenan los datos del punto seleccionado en el mapa
         vm.selectedPoint = {
             latitude: '0',
             longitude: '0'
         };
+
+        // ===============>>>>>> FLAGS <<<<<===============
+        // indica si el menu se encuentra abierto o cerrado
+        vm.openMenuTripFinder = false;
+        // Modelo para usar con el checkbox (es necesario declararlo asi).
+        vm.selectTripCloseToPoint = {
+            checkbox: false
+        }
+        // Indica si la capa de recorridos cercanos a un punto esta creada.
+        vm.isLayerCloseToPointCreated = false;
+
+        // ********************** FUNCIONES **************************
+        // Este metodo se encarga de obtener todos los recorridos cercanos a un
+        // punto seleccionado y agregarlos en una capa.
+        vm.getTripsCloseToSelectedPoint = getTripsCloseToSelectedPoint;
+        // Este metodo se encarga de mostrar la capa de recorridos cercanos a un punto (si existe).
+        vm.viewTripsCloseToPoint = viewTripsCloseToPoint;
+        // Este metodo resetea todo lo relacionado con los recorridos cercanos a un punto.
+        vm.resetLayerCloseToPoint = resetLayerCloseToPoint;
+
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ********************************** PRIVADO ***********************************
+        // capa temporal para mostrar el punto selecciondao en el mapa
+        var temporalLayer = srvLayers.getTemporalLayer();
+        // agregamos la capa al mapa
+        temporalLayer.setMap(vm.map);
+        // // captura el evento de agregar un feature a la capa
+        // temporalLayer.getSource().on( 'addfeature', function (ft) {
+        //     console.log("## Se mostro el punto en el mapa ##");
+        // });
+
         // funcion que habilita el uso de los eventos de este menu
         var enableEventClick;
 
         // ******************************************************************************************
-        // ****************************** Recorridos cerca de un punto ******************************
+        // ****************************** Descripcion de las funciones ******************************
 
-        // Se construye un modelo para capturar todos los puntos
-
-
-        // Este metodo se encarga de obtener todos los recorridos cercanos a un
-        // punto seleccionado y agregarlos en una capa.
+        // ********************* PUBLICAS *****************************
         function getTripsCloseToSelectedPoint() {
             console.log("select to point: " + vm.selectedPoint);
-            console.log(vm.selectedPoint);
             dataServer.getTripsCloseToPoint(vm.selectedPoint)
                 .then(function(data) {
                     vm.tripsclosetopointJson = data;
                     console.log("Datos recuperados prom TRIPS cercanos a un punto con EXITO! = " + data);
-                    // Se establece que la capa de recorridos cercanos a un punto no se mostrara (valor del checkbox).
-                    vm.selectTripCloseToPoint.checkbox = false;
                     // Si la capa ya fue creada anteriormente se la elimina para poder crear una nueva actualizada.
                     if (vm.isLayerCloseToPointCreated) {
                         vm.map.removeLayer(vm.layerTripsCloseToPoint);
@@ -69,34 +84,22 @@
                     // Se establce que la capa de recorridos cercanos a un punto se mostrara (valor del checkbox).
                     vm.selectTripCloseToPoint.checkbox = true;
                     // Se muestra la nueva capa.
-                    vm.viewTripsCloseToPoint();
+                    viewTripsCloseToPoint();
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS cercanos a un punto");
                 })
         }
 
-        // Este metodo se encarga de mostrar la capa de recorridos cercanos a un punto (si existe).
         function viewTripsCloseToPoint() {
             // Se comprueba que la capa existe.
             if (vm.isLayerCloseToPointCreated) {
                 // Se hace visible la capa.
                 adminLayers.viewLayer(vm.layerTripsCloseToPoint);
-                // console.log(" capa de punto visible: "+vm.layerTripsCloseToPoint.getVisible());
                 vm.layerTripsCloseToPoint.setVisible(vm.selectTripCloseToPoint.checkbox);
-                // console.log(" capa de punto visible: "+vm.layerTripsCloseToPoint.getVisible());
             }
         }
 
-        // Modelo para usar con el checkbox (es necesario declararlo asi).
-        vm.selectTripCloseToPoint = {
-            checkbox: false
-        }
-
-        // Bandera que indica si la capa de recorridos cercanos a un punto esta creada.
-        vm.isLayerCloseToPointCreated = false;
-
-        // Este metodo resetea todo lo relacionado con los recorridos cercanos a un punto.
         function resetLayerCloseToPoint() {
             // Si la capa esta creada, es removida.
             if (vm.isLayerCloseToPointCreated) {
@@ -116,17 +119,6 @@
             temporalLayer.getSource().clear();
         }
 
-        // **************************** Entrando al menu *********************************
-
-          var temporalLayer = srvLayers.getTemporalLayer();
-          temporalLayer.setMap(vm.map);
-          temporalLayer.getSource().on( 'addfeature', function (ft) {
-              // ft - feature being added
-              console.log("## Se mostro el punto en el mapa ##");
-          });
-
-        // *******************************************************************************
-
         // Se captura el evento de click dentro del mapa.
         vm.map.on('click', function(evt) {
             // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
@@ -145,15 +137,6 @@
             }
         });
 
-        // *******************************************************************************
-        // **************************** Entrando al menu *********************************
-
-        function enableEventClick(){
-            adminMenu.disableAll();
-            adminMenu.setActiveTripFinder(true);
-            console.log('Entro a actualizacion de eventos TRIPS_FINDER');
-        }
-
         // se encarga de observar si el menu se encuentra abierto o cerrado
         vm.$watch('openMenuTripFinder', function(isOpen){
             if (isOpen) {
@@ -166,6 +149,16 @@
             }
         });
 
+        // ********************* PRIVADAS *****************************
+        function enableEventClick(){
+            adminMenu.disableAll();
+            adminMenu.setActiveTripFinder(true);
+            console.log('Entro a actualizacion de eventos TRIPS_FINDER');
+        }
+
+        // ******************************************************************************************
+        // ******************************************************************************************
+        
     } // fin Constructor
 
 })()
