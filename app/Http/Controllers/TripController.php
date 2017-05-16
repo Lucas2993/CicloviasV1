@@ -129,4 +129,77 @@ class TripController extends Controller
 
     return $km;
   }
+
+/**
+*Funcion que retorna los Recorridos que estan dentro de un rango de una determinada Distancia.
+*
+*@param int $long
+*@param array $result
+*/
+public function getToDistance($long){
+  //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
+  $longMin= $long - 0.05;
+  $longMax= $long + 0.05;
+
+  $result = array();
+  $Trips = Trip::all();
+
+  foreach($Trips as $trip){
+    $points = $trip->geopoints()->get();
+    $trip->points= $points;
+    $kmt = $this->tripDistance($points);
+    $kmr = round($kmt, 2);
+      if($kmr >= $longMin && $kmr <= $longMax){
+        $result[] = $trip;
+
+      }
+  }
+
+  return $result;
+}
+
+
+  /**
+  * Funcion que retorna el largo en kilometros de un Recorrido.
+  *
+  * @param $trip
+  * @return int $km
+  */
+public function tripDistance($trip){
+  //saco el numero de elementos
+  $longitud = count($trip);
+  $km=0;
+  //Recorro todos los elementos
+  for($i=1; $i<$longitud; $i++){
+    $j= $i - 1;
+    //Calculo la distancia entre los puntos del recorrido
+    $km += $this->CalculateDistance($trip[$j]->latitude, $trip[$j]->longitude, $trip[$i]->latitude, $trip[$i]->longitude);
+    }
+
+  return $km;
+}
+
+/**
+* Funcion que retorna el largo en kilometros de un Recorrido.
+*
+* @param $id
+* @return int $km
+*/
+public function tripIdDistance($id){
+//Busco recorrido por id
+$Trip = Trip::find($id);
+
+$points = $Trip->geopoints()->get();
+//saco el numero de elementos
+$longitud = count($points);
+$km=0;
+//Recorro todos los elementos
+for($i=1; $i<$longitud; $i++){
+  $j= $i - 1;
+  //Calculo la distancia entre los puntos del recorrido
+  $km +=  $this->CalculateDistance($points[$j]->latitude, $points[$j]->longitude, $points[$i]->latitude, $points[$i]->longitude);
+  }
+return $km;
+}
+
 }

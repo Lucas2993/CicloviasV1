@@ -14,6 +14,7 @@
             // Trips
             getTrips:getTrips,
             getTripsCloseToPoint:getTripsCloseToPoint,
+            getTripsToDistance:getTripsToDistance,
 
             // Journey
             getJourneys: getJourneys,
@@ -173,6 +174,24 @@
                 },
                 function errorCallback(err) {
                     defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getTripsToDistance(long) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP + '/toDistance/'+ long
+            }).then(function successCallback(res) {
+                defered.resolve(res.data);
+                console.log('datos de promise de DISTANCE TRIP: ' + res.data);
+                },
+                function errorCallback(err) {
+                  defered.reject(err)
                 }
             );
             return promise;
