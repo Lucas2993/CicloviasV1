@@ -57,6 +57,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripFinderController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapJourneyController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/events/events.createPoint.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripByDistanceController.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.centrality.js') }}"></script>

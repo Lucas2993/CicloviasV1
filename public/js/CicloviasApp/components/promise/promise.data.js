@@ -15,6 +15,7 @@
             getTrips:getTrips,
             getTripsCloseToPoint:getTripsCloseToPoint,
             getTripsRanking: getTripsRanking,
+            getTripsToDistance:getTripsToDistance,
 
             // Journey
             getJourneys: getJourneys,
@@ -208,6 +209,24 @@
                 {"id":10,"name":"Trayeco 10","ranking":"15", "pointIni":{"latitude":-42.789045635333466,"longitude":-65.01615123298802}, "pointFinal":{"latitude":-42.78891965982954,"longitude":-65.01485304382481}}
             ];
             return respuestaServidor;
+        };
+
+        function getTripsToDistance(long) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP + '/toDistance/'+ long
+            }).then(function successCallback(res) {
+                defered.resolve(res.data);
+                console.log('datos de promise de DISTANCE TRIP: ' + res.data);
+                },
+                function errorCallback(err) {
+                  defered.reject(err)
+                }
+            );
+            return promise;
         };
     }
 })()
