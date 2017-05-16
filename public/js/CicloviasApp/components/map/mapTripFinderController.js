@@ -140,7 +140,7 @@
 
         // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
         vm.searchCentrality = function(point) {
-            vm.centralityEdit();
+            // vm.centralityEdit();
             vm.newCentrality = point.get('object');
             vm.$apply();
         }
@@ -148,4 +148,4 @@
 
     } // fin Constructor
 
-})()
+  })()

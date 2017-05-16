@@ -72,10 +72,10 @@
                 vm.centralitiesLayer.getSource().clear();
             } else {
                 vm.selectedAllCentralities = true;
-                adminLayers.addCentralities(vm.centralitiesJson, vm.centralitiesLayer);
+                adminLayers.addCentralities(srvLayersCentrality.getCentralities(), srvLayersCentrality.getCentralitiesLayer());
             }
 
-            angular.forEach(vm.centralitiesJson, function(centrality) {
+            angular.forEach(srvLayersCentrality.getCentralities(), function(centrality) {
                 centrality.selected = vm.selectedAllCentralities;
             });
         } //fin checkAllCentralities
@@ -95,8 +95,9 @@
                         // insertFirst: false
                     });
                     vm.map.addOverlay(popup);
-                    popup.show(evt.coordinate, feature.get('object').name);
-
+                    if(feature.get('object') != undefined){
+                      popup.show(evt.coordinate, feature.get('object').name);
+                    }
 
                     // console.log( feature.get('object').name);
 
