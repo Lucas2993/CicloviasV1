@@ -12,7 +12,7 @@
 
         return service;
 
-        // permite la visualizacion del feature en la capa
+        // permite la visualizacion del feature por Id en la capa
         function viewTrip(tripJson, layer) {
             console.log("entro al admin de features!!");
             var feature = null;

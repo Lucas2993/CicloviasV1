@@ -14,7 +14,9 @@
                 getStyleTrip: getStyleTrip,
                 getStylePolygon: getStylePolygon,
                 getStyleJourney: getStyleJourney,
-                getStyleTripCloseToPoint: getStyleTripCloseToPoint
+                getStyleTripCloseToPoint: getStyleTripCloseToPoint,
+                getStyleTripsRanking: getStyleTripsRanking,
+                getStyleTemporalEditCentrality: getStyleTemporalEditCentrality
             };
             return service;
 
@@ -43,11 +45,14 @@
             function getStylePoint() {
                 var stylePoint = new ol.style.Style({
                     image: new ol.style.Icon(({
-                        anchor: [0.5, 46],
+                        anchor: [0.5, 0,5],
+                        anchorOrigin: 'bottom-right',
                         anchorXUnits: 'fraction',
                         anchorYUnits: 'pixels',
                         src: 'https://openlayers.org/en/v4.1.0/examples/data/icon.png'
                         // src: 'https://openlayers.org/en/v4.1.0/examples/data/dot.png'
+                        //, imgSize: [15, 25]
+                        // , size: [15, 25]
                     }))
                 });
 
@@ -63,7 +68,6 @@
                     fill: new ol.style.Fill({
                       // color: 'rgba(0, 0, 255, 0.1)'
                       color: 'rgba(0, 23, 251, 0.1)'
-                      // color: 'yellow'
                     }),
                     text: styleText
                });
@@ -92,6 +96,33 @@
                 });
 
                 return style;
+            }
+
+            function getStyleTripsRanking(){
+                var style = new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: 'green', width: 3}),
+                });
+
+                return style;
+            }
+
+            function getStyleTemporalEditCentrality(){
+                var style = new ol.style.Style({
+                      fill: new ol.style.Fill({
+                        color: 'rgba(255, 255, 255, 0.2)'
+                      }),
+                      stroke: new ol.style.Stroke({
+                        color: '#ffcc33',
+                        width: 2
+                      }),
+                      image: new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({
+                          color: 'red'
+                        })
+                      })
+                  });
+                  return style;
             }
         }
 

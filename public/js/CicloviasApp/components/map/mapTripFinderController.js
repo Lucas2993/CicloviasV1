@@ -4,11 +4,14 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapTripFinderController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality', 'dataServer','adminLayers', 'serviceTrip', 'adminTrip', MapTripFinderController]);
+        .controller('mapTripFinderController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality', 'dataServer','adminLayers', 'serviceTrip', 'adminTrip', 'adminMenu', MapTripFinderController]);
 
-    function MapTripFinderController(vm, creatorMap, srvLayers, srvLayersCentrality, dataServer,adminLayers,  serviceTrip, adminTrip) {
+    function MapTripFinderController(vm, creatorMap, srvLayers, srvLayersCentrality, dataServer,adminLayers,  serviceTrip, adminTrip, adminMenu) {
 
         // ********************* declaracion de variables y metodos *********************
+
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // ********************************** PUBLICO ***********************************
 
         vm.map = creatorMap.getMap();
 
@@ -18,16 +21,22 @@
         vm.viewTripsCloseToPoint = viewTripsCloseToPoint;
         vm.resetLayerCloseToPoint = resetLayerCloseToPoint;
 
-        // function viewLayerTrips(){
-        //     adminLayers.viewLayerTrips(vm.layerTrips);
-        // }
+        // ===============>>>>>> FLAGS <<<<<===============
+        // bandera que indica si el menu se encuentra abierto o cerrado
+        vm.openMenuTripFinder = false;
 
         vm.selectedPoint = {
             latitude: '0',
             longitude: '0'
         };
 
-        // Cuando el usuario quiere crear una nueva centralidad de ajustan las banderas y se inicializa la centralidad.
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // ********************************** PRIVADO ***********************************
+        // funcion que habilita el uso de los eventos de este menu
+        var enableEventClick;
 
         // ******************************************************************************************
         // ****************************** Recorridos cerca de un punto ******************************
@@ -52,8 +61,7 @@
                         vm.isLayerCloseToPointCreated = false;
                     }
                     // Se crea una nueva capa de recorridos con los datos obtenidos.
-                    // vm.layerTripsCloseToPoint = srvLayers.getLayerTrips(vm.tripsclosetopointJson);
-                    vm.layerTripsCloseToPoint = srvLayers.getLayerTripsOld(vm.tripsclosetopointJson);
+                    vm.layerTripsCloseToPoint = srvLayers.getLayerTripsFinder(vm.tripsclosetopointJson);
                     // Se indica que una nueva capa de recorridos cercanos a un punto se ha creado.
                     vm.isLayerCloseToPointCreated = true;
                     // Se agrega la capa nueva al mapa.
@@ -104,47 +112,59 @@
                 latitude: '0',
                 longitude: '0'
             };
+            // borra el punto de seleccion, si es q lo hay
+            temporalLayer.getSource().clear();
         }
+
+        // **************************** Entrando al menu *********************************
+
+          var temporalLayer = srvLayers.getTemporalLayer();
+          temporalLayer.setMap(vm.map);
+          temporalLayer.getSource().on( 'addfeature', function (ft) {
+              // ft - feature being added
+              console.log("## Se mostro el punto en el mapa ##");
+          });
+
+        // *******************************************************************************
 
         // Se captura el evento de click dentro del mapa.
         vm.map.on('click', function(evt) {
             // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
-            vm.callbackMarkersOnClick(evt.pixel);
+            if(adminMenu.activeTripFinder()){
+                vm.selectedPoint.longitude = evt.coordinate[0];
+                vm.selectedPoint.latitude = evt.coordinate[1];
+                // actualiza los valores de los componentes de la vista
+                vm.$apply();
 
-            var coordinate = evt.coordinate;
-
-            vm.selectedPoint.longitude = coordinate[0];
-            vm.selectedPoint.latitude = coordinate[1];
-
-            // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
-            var coordinate = evt.coordinate;
-            if (vm.isSelecting || vm.isEditing) {
-                vm.newCentrality.longitude = coordinate[0];
-                vm.newCentrality.latitude = coordinate[1];
-                console.log('Selected point: ' + coordinate);
+                // ********************* muestra el punto en el mapa *************************
+                var point = new ol.Feature({
+                          geometry: new ol.geom.Point([vm.selectedPoint.longitude, vm.selectedPoint.latitude])
+                      });
+                temporalLayer.getSource().clear();
+                temporalLayer.getSource().addFeature(point);
             }
-            vm.$apply();
-
         });
 
-        // Modificacion y borrado de una centralidad.
-        vm.callbackMarkersOnClick = function(pixel) {
-            // Determina que elemento se clickeo (indicador de centralidad).
-            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
-                // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
-                vm.searchCentrality(feature);
-            })
+        // *******************************************************************************
+        // **************************** Entrando al menu *********************************
+
+        function enableEventClick(){
+            adminMenu.disableAll();
+            adminMenu.setActiveTripFinder(true);
+            console.log('Entro a actualizacion de eventos TRIPS_FINDER');
         }
 
-        //nooooooooooooooooooo
-
-        // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
-        vm.searchCentrality = function(point) {
-            vm.centralityEdit();
-            vm.newCentrality = point.get('object');
-            vm.$apply();
-        }
-
+        // se encarga de observar si el menu se encuentra abierto o cerrado
+        vm.$watch('openMenuTripFinder', function(isOpen){
+            if (isOpen) {
+                console.log('El menu de FINDER TRIPS esta abierto');
+                enableEventClick();
+            }
+            else {
+                // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
+                temporalLayer.getSource().clear();
+            }
+        });
 
     } // fin Constructor
 

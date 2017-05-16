@@ -5,6 +5,7 @@
     .constant('path',{
         CENTRALITY: 'api/centrality',
         TRIP:'api/trip',
+        TRIPS_RANKING: 'api/tripsRanking',
         JOURNEY: 'api/journey',
         ZONE: 'api/zone'
     })
