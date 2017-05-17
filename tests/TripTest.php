@@ -9,7 +9,7 @@ use App\Models\Trip;
 
 class TripTest extends TestCase
 {
-  use DatabaseMigrations;
+  //use DatabaseMigrations;
 
   public function testModel(){
       // Se crean dos nuevos puntos y se los incluye en un arreglo.
@@ -72,10 +72,9 @@ class TripTest extends TestCase
   public function getCloseToPoint(){
     $this->generarDatosPrueba();
 
-    $this->getJson('api/trip/closeToPoint/-42.767517/-65.037274')
+    $this->getJson('api/trip/closeToPoint/-42.780875/-65.038786')
           ->seeJson([
-            'name' => 'Recorrido 3',
-            'name' => 'Recorrido 4'
+            'name' => 'Recorrido 2',
           ]);
   }
 

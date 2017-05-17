@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Trip;
+use App\Services\CicloviasHelper;
 
 
 class TripController extends Controller
 {
+  private $clvHelperService;
+
+  //Se declara contructor para inyectar service "CicloviasHelper"
+  function __construct (CicloviasHelper $helper){
+    $this->clvHelperService = $helper;
+  }
 
   /**
   * Display a listing of the resource.
@@ -74,7 +81,7 @@ class TripController extends Controller
   /**
   * Devuelve los recorridos cercanos al punto pasado como parámetro.
   *
-  * @param  json $point
+  * @param  $point(latitude, longitude)
   * @return Response
   */
   public function getCloseToPoint($latitude, $longitude){
@@ -83,25 +90,24 @@ class TripController extends Controller
     $lat = $latitude;
     $long = $longitude;
 
-    // echo($lat."\n");
-    // echo($long."\n");
-
     //Constantes utilizadas para acotar la busqueda de recorridos.
     $min_lat = $lat + 0.0035;
     $max_lat = $lat - 0.0035;
     $min_long = $long + 0.0046;
     $max_long = $long - 0.0046;
 
-    /*
-      TODO: Crear consulta para acotar la busqueda de recorridos cercanos al punto de interes.
-    */
-
-    $trips = Trip::with('geopoints')->get();
+    $trips = Trip::with(['geopoints' => function($query) use ($min_lat, $max_lat, $min_long, $max_long){
+        $query->where('latitude', '>=', $max_lat)
+              ->where('latitude', '<=', $min_lat)
+              ->where('longitude', '>=', $max_long)
+              ->where('longitude', '<=', $min_long);
+    }])->get();
 
     foreach($trips as $trip){
       $points = $trip->geopoints()->get();
-      foreach( $points as $point){
-        $distancia = $this->CalculateDistance($lat, $long, $point->latitude, $point->longitude);
+      foreach($points as $point){
+        $distancia = $this->clvHelperService
+                          ->CalculateDistance($lat, $long, $point->latitude,$point->longitude);
         if ($distancia <= 0.3) {
           $result[] = $trip;
           $trip->points = $trip->geopoints;
@@ -111,22 +117,5 @@ class TripController extends Controller
       }
     }
     return $result;
-  }
-
-  private function calculateDistance($lat1, $long1, $lat2, $long2){
-    $degtorad = 0.01745329;
-    $radtodeg = 57.29577951;
-
-    $dlong = ($long1 - $long2);
-    $dvalue = (sin($lat1 * $degtorad) * sin($lat2 * $degtorad))
-			       + (cos($lat1 * $degtorad) * cos($lat2 * $degtorad)
-			        * cos($dlong * $degtorad));
-
-    $dd = acos($dvalue) * $radtodeg;
-
-    $miles = ($dd * 69.16);
-    $km = ($dd * 111.302);
-
-    return $km;
   }
 }
