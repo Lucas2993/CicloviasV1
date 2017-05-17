@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+      $this->app->singleton('CicloviasHelper', function(){
+        return new App\Services\CicloviasHelper();
+      });
     }
 }

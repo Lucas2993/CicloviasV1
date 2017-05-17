@@ -9,7 +9,7 @@ use App\Models\Trip;
 use App\Http\Controllers\TripController;
 class TripTest extends TestCase
 {
-  //use DatabaseMigrations;
+  
   use WithoutMiddleware;
 
   public function testModel(){
@@ -73,10 +73,9 @@ class TripTest extends TestCase
 /**  public function getCloseToPoint(){
     $this->generarDatosPrueba();
 
-    $this->getJson('api/trip/closeToPoint/-42.767517/-65.037274')
+    $this->getJson('api/trip/closeToPoint/-42.780875/-65.038786')
           ->seeJson([
-            'name' => 'Recorrido 3',
-            'name' => 'Recorrido 4'
+            'name' => 'Recorrido 2',
           ]);
   }
 */

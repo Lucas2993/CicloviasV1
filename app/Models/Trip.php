@@ -13,7 +13,7 @@ class Trip extends Model{
  *
  */
  protected $fillable = [
-   'name', 'description', 'points'
+   'name', 'description','distance','points'
  ];
 
   public function geopoints(){
