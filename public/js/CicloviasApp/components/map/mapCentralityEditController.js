@@ -4,18 +4,35 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapCentralityEditController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality','dataServer','adminLayers', MapCentralityEditController]);
+        .controller('mapCentralityEditController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality','dataServer','adminLayers', 'adminMenu', MapCentralityEditController]);
 
-    function MapCentralityEditController(vm, creatorMap, srvLayers, srvLayersCentrality ,dataServer,adminLayers) {
+    function MapCentralityEditController(vm, creatorMap, srvLayers, srvLayersCentrality ,dataServer,adminLayers, adminMenu) {
 
       // ********************* declaracion de variables y metodos *********************
       vm.map = creatorMap.getMap();
+
+      // ********************************** FLAGS *************************************
+      vm.updatePointCentrality = false;
+      vm.enableDrawIndicator = enableDrawIndicator;
+      vm.showIndicatorSelectedPoint = false;
+      vm.inAction = "";
+
+      function enableDrawIndicator(){
+          vm.updatePointCentrality = false;
+          vm.showIndicatorSelectedPoint = true;
+      }
+      // ******************************************************************************
 
       // Lucas
       // Aca empieza lo que agregue para el ABM de centralidades.
       // Esta bandera se usa para saber si el usuario se encuentra seleccionando un punto para una nueva centralidad.
       // Incorporacion de agregar centralidad
       vm.isSelecting = false;
+      vm.openMenuEditCentralities = false;
+      var buttonAddCentrality = false;
+
+      // funcion que habilita el uso de los eventos de este menu
+      var enableEventClick;
 
       // Modelo de una nueva centralidad (inicializacion).
       vm.newCentrality = {
@@ -28,6 +45,9 @@
       // Cuando el usuario quiere crear una nueva centralidad se ajustan las banderas y se inicializa la centralidad.
       vm.centralitySelection = function() {
           vm.isSelecting = true;
+          vm.inAction = "Creando nueva Centralidad";
+          buttonAddCentrality = true;
+          vm.showIndicatorSelectedPoint = true;
           vm.isEditing = false;
           vm.centralityReset();
       }
@@ -37,6 +57,8 @@
           vm.isSelecting = false;
           vm.isEditing = false;
           vm.centralityReset();
+          // borramos el punto seleccionado
+          temporalLayer.getSource().clear();
       }
 
       // Se inicializa nuevamente la centralidad.
@@ -92,6 +114,11 @@
       vm.centralityEdit = function() {
           vm.isSelecting = false;
           vm.isEditing = true;
+          vm.showIndicatorSelectedPoint = false;
+          vm.updatePointCentrality = true;
+          vm.inAction = "Editando Centralidad";
+          // eliminamos el punto agregado, si es que habia alguno
+          temporalLayer.getSource().clear();
           vm.centralityReset();
       }
 
@@ -106,7 +133,7 @@
                   console.log(data);
                   alert('Se elimino correctamente la centralidad: ' + data.id);
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  srvLayersCentrality.filterCentrality(data);
+                  srvLayersCentrality.filterCentrality(data.id);
                   // vm.$apply();
               })
               .catch(function(err) {
@@ -122,12 +149,11 @@
                   // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                   console.log(data);
                   alert('Se modifico correctamente la centralidad: ' + data.id);
-                  // var cent = vm.centralitiesJson.find(findById);
-                  // adminLayers.viewCentrality(cent, vm.centralitiesLayer);
+                  srvLayersCentrality.filterCentrality(data.id);
+                  data.selected = true;
                   srvLayersCentrality.getCentralities().push(data);
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  // vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
 
               })
               .catch(function(err) {
@@ -136,27 +162,65 @@
           vm.centralityCancel();
       }
 
+      // *******************************************************************************
+      // **************************** Entrando al menu *********************************
+
+        var temporalLayer = srvLayers.getTemporalLayer();
+        temporalLayer.setMap(vm.map);
+        temporalLayer.getSource().on( 'addfeature', function (ft) {
+            // ft - feature being added
+            console.log("***Se agrego un nuevo punto***");
+        });
+
+      // *******************************************************************************
+
       // Se captura el evento de click dentro del mapa.
       vm.map.on('click', function(evt) {
-          // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
-          vm.callbackMarkersOnClick(evt.pixel);
+          if(adminMenu.activeEditCentralities()){
+              // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
+              vm.callbackMarkersOnClick(evt.pixel);
 
-          var coordinate = evt.coordinate;
+              var longPointSelected = evt.coordinate[0];
+              var latPointSelected = evt.coordinate[1];
 
-          // vm.selectedPoint.longitude = coordinate[0];
-          // vm.selectedPoint.latitude = coordinate[1];
-
-          // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
-          var coordinate = evt.coordinate;
-          if (vm.isSelecting || vm.isEditing) {
-              vm.newCentrality.longitude = coordinate[0];
-              vm.newCentrality.latitude = coordinate[1];
-              console.log('Selected point: ' + coordinate);
+              // Si estoy creando o editando una centralidad se obtienen las coordenadas donde se efectuo el click.
+              if (vm.isSelecting || vm.isEditing) {
+                  vm.newCentrality.longitude = longPointSelected;
+                  vm.newCentrality.latitude = latPointSelected;
+                  console.log('Selected point: [' +longPointSelected+' ;'+latPointSelected+']' );
+              }
+              // actualiza los valores de los componentes de la vista
+              vm.$apply();
+              // *********************************************************************
+              // ****************** Agregar punto en el mapa *************************
+              if(vm.showIndicatorSelectedPoint){
+                  var point = new ol.Feature({
+                            geometry: new ol.geom.Point([longPointSelected, latPointSelected])
+                        });
+                  temporalLayer.getSource().clear();
+                  temporalLayer.getSource().addFeature(point);
+              }
           }
-
-
       });
 
+      // *******************************************************************************
+      // **************************** Entrando al menu *********************************
+      function enableEventClick(){
+          adminMenu.disableAll();
+          adminMenu.setActiveEditCentralities(true);
+          console.log('Entro a actualizacion de eventos EDIT_CENTRALITIES');
+      }
+
+      vm.$watch('openMenuEditCentralities', function(isOpen){
+          if (isOpen) {
+            console.log('El menu de EDIT_CENTRALIDADES esta abierto');
+            enableEventClick();
+          }
+          else {
+              // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
+              temporalLayer.getSource().clear();
+          }
+      });
 
     } // fin Constructor
 

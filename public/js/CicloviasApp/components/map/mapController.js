@@ -500,6 +500,59 @@
         vm.centralitySelectionPoint = function() {
             vm.isSelectingPoint = true;
         }
+
+
+        // ************************ agrega el punto al mouse *******************************
+        var features = new ol.Collection();
+        var featureOverlay = new ol.layer.Vector({
+        source: new ol.source.Vector({features: features}),
+        // source: new ol.source.Vector(),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+      featureOverlay.setMap(vm.map);
+
+      var modify = new ol.interaction.Modify({
+        features: features,
+        // se debe presionar Shift para eliminar vertices ya creados
+        deleteCondition: function(event) {
+          return ol.events.condition.shiftKeyOnly(event) &&
+              ol.events.condition.singleClick(event);
+        }
+      });
+      vm.map.addInteraction(modify);
+
+      var draw; // global so we can remove it later
+      var typeSelect = document.getElementById('type');
+
+      function addInteraction() {
+        draw = new ol.interaction.Draw({
+          features: features,
+        //   type: 'point'
+            type: /** @type {ol.geom.GeometryType} */ (typeSelect.value)
+        });
+        vm.map.addInteraction(draw);
+      }
+
+      typeSelect.onchange = function() {
+        map.removeInteraction(draw);
+        addInteraction();
+      };
+
+      addInteraction();
     } // fin Constructor
 
 })()

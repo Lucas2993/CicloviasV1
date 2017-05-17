@@ -36,8 +36,10 @@
             centralitiesLayer = layer;
         }
 
-        function filterCentrality(data) {
-            centralitiesJson = centralitiesJson.filter((item) => item.id !== data.id);
+        function filterCentrality(id) {
+            console.log("Cant de centralidades ANTES de borrar: "+centralitiesJson.length);
+            centralitiesJson = centralitiesJson.filter((item) => item.id !== id);
+            console.log("Cant de centralidades DESPUES de borrar: "+centralitiesJson.length);
             console.log(centralitiesJson);
         }
 

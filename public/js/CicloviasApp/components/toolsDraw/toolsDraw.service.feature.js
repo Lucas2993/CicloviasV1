@@ -11,7 +11,8 @@
                 getPolygon: getPolygon,
                 getFeatureGeom: getFeatureGeom,
                 getFeatureGeomId: getFeatureGeomId,
-                getFeatureTripJson: getFeatureTripJson
+                getFeatureTripJson: getFeatureTripJson,
+                getFeatureTripRanking: getFeatureTripRanking
             };
             return service;
 
@@ -78,6 +79,36 @@
                 // le asignamos un ID
                 feature.setId(tripsJson.id);
                 console.log("id del trayecto del JSON creado: "+feature.getId());
+                return feature;
+            }
+
+            // crea un feature correspondiente a cada tramo con su ponderacion
+            function getFeatureTripRanking(tripRankingJson){
+                var arrayLontLat = [];
+                var longLat;
+                var geomTrip;
+
+                console.log(tripRankingJson);
+
+                // agregamos los puntos del tramo
+                var point = tripRankingJson.pointIni;
+                longLat = [point.longitude, point.latitude];
+                console.log("Pto inicio: ["+point.longitude+"; "+point.latitude+"]");
+                arrayLontLat.push(longLat);
+                point = tripRankingJson.pointFinal;
+                longLat = [point.longitude, point.latitude];
+                console.log("Pto Fin: ["+point.longitude+"; "+point.latitude+"]");
+                arrayLontLat.push(longLat);
+
+                geomTrip = new ol.geom.LineString(arrayLontLat);
+
+                var feature = new ol.Feature({
+                    geometry: geomTrip,
+                    ranking: tripRankingJson.ranking
+                });
+                // le asignamos un ID
+                feature.setId(tripRankingJson.id);
+                console.log("id del trayecto del JSON RANking creado: "+feature.getId()+" puntos: "+arrayLontLat);
                 return feature;
             }
         }

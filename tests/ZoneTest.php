@@ -16,7 +16,7 @@ class ZoneTest extends TestCase{
         $point_2 = new GeoPoint(['latitude' => '-42.036735','longitude' => '-65.7672777', 'order' => '2']);
         $points = array($point_1, $point_2);
         // Se crea una zona incorporando el arreglo de puntos.
-        $zone = new Zone(['name' => 'Nueva zona','description' => 'Alta zona', 'points' => $points]);
+        $zone = new Zone(['name' => 'Nueva zona','description' => 'Alta zona','color'=>'blue','points' => $points]);
         // Se comprueba el funcionamiento del modelo.
         $this->assertTrue(count($zone->points) == 2);
         $this->assertTrue($zone->name == 'Nueva zona');
@@ -27,7 +27,7 @@ class ZoneTest extends TestCase{
         // Se obtiene la cantidad de zonas almacenadas antes de guardar la zona nueva.
         $records_before = count(Zone::All());
         // Se crea y persiste una nueva zona.
-        $zone = Zone::create(['name' => 'Nueva zona','description' => 'Alta zona']);
+        $zone = Zone::create(['name' => 'Nueva zona','description' => 'Alta zona','color'=>'blue']);
         // Se obtiene la cantidad de zonas almacenadas luego de guardar la zona nueva.
         $records_after = count(Zone::All());
         // Se comprueba que la nueva zona se haya guardado (deberia haber una zona mas almacenada).
@@ -39,7 +39,7 @@ class ZoneTest extends TestCase{
 
     public function testGeoPoints(){
         // Se crea y persiste una nueva zona.
-        $zone = Zone::create(['name' => 'Nueva zona','description' => 'Alta zona']);
+        $zone = Zone::create(['name' => 'Nueva zona','description' => 'Alta zona','color'=>'blue']);
         // Se crean y persisten dos nuevos puntos.
         $point_1 = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '1']);
         $point_2 = GeoPoint::create(['latitude' => '-42.036735','longitude' => '-65.7672777', 'order' => '2']);

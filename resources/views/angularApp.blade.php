@@ -49,13 +49,15 @@
     <script src="{{ URL::asset('js/CicloviasApp/shared/pagefooter/pagefooterModule.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
-    <!-- <script src="{{ URL::asset('js/CicloviasApp/components/map/mapController.js') }}"></script> -->
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.tripRanking.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapCentralityController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapCentralityEditController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapZoneController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripFinderController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/mapJourneyController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/events/events.createPoint.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripByDistanceController.js') }}"></script>
 
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.centrality.js') }}"></script>
@@ -69,7 +71,9 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/trip/trip.service.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/trip/trip.administrator.js') }}"></script>
 
+    <!-- Administradores -->
     <script src="{{ URL::asset('js/CicloviasApp/components/layers/layers.administrator.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/menu/menu.administrator.js') }}"></script>
 
     <!-- Constantes de la aplicacion -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>
