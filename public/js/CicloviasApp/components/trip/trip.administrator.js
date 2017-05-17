@@ -1,4 +1,4 @@
-// Servicio encargado de devolver un vector con la info necesarias de las zonas para su visualizacion
+// Servicio encargado de la visualizacion de un recorrido
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
@@ -12,7 +12,7 @@
 
         return service;
 
-        // permite la visualizacion del feature en la capa
+        // permite la visualizacion del feature por Id en la capa
         function viewTrip(tripJson, layer) {
             console.log("entro al admin de features!!");
             var feature = null;

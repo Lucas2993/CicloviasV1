@@ -3,9 +3,9 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .factory('adminLayers', ['creatorPoints', 'srvLayers', adminLayers]);
+        .factory('adminLayers', ['creatorPoints', 'serviceTrip', adminLayers]);
 
-    function adminLayers(creatorPoints, srvLayers) {
+    function adminLayers(creatorPoints, serviceTrip) {
         var service = {
             viewLayer: viewLayer,
             viewLayerGroup: viewLayerGroup,
@@ -110,17 +110,21 @@
                 return feacture;
         }
 
+        // agrega centralidades a partir de los datos recuperados del servidor a la capa recibida
         function addCentralities(centralitiesJson, layer) {
             var points = creatorPoints.getVectorPointCentralities(centralitiesJson);
             layer.getSource().addFeatures(points);
         }
 
+        // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida
         function addTrips(dataJsonTrips, layer){
-            var vectorFeatureTrips = srvLayers.getVectorFeatures(dataJsonTrips);
+            // var vectorFeatureTrips = srvLayers.getVectorFeatures(dataJsonTrips);
+            var vectorFeatureTrips = serviceTrip.getVectorFeatures(dataJsonTrips);
             console.log("Nro de features: "+vectorFeatureTrips.length);
             layer.getSource().addFeatures(vectorFeatureTrips);
         }
 
+        // agrega un punto a partir de los datos recibidos a la capa
         function addPoint(latitude,longitude,data, layer) {
             var point = creatorPoints.getPoint(latitude, longitude, data);
             console.log(point);

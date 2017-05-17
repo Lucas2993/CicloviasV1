@@ -4,7 +4,7 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-    .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', 'adminTrip', MapController]);
+        .controller('MapController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer', 'adminLayers', 'serviceTrip', 'adminTrip', MapController]);
 
     function MapController(vm, creatorMap, srvLayers, dataServer, adminLayers, serviceTrip, adminTrip) {
 
@@ -25,7 +25,6 @@
         // ********************************** NUEVO *******************************
         vm.selectZone = selectZone;
         vm.selectCentrality = selectCentrality;
-
         vm.checkAll = checkAll;
 
         vm.checkboxModel = {
@@ -139,11 +138,10 @@
             // for (var i = 0; i < array.length; i++) {
             //     array[i]
             // }
-            if(vm.selectedAllZones){
+            if (vm.selectedAllZones) {
                 adminLayers.disableAllZone(vm.zonesLayer);
                 vm.selectedAllZones = false;
-            }
-            else{
+            } else {
                 adminLayers.enableAllZone(vm.zonesLayer);
                 vm.selectedAllZones = true;
             }
@@ -160,7 +158,7 @@
             }
             console.log("Zona seleccionada: " + nameZone);
 
-            console.log("MODEL selected: "+seleccion);
+            console.log("MODEL selected: " + seleccion);
             zoneSelected.setVisible(seleccion);
         }
 
@@ -372,7 +370,8 @@
         vm.layerTrips;
         vm.viewLayerTrips = viewLayerTrips;
         vm.selectAllTrips = false;
-        function viewLayerTrips(){
+
+        function viewLayerTrips() {
             // adminLayers.viewLayer(vm.layerTrips);
             if (vm.selectAllTrips) {
                 vm.selectAllTrips = false;
@@ -389,14 +388,15 @@
 
         vm.selectTrip = selectTrip;
 
-        function selectTrip(trip){
+        function selectTrip(trip) {
             console.log("entro a la seleccion de recorridos");
             adminTrip.viewTrip(trip, vm.layerTrips);
         }
 
 
         vm.viewLayerJournies = viewLayerJournies;
-        function viewLayerJournies(){
+
+        function viewLayerJournies() {
             adminLayers.viewLayer(vm.layerJournies);
         }
 
@@ -426,7 +426,7 @@
         // Este metodo se encarga de obtener todos los recorridos cercanos a un
         // punto seleccionado y agregarlos en una capa.
         function getTripsCloseToSelectedPoint() {
-            console.log("select to point: "+vm.selectedPoint);
+            console.log("select to point: " + vm.selectedPoint);
             console.log(vm.selectedPoint);
             dataServer.getTripsCloseToPoint(vm.selectedPoint)
                 .then(function(data) {
@@ -502,6 +502,57 @@
         }
 
 
+        // ************************ agrega el punto al mouse *******************************
+        var features = new ol.Collection();
+        var featureOverlay = new ol.layer.Vector({
+        source: new ol.source.Vector({features: features}),
+        // source: new ol.source.Vector(),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+      featureOverlay.setMap(vm.map);
+
+      var modify = new ol.interaction.Modify({
+        features: features,
+        // se debe presionar Shift para eliminar vertices ya creados
+        deleteCondition: function(event) {
+          return ol.events.condition.shiftKeyOnly(event) &&
+              ol.events.condition.singleClick(event);
+        }
+      });
+      vm.map.addInteraction(modify);
+
+      var draw; // global so we can remove it later
+      var typeSelect = document.getElementById('type');
+
+      function addInteraction() {
+        draw = new ol.interaction.Draw({
+          features: features,
+        //   type: 'point'
+            type: /** @type {ol.geom.GeometryType} */ (typeSelect.value)
+        });
+        vm.map.addInteraction(draw);
+      }
+
+      typeSelect.onchange = function() {
+        map.removeInteraction(draw);
+        addInteraction();
+      };
+
+      addInteraction();
     } // fin Constructor
 
 })()

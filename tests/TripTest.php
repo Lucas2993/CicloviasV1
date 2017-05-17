@@ -6,10 +6,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use App\Models\GeoPoint;
 use App\Models\Trip;
-
+use App\Http\Controllers\TripController;
 class TripTest extends TestCase
 {
-  //use DatabaseMigrations;
+  
+  use WithoutMiddleware;
 
   public function testModel(){
       // Se crean dos nuevos puntos y se los incluye en un arreglo.
@@ -69,7 +70,7 @@ class TripTest extends TestCase
   * @test
   * @return void
   */
-  public function getCloseToPoint(){
+/**  public function getCloseToPoint(){
     $this->generarDatosPrueba();
 
     $this->getJson('api/trip/closeToPoint/-42.780875/-65.038786')
@@ -77,7 +78,7 @@ class TripTest extends TestCase
             'name' => 'Recorrido 2',
           ]);
   }
-
+*/
   private function generarDatosPrueba(){
     /*-------Recorrido 1------------*/
     $trip = Trip::create(['name' => 'Recorrido 1','description' => 'Por la costanera']);
@@ -254,4 +255,36 @@ class TripTest extends TestCase
     /*-------------------------------*/
 
   }
+
+  public function testTripDistance(){
+
+    // Se crean dos nuevos puntos y se los incluye en un arreglo.
+    $point_1 = new GeoPoint(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '1']);
+    $point_2 = new GeoPoint(['latitude' => '-42.036735','longitude' => '-65.7672777', 'order' => '2']);
+    $points = array($point_1, $point_2);
+    //Control de metros o kilometros
+    $distancia = (new TripController)->tripDistance($points);
+    //var_dump ($distancia);
+    $this->assertTrue($distancia > 0);
+
+  }
+
+  public function testTripToDistance(){
+    $trips= (new TripController)->getToDistance(1.59);
+    $countstrip = count($trips);
+
+    //var_dump ($countstrip);
+    $this->assertTrue($countstrip > 0);
+
+
+  }
+
+  public function testTripIdDistance(){
+    //Control de metros o kilometros
+    $distancia = (new TripController)->tripIdDistance('1');
+    //var_dump ($distancia);
+    $this->assertTrue($distancia > 0.0);
+  }
+
+
 }

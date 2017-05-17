@@ -24,7 +24,7 @@
                                                 })
                                                 .when('/map', {
                                                     templateUrl: base_route + path.MAP_VIEW,
-                                                    controller: 'MapController'
+                                                    // controller: 'MapController'
                                                 })
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW

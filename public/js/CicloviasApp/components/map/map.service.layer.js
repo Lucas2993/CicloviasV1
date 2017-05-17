@@ -3,27 +3,39 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
+    
+        .factory('srvLayers', ['creatorStyle','srvZone','serviceTrip', srvLayers]);
 
-        .factory('srvLayers', ['creatorPoints','creatorStyle','serviceDrawZone','srvZone','serviceTrip', srvLayers]);
+        function srvLayers(creatorStyle, srvZone, serviceTrip){
 
-        function srvLayers(creatorPoints, creatorStyle, serviceDrawZone, srvZone, serviceTrip){
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // *************************** FUNCIONES PUBLICAS *******************************
             var service = {
                 getLayerTile: getLayerTile,
                 getLayerMarker: getLayerMarker,
-                getLayerZones: getLayerZones,
                 getGroupLayerZones: getGroupLayerZones,
                 getLayerTrips: getLayerTrips,
-                getLayerTripsOld: getLayerTripsOld,
+                getLayerTripsFinder: getLayerTripsFinder,
+                getLayerTripsRanking: getLayerTripsRanking,
                 getLayerJourney: getLayerJourney,
-                getVectorFeatures: getVectorFeatures
+                getTemporalLayer: getTemporalLayer
             };
-
-            var generateZone;
-            var getInfoTrips;
-            var getInfoTrips2;
 
             return service;
 
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // *************************** FUNCIONES PRIVADAS *******************************
+            var generateZone;
+
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // *************************** FUNCIONES PUBLICAS *******************************
             // crea y devuelve una capa del tipo Tile
             function getLayerTile () {
               var layer = new ol.layer.Tile({
@@ -33,8 +45,8 @@
               return layer;
             };
 
-            // crea y devuelve la capa de los marcadoresr
-            function getLayerMarker (centralitiesJson) {
+            // crea y devuelve la capa vacia
+            function getLayerMarker () {
                 var vectorPointsCentralities;
 
                 var centralitiesPoints = new ol.source.Vector({
@@ -48,27 +60,8 @@
                 return layerMarker;
             };
 
-            function getLayerZones (infoZoneJson) {
-                // recuperams solo los datos que nos interesan
-                var infoZones = srvZone.getDataZones(infoZoneJson);
-                // 1ro determinamos el estilo del texto, con su info de cada zona(por ahora va ser el mismo para todos)
-                var styleText = creatorStyle.getStyleText('NEW_ZONA_R');
-                // una vez creado el estilo de texto vamos a creaer el estilo del polygono de cada zona
-                var stylePolygon = creatorStyle.getStylePolygon("blue",styleText);
-                // creamos los dibujos de cada zona (polygon)
-                var vectorDrawsZone = serviceDrawZone.getVectorDraws(infoZones);
-
-                var layerZone = new ol.layer.Vector({
-                    source: new ol.source.Vector({
-                        features: vectorDrawsZone
-                    }),
-                    style: stylePolygon
-                });
-
-                return layerZone;
-            }
-
-            // recibe los datos obtenidos del servidor
+            // recibe los datos de las zonas obtenidos del servidor y devuelve una capa que
+            // con subcapas con las zonas
             function getGroupLayerZones(infoZoneJson) {
                 console.log("entro a la nueva funcion layer Group!!");
                 var groupLayerZones;
@@ -84,7 +77,6 @@
                     console.log('capa '+i+' : '+newLayer.getVisible());
                     vectorLayers.push(newLayer);
                  }
-                 console.log('paso generateZone()');
                  // creo un groupLayer que contendra todas las zonas
                  groupLayerZones = new ol.layer.Group({
                      layers: vectorLayers
@@ -93,40 +85,10 @@
                 return groupLayerZones;
             }
 
-            // crea la capa de una zona
-            function generateZone(infoZone) {
-                console.log('entro a genrateZone()');
-                 // crea el dibujo con los puntos
-                 var draw = new ol.Feature({
-                     geometry: new ol.geom.Polygon([
-                             infoZone.points
-                     ])
-                 });
-                 // crea el stylo del dibujo
-                var styleDraw = creatorStyle.getStylePolygon(infoZone.color, creatorStyle.getStyleText(infoZone.name));
-
-                 console.log('Nombre de las zonas: '+infoZone.name);
-                 console.log('Cantidad de puntos: '+infoZone.points.length);
-                 // crea la capa
-                 var vectorDraw = [];
-                 vectorDraw.push(draw);
-
-                 return new ol.layer.Vector({
-                    source: new ol.source.Vector({
-                    features: vectorDraw
-                    }),
-                    style: styleDraw,
-                    visible: false
-                 });
-
-              }
-
-              // crea y devuelve la capa de recorridos
+            // crea y devuelve una capa que contiene los recorridos recuperados del servidor
             function getLayerTrips(dataJsonTrips){
                 // recuperamos los datos q nos competen
-                var arrayCoord = getInfoTrips2(dataJsonTrips);
-
-                  var vectorSourceNew = serviceTrip.getSource2(arrayCoord);
+                  var vectorSourceNew = serviceTrip.getSourceTripId(dataJsonTrips);
                   var styleLayer = creatorStyle.getStyleTrip();
 
                   var vectorSourceVacio = new ol.source.Vector({
@@ -135,20 +97,15 @@
                   var layerTrips = new ol.layer.Vector({
                     source: vectorSourceVacio,
                     style: styleLayer
-                    // visible: false
                   });
-
-                  console.log("Capa de trayectos NUEVA visible: "+layerTrips.getVisible());
 
                   return layerTrips;
               }
 
-              function getLayerTripsOld(dataJsonTrips){
+              // crea y devuelve una capa que contiene los recorridos recuperados del servidor #2
+              function getLayerTripsFinder(dataJsonTrips){
                   // recuperamos los datos q nos competen
-                  var arrayCoord = getInfoTrips(dataJsonTrips);
-
-                    var vectorSourceNew = serviceTrip.getSource(arrayCoord);
-                    // var styleLayer = creatorStyle.getStyleTrip();
+                    var vectorSourceNew = serviceTrip.getSourceTripFinder(dataJsonTrips);
                     var styleLayer = creatorStyle.getStyleTripCloseToPoint();
 
                     var layerTrips = new ol.layer.Vector({
@@ -162,92 +119,26 @@
                     return layerTrips;
                 }
 
+                // crea la capa de tramos con su ponderacion
+                function getLayerTripsRanking(dataJsonTripsRanking){
+                    // recuperamos los datos q nos competen
+                      var vectorSourceTripsRanking = serviceTrip.getSourceTripsRanking(dataJsonTripsRanking);
+                      var styleLayer = creatorStyle.getStyleTripsRanking();
 
-              function getVectorFeatures(dataJsonTrips){
-                // recuperamos los datos q nos competen
-                var arrayCoord = getInfoTrips2(dataJsonTrips);
-                var vectorFeaturesTrip = serviceTrip.getFeatures(arrayCoord);
+                      var layerTripsRanking = new ol.layer.Vector({
+                        source: vectorSourceTripsRanking,
+                        style: styleLayer,
+                        visible: false
+                      });
 
-                return vectorFeaturesTrip;
-              }
+                      return layerTripsRanking;
+                }
 
-              // crea y devuelve un vector con los datos de las zonas
-              function getInfoTrips(dataJsonTrips) {
-                      var arrayPointsTrips = [];
-                      var arrayLontLat = [];
-                      var arrayInfoTrips = [];
-
-                      // obtenemos nada mas q los puntos de las zonas con sus datos
-                      for (var i = 0; i < dataJsonTrips.length; i++) {
-                          arrayPointsTrips.push((dataJsonTrips[i]).points);
-                      }
-
-                      var setPoints;
-                      var longLat;
-
-                      // rescatams solo los long y lat de cada punto de cada cjto de puntos
-                      for (var i = 0; i < arrayPointsTrips.length; i++) {
-                          setPoints = arrayPointsTrips[i];
-                          // por cada conjunto de puntos rescatams sus long y lat de cada punto
-                          for (var j = 0; j < setPoints.length; j++) {
-                              longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
-                              arrayLontLat.push(longLat);
-                          }
-                          // agregamos el cjot de puntos de cada recorrido al cjto de recorridos
-                          arrayInfoTrips.push(arrayLontLat);
-                          // reseteamos la variable auxiliar
-                          arrayLontLat = [];
-                      }
-                      return arrayInfoTrips;
-              };
-
-              // crea y devuelve un vector con los datos de las zonas
-              function getInfoTrips2(dataJsonTrips) {
-                      var arrayPointsTrips = [];
-                      var arrayLontLat = [];
-                      var arrayInfoTrips = [];
-
-                      // obtenemos nada mas q los puntos de las zonas con sus datos
-                      for (var i = 0; i < dataJsonTrips.length; i++) {
-                          arrayPointsTrips.push((dataJsonTrips[i]).points);
-                      }
-
-                      var setPoints;
-                      var longLat;
-                      var idAux;
-
-                      // rescatams solo los long y lat de cada punto de cada cjto de puntos
-                      for (var i = 0; i < arrayPointsTrips.length; i++) {
-                          setPoints = arrayPointsTrips[i];
-                          // por cada conjunto de puntos rescatams sus long y lat de cada punto
-                          for (var j = 0; j < setPoints.length; j++) {
-                              longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
-                              arrayLontLat.push(longLat);
-                          }
-                          // agregamos el cjot de puntos de cada recorrido al cjto de recorridos
-                          var dataTrip = new Object();
-                          idAux = i+1;
-                          dataTrip.id = idAux;
-                          dataTrip.points = arrayLontLat;
-
-                          arrayInfoTrips.push(dataTrip);
-                          console.log("id guardado: "+i+" cant de puntos: "+(dataTrip.points).length);
-                          // reseteamos la variable auxiliar
-                          arrayLontLat = [];
-                      }
-                      return arrayInfoTrips;
-              };
-
+              // crea y devuelve una capa con los trayectos del servidor
               function getLayerJourney(dataJsonJourney){
                       // recuperamos los datos q nos competen
-                    //   var arrayCoord = getInfoTrips2(dataJsonTrips);
-
-                        var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
-                        // var styleLayer = creatorStyle.getStyleTrip();
+                      var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
                         var styleLayer = creatorStyle.getStyleJourney();
-
-                        // var vectorSourceVacio = new ol.source.Vector({
-                        // });
 
                         var layerJournies = new ol.layer.Vector({
                           source: vectorSourceJourney,
@@ -255,10 +146,51 @@
                           visible: false
                         });
 
-                        console.log("Capa de trayectos NUEVA visible: "+layerJournies.getVisible());
-
                         return layerJournies;
               }
+
+              function getTemporalLayer(){
+                  var features = new ol.Collection();
+                  var temporalLayer = new ol.layer.Vector({
+                      source: new ol.source.Vector({features: features}),
+                      style: creatorStyle.getStyleTemporalEditCentrality()
+                    });
+
+                    return temporalLayer;
+              }
+
+              // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+              // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+              // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+              // *************************** FUNCIONES PRIVADAS *******************************
+              // crea la capa de una zona a partir de los datos recibidos
+              function generateZone(infoZone) {
+                   // crea el dibujo con los puntos
+                   var draw = new ol.Feature({
+                       geometry: new ol.geom.Polygon([
+                               infoZone.points
+                       ])
+                   });
+                   // crea el stylo del dibujo
+                  var styleDraw = creatorStyle.getStylePolygon(infoZone.color, creatorStyle.getStyleText(infoZone.name));
+
+                   console.log('Nombre de las zonas: '+infoZone.name+' Cantidad de puntos: '+infoZone.points.length);
+                   // crea la capa
+                   var vectorDraw = [];
+                   vectorDraw.push(draw);
+
+                   return new ol.layer.Vector({
+                      source: new ol.source.Vector({
+                      features: vectorDraw
+                      }),
+                      style: styleDraw,
+                      visible: false
+                   });
+                }
+
+                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         }
 
 })()
