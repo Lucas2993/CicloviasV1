@@ -106,9 +106,13 @@ class CicloviasHelper {
   * Función que devuelve el punto normalizado del punto representado por los valores (latitud y longitud)
   * pasados como parámetro.
   */
-  // public function normalizeGeoPoint($lat, $long){
-  //   $qry_lat_min;
-  //   $qry_lat_max;
-  //
-  // }
+  public function normalizeGeoPoint($lat, $long){
+    $qry_lat_min;
+    $qry_lat_max;
+    $qry_long_min;
+    $qry_long_max;
+
+    
+
+  }
 }//fin de la clase

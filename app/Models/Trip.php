@@ -9,14 +9,15 @@ class Trip extends Model{
   protected $table = 'trips';
 
   /**
- * The attributes that are mass assignable.
- *
- */
- protected $fillable = [
-   'name', 'description','distance','points'
- ];
+   * The attributes that are mass assignable.
+   *
+   */
+   protected $fillable = [
+     'name', 'description','distance','points'
+   ];
 
   public function geopoints(){
       return $this->belongsToMany('App\Models\GeoPoint');
   }
+  
 }

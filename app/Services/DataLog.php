@@ -22,6 +22,12 @@ class DataLog {
       DB::transaction(function (){
         //Se registra el log en la tabla "Datalog"
         $log_id = $this->generateLogID();
+        $id_datalog = DB::table('datalogs')->insertGetId(
+          [
+            'datalog' => $log_id,
+            'estado' => 'GEN'
+          ]
+        );
         while (($linea = fgetcsv($arch, 500)) !== false) {
           $newTrip = new Trip();
           $newTrip->name = $linea[0];
@@ -38,7 +44,7 @@ class DataLog {
             $points[]=$point;
           }
           $newTrip->points = $points;
-          $this->registerTrip($newTrip);
+          $this->registerTrip($newTrip, $id_datalog);
         }
       });
       $exito = true;
@@ -49,15 +55,28 @@ class DataLog {
     return $exito;
   }
 
-  // private function registerTrip($trip){
-  //
-  // }
+  private function registerTrip($trip, $id_log){
+    //Se calcula distancia del recorrido a guardar
+    $distance = $this->clvHelper->tripDistance($trip->points);
+
+    $trip->distance = $distance;
+
+    //Se guarda el recorrido en la bd y luego se recupera su id
+    $trip->save();
+    $trip_id = $trip->getKey();
+
+    //No se dispone de un Model de Datalog por eso se utiliza
+    //DB:table() para actualizar el id del datalog del recorrido.
+    DB::table('trips')->where('id', '=', $trip_id)
+	       ->update(array('datalog_id' => $id_log));
+
+  }
 
   private function generateLogID(){
     $date = getdate();
     $suma = $date[hours] + $date[minutes] + $date[seconds];
     $result = $date[year]."_".$date[mon]."_".$date[mday]."_".$Suma;
-    return result;
+    return $result;
   }
 
 
