@@ -279,7 +279,7 @@ class TripController extends Controller
 
     public function generateTrips($quantity, $max_distance_km){
         ini_set('max_execution_time', 900);
-        $file = fopen("/home/lucas/Tempo/archivo.csv", "w");
+        // $file = fopen("/home/lucas/Tempo/archivo.csv", "w");
         $again = false;
         $day_times = ['Morning', 'Afternoon', 'Evening'];
         //   El procedimiento se repite una cantidad n de veces.
@@ -434,8 +434,8 @@ class TripController extends Controller
                 $point_to_add->longitude);
             }
             if(count($new_trip_points) > $min_distance_km && !$again){
-                $linea_csv = "Recorrido ".$k.",Recorrido generado ".$k.",".count($new_trip_points);
-                fwrite($file, $linea_csv . PHP_EOL);
+                // $linea_csv = "Recorrido ".$k.",Recorrido generado ".$k.",".count($new_trip_points);
+                // fwrite($file, $linea_csv . PHP_EOL);
                 $name = Name::all()->random(1)->name;
                 $new_trip = Trip::create(['name' => 'Recorrido '.$k,
                                         'description' => 'Recorrido generado '.$k,
@@ -445,10 +445,8 @@ class TripController extends Controller
                                     ]);
                 $order = 1;
                 foreach($new_trip_points as $new_trip_point){
-                    $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
-                    fwrite($file, $linea_csv . PHP_EOL);
-                    // $point_of_trip = GeoPoint::create(['latitude' => $new_trip_point->latitude,'longitude' => $new_trip_point->longitude, 'order' => $order]);
-                    // $new_trip->geopoints()->save($new_trip_point);
+                    // $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
+                    // fwrite($file, $linea_csv . PHP_EOL);
                     $new_trippoint = TripPoint::create(['order' => $order]);
                     $order++;
                     $new_trip->trippoint()->save($new_trippoint);
@@ -465,7 +463,7 @@ class TripController extends Controller
             WHERE gp.latitude >= -42.742411494255066
             */
         }
-        fclose($file);
+        // fclose($file);
         return "Ok";
     }
 
