@@ -18,6 +18,24 @@
         // capa de recorridos
         vm.layerTripsRanking
 
+        vm.list = [
+          {
+            "id": 1,
+            "turno": "Mañana",
+            "selected" : false
+          }
+          ,{
+            "id": 2,
+            "turno": "Tarde",
+            "selected" : false
+          },{
+            "id": 3,
+            "turno": "Noche",
+            "selected" : false
+          }
+        ];
+
+
         // ===============>>>>>> FLAGS <<<<<===============
         // indica si el menu se encuentra abierto o cerrado
         vm.openMenuRankingTrip = false;
@@ -26,6 +44,7 @@
         // permite la visualizacion de la capa de tramos ponderados (segun el estado del checkbox)
         vm.viewLayerTripsRanking = viewLayerTripsRanking;
 
+        vm.findTripsRanking = findTripsRanking;
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -135,15 +154,24 @@
             //     .catch(function(err) {
             //         console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS_RANKING");
             //     })
+
+            if(document.getElementById("rangeSuccess") != null){
+              alert("Min ponderación " +   document.getElementById("rangeSuccess").value +"\nMañana:"+vm.list[0].selected+ "\nTarde: "+vm.list[1].selected+"\nNoche: "+vm.list[2].selected );
+            }
+            // vm.map.removeLayer(vm.layerTripsRanking);
+
             vm.tripsRankingJson = dataServer.getTripsRanking();
             vm.layerTripsRanking = srvLayers.getLayerTripsRanking(vm.tripsRankingJson);
             vm.map.addLayer(vm.layerTripsRanking);
+            vm.viewLayerTripsRanking();
+
         }
 
         function enableEventClick(){
             adminMenu.disableAll();
             adminMenu.setActiveTripsRanking(true);
         }
+
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -153,7 +181,7 @@
         // ******************************************************************************
         // al crear el controlador ejecutamos esta funcion
         findTripsRanking();
-
+        vm.viewLayerTripsRanking();
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     } // fin Constructor

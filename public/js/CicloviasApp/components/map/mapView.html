@@ -13,15 +13,14 @@
                             <div>
                                 <label>
                                       <input type="checkbox" ng-click="checkAllCentralities()"> VER TODAS
-                                    </label>
+                                </label>
                             </div>
                             <div class="checkbox" ng-repeat="centrality in getCentralities()">
                                 <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
                                 <label>
                                       <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
-                                    </label>
+                                </label>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -137,8 +136,31 @@
                 <div class="panel-default" ng-controller="tripsRankingController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos ponderados" is-open="openMenuRankingTrip">
                         <form>
-                            <div>
-                                <label><input type="checkbox" ng-model="selectTripsRanking" ng-change= "viewLayerTripsRanking()" > Ver recorridos ponderados</label>
+                            <div class=" form-group">
+                                <!-- <div>
+                                    <label><input type="checkbox" ng-model="selectTripsRanking" ng-change= "viewLayerTripsRanking()" > Mostrar capa</label>
+                                </div> -->
+                                <div class="range range-primary">
+                                    <output>Ponderación min:</output>
+                                    <input type="range" name="range"   min="1" max="100" value="1" onchange="rangeSuccess.value=value">
+                                    <output id="rangeSuccess">1</output>
+                                </div>
+                                <!-- </div> -->
+                                <br>
+                                <div>
+                                    <label label-primary>Filtro por turno:</label>
+                                </div>
+                                <div class="checkbox" ng-repeat="c in list">
+                                    <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
+                                    <label>
+                                        <input type="checkbox" ng-model="c.selected" ng-change= "" > [[c.turno]]
+                                  </label>
+                                </div>
+
+                                <button class="btn btn-block btn-primary" ng-disabled="" uib-tooltip="Filtrar" ng-click="findTripsRanking()">
+                                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+
                             </div>
                         </form>
                     </div>
@@ -167,6 +189,8 @@
                         </form>
                     </div>
                 </div>
+
+
 
             </uib-accordion>
 
