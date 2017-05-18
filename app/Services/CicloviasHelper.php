@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Trip;
+use App\Models\GeoPoint;
+use App\Models\TripPoint;
 
 class CicloviasHelper {
 
@@ -66,7 +68,13 @@ class CicloviasHelper {
     $Trips = Trip::all();
 
     foreach($Trips as $trip){
-      $points = $trip->geopoints()->get();
+      $trip_points = $trip->trippoint()->get();
+      $points = array();
+      foreach($trip_points as $trip_point){
+          $point = GeoPoint::find($trip_point->geo_point_id);
+          $point->order = $trip_point->order;
+          array_push($points, $point);
+      }
       $trip->points= $points;
       $kmt = $this->tripDistance($points);
       $kmr = round($kmt, 2);
@@ -89,7 +97,13 @@ class CicloviasHelper {
     //Busco recorrido por id
     $Trip = Trip::find($id);
 
-    $points = $Trip->geopoints()->get();
+    $trip_points = $Trip->trippoint()->get();
+    $points = array();
+    foreach($trip_points as $trip_point){
+        $point = GeoPoint::find($trip_point->geo_point_id);
+        $point->order = $trip_point->order;
+        array_push($points, $point);
+    }
     //saco el numero de elementos
     $longitud = count($points);
     $km=0;

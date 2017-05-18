@@ -20,12 +20,6 @@ class Update1TripsTable extends Migration
      */
     public function up()
     {
-      if (!Schema::hasColumns('trips',['distance'])){
-        Schema::table('trips', function (Blueprint $table) {
-          $table->double('distance', 10, 4);
-        });
-      }
-
       if(!Schema::hasColumns('trips',['datalog_id'])){
         Schema::table('trips', function (Blueprint $table){
           $table->unsignedInteger('datalog_id');

@@ -13,10 +13,14 @@ class Trip extends Model{
  *
  */
  protected $fillable = [
-   'name', 'description','distance','points'
+   'name', 'description', 'bicyclist', 'day_time', 'distance_km', 'points'
  ];
 
   public function geopoints(){
       return $this->belongsToMany('App\Models\GeoPoint');
+  }
+
+  public function trippoint(){
+    return $this->hasOne('App\Models\TripPoint');
   }
 }

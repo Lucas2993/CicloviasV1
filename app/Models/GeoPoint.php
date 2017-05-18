@@ -24,4 +24,11 @@ class GeoPoint extends Model
       return $this->belongsToMany('App\Models\Trip');
   }
 
+  public function roads(){
+      return $this->belongsToMany('App\Models\Road');
+  }
+
+  public function trippoint(){
+    return $this->hasOne('App\Models\TripPoint');
+  }
 }

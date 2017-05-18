@@ -17,6 +17,9 @@ class CreateTripsTable extends Migration
           $table->increments('id');
           $table->string('name', 100);
           $table->string('description', 200);
+          $table->string('bicyclist', 50);
+          $table->string('day_time', 50);
+          $table->double('distance_km', 5, 2);
           $table->timestamps();
         });
     }

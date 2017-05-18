@@ -20,9 +20,9 @@ class CreateJourneyGeopointTable extends Migration
             $table->timestamps();
             //Foreing key
             $table->foreign('geo_point_id')->references('id')
-                    ->on('geo_points');
+                    ->on('geo_points')->onDelete('cascade');;
             $table->foreign('journey_id')->references('id')
-                    ->on('journeys');
+                    ->on('journeys')->onDelete('cascade');;
         });
     }
 
