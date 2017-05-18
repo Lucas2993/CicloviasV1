@@ -31,6 +31,6 @@ class CreateZoneGeopointTable extends Migration
     */
     public function down()
     {
-        Schema::dropIfExists('zone_geopoint');
+        Schema::dropIfExists('geo_point_zone');
     }
 }

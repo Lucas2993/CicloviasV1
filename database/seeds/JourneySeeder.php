@@ -7,176 +7,176 @@ use App\Models\GeoPoint;
 class JourneySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    * Run the database seeds.
+    *
+    * @return void
+    */
     public function run()
     {
-      /*
-      ****Trayecto 1**********
-      */
-      $trayecto1 = Journey::create( [
-        'peso' => '5.0'
-      ]);
+        /*
+        ****Trayecto 1**********
+        */
+        $trayecto1 = Journey::create( [
+            'peso' => '5.0'
+        ]);
 
-      $puntos = array();
+        $puntos = array();
 
-      $punto1 = new Geopoint([
-          'latitude' => '-42.781552',
-          'longitude' => '-65.040751',
-          'order' => '1'
-      ]);
+        $punto1 = new Geopoint([
+            'latitude' => '-42.781552',
+            'longitude' => '-65.040751',
+            'order' => '1'
+        ]);
 
-      array_push($puntos, $punto1);
+        array_push($puntos, $punto1);
 
-      $punto2 = new Geopoint([
-          'latitude' => '-42.780304',
-          'longitude' => '-65.037001',
-          'order' => '2'
-      ]);
+        $punto2 = new Geopoint([
+            'latitude' => '-42.780304',
+            'longitude' => '-65.037001',
+            'order' => '2'
+        ]);
 
-      array_push($puntos, $punto2);
+        array_push($puntos, $punto2);
 
-      $punto3 = new Geopoint ([
-        'latitude' => '-42.780406',
-        'longitude' => '-65.037389',
-        'order' => '3'
-      ]);
+        $punto3 = new Geopoint ([
+            'latitude' => '-42.780406',
+            'longitude' => '-65.037389',
+            'order' => '3'
+        ]);
 
-      array_push($puntos, $punto3);
+        array_push($puntos, $punto3);
 
-      $punto4 = new Geopoint ([
-        'latitude' => '-42.779473',
-        'longitude' => '-65.034723',
-        'order' => '4'
-      ]);
+        $punto4 = new Geopoint ([
+            'latitude' => '-42.779473',
+            'longitude' => '-65.034723',
+            'order' => '4'
+        ]);
 
-      array_push($puntos, $punto4);
+        array_push($puntos, $punto4);
 
-      $punto5 = new Geopoint ([
-        'latitude' => '-42.781904',
-        'longitude' => '-65.033147',
-        'order' => '5'
-      ]);
+        $punto5 = new Geopoint ([
+            'latitude' => '-42.781904',
+            'longitude' => '-65.033147',
+            'order' => '5'
+        ]);
 
-      array_push($puntos, $punto5);
+        array_push($puntos, $punto5);
 
-      $punto6 = new Geopoint ([
-        'latitude' => '-42.779132',
-        'longitude' => '-65.025103',
-        'order' => '6'
-      ]);
+        $punto6 = new Geopoint ([
+            'latitude' => '-42.779132',
+            'longitude' => '-65.025103',
+            'order' => '6'
+        ]);
 
-      array_push($puntos, $punto6);
+        array_push($puntos, $punto6);
 
-      foreach ($puntos as $punto)
-      {
-        $trayecto1->points()->save($punto);
-      }
-      ///////////////////////////////////
+        foreach ($puntos as $punto)
+        {
+            $trayecto1->points()->save($punto);
+        }
+        ///////////////////////////////////
 
-      /*
-      ****Trayecto 2**********
-      */
-      $trayecto2 = Journey::create( [
-        'peso' => '4.0'
-      ]);
+        /*
+        ****Trayecto 2**********
+        */
+        $trayecto2 = Journey::create( [
+            'peso' => '4.0'
+        ]);
 
-      $puntos = array();
+        $puntos2 = array();
 
-      $punto1 = new Geopoint([
-          'latitude' => '-42.771879',
-          'longitude' => '-65.029648',
-          'order' => '1'
-      ]);
+        $punto7 = new Geopoint([
+            'latitude' => '-42.77195334434509',
+            'longitude' => '-65.02963721752167',
+            'order' => '1'
+        ]);
 
-      array_push($puntos, $punto1);
+        array_push($puntos2, $punto7);
 
-      $punto2 = new Geopoint([
-          'latitude' => '-42.769587',
-          'longitude' => '-65.031118',
-          'order' => '2'
-      ]);
+        $punto8 = new Geopoint([
+            'latitude' => ' -42.767661809921265',
+            'longitude' => '-65.03238379955292',
+            'order' => '2'
+        ]);
 
-      array_push($puntos, $punto2);
+        array_push($puntos2, $punto8);
 
-      $punto3 = new Geopoint ([
-        'latitude' => '-42.770485',
-        'longitude' => '-65.033811',
-        'order' => '3'
-      ]);
+        $punto9 = new Geopoint ([
+            'latitude' => '-42.76856303215027',
+            'longitude' => ' -65.03504455089569',
+            'order' => '3'
+        ]);
 
-      array_push($puntos, $punto3);
+        array_push($puntos2, $punto9);
 
-      $punto4 = new Geopoint ([
-        'latitude' => '-42.767043',
-        'longitude' => '-65.036000',
-        'order' => '4'
-      ]);
+        $punto10 = new Geopoint ([
+            'latitude' => '-42.766631841659546',
+            'longitude' => '-65.036181807518',
+            'order' => '4'
+        ]);
 
-      array_push($puntos, $punto4);
+        array_push($puntos2, $punto10);
 
-      foreach ($puntos as $punto)
-      {
-        $trayecto2->points()->save($punto);
-      }
-      ///////////////////////////////////
+        foreach ($puntos2 as $punto)
+        {
+            $trayecto2->points()->save($punto);
+        }
+        ///////////////////////////////////
 
-      /*
-      ****Trayecto 3**********
-      */
-      $trayecto3 = Journey::create( [
-        'peso' => '0'
-      ]);
+        /*
+        ****Trayecto 3**********
+        */
+        $trayecto3 = Journey::create( [
+            'peso' => '0'
+        ]);
 
-      $puntos = array();
+        $puntos3 = array();
 
-      $punto1 = new Geopoint([
-          'latitude' => '-42.768000',
-          'longitude' => '-65.037019',
-          'order' => '1'
-      ]);
+        $punto11 = new Geopoint([
+            'latitude' => '-42.768117785453796',
+            'longitude' => '-65.03694623708725',
+            'order' => '1'
+        ]);
 
-      array_push($puntos, $punto1);
+        array_push($puntos3, $punto11);
 
-      $punto2 = new Geopoint([
-          'latitude' => '-42.770957',
-          'longitude' => '-65.035158',
-          'order' => '2'
-      ]);
+        $punto12 = new Geopoint([
+            'latitude' => ' -42.783840894699104',
+            'longitude' => '-65.0270837545395',
+            'order' => '2'
+        ]);
 
-      array_push($puntos, $punto2);
+        array_push($puntos3, $punto12);
 
-      $punto3 = new Geopoint ([
-        'latitude' => '-42.770957',
-        'longitude' => '-65.035158',
-        'order' => '3'
-      ]);
+        $punto13 = new Geopoint ([
+            'latitude' =>  '-42.785664796829224',
+            'longitude' => '-65.03242671489716',
+            'order' => '3'
+        ]);
 
-      array_push($puntos, $punto3);
+        array_push($puntos3, $punto13);
 
-      $punto4 = new Geopoint ([
-        'latitude' => '-42.782815',
-        'longitude' => '-65.014988',
-        'order' => '4'
-      ]);
+        $punto14 = new Geopoint ([
+            'latitude' => '-42.782338857650764',
+            'longitude' => '-65.0344866514206',
+            'order' => '4'
+        ]);
 
-      array_push($puntos, $punto4);
+        array_push($puntos3, $punto14);
 
-      $punto5 = new Geopoint ([
-        'latitude' => '-42.785066',
-        'longitude' => '-65.005608',
-        'order' => '5'
-      ]);
+        $punto15 = new Geopoint ([
+            'latitude' => '-42.783025503158576',
+            'longitude' => '-65.03654658794403',
+            'order' => '5'
+        ]);
 
-      array_push($puntos, $punto5);
+        array_push($puntos3, $punto15);
 
-      foreach ($puntos as $punto)
-      {
-        $trayecto2->points()->save($punto);
-      }
-      ///////////////////////////////////
+        foreach ($puntos3 as $punto)
+        {
+            $trayecto3->points()->save($punto);
+        }
+        ///////////////////////////////////
 
     }
 }
