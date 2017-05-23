@@ -1,4 +1,4 @@
-<p align="center"><img src="http://www.madryn.unp.edu.ar/images/stories/logo_encabezado.png"></p>
+<p align="center"><img src="http://www.unp.edu.ar/images/universidad/logo.png"></p>
 <p>
 	<h1>Proyecto: Ciclovias</h1>
 </p>
