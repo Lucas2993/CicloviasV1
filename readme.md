@@ -3,7 +3,7 @@
 	<h1>Proyecto: Ciclovias</h1>
 </p>
 
-## Proposito
+## Propósito
 
 El propósito de este proyecto es la determinación y visualización de las alternativas más convenientes para la instalación de ciclovías en la ciudad de Puerto Madryn, considerando los lugares con mayor afluencia de personas (centralidades), las características de las calles y los recorridos con mayor tránsito ciclista.
 
@@ -19,4 +19,4 @@ El producto a desarrollar consiste en un sistema informático que, en base a dif
 ## License
 
 Este proyecto forma parte de un trabajo práctico integrador requerido por la asignatua "Ingenría de Software" de la Lic. en Informática, Facultad de Ingeniería, Universidad Nacional de la Patagonia "San Juan Bosco", sede Puerto Madryn, Chubut. 
-<a href="http://www.madryn.unp.edu.ar/index.php/facultad-ingenieria"></a>
+[UNPSJB](http://www.unp.edu.ar/).
