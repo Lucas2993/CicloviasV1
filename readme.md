@@ -1,4 +1,4 @@
-<p align="center"><img src=""></p>
+<p align="center"><img src="http://www.madryn.unp.edu.ar/images/stories/logo_encabezado.png"></p>
 <p>
 	<h1>Proyecto: Ciclovias</h1>
 </p>
@@ -18,5 +18,5 @@ El producto a desarrollar consiste en un sistema informático que, en base a dif
 
 ## License
 
-Este proyecto forma parte de un trabajo práctico integrador requerido por la asignatua "Ingenría de Software" de la Lic. en Informática, Facultad de Ingeniería, Universidad Nacional de la Patagonia "San Juan Bosco", sede Puerto Madryn, Chubut. 
-[UNPSJB](http://www.unp.edu.ar/).
+Este proyecto forma parte de un trabajo práctico integrador requerido por la asignatura "Ingeniería de Software" de la Lic. en Informática, Facultad de Ingeniería, Universidad Nacional de la Patagonia "San Juan Bosco", sede Puerto Madryn, Chubut. 
+[UNPSJB-FIPM](http://www.madryn.unp.edu.ar/index.php/facultad-ingenieria).
