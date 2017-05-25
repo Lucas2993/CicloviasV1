@@ -14,7 +14,7 @@ class JourneyController extends Controller
      */
     public function index()
     {
-      $journeys = Journey::with('points')->get();
+      $journeys = Journey::all();
 
       return $journeys;
     }

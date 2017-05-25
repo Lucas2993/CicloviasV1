@@ -3,15 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\Point;
 
-class Journey extends Model
-{
-  protected $table = 'journeys';
+class Journey extends Model{
 
-  protected $fillable = ['peso'];
+    use PostgisTrait;
+    
+    protected $table = 'journeys';
 
-  public function points(){
-    return $this->belongsToMany('App\Models\GeoPoint');
-  }
+    protected $fillable = ['peso'];
+
+    protected $postgisFields = ['geom'];
 
 }

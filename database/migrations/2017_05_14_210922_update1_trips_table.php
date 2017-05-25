@@ -35,12 +35,6 @@ class Update1TripsTable extends Migration
      */
     public function down()
     {
-      if(Schema::hasColumns('trips',['distance'])){
-        Schema::table('trips', function (Blueprint $table) {
-          $table->dropColumn('distance');
-        });
-      }
-
       if(Schema::hasColumns('trips',['datalog_id'])){
         Schema::table('trips', function (Blueprint $table) {
           $table->dropForeign('trips_datalog_id_foreign');

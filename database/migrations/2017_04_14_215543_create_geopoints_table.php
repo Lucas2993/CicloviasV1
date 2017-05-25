@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Phaza\LaravelPostgis\Schema\Blueprint;
 
 class CreateGeopointsTable extends Migration
 {
@@ -11,13 +11,10 @@ class CreateGeopointsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('geo_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('centrality_id')->unsigned()->nullable();
-            $table->double('latitude', 15, 8);
-            $table->double('longitude', 15, 8);
+            $table->point('geopoint');
             $table->integer('order');
             $table->foreign('centrality_id')
                   ->references('id')->on('centralities')

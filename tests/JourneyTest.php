@@ -4,103 +4,37 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\LineString;
+use Phaza\LaravelPostgis\Geometries\Point;
+use Phaza\LaravelPostgis\Geometries\Polygon;
+use Phaza\LaravelPostgis\PostgisConnection;
+
 use App\Models\Journey;
-use App\Models\GeoPoint;
 
 class JourneyTest extends TestCase
 {
+    public function testSave(){
+        $journey1 = new Journey();
+        $journey1->peso = '5.0';
 
-    use DatabaseMigrations;
+        $puntos = array();
 
-    /**
-    * Test de service GET "api/journey" que devuelve el listado completo de trayectos.
-    * Creado por JLDEVIA.
-    * @test
-    * @return void
-    */
-    public function getJourneys()
-    {
-        $this->crearDatosPrueba();
+        $punto1 = new Point(-42.781552,-65.040751);
+        array_push($puntos, $punto1);
+        $punto2 = new Point(-42.780304,-65.037001);
+        array_push($puntos, $punto2);
+        $punto3 = new Point(-42.780406,-65.037389);
+        array_push($puntos, $punto3);
+        $punto4 = new Point(-42.779473,-65.034723);
+        array_push($puntos, $punto4);
+        $punto5 = new Point(-42.781904,-65.033147);
+        array_push($puntos, $punto5);
+        $punto6 = new Point(-42.779132,-65.025103);
+        array_push($puntos, $punto6);
 
-        $this->json('GET', 'api/journey')
-              ->seeJson([
-                'id'=> 1,
-                'peso'=>'5.0',
-                'latitude'=> '-42.781552'
-              ]);
+        $journey1->geom = new LineString($puntos);
+        $journey1->save();
+        $this->assertTrue(true);
     }
-
-    /**
-    * Test de service GET "api/journey/{id}" que devuelve el trayecto con el id pasado como
-    * parámetro.
-    * Creado por JLDEVIA.
-    * @test
-    * @return void
-    */
-    public function showJourney()
-    {
-      $this->crearDatosPrueba();
-
-      $this->json('GET', 'api/journey/1')
-            ->seeJson([
-              'peso' => '5.0',
-              'latitude' => '-42.780304'
-            ]);
-    }
-
-    /**
-    * Test de service DELETE "api/journey/{id}" que elimina el trayecto pasado como parámetro.
-    * Creado por JLDEVIA.
-    * @test
-    * @return void
-    */
-    public function destroyJourney()
-    {
-      $this->crearDatosPrueba();
-
-      $response = $this->call('DELETE', 'api/journey/1');
-
-      $this->assertResponseOk();
-    }
-
-    /**
-    * Test de service PUT "api/journey/{id}" que actualiza el trayecto pasado como parámetro.
-    * Creado por JLDEVIA.
-    * @test
-    * @return void
-    */
-    public function updateJourney()
-    {
-      $this->crearDatosPrueba();
-
-      $this->json('PUT', 'api/journey/1', ['peso'=>'4.5']);
-      $this->assertResponseOk();
-    }
-
-    private function crearDatosPrueba()
-    {
-      /*
-       Se crean trayectos
-      */
-      $trayecto1 = Journey::create( [
-        'peso' => '5.0'
-      ]);
-
-      $punto1 = new Geopoint([
-          'latitude' => '-42.781552',
-          'longitude' => '-65.040751',
-          'order' => '1'
-      ]);
-
-      $punto2 = new Geopoint([
-          'latitude' => '-42.780304',
-          'longitude' => '-65.037001',
-          'order' => '2'
-      ]);
-
-      $trayecto1->points()->save($punto1);
-      $trayecto1->points()->save($punto2);
-
-    }
-
 }

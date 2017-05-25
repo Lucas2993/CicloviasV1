@@ -3,24 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 class Trip extends Model{
 
-  protected $table = 'trips';
+    use PostgisTrait;
 
-  /**
- * The attributes that are mass assignable.
- *
- */
- protected $fillable = [
-   'name', 'description', 'bicyclist', 'day_time', 'distance_km', 'points'
- ];
+    protected $table = 'trips';
 
-  public function geopoints(){
-      return $this->belongsToMany('App\Models\GeoPoint');
-  }
+    protected $fillable = [
+        'name', 'description', 'user', 'time', 'distance_km'
+    ];
 
-  public function trippoint(){
-    return $this->hasOne('App\Models\TripPoint');
-  }
+    protected $postgisFields = ['geom'];
 }

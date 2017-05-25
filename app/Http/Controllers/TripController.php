@@ -14,12 +14,12 @@ use App\Services\CicloviasHelper;
 
 class TripController extends Controller
 {
-  private $clvHelperService;
+    private $clvHelperService;
 
-  //Se declara contructor para inyectar service "CicloviasHelper"
-  function __construct (CicloviasHelper $helper){
-    $this->clvHelperService = $helper;
-  }
+    //Se declara contructor para inyectar service "CicloviasHelper"
+    function __construct (CicloviasHelper $helper){
+        $this->clvHelperService = $helper;
+    }
 
     /**
     * Display a listing of the resource.
@@ -29,16 +29,6 @@ class TripController extends Controller
     public function index() {
         $Trips = Trip::all();
         // Se obtienen los puntos correspodientes.
-        foreach($Trips as $trip){
-            $trip_points = $trip->trippoint()->get();
-            $points = array();
-            foreach($trip_points as $trip_point){
-                $point = GeoPoint::find($trip_point->geo_point_id);
-                $point->order = $trip_point->order;
-                array_push($points, $point);
-            }
-            $trip->points = $points;
-        }
         return $Trips;
     }
 
@@ -89,194 +79,106 @@ class TripController extends Controller
         Trip::destroy($id);
     }
 
-  /**
-  * Devuelve los recorridos cercanos al punto pasado como parámetro.
-  *
-  * @param  $point(latitude, longitude)
-  * @return Response
-  */
-  public function getCloseToPoint($latitude, $longitude){
-      $result = array();
+    /**
+    * Devuelve los recorridos cercanos al punto pasado como parámetro.
+    *
+    * @param  $point(latitude, longitude)
+    * @return Response
+    */
 
-      $lat = $latitude;
-      $long = $longitude;
+    // TODO Para corregir...
+    public function getCloseToPoint($latitude, $longitude){
+        $result = array();
 
-      //Constantes utilizadas para acotar la busqueda de recorridos.
-      $min_lat = $lat + 0.0035;
-      $max_lat = $lat - 0.0035;
-      $min_long = $long + 0.0046;
-      $max_long = $long - 0.0046;
+        $lat = $latitude;
+        $long = $longitude;
 
-    //   $trips = Trip::with(['trips_points' => function($query) use ($min_lat, $max_lat, $min_long, $max_long){
-    //       $query->join('geopoints', 'trip_points.geo_point_id', '=', 'geopoints.id')
-    //       ->where('geopoints.latitude', '>=', $max_lat)
-    //       ->where('geopoints.latitude', '<=', $min_lat)
-    //       ->where('geopoints.longitude', '>=', $max_long)
-    //       ->where('geopoints.longitude', '<=', $min_long);
-    //   }])->get();
+        //Constantes utilizadas para acotar la busqueda de recorridos.
+        $min_lat = $lat + 0.0035;
+        $max_lat = $lat - 0.0035;
+        $min_long = $long + 0.0046;
+        $max_long = $long - 0.0046;
 
-    $trips = DB::table('trips')
-            ->join('trips_points', 'trips.id', '=', 'trips_points.trip_id')
-            ->join('geo_points', 'geo_points.id', '=', 'trips_points.geo_point_id')
-            ->select('trips.*')
-            ->where('geo_points.latitude', '>=', $max_lat)
-            ->where('geo_points.latitude', '<=', $min_lat)
-            ->where('geo_points.longitude', '>=', $max_long)
-            ->where('geo_points.longitude', '<=', $min_long)
-            ->get();
-    $aux = array();
-    foreach($trips as $trip){
-        array_push($aux, Trip::find($trip->id));
+        //   $trips = Trip::with(['trips_points' => function($query) use ($min_lat, $max_lat, $min_long, $max_long){
+        //       $query->join('geopoints', 'trip_points.geo_point_id', '=', 'geopoints.id')
+        //       ->where('geopoints.latitude', '>=', $max_lat)
+        //       ->where('geopoints.latitude', '<=', $min_lat)
+        //       ->where('geopoints.longitude', '>=', $max_long)
+        //       ->where('geopoints.longitude', '<=', $min_long);
+        //   }])->get();
+
+        $trips = DB::table('trips')
+        ->join('trips_points', 'trips.id', '=', 'trips_points.trip_id')
+        ->join('geo_points', 'geo_points.id', '=', 'trips_points.geo_point_id')
+        ->select('trips.*')
+        ->where('geo_points.latitude', '>=', $max_lat)
+        ->where('geo_points.latitude', '<=', $min_lat)
+        ->where('geo_points.longitude', '>=', $max_long)
+        ->where('geo_points.longitude', '<=', $min_long)
+        ->get();
+        $aux = array();
+        foreach($trips as $trip){
+            array_push($aux, Trip::find($trip->id));
+        }
+        $trips = $aux;
+
+        foreach($trips as $trip){
+            $trip_points = $trip->trippoint()->get();
+            $points = array();
+            foreach($trip_points as $trip_point){
+                $point = GeoPoint::find($trip_point->geo_point_id);
+                $point->order = $trip_point->order;
+                array_push($points, $point);
+            }
+            foreach($points as $point){
+                $distancia = $this->clvHelperService
+                ->CalculateDistance($lat, $long, $point->latitude,$point->longitude);
+                if ($distancia <= 0.3) {
+                    $result[] = $trip;
+                    $trip->points = $points;
+                    unset($trip->geopoints);
+                    break;
+                    $trip_points = $trip->trippoint()->get();
+                    $points = array();
+                    foreach($trip_points as $trip_point){
+                        $point = GeoPoint::find($trip_point->geo_point_id);
+                        $point->order = $trip_point->order;
+                        array_push($points, $point);
+                    }
+                    $trip->geopoints = $points;
+
+                    foreach($trips as $trip){
+                        // $points = $trip->geopoints()->get();
+                        $trip_points = $trip->trippoint()->get();
+                        $points = array();
+                        foreach($trip_points as $trip_point){
+                            $point = GeoPoint::find($trip_point->geo_point_id);
+                            $point->order = $trip_point->order;
+                            array_push($points, $point);
+                        }
+
+                        foreach( $points as $point){
+                            $distancia = $this->CalculateDistance($lat, $long, $point->latitude, $point->longitude);
+                            if ($distancia <= 0.3) {
+                                $result[] = $trip;
+                                $trip->points = $trip->geopoints;
+                                unset($trip->geopoints);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
     }
-    $trips = $aux;
 
-      foreach($trips as $trip){
-          $trip_points = $trip->trippoint()->get();
-          $points = array();
-          foreach($trip_points as $trip_point){
-              $point = GeoPoint::find($trip_point->geo_point_id);
-              $point->order = $trip_point->order;
-              array_push($points, $point);
-          }
-          foreach($points as $point){
-              $distancia = $this->clvHelperService
-              ->CalculateDistance($lat, $long, $point->latitude,$point->longitude);
-              if ($distancia <= 0.3) {
-                  $result[] = $trip;
-                  $trip->points = $points;
-                  unset($trip->geopoints);
-                  break;
-                  $trip_points = $trip->trippoint()->get();
-                  $points = array();
-                  foreach($trip_points as $trip_point){
-                      $point = GeoPoint::find($trip_point->geo_point_id);
-                      $point->order = $trip_point->order;
-                      array_push($points, $point);
-                  }
-                  $trip->geopoints = $points;
-
-                  foreach($trips as $trip){
-                      // $points = $trip->geopoints()->get();
-                      $trip_points = $trip->trippoint()->get();
-                      $points = array();
-                      foreach($trip_points as $trip_point){
-                          $point = GeoPoint::find($trip_point->geo_point_id);
-                          $point->order = $trip_point->order;
-                          array_push($points, $point);
-                      }
-
-                      foreach( $points as $point){
-                          $distancia = $this->CalculateDistance($lat, $long, $point->latitude, $point->longitude);
-                          if ($distancia <= 0.3) {
-                              $result[] = $trip;
-                              $trip->points = $trip->geopoints;
-                              unset($trip->geopoints);
-                              break;
-                          }
-                      }
-                  }
-              }
-          }
-      }
-      return $result;
-  }
-
-/**
-* Funcionalidad movida a la clase Services\CicloviasHelper.
-*/
-//   private function calculateDistance($lat1, $long1, $lat2, $long2){
-//     $degtorad = 0.01745329;
-//     $radtodeg = 57.29577951;
-//
-//     $dlong = ($long1 - $long2);
-//     $dvalue = (sin($lat1 * $degtorad) * sin($lat2 * $degtorad))
-// 			       + (cos($lat1 * $degtorad) * cos($lat2 * $degtorad)
-// 			        * cos($dlong * $degtorad));
-//
-//     $dd = acos($dvalue) * $radtodeg;
-//
-//     $miles = ($dd * 69.16);
-//     $km = ($dd * 111.302);
-//
-//     return $km;
-//   }
-//
-// /**
-// *Funcion que retorna los Recorridos que estan dentro de un rango de una determinada Distancia.
-// *
-// *@param int $long
-// *@param array $result
-// */
-// public function getToDistance($long){
-//   //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
-//   $longMin= $long - 0.05;
-//   $longMax= $long + 0.05;
-//
-//   $result = array();
-//   $Trips = Trip::all();
-//
-//   foreach($Trips as $trip){
-//     $points = $trip->geopoints()->get();
-//     $trip->points= $points;
-//     $kmt = $this->tripDistance($points);
-//     $kmr = round($kmt, 2);
-//       if($kmr >= $longMin && $kmr <= $longMax){
-//         $result[] = $trip;
-//
-//       }
-//   }
-//
-//   return $result;
-// }
-//
-//
-//   /**
-//   * Funcion que retorna el largo en kilometros de un Recorrido.
-//   *
-//   * @param $trip
-//   * @return int $km
-//   */
-// public function tripDistance($trip){
-//   //saco el numero de elementos
-//   $longitud = count($trip);
-//   $km=0;
-//   //Recorro todos los elementos
-//   for($i=1; $i<$longitud; $i++){
-//     $j= $i - 1;
-//     //Calculo la distancia entre los puntos del recorrido
-//     $km += $this->CalculateDistance($trip[$j]->latitude, $trip[$j]->longitude, $trip[$i]->latitude, $trip[$i]->longitude);
-//     }
-//
-//   return $km;
-// }
-//
-// /**
-// * Funcion que retorna el largo en kilometros de un Recorrido.
-// *
-// * @param $id
-// * @return int $km
-// */
-// public function tripIdDistance($id){
-// //Busco recorrido por id
-// $Trip = Trip::find($id);
-//
-// $points = $Trip->geopoints()->get();
-// //saco el numero de elementos
-// $longitud = count($points);
-// $km=0;
-// //Recorro todos los elementos
-// for($i=1; $i<$longitud; $i++){
-//   $j= $i - 1;
-//   //Calculo la distancia entre los puntos del recorrido
-//   $km +=  $this->CalculateDistance($points[$j]->latitude, $points[$j]->longitude, $points[$i]->latitude, $points[$i]->longitude);
-//   }
-// return $km;
-// }
-
+    // TODO Para corregir...
     public function getToDistance($long){
         return $this->clvHelperService->getToDistance($long);
     }
 
+    // TODO Para corregir...
     public function generateTrips($quantity, $max_distance_km){
         ini_set('max_execution_time', 900);
         // $file = fopen("/home/lucas/Tempo/archivo.csv", "w");
@@ -438,53 +340,55 @@ class TripController extends Controller
                 // fwrite($file, $linea_csv . PHP_EOL);
                 $name = Name::all()->random(1)->name;
                 $new_trip = Trip::create(['name' => 'Recorrido '.$k,
-                                        'description' => 'Recorrido generado '.$k,
-                                        'distance_km' => $distance_completed,
-                                        'bicyclist' => $name,
-                                        'day_time' => $day_times[rand(0, count($day_times)-1)]
-                                    ]);
-                $order = 1;
-                foreach($new_trip_points as $new_trip_point){
-                    // $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
-                    // fwrite($file, $linea_csv . PHP_EOL);
-                    $new_trippoint = TripPoint::create(['order' => $order]);
-                    $order++;
-                    $new_trip->trippoint()->save($new_trippoint);
-                    $new_trip_point->trippoint()->save($new_trippoint);
-                }
+                'description' => 'Recorrido generado '.$k,
+                'distance_km' => $distance_completed,
+                'bicyclist' => $name,
+                'day_time' => $day_times[rand(0, count($day_times)-1)]
+            ]);
+            $order = 1;
+            foreach($new_trip_points as $new_trip_point){
+                // $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
+                // fwrite($file, $linea_csv . PHP_EOL);
+                $new_trippoint = TripPoint::create(['order' => $order]);
+                $order++;
+                $new_trip->trippoint()->save($new_trippoint);
+                $new_trip_point->trippoint()->save($new_trippoint);
             }
-            /*
-            SELECT r.*
-            FROM roads r
-            JOIN geo_point_road gpr
-            ON gpr.road_id = r.id
-            JOIN geo_points gp
-            ON gpr.geo_point_id = gp.id
-            WHERE gp.latitude >= -42.742411494255066
-            */
         }
-        // fclose($file);
-        return "Ok";
+        /*
+        SELECT r.*
+        FROM roads r
+        JOIN geo_point_road gpr
+        ON gpr.road_id = r.id
+        JOIN geo_points gp
+        ON gpr.geo_point_id = gp.id
+        WHERE gp.latitude >= -42.742411494255066
+        */
+    }
+    // fclose($file);
+    return "Ok";
+}
+
+/**
+* Funcion que retorna el largo en kilometros de un Recorrido.
+*
+* @param $trip
+* @return int $km
+*/
+
+// TODO Para corregir...
+public function tripDistance($trip){
+    //saco el numero de elementos
+    $longitud = count($trip);
+    $km=0;
+    //Recorro todos los elementos
+    for($i=1; $i<$longitud; $i++){
+        $j= $i - 1;
+        //Calculo la distancia entre los puntos del recorrido
+        $km += $this->CalculateDistance($trip[$j]->latitude, $trip[$j]->longitude, $trip[$i]->latitude, $trip[$i]->longitude);
     }
 
-    /**
-    * Funcion que retorna el largo en kilometros de un Recorrido.
-    *
-    * @param $trip
-    * @return int $km
-    */
-    public function tripDistance($trip){
-        //saco el numero de elementos
-        $longitud = count($trip);
-        $km=0;
-        //Recorro todos los elementos
-        for($i=1; $i<$longitud; $i++){
-            $j= $i - 1;
-            //Calculo la distancia entre los puntos del recorrido
-            $km += $this->CalculateDistance($trip[$j]->latitude, $trip[$j]->longitude, $trip[$i]->latitude, $trip[$i]->longitude);
-        }
-
-        return $km;
-    }
+    return $km;
+}
 
 }
