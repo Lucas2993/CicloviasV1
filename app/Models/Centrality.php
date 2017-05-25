@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 /**
 *Crontoller creado por JLDEVIA el 14/04/2017.
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 */
 class Centrality extends Model
 {
-  protected $table = 'centralities';
+    protected $table = 'centralities';
 
   /**
  * The attributes that are mass assignable.
@@ -23,4 +25,11 @@ class Centrality extends Model
   public function geopoint(){
     return $this->hasOne('App\Models\GeoPoint');
   }
+
+    // protected $fillable = [
+    //   'name', 'location'
+    // ];
+    // protected $postgisFields = [
+    //   'geom'
+    // ];
 }

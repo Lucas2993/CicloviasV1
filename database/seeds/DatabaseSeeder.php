@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder{
       Model::unguard();
 
       $this->call(CentralitySeeder::class);
-      $this->call(ZoneSeeder::class);
-      $this->call(TripSeeder::class);
-      $this->call(JourneySeeder::class);
-      $this->call(RoadSeeder::class);
-      $this->call(NamesSeeder::class);
+      // $this->call(ZoneSeeder::class);
+      // $this->call(TripSeeder::class);
+      // $this->call(JourneySeeder::class);
+      // $this->call(RoadSeeder::class);
+      // $this->call(NamesSeeder::class);
 
       Model::reguard();
     }

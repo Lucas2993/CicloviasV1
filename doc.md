@@ -35,3 +35,6 @@ DROP TABLE `geo_point_journey`, `geo_point_trip`, `geo_point_zone`, `zones`,`jou
 php artisan migrate:install
 php artisan migrate
 php artisan db:seed
+
+## postgis extencion
+sudo apt-get install postgis postgresql-9.3-postgis-scripts
