@@ -21,6 +21,10 @@ class CreateTripsTable extends Migration
             $table->date('time', 50);
             $table->double('distance_km', 5, 2);
             $table->linestring('geom');
+            $table->unsignedInteger('datalog_id')->nullable();
+            $table->foreign('datalog_id')
+                  ->references('id')->on('datalogs')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
