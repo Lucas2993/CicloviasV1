@@ -3,7 +3,7 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-    
+
         .factory('srvLayers', ['creatorStyle','srvZone','serviceTrip', srvLayers]);
 
         function srvLayers(creatorStyle, srvZone, serviceTrip){
@@ -106,7 +106,7 @@
               function getLayerTripsFinder(dataJsonTrips){
                   // recuperamos los datos q nos competen
                     var vectorSourceNew = serviceTrip.getSourceTripFinder(dataJsonTrips);
-                    var styleLayer = creatorStyle.getStyleTripCloseToPoint();
+                    var styleLayer = creatorStyle.getStyleTripCloseToPointViolet();
 
                     var layerTrips = new ol.layer.Vector({
                       source: vectorSourceNew,

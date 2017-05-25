@@ -20,7 +20,11 @@ class CreateTripsTable extends Migration
           $table->string('bicyclist', 50);
           $table->string('day_time', 50);
           $table->double('distance_km', 5, 2);
+          $table->unsignedInteger('datalog_id')->nullable();
           $table->timestamps();
+          $table->foreign('datalog_id')->references('id')
+                  ->on('datalogs')->onDelete('cascade');;
+                  //data 5 14
         });
     }
 
