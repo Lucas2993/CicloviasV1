@@ -10,26 +10,22 @@ use Phaza\LaravelPostgis\Geometries\Point;
 *Crontoller creado por JLDEVIA el 14/04/2017.
 *H.U: Capa de centralidades.
 */
-class Centrality extends Model
-{
+class Centrality extends Model{
+
+    use PostgisTrait;
+
     protected $table = 'centralities';
 
-  /**
- * The attributes that are mass assignable.
- *
- */
- protected $fillable = [
-   'name', 'location', 'point'
- ];
+    /**
+    * The attributes that are mass assignable.
+    *
+    */
+    protected $fillable = [
+        'name', 'location'
+    ];
 
-  public function geopoint(){
-    return $this->hasOne('App\Models\GeoPoint');
-  }
+    protected $postgisFields = [
+        'geom'
+    ];
 
-    // protected $fillable = [
-    //   'name', 'location'
-    // ];
-    // protected $postgisFields = [
-    //   'geom'
-    // ];
 }

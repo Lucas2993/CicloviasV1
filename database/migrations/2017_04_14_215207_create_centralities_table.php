@@ -22,6 +22,7 @@ class CreateCentralitiesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('location')->nullable()->default(null);
+            $table->point('geom');
             $table->timestamps();
         });
 

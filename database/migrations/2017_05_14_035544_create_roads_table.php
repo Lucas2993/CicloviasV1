@@ -16,6 +16,7 @@ class CreateRoadsTable extends Migration
         Schema::create('roads', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
+            $table->linestring('geom');
             $table->timestamps();
         });
     }
