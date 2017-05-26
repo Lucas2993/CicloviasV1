@@ -1,7 +1,11 @@
 <?php
 use Illuminate\Database\Seeder;
+
+use Phaza\LaravelPostgis\Geometries\Point;
+use Phaza\LaravelPostgis\Geometries\LineString;
+use Phaza\LaravelPostgis\Geometries\Polygon;
+
 use App\Models\Zone;
-use App\Models\GeoPoint;
 
 class ZoneSeeder extends Seeder
 {
@@ -13,3547 +17,2184 @@ class ZoneSeeder extends Seeder
     public function run(){
         // -------------- Zona 1: Villa Padilla--------------
 
-        $point1 = GeoPoint::create(['latitude' => '-42.77448867008272', 'longitude' => '-65.0524833248167', 'order' => '1']);
-        $point2 = GeoPoint::create(['latitude' => '-42.77443837866366', 'longitude' => '-65.05233831789181', 'order' => '2']);
-        $point3 = GeoPoint::create(['latitude' => '-42.774296640681', 'longitude' => '-65.05192207258021', 'order' => '3']);
-        $point4 = GeoPoint::create(['latitude' => '-42.773995227442896', 'longitude' => '-65.05103610541477', 'order' => '4']);
-        $point5 = GeoPoint::create(['latitude' => '-42.77354210175733', 'longitude' => '-65.04970447245759', 'order' => '5']);
-        $point6 = GeoPoint::create(['latitude' => '-42.77308662913887', 'longitude' => '-65.04836596633982', 'order' => '6']);
-        $point7 = GeoPoint::create(['latitude' => '-42.77263870023327', 'longitude' => '-65.04704950462738', 'order' => '7']);
-        $point8 = GeoPoint::create(['latitude' => '-42.772402246744775', 'longitude' => '-65.04635456103527', 'order' => '8']);
-        $point9 = GeoPoint::create(['latitude' => '-42.772179204301324', 'longitude' => '-65.04569918002613', 'order' => '9']);
-        $point10 = GeoPoint::create(['latitude' => '-42.77185775831461', 'longitude' => '-65.04475445571944', 'order' => '10']);
-        $point11 = GeoPoint::create(['latitude' => '-42.77181584879875', 'longitude' => '-65.04462193783027', 'order' => '11']);
-        $point12 = GeoPoint::create(['latitude' => '-42.77173697508987', 'longitude' => '-65.04436302084125', 'order' => '12']);
-        $point13 = GeoPoint::create(['latitude' => '-42.771799336449504', 'longitude' => '-65.04432102750634', 'order' => '13']);
-        $point14 = GeoPoint::create(['latitude' => '-42.77270600691577', 'longitude' => '-65.04377276721976', 'order' => '14']);
-        $point15 = GeoPoint::create(['latitude' => '-42.773696328775706', 'longitude' => '-65.04313943061597', 'order' => '15']);
-        $point16 = GeoPoint::create(['latitude' => '-42.77428675003526', 'longitude' => '-65.04276475954411', 'order' => '16']);
-        $point17 = GeoPoint::create(['latitude' => '-42.77486241914522', 'longitude' => '-65.04239930856573', 'order' => '17']);
-        $point18 = GeoPoint::create(['latitude' => '-42.77515863560336', 'longitude' => '-65.04327094267677', 'order' => '18']);
-        $point19 = GeoPoint::create(['latitude' => '-42.77530875548922', 'longitude' => '-65.04371241751691', 'order' => '19']);
-        $point20 = GeoPoint::create(['latitude' => '-42.77547002330627', 'longitude' => '-65.0441870008746', 'order' => '20']);
-        $point21 = GeoPoint::create(['latitude' => '-42.77576204881282', 'longitude' => '-65.04504597831182', 'order' => '21']);
-        $point22 = GeoPoint::create(['latitude' => '-42.77605533160488', 'longitude' => '-65.0459088114245', 'order' => '22']);
-        $point23 = GeoPoint::create(['latitude' => '-42.77621701851709', 'longitude' => '-65.04638456824863', 'order' => '23']);
-        $point24 = GeoPoint::create(['latitude' => '-42.7766747542494', 'longitude' => '-65.04773112099346', 'order' => '24']);
-        $point25 = GeoPoint::create(['latitude' => '-42.77713341199106', 'longitude' => '-65.04908060740439', 'order' => '25']);
-        $point26 = GeoPoint::create(['latitude' => '-42.77660183169178', 'longitude' => '-65.04941680554067', 'order' => '26']);
-        $point27 = GeoPoint::create(['latitude' => '-42.77602783896248', 'longitude' => '-65.04977974194807', 'order' => '27']);
-        $point28 = GeoPoint::create(['latitude' => '-42.775973943325056', 'longitude' => '-65.04960456017177', 'order' => '28']);
-        $point29 = GeoPoint::create(['latitude' => '-42.77591853894509', 'longitude' => '-65.0497427777551', 'order' => '29']);
-        $point30 = GeoPoint::create(['latitude' => '-42.77580664053772', 'longitude' => '-65.04942753437675', 'order' => '30']);
-        $point31 = GeoPoint::create(['latitude' => '-42.77562810600011', 'longitude' => '-65.05006413992275', 'order' => '31']);
-        $point32 = GeoPoint::create(['latitude' => '-42.775132735522554', 'longitude' => '-65.05123517561515', 'order' => '32']);
-        $point33 = GeoPoint::create(['latitude' => '-42.775051179604674', 'longitude' => '-65.05140013146959', 'order' => '33']);
-        $point34 = GeoPoint::create(['latitude' => '-42.77448867008272', 'longitude' => '-65.0524833248167', 'order' => '34']);
-
-        $zone1 = Zone::create(['name' => 'Villa Padilla', 'description' => 'Barrio 1', 'color' => 'blue']);
-
-        $zone1->geopoints()->save($point1);
-        $zone1->geopoints()->save($point2);
-        $zone1->geopoints()->save($point3);
-        $zone1->geopoints()->save($point4);
-        $zone1->geopoints()->save($point5);
-        $zone1->geopoints()->save($point6);
-        $zone1->geopoints()->save($point7);
-        $zone1->geopoints()->save($point8);
-        $zone1->geopoints()->save($point9);
-        $zone1->geopoints()->save($point10);
-        $zone1->geopoints()->save($point11);
-        $zone1->geopoints()->save($point12);
-        $zone1->geopoints()->save($point13);
-        $zone1->geopoints()->save($point14);
-        $zone1->geopoints()->save($point15);
-        $zone1->geopoints()->save($point16);
-        $zone1->geopoints()->save($point17);
-        $zone1->geopoints()->save($point18);
-        $zone1->geopoints()->save($point19);
-        $zone1->geopoints()->save($point20);
-        $zone1->geopoints()->save($point21);
-        $zone1->geopoints()->save($point22);
-        $zone1->geopoints()->save($point23);
-        $zone1->geopoints()->save($point24);
-        $zone1->geopoints()->save($point25);
-        $zone1->geopoints()->save($point26);
-        $zone1->geopoints()->save($point27);
-        $zone1->geopoints()->save($point28);
-        $zone1->geopoints()->save($point29);
-        $zone1->geopoints()->save($point30);
-        $zone1->geopoints()->save($point31);
-        $zone1->geopoints()->save($point32);
-        $zone1->geopoints()->save($point33);
-        $zone1->geopoints()->save($point34);
+        $zone1 = new Zone();
+        $zone1->name = 'Villa Padilla';
+        $zone1->description = 'Barrio 1';
+        $zone1->color = 'yellow';
+        $zone1->geom = new Polygon([
+            new LineString([
+                new Point(-42.77448867008272, -65.0524833248167),
+                new Point(-42.77443837866366, -65.05233831789181),
+                new Point(-42.774296640681, -65.05192207258021),
+                new Point(-42.773995227442896, -65.05103610541477),
+                new Point(-42.77354210175733, -65.04970447245759),
+                new Point(-42.77308662913887, -65.04836596633982),
+                new Point(-42.77263870023327, -65.04704950462738),
+                new Point(-42.772402246744775, -65.04635456103527),
+                new Point(-42.772179204301324, -65.04569918002613),
+                new Point(-42.77185775831461, -65.04475445571944),
+                new Point(-42.77181584879875, -65.04462193783027),
+                new Point(-42.77173697508987, -65.04436302084125),
+                new Point(-42.771799336449504, -65.04432102750634),
+                new Point(-42.77270600691577, -65.04377276721976),
+                new Point(-42.773696328775706, -65.04313943061597),
+                new Point(-42.77428675003526, -65.04276475954411),
+                new Point(-42.77486241914522, -65.04239930856573),
+                new Point(-42.77515863560336, -65.04327094267677),
+                new Point(-42.77530875548922, -65.04371241751691),
+                new Point(-42.77547002330627, -65.0441870008746),
+                new Point(-42.77576204881282, -65.04504597831182),
+                new Point(-42.77605533160488, -65.0459088114245),
+                new Point(-42.77621701851709, -65.04638456824863),
+                new Point(-42.7766747542494, -65.04773112099346),
+                new Point(-42.77713341199106, -65.04908060740439),
+                new Point(-42.77660183169178, -65.04941680554067),
+                new Point(-42.77602783896248, -65.04977974194807),
+                new Point(-42.775973943325056, -65.04960456017177),
+                new Point(-42.77591853894509, -65.0497427777551),
+                new Point(-42.77580664053772, -65.04942753437675),
+                new Point(-42.77562810600011, -65.05006413992275),
+                new Point(-42.775132735522554, -65.05123517561515),
+                new Point(-42.775051179604674, -65.05140013146959),
+                new Point(-42.77448867008272, -65.0524833248167),
+            ])
+        ]);
+        $zone1->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 2: Roque Azolina--------------
 
-        $point35 = GeoPoint::create(['latitude' => '-42.77191064812362', 'longitude' => '-65.05806148137869', 'order' => '1']);
-        $point36 = GeoPoint::create(['latitude' => '-42.771443357021724', 'longitude' => '-65.05772201430015', 'order' => '2']);
-        $point37 = GeoPoint::create(['latitude' => '-42.76791340231921', 'longitude' => '-65.05520752716713', 'order' => '3']);
-        $point38 = GeoPoint::create(['latitude' => '-42.766434666961345', 'longitude' => '-65.05415123972921', 'order' => '4']);
-        $point39 = GeoPoint::create(['latitude' => '-42.76690531082454', 'longitude' => '-65.0538525087001', 'order' => '5']);
-        $point40 = GeoPoint::create(['latitude' => '-42.767114355489696', 'longitude' => '-65.05371982317286', 'order' => '6']);
-        $point41 = GeoPoint::create(['latitude' => '-42.76802731238333', 'longitude' => '-65.05314373496775', 'order' => '7']);
-        $point42 = GeoPoint::create(['latitude' => '-42.76856584966225', 'longitude' => '-65.0535207529725', 'order' => '8']);
-        $point43 = GeoPoint::create(['latitude' => '-42.76863935895307', 'longitude' => '-65.05357213403894', 'order' => '9']);
-        $point44 = GeoPoint::create(['latitude' => '-42.76932105913818', 'longitude' => '-65.0540500701579', 'order' => '10']);
-        $point45 = GeoPoint::create(['latitude' => '-42.76971618205377', 'longitude' => '-65.05432583477231', 'order' => '11']);
-        $point46 = GeoPoint::create(['latitude' => '-42.770650261343434', 'longitude' => '-65.05497970703888', 'order' => '12']);
-        $point47 = GeoPoint::create(['latitude' => '-42.771283011213995', 'longitude' => '-65.05542260680257', 'order' => '13']);
-        $point48 = GeoPoint::create(['latitude' => '-42.77161535367483', 'longitude' => '-65.05477594297273', 'order' => '14']);
-        $point49 = GeoPoint::create(['latitude' => '-42.77186966061711', 'longitude' => '-65.05428216505678', 'order' => '15']);
-        $point50 = GeoPoint::create(['latitude' => '-42.77211986042684', 'longitude' => '-65.05375360224265', 'order' => '16']);
-        $point51 = GeoPoint::create(['latitude' => '-42.77240333639219', 'longitude' => '-65.05318656649297', 'order' => '17']);
-        $point52 = GeoPoint::create(['latitude' => '-42.772632916720084', 'longitude' => '-65.05379911597689', 'order' => '18']);
-        $point53 = GeoPoint::create(['latitude' => '-42.772691170947155', 'longitude' => '-65.05394035104536', 'order' => '19']);
-        $point54 = GeoPoint::create(['latitude' => '-42.773031308577934', 'longitude' => '-65.05475767042381', 'order' => '20']);
-        $point55 = GeoPoint::create(['latitude' => '-42.77311387032418', 'longitude' => '-65.05496520634638', 'order' => '21']);
-        $point56 = GeoPoint::create(['latitude' => '-42.773159551696494', 'longitude' => '-65.05507752384891', 'order' => '22']);
-        $point57 = GeoPoint::create(['latitude' => '-42.77305955559163', 'longitude' => '-65.05527148108834', 'order' => '23']);
-        $point58 = GeoPoint::create(['latitude' => '-42.77254473909872', 'longitude' => '-65.05635291423579', 'order' => '24']);
-        $point59 = GeoPoint::create(['latitude' => '-42.77224340967962', 'longitude' => '-65.05705447953142', 'order' => '25']);
-        $point60 = GeoPoint::create(['latitude' => '-42.77191064812362', 'longitude' => '-65.05806148137869', 'order' => '26']);
-
-        $zone2 = Zone::create(['name' => 'Roque Azolina', 'description' => 'Barrio 2', 'color' => 'blue']);
-
-        $zone2->geopoints()->save($point35);
-        $zone2->geopoints()->save($point36);
-        $zone2->geopoints()->save($point37);
-        $zone2->geopoints()->save($point38);
-        $zone2->geopoints()->save($point39);
-        $zone2->geopoints()->save($point40);
-        $zone2->geopoints()->save($point41);
-        $zone2->geopoints()->save($point42);
-        $zone2->geopoints()->save($point43);
-        $zone2->geopoints()->save($point44);
-        $zone2->geopoints()->save($point45);
-        $zone2->geopoints()->save($point46);
-        $zone2->geopoints()->save($point47);
-        $zone2->geopoints()->save($point48);
-        $zone2->geopoints()->save($point49);
-        $zone2->geopoints()->save($point50);
-        $zone2->geopoints()->save($point51);
-        $zone2->geopoints()->save($point52);
-        $zone2->geopoints()->save($point53);
-        $zone2->geopoints()->save($point54);
-        $zone2->geopoints()->save($point55);
-        $zone2->geopoints()->save($point56);
-        $zone2->geopoints()->save($point57);
-        $zone2->geopoints()->save($point58);
-        $zone2->geopoints()->save($point59);
-        $zone2->geopoints()->save($point60);
+        $zone2 = new Zone();
+        $zone2->name = 'Roque Azolina';
+        $zone2->description = 'Barrio 2';
+        $zone2->color = 'blue';
+        $zone2->geom = new Polygon([
+            new LineString([
+                new Point(-42.77191064812362, -65.05806148137869),
+                new Point(-42.771443357021724, -65.05772201430015),
+                new Point(-42.76791340231921, -65.05520752716713),
+                new Point(-42.766434666961345, -65.05415123972921),
+                new Point(-42.76690531082454, -65.0538525087001),
+                new Point(-42.767114355489696, -65.05371982317286),
+                new Point(-42.76802731238333, -65.05314373496775),
+                new Point(-42.76856584966225, -65.0535207529725),
+                new Point(-42.76863935895307, -65.05357213403894),
+                new Point(-42.76932105913818, -65.0540500701579),
+                new Point(-42.76971618205377, -65.05432583477231),
+                new Point(-42.770650261343434, -65.05497970703888),
+                new Point(-42.771283011213995, -65.05542260680257),
+                new Point(-42.77161535367483, -65.05477594297273),
+                new Point(-42.77186966061711, -65.05428216505678),
+                new Point(-42.77211986042684, -65.05375360224265),
+                new Point(-42.77240333639219, -65.05318656649297),
+                new Point(-42.772632916720084, -65.05379911597689),
+                new Point(-42.772691170947155, -65.05394035104536),
+                new Point(-42.773031308577934, -65.05475767042381),
+                new Point(-42.77311387032418, -65.05496520634638),
+                new Point(-42.773159551696494, -65.05507752384891),
+                new Point(-42.77305955559163, -65.05527148108834),
+                new Point(-42.77254473909872, -65.05635291423579),
+                new Point(-42.77224340967962, -65.05705447953142),
+                new Point(-42.77191064812362, -65.05806148137869),
+            ])
+        ]);
+        $zone2->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 3: Gobernador Roque Gonzalez--------------
 
-        $point61 = GeoPoint::create(['latitude' => '-42.78158017926267', 'longitude' => '-65.06626275453881', 'order' => '1']);
-        $point62 = GeoPoint::create(['latitude' => '-42.77788032338284', 'longitude' => '-65.06312456999065', 'order' => '2']);
-        $point63 = GeoPoint::create(['latitude' => '-42.777930111887684', 'longitude' => '-65.0630954009676', 'order' => '3']);
-        $point64 = GeoPoint::create(['latitude' => '-42.77911103822581', 'longitude' => '-65.06240582179352', 'order' => '4']);
-        $point65 = GeoPoint::create(['latitude' => '-42.78003254466071', 'longitude' => '-65.06186770360978', 'order' => '5']);
-        $point66 = GeoPoint::create(['latitude' => '-42.78011560932114', 'longitude' => '-65.06181506525785', 'order' => '6']);
-        $point67 = GeoPoint::create(['latitude' => '-42.78122361310167', 'longitude' => '-65.0611124103148', 'order' => '7']);
-        $point68 = GeoPoint::create(['latitude' => '-42.78238014810154', 'longitude' => '-65.06037882614905', 'order' => '8']);
-        $point69 = GeoPoint::create(['latitude' => '-42.78351363286771', 'longitude' => '-65.05965991031387', 'order' => '9']);
-        $point70 = GeoPoint::create(['latitude' => '-42.784269345257826', 'longitude' => '-65.05918063309039', 'order' => '10']);
-        $point71 = GeoPoint::create(['latitude' => '-42.784689613882925', 'longitude' => '-65.06041428159948', 'order' => '11']);
-        $point72 = GeoPoint::create(['latitude' => '-42.78563333236124', 'longitude' => '-65.05982712928218', 'order' => '12']);
-        $point73 = GeoPoint::create(['latitude' => '-42.78656657346059', 'longitude' => '-65.05924668248741', 'order' => '13']);
-        $point74 = GeoPoint::create(['latitude' => '-42.78750568189215', 'longitude' => '-65.05866246383623', 'order' => '14']);
-        $point75 = GeoPoint::create(['latitude' => '-42.78729060225671', 'longitude' => '-65.05801085468352', 'order' => '15']);
-        $point76 = GeoPoint::create(['latitude' => '-42.78708231196285', 'longitude' => '-65.0573964611809', 'order' => '16']);
-        $point77 = GeoPoint::create(['latitude' => '-42.787676756535916', 'longitude' => '-65.05701910790003', 'order' => '17']);
-        $point78 = GeoPoint::create(['latitude' => '-42.79236341387636', 'longitude' => '-65.05404755558695', 'order' => '18']);
-        $point79 = GeoPoint::create(['latitude' => '-42.79244773582229', 'longitude' => '-65.05505254577746', 'order' => '19']);
-        $point80 = GeoPoint::create(['latitude' => '-42.79257388346505', 'longitude' => '-65.05655835468258', 'order' => '20']);
-        $point81 = GeoPoint::create(['latitude' => '-42.792715705266744', 'longitude' => '-65.05811110224548', 'order' => '21']);
-        $point82 = GeoPoint::create(['latitude' => '-42.79280857675391', 'longitude' => '-65.05923050541429', 'order' => '22']);
-        $point83 = GeoPoint::create(['latitude' => '-42.79105516642903', 'longitude' => '-65.06034236487027', 'order' => '23']);
-        $point84 = GeoPoint::create(['latitude' => '-42.79046650536915', 'longitude' => '-65.06071552719955', 'order' => '24']);
-        $point85 = GeoPoint::create(['latitude' => '-42.78859071925797', 'longitude' => '-65.06185236472697', 'order' => '25']);
-        $point86 = GeoPoint::create(['latitude' => '-42.78673052348665', 'longitude' => '-65.06303857166408', 'order' => '26']);
-        $point87 = GeoPoint::create(['latitude' => '-42.78158017926267', 'longitude' => '-65.06626275453881', 'order' => '27']);
-
-        $zone3 = Zone::create(['name' => 'Gobernador Roque Gonzalez', 'description' => 'Barrio 3', 'color' => 'blue']);
-
-        $zone3->geopoints()->save($point61);
-        $zone3->geopoints()->save($point62);
-        $zone3->geopoints()->save($point63);
-        $zone3->geopoints()->save($point64);
-        $zone3->geopoints()->save($point65);
-        $zone3->geopoints()->save($point66);
-        $zone3->geopoints()->save($point67);
-        $zone3->geopoints()->save($point68);
-        $zone3->geopoints()->save($point69);
-        $zone3->geopoints()->save($point70);
-        $zone3->geopoints()->save($point71);
-        $zone3->geopoints()->save($point72);
-        $zone3->geopoints()->save($point73);
-        $zone3->geopoints()->save($point74);
-        $zone3->geopoints()->save($point75);
-        $zone3->geopoints()->save($point76);
-        $zone3->geopoints()->save($point77);
-        $zone3->geopoints()->save($point78);
-        $zone3->geopoints()->save($point79);
-        $zone3->geopoints()->save($point80);
-        $zone3->geopoints()->save($point81);
-        $zone3->geopoints()->save($point82);
-        $zone3->geopoints()->save($point83);
-        $zone3->geopoints()->save($point84);
-        $zone3->geopoints()->save($point85);
-        $zone3->geopoints()->save($point86);
-        $zone3->geopoints()->save($point87);
+        $zone3 = new Zone();
+        $zone3->name = 'Gobernador Roque Gonzalez';
+        $zone3->description = 'Barrio 3';
+        $zone3->color = 'orange';
+        $zone3->geom = new Polygon([
+            new LineString([
+                new Point(-42.78158017926267, -65.06626275453881),
+                new Point(-42.77788032338284, -65.06312456999065),
+                new Point(-42.777930111887684, -65.0630954009676),
+                new Point(-42.77911103822581, -65.06240582179352),
+                new Point(-42.78003254466071, -65.06186770360978),
+                new Point(-42.78011560932114, -65.06181506525785),
+                new Point(-42.78122361310167, -65.0611124103148),
+                new Point(-42.78238014810154, -65.06037882614905),
+                new Point(-42.78351363286771, -65.05965991031387),
+                new Point(-42.784269345257826, -65.05918063309039),
+                new Point(-42.784689613882925, -65.06041428159948),
+                new Point(-42.78563333236124, -65.05982712928218),
+                new Point(-42.78656657346059, -65.05924668248741),
+                new Point(-42.78750568189215, -65.05866246383623),
+                new Point(-42.78729060225671, -65.05801085468352),
+                new Point(-42.78708231196285, -65.0573964611809),
+                new Point(-42.787676756535916, -65.05701910790003),
+                new Point(-42.79236341387636, -65.05404755558695),
+                new Point(-42.79244773582229, -65.05505254577746),
+                new Point(-42.79257388346505, -65.05655835468258),
+                new Point(-42.792715705266744, -65.05811110224548),
+                new Point(-42.79280857675391, -65.05923050541429),
+                new Point(-42.79105516642903, -65.06034236487027),
+                new Point(-42.79046650536915, -65.06071552719955),
+                new Point(-42.78859071925797, -65.06185236472697),
+                new Point(-42.78673052348665, -65.06303857166408),
+                new Point(-42.78158017926267, -65.06626275453881),
+            ])
+        ]);
+        $zone3->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 4: Güemes--------------
 
-        $point88 = GeoPoint::create(['latitude' => '-42.771283011213995', 'longitude' => '-65.05542260680257', 'order' => '1']);
-        $point89 = GeoPoint::create(['latitude' => '-42.770650261343434', 'longitude' => '-65.05497970703888', 'order' => '2']);
-        $point90 = GeoPoint::create(['latitude' => '-42.76971618205377', 'longitude' => '-65.05432583477231', 'order' => '3']);
-        $point91 = GeoPoint::create(['latitude' => '-42.76932105913818', 'longitude' => '-65.0540500701579', 'order' => '4']);
-        $point92 = GeoPoint::create(['latitude' => '-42.76863935895307', 'longitude' => '-65.05357213403894', 'order' => '5']);
-        $point93 = GeoPoint::create(['latitude' => '-42.76856584966225', 'longitude' => '-65.0535207529725', 'order' => '6']);
-        $point94 = GeoPoint::create(['latitude' => '-42.76802731238333', 'longitude' => '-65.05314373496775', 'order' => '7']);
-        $point95 = GeoPoint::create(['latitude' => '-42.768542380333365', 'longitude' => '-65.05282597701844', 'order' => '8']);
-        $point96 = GeoPoint::create(['latitude' => '-42.76920136556086', 'longitude' => '-65.05241937089549', 'order' => '9']);
-        $point97 = GeoPoint::create(['latitude' => '-42.76985046014261', 'longitude' => '-65.05198116499758', 'order' => '10']);
-        $point98 = GeoPoint::create(['latitude' => '-42.77030970461749', 'longitude' => '-65.0517057356593', 'order' => '11']);
-        $point99 = GeoPoint::create(['latitude' => '-42.770676161424234', 'longitude' => '-65.05146827634239', 'order' => '12']);
-        $point100 = GeoPoint::create(['latitude' => '-42.771068350673715', 'longitude' => '-65.05123567852934', 'order' => '13']);
-        $point101 = GeoPoint::create(['latitude' => '-42.77190561898172', 'longitude' => '-65.05073586564308', 'order' => '14']);
-        $point102 = GeoPoint::create(['latitude' => '-42.7720064532769', 'longitude' => '-65.05067174408381', 'order' => '15']);
-        $point103 = GeoPoint::create(['latitude' => '-42.77258757062393', 'longitude' => '-65.05028030920562', 'order' => '16']);
-        $point104 = GeoPoint::create(['latitude' => '-42.773057879210995', 'longitude' => '-65.04999658178319', 'order' => '17']);
-        $point105 = GeoPoint::create(['latitude' => '-42.77354210175733', 'longitude' => '-65.04970447245759', 'order' => '18']);
-        $point106 = GeoPoint::create(['latitude' => '-42.773995227442896', 'longitude' => '-65.05103610541477', 'order' => '19']);
-        $point107 = GeoPoint::create(['latitude' => '-42.774296640681', 'longitude' => '-65.05192207258021', 'order' => '20']);
-        $point108 = GeoPoint::create(['latitude' => '-42.77443837866366', 'longitude' => '-65.05233831789181', 'order' => '21']);
-        $point109 = GeoPoint::create(['latitude' => '-42.77448867008272', 'longitude' => '-65.0524833248167', 'order' => '22']);
-        $point110 = GeoPoint::create(['latitude' => '-42.77379054136739', 'longitude' => '-65.05385368216655', 'order' => '23']);
-        $point111 = GeoPoint::create(['latitude' => '-42.773159551696494', 'longitude' => '-65.05507752384891', 'order' => '24']);
-        $point112 = GeoPoint::create(['latitude' => '-42.77311387032418', 'longitude' => '-65.05496520634638', 'order' => '25']);
-        $point113 = GeoPoint::create(['latitude' => '-42.773031308577934', 'longitude' => '-65.05475767042381', 'order' => '26']);
-        $point114 = GeoPoint::create(['latitude' => '-42.772691170947155', 'longitude' => '-65.05394035104536', 'order' => '27']);
-        $point115 = GeoPoint::create(['latitude' => '-42.772632916720084', 'longitude' => '-65.05379911597689', 'order' => '28']);
-        $point116 = GeoPoint::create(['latitude' => '-42.77240333639219', 'longitude' => '-65.05318656649297', 'order' => '29']);
-        $point117 = GeoPoint::create(['latitude' => '-42.77211986042684', 'longitude' => '-65.05375360224265', 'order' => '30']);
-        $point118 = GeoPoint::create(['latitude' => '-42.77186966061711', 'longitude' => '-65.05428216505678', 'order' => '31']);
-        $point119 = GeoPoint::create(['latitude' => '-42.77161535367483', 'longitude' => '-65.05477594297273', 'order' => '32']);
-        $point120 = GeoPoint::create(['latitude' => '-42.771283011213995', 'longitude' => '-65.05542260680257', 'order' => '33']);
-
-        $zone4 = Zone::create(['name' => 'Güemes', 'description' => 'Barrio 4', 'color' => 'blue']);
-
-        $zone4->geopoints()->save($point88);
-        $zone4->geopoints()->save($point89);
-        $zone4->geopoints()->save($point90);
-        $zone4->geopoints()->save($point91);
-        $zone4->geopoints()->save($point92);
-        $zone4->geopoints()->save($point93);
-        $zone4->geopoints()->save($point94);
-        $zone4->geopoints()->save($point95);
-        $zone4->geopoints()->save($point96);
-        $zone4->geopoints()->save($point97);
-        $zone4->geopoints()->save($point98);
-        $zone4->geopoints()->save($point99);
-        $zone4->geopoints()->save($point100);
-        $zone4->geopoints()->save($point101);
-        $zone4->geopoints()->save($point102);
-        $zone4->geopoints()->save($point103);
-        $zone4->geopoints()->save($point104);
-        $zone4->geopoints()->save($point105);
-        $zone4->geopoints()->save($point106);
-        $zone4->geopoints()->save($point107);
-        $zone4->geopoints()->save($point108);
-        $zone4->geopoints()->save($point109);
-        $zone4->geopoints()->save($point110);
-        $zone4->geopoints()->save($point111);
-        $zone4->geopoints()->save($point112);
-        $zone4->geopoints()->save($point113);
-        $zone4->geopoints()->save($point114);
-        $zone4->geopoints()->save($point115);
-        $zone4->geopoints()->save($point116);
-        $zone4->geopoints()->save($point117);
-        $zone4->geopoints()->save($point118);
-        $zone4->geopoints()->save($point119);
-        $zone4->geopoints()->save($point120);
+        $zone4 = new Zone();
+        $zone4->name = 'Güemes';
+        $zone4->description = 'Barrio 4';
+        $zone4->color = 'yellow';
+        $zone4->geom = new Polygon([
+            new LineString([
+                new Point(-42.771283011213995, -65.05542260680257),
+                new Point(-42.770650261343434, -65.05497970703888),
+                new Point(-42.76971618205377, -65.05432583477231),
+                new Point(-42.76932105913818, -65.0540500701579),
+                new Point(-42.76863935895307, -65.05357213403894),
+                new Point(-42.76856584966225, -65.0535207529725),
+                new Point(-42.76802731238333, -65.05314373496775),
+                new Point(-42.768542380333365, -65.05282597701844),
+                new Point(-42.76920136556086, -65.05241937089549),
+                new Point(-42.76985046014261, -65.05198116499758),
+                new Point(-42.77030970461749, -65.0517057356593),
+                new Point(-42.770676161424234, -65.05146827634239),
+                new Point(-42.771068350673715, -65.05123567852934),
+                new Point(-42.77190561898172, -65.05073586564308),
+                new Point(-42.7720064532769, -65.05067174408381),
+                new Point(-42.77258757062393, -65.05028030920562),
+                new Point(-42.773057879210995, -65.04999658178319),
+                new Point(-42.77354210175733, -65.04970447245759),
+                new Point(-42.773995227442896, -65.05103610541477),
+                new Point(-42.774296640681, -65.05192207258021),
+                new Point(-42.77443837866366, -65.05233831789181),
+                new Point(-42.77448867008272, -65.0524833248167),
+                new Point(-42.77379054136739, -65.05385368216655),
+                new Point(-42.773159551696494, -65.05507752384891),
+                new Point(-42.77311387032418, -65.05496520634638),
+                new Point(-42.773031308577934, -65.05475767042381),
+                new Point(-42.772691170947155, -65.05394035104536),
+                new Point(-42.772632916720084, -65.05379911597689),
+                new Point(-42.77240333639219, -65.05318656649297),
+                new Point(-42.77211986042684, -65.05375360224265),
+                new Point(-42.77186966061711, -65.05428216505678),
+                new Point(-42.77161535367483, -65.05477594297273),
+                new Point(-42.771283011213995, -65.05542260680257),
+            ])
+        ]);
+        $zone4->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 5: San Miguel--------------
 
-        $point121 = GeoPoint::create(['latitude' => '-42.78374044716758', 'longitude' => '-65.07262604397104', 'order' => '1']);
-        $point122 = GeoPoint::create(['latitude' => '-42.78158017926267', 'longitude' => '-65.06626275453881', 'order' => '2']);
-        $point123 = GeoPoint::create(['latitude' => '-42.78673052348665', 'longitude' => '-65.06303857166408', 'order' => '3']);
-        $point124 = GeoPoint::create(['latitude' => '-42.786774612297364', 'longitude' => '-65.06316765297295', 'order' => '4']);
-        $point125 = GeoPoint::create(['latitude' => '-42.78697954982994', 'longitude' => '-65.06378456104653', 'order' => '5']);
-        $point126 = GeoPoint::create(['latitude' => '-42.78718960032347', 'longitude' => '-65.06438227456184', 'order' => '6']);
-        $point127 = GeoPoint::create(['latitude' => '-42.78739621423671', 'longitude' => '-65.06498694505677', 'order' => '7']);
-        $point128 = GeoPoint::create(['latitude' => '-42.787607857291846', 'longitude' => '-65.06560636770129', 'order' => '8']);
-        $point129 = GeoPoint::create(['latitude' => '-42.787813633014736', 'longitude' => '-65.06621690552845', 'order' => '9']);
-        $point130 = GeoPoint::create(['latitude' => '-42.78801446341478', 'longitude' => '-65.06681260738699', 'order' => '10']);
-        $point131 = GeoPoint::create(['latitude' => '-42.788224849184445', 'longitude' => '-65.06743672389729', 'order' => '11']);
-        $point132 = GeoPoint::create(['latitude' => '-42.78842442229899', 'longitude' => '-65.0680291568136', 'order' => '12']);
-        $point133 = GeoPoint::create(['latitude' => '-42.78863514334478', 'longitude' => '-65.06865427915226', 'order' => '13']);
-        $point134 = GeoPoint::create(['latitude' => '-42.78883345917387', 'longitude' => '-65.06924277257409', 'order' => '14']);
-        $point135 = GeoPoint::create(['latitude' => '-42.78887486577554', 'longitude' => '-65.06935777228563', 'order' => '15']);
-        $point136 = GeoPoint::create(['latitude' => '-42.78374044716758', 'longitude' => '-65.07262604397104', 'order' => '16']);
-
-        $zone5 = Zone::create(['name' => 'San Miguel', 'description' => 'Barrio 5', 'color' => 'blue']);
-
-        $zone5->geopoints()->save($point121);
-        $zone5->geopoints()->save($point122);
-        $zone5->geopoints()->save($point123);
-        $zone5->geopoints()->save($point124);
-        $zone5->geopoints()->save($point125);
-        $zone5->geopoints()->save($point126);
-        $zone5->geopoints()->save($point127);
-        $zone5->geopoints()->save($point128);
-        $zone5->geopoints()->save($point129);
-        $zone5->geopoints()->save($point130);
-        $zone5->geopoints()->save($point131);
-        $zone5->geopoints()->save($point132);
-        $zone5->geopoints()->save($point133);
-        $zone5->geopoints()->save($point134);
-        $zone5->geopoints()->save($point135);
-        $zone5->geopoints()->save($point136);
+        $zone5 = new Zone();
+        $zone5->name = 'San Miguel';
+        $zone5->description = 'Barrio 5';
+        $zone5->color = 'orange';
+        $zone5->geom = new Polygon([
+            new LineString([
+                new Point(-42.78374044716758, -65.07262604397104),
+                new Point(-42.78158017926267, -65.06626275453881),
+                new Point(-42.78673052348665, -65.06303857166408),
+                new Point(-42.786774612297364, -65.06316765297295),
+                new Point(-42.78697954982994, -65.06378456104653),
+                new Point(-42.78718960032347, -65.06438227456184),
+                new Point(-42.78739621423671, -65.06498694505677),
+                new Point(-42.787607857291846, -65.06560636770129),
+                new Point(-42.787813633014736, -65.06621690552845),
+                new Point(-42.78801446341478, -65.06681260738699),
+                new Point(-42.788224849184445, -65.06743672389729),
+                new Point(-42.78842442229899, -65.0680291568136),
+                new Point(-42.78863514334478, -65.06865427915226),
+                new Point(-42.78883345917387, -65.06924277257409),
+                new Point(-42.78887486577554, -65.06935777228563),
+                new Point(-42.78374044716758, -65.07262604397104),
+            ])
+        ]);
+        $zone5->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 6: Barrancas del Golfo--------------
 
-        $point137 = GeoPoint::create(['latitude' => '-42.74647425420105', 'longitude' => '-65.03896591338781', 'order' => '1']);
-        $point138 = GeoPoint::create(['latitude' => '-42.74646763249754', 'longitude' => '-65.03891126337912', 'order' => '2']);
-        $point139 = GeoPoint::create(['latitude' => '-42.74643955312189', 'longitude' => '-65.03858654845018', 'order' => '3']);
-        $point140 = GeoPoint::create(['latitude' => '-42.74636386453625', 'longitude' => '-65.0377110586637', 'order' => '4']);
-        $point141 = GeoPoint::create(['latitude' => '-42.746300413529205', 'longitude' => '-65.0374828194403', 'order' => '5']);
-        $point142 = GeoPoint::create(['latitude' => '-42.74621684595456', 'longitude' => '-65.03682416948892', 'order' => '6']);
-        $point143 = GeoPoint::create(['latitude' => '-42.74621215208879', 'longitude' => '-65.03647967326849', 'order' => '7']);
-        $point144 = GeoPoint::create(['latitude' => '-42.74699938043485', 'longitude' => '-65.0362396155616', 'order' => '8']);
-        $point145 = GeoPoint::create(['latitude' => '-42.75405333868858', 'longitude' => '-65.03622050482237', 'order' => '9']);
-        $point146 = GeoPoint::create(['latitude' => '-42.75521842322971', 'longitude' => '-65.0359160740991', 'order' => '10']);
-        $point147 = GeoPoint::create(['latitude' => '-42.755705327985055', 'longitude' => '-65.03591691228942', 'order' => '11']);
-        $point148 = GeoPoint::create(['latitude' => '-42.756962948737225', 'longitude' => '-65.03601464528042', 'order' => '12']);
-        $point149 = GeoPoint::create(['latitude' => '-42.757937847895334', 'longitude' => '-65.03574533473144', 'order' => '13']);
-        $point150 = GeoPoint::create(['latitude' => '-42.75996316715913', 'longitude' => '-65.0350365609991', 'order' => '14']);
-        $point151 = GeoPoint::create(['latitude' => '-42.76022241942431', 'longitude' => '-65.03667614507887', 'order' => '15']);
-        $point152 = GeoPoint::create(['latitude' => '-42.760243122725136', 'longitude' => '-65.03670347008322', 'order' => '16']);
-        $point153 = GeoPoint::create(['latitude' => '-42.760257455779566', 'longitude' => '-65.03673766824816', 'order' => '17']);
-        $point154 = GeoPoint::create(['latitude' => '-42.760263909845', 'longitude' => '-65.03677597354567', 'order' => '18']);
-        $point155 = GeoPoint::create(['latitude' => '-42.760262233464374', 'longitude' => '-65.0368151170335', 'order' => '19']);
-        $point156 = GeoPoint::create(['latitude' => '-42.760252510456695', 'longitude' => '-65.03685216504552', 'order' => '20']);
-        $point157 = GeoPoint::create(['latitude' => '-42.76017891734682', 'longitude' => '-65.03714653748497', 'order' => '21']);
-        $point158 = GeoPoint::create(['latitude' => '-42.76009266756316', 'longitude' => '-65.03770636479793', 'order' => '22']);
-        $point159 = GeoPoint::create(['latitude' => '-42.76007573611875', 'longitude' => '-65.03779387186707', 'order' => '23']);
-        $point160 = GeoPoint::create(['latitude' => '-42.75999853879053', 'longitude' => '-65.03819243136296', 'order' => '24']);
-        $point161 = GeoPoint::create(['latitude' => '-42.75985587879853', 'longitude' => '-65.0389125206646', 'order' => '25']);
-        $point162 = GeoPoint::create(['latitude' => '-42.75948221355503', 'longitude' => '-65.03890631805623', 'order' => '26']);
-        $point163 = GeoPoint::create(['latitude' => '-42.758396505636966', 'longitude' => '-65.03888586621251', 'order' => '27']);
-        $point164 = GeoPoint::create(['latitude' => '-42.75715447522472', 'longitude' => '-65.03879810768626', 'order' => '28']);
-        $point165 = GeoPoint::create(['latitude' => '-42.75694702312117', 'longitude' => '-65.03880070607626', 'order' => '29']);
-        $point166 = GeoPoint::create(['latitude' => '-42.75635140508166', 'longitude' => '-65.03876156258845', 'order' => '30']);
-        $point167 = GeoPoint::create(['latitude' => '-42.756252917719394', 'longitude' => '-65.03875334832334', 'order' => '31']);
-        $point168 = GeoPoint::create(['latitude' => '-42.75557850979004', 'longitude' => '-65.03868076104185', 'order' => '32']);
-        $point169 = GeoPoint::create(['latitude' => '-42.754994877872065', 'longitude' => '-65.03865620206555', 'order' => '33']);
-        $point170 = GeoPoint::create(['latitude' => '-42.75420957736375', 'longitude' => '-65.0386061621036', 'order' => '34']);
-        $point171 = GeoPoint::create(['latitude' => '-42.75320894576288', 'longitude' => '-65.03851890649157', 'order' => '35']);
-        $point172 = GeoPoint::create(['latitude' => '-42.75008081949852', 'longitude' => '-65.03838077272727', 'order' => '36']);
-        $point173 = GeoPoint::create(['latitude' => '-42.74959022670578', 'longitude' => '-65.03838270056501', 'order' => '37']);
-        $point174 = GeoPoint::create(['latitude' => '-42.746679443190715', 'longitude' => '-65.03892484206227', 'order' => '38']);
-        $point175 = GeoPoint::create(['latitude' => '-42.74647425420105', 'longitude' => '-65.03896591338781', 'order' => '39']);
-
-        $zone6 = Zone::create(['name' => 'Barrancas del Golfo', 'description' => 'Barrio 6', 'color' => 'blue']);
-
-        $zone6->geopoints()->save($point137);
-        $zone6->geopoints()->save($point138);
-        $zone6->geopoints()->save($point139);
-        $zone6->geopoints()->save($point140);
-        $zone6->geopoints()->save($point141);
-        $zone6->geopoints()->save($point142);
-        $zone6->geopoints()->save($point143);
-        $zone6->geopoints()->save($point144);
-        $zone6->geopoints()->save($point145);
-        $zone6->geopoints()->save($point146);
-        $zone6->geopoints()->save($point147);
-        $zone6->geopoints()->save($point148);
-        $zone6->geopoints()->save($point149);
-        $zone6->geopoints()->save($point150);
-        $zone6->geopoints()->save($point151);
-        $zone6->geopoints()->save($point152);
-        $zone6->geopoints()->save($point153);
-        $zone6->geopoints()->save($point154);
-        $zone6->geopoints()->save($point155);
-        $zone6->geopoints()->save($point156);
-        $zone6->geopoints()->save($point157);
-        $zone6->geopoints()->save($point158);
-        $zone6->geopoints()->save($point159);
-        $zone6->geopoints()->save($point160);
-        $zone6->geopoints()->save($point161);
-        $zone6->geopoints()->save($point162);
-        $zone6->geopoints()->save($point163);
-        $zone6->geopoints()->save($point164);
-        $zone6->geopoints()->save($point165);
-        $zone6->geopoints()->save($point166);
-        $zone6->geopoints()->save($point167);
-        $zone6->geopoints()->save($point168);
-        $zone6->geopoints()->save($point169);
-        $zone6->geopoints()->save($point170);
-        $zone6->geopoints()->save($point171);
-        $zone6->geopoints()->save($point172);
-        $zone6->geopoints()->save($point173);
-        $zone6->geopoints()->save($point174);
-        $zone6->geopoints()->save($point175);
+        $zone6 = new Zone();
+        $zone6->name = 'Barrancas del Golfo';
+        $zone6->description = 'Barrio 6';
+        $zone6->color = 'yellow';
+        $zone6->geom = new Polygon([
+            new LineString([
+                new Point(-42.74647425420105, -65.03896591338781),
+                new Point(-42.74646763249754, -65.03891126337912),
+                new Point(-42.74643955312189, -65.03858654845018),
+                new Point(-42.74636386453625, -65.0377110586637),
+                new Point(-42.746300413529205, -65.0374828194403),
+                new Point(-42.74621684595456, -65.03682416948892),
+                new Point(-42.74621215208879, -65.03647967326849),
+                new Point(-42.74699938043485, -65.0362396155616),
+                new Point(-42.75405333868858, -65.03622050482237),
+                new Point(-42.75521842322971, -65.0359160740991),
+                new Point(-42.755705327985055, -65.03591691228942),
+                new Point(-42.756962948737225, -65.03601464528042),
+                new Point(-42.757937847895334, -65.03574533473144),
+                new Point(-42.75996316715913, -65.0350365609991),
+                new Point(-42.76022241942431, -65.03667614507887),
+                new Point(-42.760243122725136, -65.03670347008322),
+                new Point(-42.760257455779566, -65.03673766824816),
+                new Point(-42.760263909845, -65.03677597354567),
+                new Point(-42.760262233464374, -65.0368151170335),
+                new Point(-42.760252510456695, -65.03685216504552),
+                new Point(-42.76017891734682, -65.03714653748497),
+                new Point(-42.76009266756316, -65.03770636479793),
+                new Point(-42.76007573611875, -65.03779387186707),
+                new Point(-42.75999853879053, -65.03819243136296),
+                new Point(-42.75985587879853, -65.0389125206646),
+                new Point(-42.75948221355503, -65.03890631805623),
+                new Point(-42.758396505636966, -65.03888586621251),
+                new Point(-42.75715447522472, -65.03879810768626),
+                new Point(-42.75694702312117, -65.03880070607626),
+                new Point(-42.75635140508166, -65.03876156258845),
+                new Point(-42.756252917719394, -65.03875334832334),
+                new Point(-42.75557850979004, -65.03868076104185),
+                new Point(-42.754994877872065, -65.03865620206555),
+                new Point(-42.75420957736375, -65.0386061621036),
+                new Point(-42.75320894576288, -65.03851890649157),
+                new Point(-42.75008081949852, -65.03838077272727),
+                new Point(-42.74959022670578, -65.03838270056501),
+                new Point(-42.746679443190715, -65.03892484206227),
+                new Point(-42.74647425420105, -65.03896591338781),
+            ])
+        ]);
+        $zone6->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 7: Presidente Perón--------------
 
-        $point176 = GeoPoint::create(['latitude' => '-42.78371773220996', 'longitude' => '-65.07882580247237', 'order' => '1']);
-        $point177 = GeoPoint::create(['latitude' => '-42.78349686906134', 'longitude' => '-65.07817436095772', 'order' => '2']);
-        $point178 = GeoPoint::create(['latitude' => '-42.78329310499521', 'longitude' => '-65.0775758092521', 'order' => '3']);
-        $point179 = GeoPoint::create(['latitude' => '-42.783090011481306', 'longitude' => '-65.07696543906299', 'order' => '4']);
-        $point180 = GeoPoint::create(['latitude' => '-42.78288088299712', 'longitude' => '-65.07636420514837', 'order' => '5']);
-        $point181 = GeoPoint::create(['latitude' => '-42.782624312940975', 'longitude' => '-65.07561050441501', 'order' => '6']);
-        $point182 = GeoPoint::create(['latitude' => '-42.78228937209016', 'longitude' => '-65.07464264605557', 'order' => '7']);
-        $point183 = GeoPoint::create(['latitude' => '-42.782239248309196', 'longitude' => '-65.07449805822581', 'order' => '8']);
-        $point184 = GeoPoint::create(['latitude' => '-42.77977178365298', 'longitude' => '-65.06736933339577', 'order' => '9']);
-        $point185 = GeoPoint::create(['latitude' => '-42.78158017926267', 'longitude' => '-65.06626275453881', 'order' => '10']);
-        $point186 = GeoPoint::create(['latitude' => '-42.78374044716758', 'longitude' => '-65.07262604397104', 'order' => '11']);
-        $point187 = GeoPoint::create(['latitude' => '-42.78887486577554', 'longitude' => '-65.06935777228563', 'order' => '12']);
-        $point188 = GeoPoint::create(['latitude' => '-42.78883345917387', 'longitude' => '-65.06924277257409', 'order' => '13']);
-        $point189 = GeoPoint::create(['latitude' => '-42.78863514334478', 'longitude' => '-65.06865427915226', 'order' => '14']);
-        $point190 = GeoPoint::create(['latitude' => '-42.78842442229899', 'longitude' => '-65.0680291568136', 'order' => '15']);
-        $point191 = GeoPoint::create(['latitude' => '-42.788224849184445', 'longitude' => '-65.06743672389729', 'order' => '16']);
-        $point192 = GeoPoint::create(['latitude' => '-42.78801446341478', 'longitude' => '-65.06681260738699', 'order' => '17']);
-        $point193 = GeoPoint::create(['latitude' => '-42.787813633014736', 'longitude' => '-65.06621690552845', 'order' => '18']);
-        $point194 = GeoPoint::create(['latitude' => '-42.787607857291846', 'longitude' => '-65.06560636770129', 'order' => '19']);
-        $point195 = GeoPoint::create(['latitude' => '-42.78739621423671', 'longitude' => '-65.06498694505677', 'order' => '20']);
-        $point196 = GeoPoint::create(['latitude' => '-42.78718960032347', 'longitude' => '-65.06438227456184', 'order' => '21']);
-        $point197 = GeoPoint::create(['latitude' => '-42.78697954982994', 'longitude' => '-65.06378456104653', 'order' => '22']);
-        $point198 = GeoPoint::create(['latitude' => '-42.786774612297364', 'longitude' => '-65.06316765297295', 'order' => '23']);
-        $point199 = GeoPoint::create(['latitude' => '-42.78673052348665', 'longitude' => '-65.06303857166408', 'order' => '24']);
-        $point200 = GeoPoint::create(['latitude' => '-42.78859071925797', 'longitude' => '-65.06185236472697', 'order' => '25']);
-        $point201 = GeoPoint::create(['latitude' => '-42.79046650536915', 'longitude' => '-65.06071552719955', 'order' => '26']);
-        $point202 = GeoPoint::create(['latitude' => '-42.79047061250171', 'longitude' => '-65.06072784859721', 'order' => '27']);
-        $point203 = GeoPoint::create(['latitude' => '-42.79052123919689', 'longitude' => '-65.06087545391209', 'order' => '28']);
-        $point204 = GeoPoint::create(['latitude' => '-42.79071955502596', 'longitude' => '-65.06145397286913', 'order' => '29']);
-        $point205 = GeoPoint::create(['latitude' => '-42.79092105597826', 'longitude' => '-65.06204146046257', 'order' => '30']);
-        $point206 = GeoPoint::create(['latitude' => '-42.791111073723215', 'longitude' => '-65.06259583953845', 'order' => '31']);
-        $point207 = GeoPoint::create(['latitude' => '-42.791316178893844', 'longitude' => '-65.06319405596795', 'order' => '32']);
-        $point208 = GeoPoint::create(['latitude' => '-42.791535952395066', 'longitude' => '-65.06383510392267', 'order' => '33']);
-        $point209 = GeoPoint::create(['latitude' => '-42.79173896208994', 'longitude' => '-65.06442745301993', 'order' => '34']);
-        $point210 = GeoPoint::create(['latitude' => '-42.79193903811867', 'longitude' => '-65.06501100111886', 'order' => '35']);
-        $point211 = GeoPoint::create(['latitude' => '-42.79215914689601', 'longitude' => '-65.06565297108294', 'order' => '36']);
-        $point212 = GeoPoint::create(['latitude' => '-42.79236785628504', 'longitude' => '-65.06626183252946', 'order' => '37']);
-        $point213 = GeoPoint::create(['latitude' => '-42.79256692648542', 'longitude' => '-65.06684253078132', 'order' => '38']);
-        $point214 = GeoPoint::create(['latitude' => '-42.79265736722064', 'longitude' => '-65.0671063092742', 'order' => '39']);
-        $point215 = GeoPoint::create(['latitude' => '-42.79290362753588', 'longitude' => '-65.06782463837617', 'order' => '40']);
-        $point216 = GeoPoint::create(['latitude' => '-42.793155336088205', 'longitude' => '-65.06855880927513', 'order' => '41']);
-        $point217 = GeoPoint::create(['latitude' => '-42.79330025919407', 'longitude' => '-65.06898176010927', 'order' => '42']);
-        $point218 = GeoPoint::create(['latitude' => '-42.79351433300113', 'longitude' => '-65.06960612807666', 'order' => '43']);
-        $point219 = GeoPoint::create(['latitude' => '-42.79373134047427', 'longitude' => '-65.07023921322336', 'order' => '44']);
-        $point220 = GeoPoint::create(['latitude' => '-42.79394315116747', 'longitude' => '-65.07085695948724', 'order' => '45']);
-        $point221 = GeoPoint::create(['latitude' => '-42.79415311784197', 'longitude' => '-65.07146967660923', 'order' => '46']);
-        $point222 = GeoPoint::create(['latitude' => '-42.794347829452676', 'longitude' => '-65.0720374667302', 'order' => '47']);
-        $point223 = GeoPoint::create(['latitude' => '-42.79368850894906', 'longitude' => '-65.07246888328655', 'order' => '48']);
-        $point224 = GeoPoint::create(['latitude' => '-42.7924765695692', 'longitude' => '-65.07326197896482', 'order' => '49']);
-        $point225 = GeoPoint::create(['latitude' => '-42.79154047862278', 'longitude' => '-65.07386203941302', 'order' => '50']);
-        $point226 = GeoPoint::create(['latitude' => '-42.79059064135515', 'longitude' => '-65.07447073322147', 'order' => '51']);
-        $point227 = GeoPoint::create(['latitude' => '-42.78946352683542', 'longitude' => '-65.07519342091308', 'order' => '52']);
-        $point228 = GeoPoint::create(['latitude' => '-42.788036507820124', 'longitude' => '-65.07610805418739', 'order' => '53']);
-        $point229 = GeoPoint::create(['latitude' => '-42.78662625261117', 'longitude' => '-65.07701204244465', 'order' => '54']);
-        $point230 = GeoPoint::create(['latitude' => '-42.78555227935757', 'longitude' => '-65.07770044815229', 'order' => '55']);
-        $point231 = GeoPoint::create(['latitude' => '-42.784466906715636', 'longitude' => '-65.07837854411903', 'order' => '56']);
-        $point232 = GeoPoint::create(['latitude' => '-42.78371773220996', 'longitude' => '-65.07882580247237', 'order' => '57']);
-
-        $zone7 = Zone::create(['name' => 'Presidente Perón', 'description' => 'Barrio 7', 'color' => 'blue']);
-
-        $zone7->geopoints()->save($point176);
-        $zone7->geopoints()->save($point177);
-        $zone7->geopoints()->save($point178);
-        $zone7->geopoints()->save($point179);
-        $zone7->geopoints()->save($point180);
-        $zone7->geopoints()->save($point181);
-        $zone7->geopoints()->save($point182);
-        $zone7->geopoints()->save($point183);
-        $zone7->geopoints()->save($point184);
-        $zone7->geopoints()->save($point185);
-        $zone7->geopoints()->save($point186);
-        $zone7->geopoints()->save($point187);
-        $zone7->geopoints()->save($point188);
-        $zone7->geopoints()->save($point189);
-        $zone7->geopoints()->save($point190);
-        $zone7->geopoints()->save($point191);
-        $zone7->geopoints()->save($point192);
-        $zone7->geopoints()->save($point193);
-        $zone7->geopoints()->save($point194);
-        $zone7->geopoints()->save($point195);
-        $zone7->geopoints()->save($point196);
-        $zone7->geopoints()->save($point197);
-        $zone7->geopoints()->save($point198);
-        $zone7->geopoints()->save($point199);
-        $zone7->geopoints()->save($point200);
-        $zone7->geopoints()->save($point201);
-        $zone7->geopoints()->save($point202);
-        $zone7->geopoints()->save($point203);
-        $zone7->geopoints()->save($point204);
-        $zone7->geopoints()->save($point205);
-        $zone7->geopoints()->save($point206);
-        $zone7->geopoints()->save($point207);
-        $zone7->geopoints()->save($point208);
-        $zone7->geopoints()->save($point209);
-        $zone7->geopoints()->save($point210);
-        $zone7->geopoints()->save($point211);
-        $zone7->geopoints()->save($point212);
-        $zone7->geopoints()->save($point213);
-        $zone7->geopoints()->save($point214);
-        $zone7->geopoints()->save($point215);
-        $zone7->geopoints()->save($point216);
-        $zone7->geopoints()->save($point217);
-        $zone7->geopoints()->save($point218);
-        $zone7->geopoints()->save($point219);
-        $zone7->geopoints()->save($point220);
-        $zone7->geopoints()->save($point221);
-        $zone7->geopoints()->save($point222);
-        $zone7->geopoints()->save($point223);
-        $zone7->geopoints()->save($point224);
-        $zone7->geopoints()->save($point225);
-        $zone7->geopoints()->save($point226);
-        $zone7->geopoints()->save($point227);
-        $zone7->geopoints()->save($point228);
-        $zone7->geopoints()->save($point229);
-        $zone7->geopoints()->save($point230);
-        $zone7->geopoints()->save($point231);
-        $zone7->geopoints()->save($point232);
+        $zone7 = new Zone();
+        $zone7->name = 'Presidente Perón';
+        $zone7->description = 'Barrio 7';
+        $zone7->color = 'red';
+        $zone7->geom = new Polygon([
+            new LineString([
+                new Point(-42.78371773220996, -65.07882580247237),
+                new Point(-42.78349686906134, -65.07817436095772),
+                new Point(-42.78329310499521, -65.0775758092521),
+                new Point(-42.783090011481306, -65.07696543906299),
+                new Point(-42.78288088299712, -65.07636420514837),
+                new Point(-42.782624312940975, -65.07561050441501),
+                new Point(-42.78228937209016, -65.07464264605557),
+                new Point(-42.782239248309196, -65.07449805822581),
+                new Point(-42.77977178365298, -65.06736933339577),
+                new Point(-42.78158017926267, -65.06626275453881),
+                new Point(-42.78374044716758, -65.07262604397104),
+                new Point(-42.78887486577554, -65.06935777228563),
+                new Point(-42.78883345917387, -65.06924277257409),
+                new Point(-42.78863514334478, -65.06865427915226),
+                new Point(-42.78842442229899, -65.0680291568136),
+                new Point(-42.788224849184445, -65.06743672389729),
+                new Point(-42.78801446341478, -65.06681260738699),
+                new Point(-42.787813633014736, -65.06621690552845),
+                new Point(-42.787607857291846, -65.06560636770129),
+                new Point(-42.78739621423671, -65.06498694505677),
+                new Point(-42.78718960032347, -65.06438227456184),
+                new Point(-42.78697954982994, -65.06378456104653),
+                new Point(-42.786774612297364, -65.06316765297295),
+                new Point(-42.78673052348665, -65.06303857166408),
+                new Point(-42.78859071925797, -65.06185236472697),
+                new Point(-42.79046650536915, -65.06071552719955),
+                new Point(-42.79047061250171, -65.06072784859721),
+                new Point(-42.79052123919689, -65.06087545391209),
+                new Point(-42.79071955502596, -65.06145397286913),
+                new Point(-42.79092105597826, -65.06204146046257),
+                new Point(-42.791111073723215, -65.06259583953845),
+                new Point(-42.791316178893844, -65.06319405596795),
+                new Point(-42.791535952395066, -65.06383510392267),
+                new Point(-42.79173896208994, -65.06442745301993),
+                new Point(-42.79193903811867, -65.06501100111886),
+                new Point(-42.79215914689601, -65.06565297108294),
+                new Point(-42.79236785628504, -65.06626183252946),
+                new Point(-42.79256692648542, -65.06684253078132),
+                new Point(-42.79265736722064, -65.0671063092742),
+                new Point(-42.79290362753588, -65.06782463837617),
+                new Point(-42.793155336088205, -65.06855880927513),
+                new Point(-42.79330025919407, -65.06898176010927),
+                new Point(-42.79351433300113, -65.06960612807666),
+                new Point(-42.79373134047427, -65.07023921322336),
+                new Point(-42.79394315116747, -65.07085695948724),
+                new Point(-42.79415311784197, -65.07146967660923),
+                new Point(-42.794347829452676, -65.0720374667302),
+                new Point(-42.79368850894906, -65.07246888328655),
+                new Point(-42.7924765695692, -65.07326197896482),
+                new Point(-42.79154047862278, -65.07386203941302),
+                new Point(-42.79059064135515, -65.07447073322147),
+                new Point(-42.78946352683542, -65.07519342091308),
+                new Point(-42.788036507820124, -65.07610805418739),
+                new Point(-42.78662625261117, -65.07701204244465),
+                new Point(-42.78555227935757, -65.07770044815229),
+                new Point(-42.784466906715636, -65.07837854411903),
+                new Point(-42.78371773220996, -65.07882580247237),
+            ])
+        ]);
+        $zone7->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 8: Provincias Unidas--------------
 
-        $point233 = GeoPoint::create(['latitude' => '-42.782170181427034', 'longitude' => '-65.04260785031671', 'order' => '1']);
-        $point234 = GeoPoint::create(['latitude' => '-42.781940014365915', 'longitude' => '-65.04192581485547', 'order' => '2']);
-        $point235 = GeoPoint::create(['latitude' => '-42.78167631969205', 'longitude' => '-65.04114403474648', 'order' => '3']);
-        $point236 = GeoPoint::create(['latitude' => '-42.78141413376079', 'longitude' => '-65.04036661322714', 'order' => '4']);
-        $point237 = GeoPoint::create(['latitude' => '-42.78116225757043', 'longitude' => '-65.03961970183535', 'order' => '5']);
-        $point238 = GeoPoint::create(['latitude' => '-42.78090954318974', 'longitude' => '-65.03887035969164', 'order' => '6']);
-        $point239 = GeoPoint::create(['latitude' => '-42.780646183792044', 'longitude' => '-65.03808966923006', 'order' => '7']);
-        $point240 = GeoPoint::create(['latitude' => '-42.77958201736513', 'longitude' => '-65.03877027976775', 'order' => '8']);
-        $point241 = GeoPoint::create(['latitude' => '-42.779355873617504', 'longitude' => '-65.03807667728013', 'order' => '9']);
-        $point242 = GeoPoint::create(['latitude' => '-42.77912671238474', 'longitude' => '-65.0373740223371', 'order' => '10']);
-        $point243 = GeoPoint::create(['latitude' => '-42.77888640322075', 'longitude' => '-65.03663725304816', 'order' => '11']);
-        $point244 = GeoPoint::create(['latitude' => '-42.779277754279946', 'longitude' => '-65.03639250147549', 'order' => '12']);
-        $point245 = GeoPoint::create(['latitude' => '-42.77993447639358', 'longitude' => '-65.03597935746807', 'order' => '13']);
-        $point246 = GeoPoint::create(['latitude' => '-42.780432948175296', 'longitude' => '-65.03567014906', 'order' => '14']);
-        $point247 = GeoPoint::create(['latitude' => '-42.7810945317928', 'longitude' => '-65.03527997146725', 'order' => '15']);
-        $point248 = GeoPoint::create(['latitude' => '-42.78165553257219', 'longitude' => '-65.03490831788055', 'order' => '16']);
-        $point249 = GeoPoint::create(['latitude' => '-42.782289036814035', 'longitude' => '-65.03450917165142', 'order' => '17']);
-        $point250 = GeoPoint::create(['latitude' => '-42.78252557412159', 'longitude' => '-65.03520713272869', 'order' => '18']);
-        $point251 = GeoPoint::create(['latitude' => '-42.78276152469593', 'longitude' => '-65.0359036688824', 'order' => '19']);
-        $point252 = GeoPoint::create(['latitude' => '-42.78299537979447', 'longitude' => '-65.03659366715165', 'order' => '20']);
-        $point253 = GeoPoint::create(['latitude' => '-42.78325488351672', 'longitude' => '-65.03735943782559', 'order' => '21']);
-        $point254 = GeoPoint::create(['latitude' => '-42.78331431121023', 'longitude' => '-65.03753503869706', 'order' => '22']);
-        $point255 = GeoPoint::create(['latitude' => '-42.78351564452447', 'longitude' => '-65.03812906417497', 'order' => '23']);
-        $point256 = GeoPoint::create(['latitude' => '-42.78354590319492', 'longitude' => '-65.0382184152628', 'order' => '24']);
-        $point257 = GeoPoint::create(['latitude' => '-42.783772046942545', 'longitude' => '-65.03888553093638', 'order' => '25']);
-        $point258 = GeoPoint::create(['latitude' => '-42.78403230503608', 'longitude' => '-65.03965373236224', 'order' => '26']);
-        $point259 = GeoPoint::create(['latitude' => '-42.784267165963', 'longitude' => '-65.04034674811662', 'order' => '27']);
-        $point260 = GeoPoint::create(['latitude' => '-42.78430195086116', 'longitude' => '-65.04044951024953', 'order' => '28']);
-        $point261 = GeoPoint::create(['latitude' => '-42.78454125419677', 'longitude' => '-65.0411409334423', 'order' => '29']);
-        $point262 = GeoPoint::create(['latitude' => '-42.78394823454724', 'longitude' => '-65.04150412130682', 'order' => '30']);
-        $point263 = GeoPoint::create(['latitude' => '-42.783355969268996', 'longitude' => '-65.04187326032257', 'order' => '31']);
-        $point264 = GeoPoint::create(['latitude' => '-42.78275766902047', 'longitude' => '-65.04225564274535', 'order' => '32']);
-        $point265 = GeoPoint::create(['latitude' => '-42.782170181427034', 'longitude' => '-65.04260785031671', 'order' => '33']);
-
-        $zone8 = Zone::create(['name' => 'Provincias Unidas', 'description' => 'Barrio 8', 'color' => 'blue']);
-
-        $zone8->geopoints()->save($point233);
-        $zone8->geopoints()->save($point234);
-        $zone8->geopoints()->save($point235);
-        $zone8->geopoints()->save($point236);
-        $zone8->geopoints()->save($point237);
-        $zone8->geopoints()->save($point238);
-        $zone8->geopoints()->save($point239);
-        $zone8->geopoints()->save($point240);
-        $zone8->geopoints()->save($point241);
-        $zone8->geopoints()->save($point242);
-        $zone8->geopoints()->save($point243);
-        $zone8->geopoints()->save($point244);
-        $zone8->geopoints()->save($point245);
-        $zone8->geopoints()->save($point246);
-        $zone8->geopoints()->save($point247);
-        $zone8->geopoints()->save($point248);
-        $zone8->geopoints()->save($point249);
-        $zone8->geopoints()->save($point250);
-        $zone8->geopoints()->save($point251);
-        $zone8->geopoints()->save($point252);
-        $zone8->geopoints()->save($point253);
-        $zone8->geopoints()->save($point254);
-        $zone8->geopoints()->save($point255);
-        $zone8->geopoints()->save($point256);
-        $zone8->geopoints()->save($point257);
-        $zone8->geopoints()->save($point258);
-        $zone8->geopoints()->save($point259);
-        $zone8->geopoints()->save($point260);
-        $zone8->geopoints()->save($point261);
-        $zone8->geopoints()->save($point262);
-        $zone8->geopoints()->save($point263);
-        $zone8->geopoints()->save($point264);
-        $zone8->geopoints()->save($point265);
+        $zone8 = new Zone();
+        $zone8->name = 'Provincias Unidas';
+        $zone8->description = 'Barrio 8';
+        $zone8->color = 'red';
+        $zone8->geom = new Polygon([
+            new LineString([
+                new Point(-42.782170181427034, -65.04260785031671),
+                new Point(-42.781940014365915, -65.04192581485547),
+                new Point(-42.78167631969205, -65.04114403474648),
+                new Point(-42.78141413376079, -65.04036661322714),
+                new Point(-42.78116225757043, -65.03961970183535),
+                new Point(-42.78090954318974, -65.03887035969164),
+                new Point(-42.780646183792044, -65.03808966923006),
+                new Point(-42.77958201736513, -65.03877027976775),
+                new Point(-42.779355873617504, -65.03807667728013),
+                new Point(-42.77912671238474, -65.0373740223371),
+                new Point(-42.77888640322075, -65.03663725304816),
+                new Point(-42.779277754279946, -65.03639250147549),
+                new Point(-42.77993447639358, -65.03597935746807),
+                new Point(-42.780432948175296, -65.03567014906),
+                new Point(-42.7810945317928, -65.03527997146725),
+                new Point(-42.78165553257219, -65.03490831788055),
+                new Point(-42.782289036814035, -65.03450917165142),
+                new Point(-42.78252557412159, -65.03520713272869),
+                new Point(-42.78276152469593, -65.0359036688824),
+                new Point(-42.78299537979447, -65.03659366715165),
+                new Point(-42.78325488351672, -65.03735943782559),
+                new Point(-42.78331431121023, -65.03753503869706),
+                new Point(-42.78351564452447, -65.03812906417497),
+                new Point(-42.78354590319492, -65.0382184152628),
+                new Point(-42.783772046942545, -65.03888553093638),
+                new Point(-42.78403230503608, -65.03965373236224),
+                new Point(-42.784267165963, -65.04034674811662),
+                new Point(-42.78430195086116, -65.04044951024953),
+                new Point(-42.78454125419677, -65.0411409334423),
+                new Point(-42.78394823454724, -65.04150412130682),
+                new Point(-42.783355969268996, -65.04187326032257),
+                new Point(-42.78275766902047, -65.04225564274535),
+                new Point(-42.782170181427034, -65.04260785031671),
+            ])
+        ]);
+        $zone8->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 9: Gobernador Fontana--------------
 
-        $point266 = GeoPoint::create(['latitude' => '-42.77788032338284', 'longitude' => '-65.06312456999065', 'order' => '1']);
-        $point267 = GeoPoint::create(['latitude' => '-42.77191064812362', 'longitude' => '-65.05806148137869', 'order' => '2']);
-        $point268 = GeoPoint::create(['latitude' => '-42.77224340967962', 'longitude' => '-65.05705447953142', 'order' => '3']);
-        $point269 = GeoPoint::create(['latitude' => '-42.77254473909872', 'longitude' => '-65.05635291423579', 'order' => '4']);
-        $point270 = GeoPoint::create(['latitude' => '-42.77305955559163', 'longitude' => '-65.05527148108834', 'order' => '5']);
-        $point271 = GeoPoint::create(['latitude' => '-42.773159551696494', 'longitude' => '-65.05507752384891', 'order' => '6']);
-        $point272 = GeoPoint::create(['latitude' => '-42.77379054136739', 'longitude' => '-65.05385368216655', 'order' => '7']);
-        $point273 = GeoPoint::create(['latitude' => '-42.77448867008272', 'longitude' => '-65.0524833248167', 'order' => '8']);
-        $point274 = GeoPoint::create(['latitude' => '-42.775051179604674', 'longitude' => '-65.05140013146959', 'order' => '9']);
-        $point275 = GeoPoint::create(['latitude' => '-42.775132735522554', 'longitude' => '-65.05123517561515', 'order' => '10']);
-        $point276 = GeoPoint::create(['latitude' => '-42.77562810600011', 'longitude' => '-65.05006413992275', 'order' => '11']);
-        $point277 = GeoPoint::create(['latitude' => '-42.77580664053772', 'longitude' => '-65.04942753437675', 'order' => '12']);
-        $point278 = GeoPoint::create(['latitude' => '-42.77591853894509', 'longitude' => '-65.0497427777551', 'order' => '13']);
-        $point279 = GeoPoint::create(['latitude' => '-42.775973943325056', 'longitude' => '-65.04960456017177', 'order' => '14']);
-        $point280 = GeoPoint::create(['latitude' => '-42.77602783896248', 'longitude' => '-65.04977974194807', 'order' => '15']);
-        $point281 = GeoPoint::create(['latitude' => '-42.77660183169178', 'longitude' => '-65.04941680554067', 'order' => '16']);
-        $point282 = GeoPoint::create(['latitude' => '-42.77713341199106', 'longitude' => '-65.04908060740439', 'order' => '17']);
-        $point283 = GeoPoint::create(['latitude' => '-42.7766747542494', 'longitude' => '-65.04773112099346', 'order' => '18']);
-        $point284 = GeoPoint::create(['latitude' => '-42.777812262329064', 'longitude' => '-65.04699745300867', 'order' => '19']);
-        $point285 = GeoPoint::create(['latitude' => '-42.778972150090226', 'longitude' => '-65.0462968097224', 'order' => '20']);
-        $point286 = GeoPoint::create(['latitude' => '-42.77971881002492', 'longitude' => '-65.04582474093567', 'order' => '21']);
-        $point287 = GeoPoint::create(['latitude' => '-42.77992810614717', 'longitude' => '-65.04643888298118', 'order' => '22']);
-        $point288 = GeoPoint::create(['latitude' => '-42.78017336063402', 'longitude' => '-65.0471586370067', 'order' => '23']);
-        $point289 = GeoPoint::create(['latitude' => '-42.78043286435627', 'longitude' => '-65.04792013291001', 'order' => '24']);
-        $point290 = GeoPoint::create(['latitude' => '-42.78065900810389', 'longitude' => '-65.0485840634604', 'order' => '25']);
-        $point291 = GeoPoint::create(['latitude' => '-42.78086034141813', 'longitude' => '-65.04917481999605', 'order' => '26']);
-        $point292 = GeoPoint::create(['latitude' => '-42.78108866446058', 'longitude' => '-65.04984495315479', 'order' => '27']);
-        $point293 = GeoPoint::create(['latitude' => '-42.78130692921919', 'longitude' => '-65.05048583347143', 'order' => '28']);
-        $point294 = GeoPoint::create(['latitude' => '-42.7814223480259', 'longitude' => '-65.05082437854061', 'order' => '29']);
-        $point295 = GeoPoint::create(['latitude' => '-42.781464760455975', 'longitude' => '-65.05094884980274', 'order' => '30']);
-        $point296 = GeoPoint::create(['latitude' => '-42.78630631536706', 'longitude' => '-65.04638708281958', 'order' => '31']);
-        $point297 = GeoPoint::create(['latitude' => '-42.78624060124616', 'longitude' => '-65.04620670426328', 'order' => '32']);
-        $point298 = GeoPoint::create(['latitude' => '-42.78578420661836', 'longitude' => '-65.0448956069689', 'order' => '33']);
-        $point299 = GeoPoint::create(['latitude' => '-42.785431579951876', 'longitude' => '-65.04383395511293', 'order' => '34']);
-        $point300 = GeoPoint::create(['latitude' => '-42.785004019070975', 'longitude' => '-65.04252143289499', 'order' => '35']);
-        $point301 = GeoPoint::create(['latitude' => '-42.78563157216157', 'longitude' => '-65.04212304103716', 'order' => '36']);
-        $point302 = GeoPoint::create(['latitude' => '-42.786162481908605', 'longitude' => '-65.04178600471054', 'order' => '37']);
-        $point303 = GeoPoint::create(['latitude' => '-42.78667914242021', 'longitude' => '-65.0414475434604', 'order' => '38']);
-        $point304 = GeoPoint::create(['latitude' => '-42.78753024086845', 'longitude' => '-65.04093063149169', 'order' => '39']);
-        $point305 = GeoPoint::create(['latitude' => '-42.788327108403166', 'longitude' => '-65.0403968718976', 'order' => '40']);
-        $point306 = GeoPoint::create(['latitude' => '-42.78873086467902', 'longitude' => '-65.04015773620006', 'order' => '41']);
-        $point307 = GeoPoint::create(['latitude' => '-42.7890646320634', 'longitude' => '-65.03996017474226', 'order' => '42']);
-        $point308 = GeoPoint::create(['latitude' => '-42.78980743632263', 'longitude' => '-65.03952012482564', 'order' => '43']);
-        $point309 = GeoPoint::create(['latitude' => '-42.790889623841366', 'longitude' => '-65.03887932832804', 'order' => '44']);
-        $point310 = GeoPoint::create(['latitude' => '-42.79104033046042', 'longitude' => '-65.03879358145856', 'order' => '45']);
-        $point311 = GeoPoint::create(['latitude' => '-42.791100344887155', 'longitude' => '-65.03950294192414', 'order' => '46']);
-        $point312 = GeoPoint::create(['latitude' => '-42.79114954665877', 'longitude' => '-65.04022487524446', 'order' => '47']);
-        $point313 = GeoPoint::create(['latitude' => '-42.79119547948815', 'longitude' => '-65.04089928317381', 'order' => '48']);
-        $point314 = GeoPoint::create(['latitude' => '-42.79132154331188', 'longitude' => '-65.0424050082599', 'order' => '49']);
-        $point315 = GeoPoint::create(['latitude' => '-42.79146344893263', 'longitude' => '-65.04395783964183', 'order' => '50']);
-        $point316 = GeoPoint::create(['latitude' => '-42.791561852475866', 'longitude' => '-65.04514421421702', 'order' => '51']);
-        $point317 = GeoPoint::create(['latitude' => '-42.79164718025018', 'longitude' => '-65.04629111002825', 'order' => '52']);
-        $point318 = GeoPoint::create(['latitude' => '-42.791752121677916', 'longitude' => '-65.04740933973062', 'order' => '53']);
-        $point319 = GeoPoint::create(['latitude' => '-42.791868378674934', 'longitude' => '-65.04868120971817', 'order' => '54']);
-        $point320 = GeoPoint::create(['latitude' => '-42.791989664813855', 'longitude' => '-65.05020151931578', 'order' => '55']);
-        $point321 = GeoPoint::create(['latitude' => '-42.79231597230441', 'longitude' => '-65.05348043601823', 'order' => '56']);
-        $point322 = GeoPoint::create(['latitude' => '-42.79231613994247', 'longitude' => '-65.05348261531306', 'order' => '57']);
-        $point323 = GeoPoint::create(['latitude' => '-42.79236341387636', 'longitude' => '-65.05404755558695', 'order' => '58']);
-        $point324 = GeoPoint::create(['latitude' => '-42.787676756535916', 'longitude' => '-65.05701910790003', 'order' => '59']);
-        $point325 = GeoPoint::create(['latitude' => '-42.78708231196285', 'longitude' => '-65.0573964611809', 'order' => '60']);
-        $point326 = GeoPoint::create(['latitude' => '-42.78729060225671', 'longitude' => '-65.05801085468352', 'order' => '61']);
-        $point327 = GeoPoint::create(['latitude' => '-42.78750568189215', 'longitude' => '-65.05866246383623', 'order' => '62']);
-        $point328 = GeoPoint::create(['latitude' => '-42.78656657346059', 'longitude' => '-65.05924668248741', 'order' => '63']);
-        $point329 = GeoPoint::create(['latitude' => '-42.78563333236124', 'longitude' => '-65.05982712928218', 'order' => '64']);
-        $point330 = GeoPoint::create(['latitude' => '-42.784689613882925', 'longitude' => '-65.06041428159948', 'order' => '65']);
-        $point331 = GeoPoint::create(['latitude' => '-42.784269345257826', 'longitude' => '-65.05918063309039', 'order' => '66']);
-        $point332 = GeoPoint::create(['latitude' => '-42.78351363286771', 'longitude' => '-65.05965991031387', 'order' => '67']);
-        $point333 = GeoPoint::create(['latitude' => '-42.78238014810154', 'longitude' => '-65.06037882614905', 'order' => '68']);
-        $point334 = GeoPoint::create(['latitude' => '-42.78122361310167', 'longitude' => '-65.0611124103148', 'order' => '69']);
-        $point335 = GeoPoint::create(['latitude' => '-42.78011560932114', 'longitude' => '-65.06181506525785', 'order' => '70']);
-        $point336 = GeoPoint::create(['latitude' => '-42.78003254466071', 'longitude' => '-65.06186770360978', 'order' => '71']);
-        $point337 = GeoPoint::create(['latitude' => '-42.77911103822581', 'longitude' => '-65.06240582179352', 'order' => '72']);
-        $point338 = GeoPoint::create(['latitude' => '-42.777930111887684', 'longitude' => '-65.0630954009676', 'order' => '73']);
-        $point339 = GeoPoint::create(['latitude' => '-42.77788032338284', 'longitude' => '-65.06312456999065', 'order' => '74']);
-
-        $zone9 = Zone::create(['name' => 'Gobernador Fontana', 'description' => 'Barrio 9', 'color' => 'blue']);
-
-        $zone9->geopoints()->save($point266);
-        $zone9->geopoints()->save($point267);
-        $zone9->geopoints()->save($point268);
-        $zone9->geopoints()->save($point269);
-        $zone9->geopoints()->save($point270);
-        $zone9->geopoints()->save($point271);
-        $zone9->geopoints()->save($point272);
-        $zone9->geopoints()->save($point273);
-        $zone9->geopoints()->save($point274);
-        $zone9->geopoints()->save($point275);
-        $zone9->geopoints()->save($point276);
-        $zone9->geopoints()->save($point277);
-        $zone9->geopoints()->save($point278);
-        $zone9->geopoints()->save($point279);
-        $zone9->geopoints()->save($point280);
-        $zone9->geopoints()->save($point281);
-        $zone9->geopoints()->save($point282);
-        $zone9->geopoints()->save($point283);
-        $zone9->geopoints()->save($point284);
-        $zone9->geopoints()->save($point285);
-        $zone9->geopoints()->save($point286);
-        $zone9->geopoints()->save($point287);
-        $zone9->geopoints()->save($point288);
-        $zone9->geopoints()->save($point289);
-        $zone9->geopoints()->save($point290);
-        $zone9->geopoints()->save($point291);
-        $zone9->geopoints()->save($point292);
-        $zone9->geopoints()->save($point293);
-        $zone9->geopoints()->save($point294);
-        $zone9->geopoints()->save($point295);
-        $zone9->geopoints()->save($point296);
-        $zone9->geopoints()->save($point297);
-        $zone9->geopoints()->save($point298);
-        $zone9->geopoints()->save($point299);
-        $zone9->geopoints()->save($point300);
-        $zone9->geopoints()->save($point301);
-        $zone9->geopoints()->save($point302);
-        $zone9->geopoints()->save($point303);
-        $zone9->geopoints()->save($point304);
-        $zone9->geopoints()->save($point305);
-        $zone9->geopoints()->save($point306);
-        $zone9->geopoints()->save($point307);
-        $zone9->geopoints()->save($point308);
-        $zone9->geopoints()->save($point309);
-        $zone9->geopoints()->save($point310);
-        $zone9->geopoints()->save($point311);
-        $zone9->geopoints()->save($point312);
-        $zone9->geopoints()->save($point313);
-        $zone9->geopoints()->save($point314);
-        $zone9->geopoints()->save($point315);
-        $zone9->geopoints()->save($point316);
-        $zone9->geopoints()->save($point317);
-        $zone9->geopoints()->save($point318);
-        $zone9->geopoints()->save($point319);
-        $zone9->geopoints()->save($point320);
-        $zone9->geopoints()->save($point321);
-        $zone9->geopoints()->save($point322);
-        $zone9->geopoints()->save($point323);
-        $zone9->geopoints()->save($point324);
-        $zone9->geopoints()->save($point325);
-        $zone9->geopoints()->save($point326);
-        $zone9->geopoints()->save($point327);
-        $zone9->geopoints()->save($point328);
-        $zone9->geopoints()->save($point329);
-        $zone9->geopoints()->save($point330);
-        $zone9->geopoints()->save($point331);
-        $zone9->geopoints()->save($point332);
-        $zone9->geopoints()->save($point333);
-        $zone9->geopoints()->save($point334);
-        $zone9->geopoints()->save($point335);
-        $zone9->geopoints()->save($point336);
-        $zone9->geopoints()->save($point337);
-        $zone9->geopoints()->save($point338);
-        $zone9->geopoints()->save($point339);
+        $zone9 = new Zone();
+        $zone9->name = 'Gobernador Fontana';
+        $zone9->description = 'Barrio 9';
+        $zone9->color = 'orange';
+        $zone9->geom = new Polygon([
+            new LineString([
+                new Point(-42.77788032338284, -65.06312456999065),
+                new Point(-42.77191064812362, -65.05806148137869),
+                new Point(-42.77224340967962, -65.05705447953142),
+                new Point(-42.77254473909872, -65.05635291423579),
+                new Point(-42.77305955559163, -65.05527148108834),
+                new Point(-42.773159551696494, -65.05507752384891),
+                new Point(-42.77379054136739, -65.05385368216655),
+                new Point(-42.77448867008272, -65.0524833248167),
+                new Point(-42.775051179604674, -65.05140013146959),
+                new Point(-42.775132735522554, -65.05123517561515),
+                new Point(-42.77562810600011, -65.05006413992275),
+                new Point(-42.77580664053772, -65.04942753437675),
+                new Point(-42.77591853894509, -65.0497427777551),
+                new Point(-42.775973943325056, -65.04960456017177),
+                new Point(-42.77602783896248, -65.04977974194807),
+                new Point(-42.77660183169178, -65.04941680554067),
+                new Point(-42.77713341199106, -65.04908060740439),
+                new Point(-42.7766747542494, -65.04773112099346),
+                new Point(-42.777812262329064, -65.04699745300867),
+                new Point(-42.778972150090226, -65.0462968097224),
+                new Point(-42.77971881002492, -65.04582474093567),
+                new Point(-42.77992810614717, -65.04643888298118),
+                new Point(-42.78017336063402, -65.0471586370067),
+                new Point(-42.78043286435627, -65.04792013291001),
+                new Point(-42.78065900810389, -65.0485840634604),
+                new Point(-42.78086034141813, -65.04917481999605),
+                new Point(-42.78108866446058, -65.04984495315479),
+                new Point(-42.78130692921919, -65.05048583347143),
+                new Point(-42.7814223480259, -65.05082437854061),
+                new Point(-42.781464760455975, -65.05094884980274),
+                new Point(-42.78630631536706, -65.04638708281958),
+                new Point(-42.78624060124616, -65.04620670426328),
+                new Point(-42.78578420661836, -65.0448956069689),
+                new Point(-42.785431579951876, -65.04383395511293),
+                new Point(-42.785004019070975, -65.04252143289499),
+                new Point(-42.78563157216157, -65.04212304103716),
+                new Point(-42.786162481908605, -65.04178600471054),
+                new Point(-42.78667914242021, -65.0414475434604),
+                new Point(-42.78753024086845, -65.04093063149169),
+                new Point(-42.788327108403166, -65.0403968718976),
+                new Point(-42.78873086467902, -65.04015773620006),
+                new Point(-42.7890646320634, -65.03996017474226),
+                new Point(-42.78980743632263, -65.03952012482564),
+                new Point(-42.790889623841366, -65.03887932832804),
+                new Point(-42.79104033046042, -65.03879358145856),
+                new Point(-42.791100344887155, -65.03950294192414),
+                new Point(-42.79114954665877, -65.04022487524446),
+                new Point(-42.79119547948815, -65.04089928317381),
+                new Point(-42.79132154331188, -65.0424050082599),
+                new Point(-42.79146344893263, -65.04395783964183),
+                new Point(-42.791561852475866, -65.04514421421702),
+                new Point(-42.79164718025018, -65.04629111002825),
+                new Point(-42.791752121677916, -65.04740933973062),
+                new Point(-42.791868378674934, -65.04868120971817),
+                new Point(-42.791989664813855, -65.05020151931578),
+                new Point(-42.79231597230441, -65.05348043601823),
+                new Point(-42.79231613994247, -65.05348261531306),
+                new Point(-42.79236341387636, -65.05404755558695),
+                new Point(-42.787676756535916, -65.05701910790003),
+                new Point(-42.78708231196285, -65.0573964611809),
+                new Point(-42.78729060225671, -65.05801085468352),
+                new Point(-42.78750568189215, -65.05866246383623),
+                new Point(-42.78656657346059, -65.05924668248741),
+                new Point(-42.78563333236124, -65.05982712928218),
+                new Point(-42.784689613882925, -65.06041428159948),
+                new Point(-42.784269345257826, -65.05918063309039),
+                new Point(-42.78351363286771, -65.05965991031387),
+                new Point(-42.78238014810154, -65.06037882614905),
+                new Point(-42.78122361310167, -65.0611124103148),
+                new Point(-42.78011560932114, -65.06181506525785),
+                new Point(-42.78003254466071, -65.06186770360978),
+                new Point(-42.77911103822581, -65.06240582179352),
+                new Point(-42.777930111887684, -65.0630954009676),
+                new Point(-42.77788032338284, -65.06312456999065),
+            ])
+        ]);
+        $zone9->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 10: Desembarco--------------
 
-        $point340 = GeoPoint::create(['latitude' => '-42.7730629083529', 'longitude' => '-65.02891114997892', 'order' => '1']);
-        $point341 = GeoPoint::create(['latitude' => '-42.77266384594281', 'longitude' => '-65.0277151362151', 'order' => '2']);
-        $point342 = GeoPoint::create(['latitude' => '-42.772194207908', 'longitude' => '-65.02641283991903', 'order' => '3']);
-        $point343 = GeoPoint::create(['latitude' => '-42.77580270104323', 'longitude' => '-65.0225547337073', 'order' => '4']);
-        $point344 = GeoPoint::create(['latitude' => '-42.77586346984122', 'longitude' => '-65.02240184779342', 'order' => '5']);
-        $point345 = GeoPoint::create(['latitude' => '-42.77612967908601', 'longitude' => '-65.02203815701472', 'order' => '6']);
-        $point346 = GeoPoint::create(['latitude' => '-42.77646663159359', 'longitude' => '-65.0216905594901', 'order' => '7']);
-        $point347 = GeoPoint::create(['latitude' => '-42.77672454275424', 'longitude' => '-65.0212431334987', 'order' => '8']);
-        $point348 = GeoPoint::create(['latitude' => '-42.7771364294762', 'longitude' => '-65.02068841914667', 'order' => '9']);
-        $point349 = GeoPoint::create(['latitude' => '-42.77766993761318', 'longitude' => '-65.02002163874923', 'order' => '10']);
-        $point350 = GeoPoint::create(['latitude' => '-42.77814837664633', 'longitude' => '-65.01917783255675', 'order' => '11']);
-        $point351 = GeoPoint::create(['latitude' => '-42.77926811509126', 'longitude' => '-65.0175658249384', 'order' => '12']);
-        $point352 = GeoPoint::create(['latitude' => '-42.78000647694185', 'longitude' => '-65.01652722331619', 'order' => '13']);
-        $point353 = GeoPoint::create(['latitude' => '-42.78080334447654', 'longitude' => '-65.01537504690596', 'order' => '14']);
-        $point354 = GeoPoint::create(['latitude' => '-42.781996256936196', 'longitude' => '-65.01319650645213', 'order' => '15']);
-        $point355 = GeoPoint::create(['latitude' => '-42.7826990795173', 'longitude' => '-65.01163814301411', 'order' => '16']);
-        $point356 = GeoPoint::create(['latitude' => '-42.783482955102066', 'longitude' => '-65.00957074659637', 'order' => '17']);
-        $point357 = GeoPoint::create(['latitude' => '-42.78412350014261', 'longitude' => '-65.00820332291264', 'order' => '18']);
-        $point358 = GeoPoint::create(['latitude' => '-42.784342603091574', 'longitude' => '-65.00663833777111', 'order' => '19']);
-        $point359 = GeoPoint::create(['latitude' => '-42.788198446189426', 'longitude' => '-65.00611614520339', 'order' => '20']);
-        $point360 = GeoPoint::create(['latitude' => '-42.788413106729706', 'longitude' => '-65.00857262956646', 'order' => '21']);
-        $point361 = GeoPoint::create(['latitude' => '-42.78889540143831', 'longitude' => '-65.01414014111141', 'order' => '22']);
-        $point362 = GeoPoint::create(['latitude' => '-42.788957762797935', 'longitude' => '-65.01485905694659', 'order' => '23']);
-        $point363 = GeoPoint::create(['latitude' => '-42.789067733367574', 'longitude' => '-65.01612363467838', 'order' => '24']);
-        $point364 = GeoPoint::create(['latitude' => '-42.78918055378429', 'longitude' => '-65.01742006364223', 'order' => '25']);
-        $point365 = GeoPoint::create(['latitude' => '-42.7892694019579', 'longitude' => '-65.01836411739667', 'order' => '26']);
-        $point366 = GeoPoint::create(['latitude' => '-42.78928272918395', 'longitude' => '-65.0186698054054', 'order' => '27']);
-        $point367 = GeoPoint::create(['latitude' => '-42.78842316501351', 'longitude' => '-65.01924555833439', 'order' => '28']);
-        $point368 = GeoPoint::create(['latitude' => '-42.78753065996361', 'longitude' => '-65.01982122744435', 'order' => '29']);
-        $point369 = GeoPoint::create(['latitude' => '-42.78735514291114', 'longitude' => '-65.01987118358727', 'order' => '30']);
-        $point370 = GeoPoint::create(['latitude' => '-42.78661351211835', 'longitude' => '-65.02031140114192', 'order' => '31']);
-        $point371 = GeoPoint::create(['latitude' => '-42.78585754827114', 'longitude' => '-65.02078556540447', 'order' => '32']);
-        $point372 = GeoPoint::create(['latitude' => '-42.78511600129738', 'longitude' => '-65.02126392061858', 'order' => '33']);
-        $point373 = GeoPoint::create(['latitude' => '-42.78443614513096', 'longitude' => '-65.02169676209846', 'order' => '34']);
-        $point374 = GeoPoint::create(['latitude' => '-42.78382854096992', 'longitude' => '-65.02208425748216', 'order' => '35']);
-        $point375 = GeoPoint::create(['latitude' => '-42.783148181889345', 'longitude' => '-65.02249572510895', 'order' => '36']);
-        $point376 = GeoPoint::create(['latitude' => '-42.78240034848818', 'longitude' => '-65.02293820577748', 'order' => '37']);
-        $point377 = GeoPoint::create(['latitude' => '-42.78154564582158', 'longitude' => '-65.0234870527973', 'order' => '38']);
-        $point378 = GeoPoint::create(['latitude' => '-42.78073980965049', 'longitude' => '-65.02402651208553', 'order' => '39']);
-        $point379 = GeoPoint::create(['latitude' => '-42.779944534677384', 'longitude' => '-65.024511069908', 'order' => '40']);
-        $point380 = GeoPoint::create(['latitude' => '-42.77909787863783', 'longitude' => '-65.0250396327221', 'order' => '41']);
-        $point381 = GeoPoint::create(['latitude' => '-42.77844903551318', 'longitude' => '-65.02550264905342', 'order' => '42']);
-        $point382 = GeoPoint::create(['latitude' => '-42.777753169911705', 'longitude' => '-65.02595711584348', 'order' => '43']);
-        $point383 = GeoPoint::create(['latitude' => '-42.77674264766512', 'longitude' => '-65.0265706711558', 'order' => '44']);
-        $point384 = GeoPoint::create(['latitude' => '-42.775713182317325', 'longitude' => '-65.02721624533821', 'order' => '45']);
-        $point385 = GeoPoint::create(['latitude' => '-42.77476183630713', 'longitude' => '-65.02783156085019', 'order' => '46']);
-        $point386 = GeoPoint::create(['latitude' => '-42.77379883945153', 'longitude' => '-65.02845048058052', 'order' => '47']);
-        $point387 = GeoPoint::create(['latitude' => '-42.7730629083529', 'longitude' => '-65.02891114997892', 'order' => '48']);
-
-        $zone10 = Zone::create(['name' => 'Desembarco', 'description' => 'Barrio 10', 'color' => 'blue']);
-
-        $zone10->geopoints()->save($point340);
-        $zone10->geopoints()->save($point341);
-        $zone10->geopoints()->save($point342);
-        $zone10->geopoints()->save($point343);
-        $zone10->geopoints()->save($point344);
-        $zone10->geopoints()->save($point345);
-        $zone10->geopoints()->save($point346);
-        $zone10->geopoints()->save($point347);
-        $zone10->geopoints()->save($point348);
-        $zone10->geopoints()->save($point349);
-        $zone10->geopoints()->save($point350);
-        $zone10->geopoints()->save($point351);
-        $zone10->geopoints()->save($point352);
-        $zone10->geopoints()->save($point353);
-        $zone10->geopoints()->save($point354);
-        $zone10->geopoints()->save($point355);
-        $zone10->geopoints()->save($point356);
-        $zone10->geopoints()->save($point357);
-        $zone10->geopoints()->save($point358);
-        $zone10->geopoints()->save($point359);
-        $zone10->geopoints()->save($point360);
-        $zone10->geopoints()->save($point361);
-        $zone10->geopoints()->save($point362);
-        $zone10->geopoints()->save($point363);
-        $zone10->geopoints()->save($point364);
-        $zone10->geopoints()->save($point365);
-        $zone10->geopoints()->save($point366);
-        $zone10->geopoints()->save($point367);
-        $zone10->geopoints()->save($point368);
-        $zone10->geopoints()->save($point369);
-        $zone10->geopoints()->save($point370);
-        $zone10->geopoints()->save($point371);
-        $zone10->geopoints()->save($point372);
-        $zone10->geopoints()->save($point373);
-        $zone10->geopoints()->save($point374);
-        $zone10->geopoints()->save($point375);
-        $zone10->geopoints()->save($point376);
-        $zone10->geopoints()->save($point377);
-        $zone10->geopoints()->save($point378);
-        $zone10->geopoints()->save($point379);
-        $zone10->geopoints()->save($point380);
-        $zone10->geopoints()->save($point381);
-        $zone10->geopoints()->save($point382);
-        $zone10->geopoints()->save($point383);
-        $zone10->geopoints()->save($point384);
-        $zone10->geopoints()->save($point385);
-        $zone10->geopoints()->save($point386);
-        $zone10->geopoints()->save($point387);
+        $zone10 = new Zone();
+        $zone10->name = 'Desembarco';
+        $zone10->description = 'Barrio 10';
+        $zone10->color = 'green';
+        $zone10->geom = new Polygon([
+            new LineString([
+                new Point(-42.7730629083529, -65.02891114997892),
+                new Point(-42.77266384594281, -65.0277151362151),
+                new Point(-42.772194207908, -65.02641283991903),
+                new Point(-42.77580270104323, -65.0225547337073),
+                new Point(-42.77586346984122, -65.02240184779342),
+                new Point(-42.77612967908601, -65.02203815701472),
+                new Point(-42.77646663159359, -65.0216905594901),
+                new Point(-42.77672454275424, -65.0212431334987),
+                new Point(-42.7771364294762, -65.02068841914667),
+                new Point(-42.77766993761318, -65.02002163874923),
+                new Point(-42.77814837664633, -65.01917783255675),
+                new Point(-42.77926811509126, -65.0175658249384),
+                new Point(-42.78000647694185, -65.01652722331619),
+                new Point(-42.78080334447654, -65.01537504690596),
+                new Point(-42.781996256936196, -65.01319650645213),
+                new Point(-42.7826990795173, -65.01163814301411),
+                new Point(-42.783482955102066, -65.00957074659637),
+                new Point(-42.78412350014261, -65.00820332291264),
+                new Point(-42.784342603091574, -65.00663833777111),
+                new Point(-42.788198446189426, -65.00611614520339),
+                new Point(-42.788413106729706, -65.00857262956646),
+                new Point(-42.78889540143831, -65.01414014111141),
+                new Point(-42.788957762797935, -65.01485905694659),
+                new Point(-42.789067733367574, -65.01612363467838),
+                new Point(-42.78918055378429, -65.01742006364223),
+                new Point(-42.7892694019579, -65.01836411739667),
+                new Point(-42.78928272918395, -65.0186698054054),
+                new Point(-42.78842316501351, -65.01924555833439),
+                new Point(-42.78753065996361, -65.01982122744435),
+                new Point(-42.78735514291114, -65.01987118358727),
+                new Point(-42.78661351211835, -65.02031140114192),
+                new Point(-42.78585754827114, -65.02078556540447),
+                new Point(-42.78511600129738, -65.02126392061858),
+                new Point(-42.78443614513096, -65.02169676209846),
+                new Point(-42.78382854096992, -65.02208425748216),
+                new Point(-42.783148181889345, -65.02249572510895),
+                new Point(-42.78240034848818, -65.02293820577748),
+                new Point(-42.78154564582158, -65.0234870527973),
+                new Point(-42.78073980965049, -65.02402651208553),
+                new Point(-42.779944534677384, -65.024511069908),
+                new Point(-42.77909787863783, -65.0250396327221),
+                new Point(-42.77844903551318, -65.02550264905342),
+                new Point(-42.777753169911705, -65.02595711584348),
+                new Point(-42.77674264766512, -65.0265706711558),
+                new Point(-42.775713182317325, -65.02721624533821),
+                new Point(-42.77476183630713, -65.02783156085019),
+                new Point(-42.77379883945153, -65.02845048058052),
+                new Point(-42.7730629083529, -65.02891114997892),
+            ])
+        ]);
+        $zone10->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 11: Bahía Nueva--------------
 
-        $point388 = GeoPoint::create(['latitude' => '-42.77923877843017', 'longitude' => '-65.04441565919318', 'order' => '1']);
-        $point389 = GeoPoint::create(['latitude' => '-42.77907742679409', 'longitude' => '-65.04394208166387', 'order' => '2']);
-        $point390 = GeoPoint::create(['latitude' => '-42.77899360776234', 'longitude' => '-65.04369615662475', 'order' => '3']);
-        $point391 = GeoPoint::create(['latitude' => '-42.778781377973985', 'longitude' => '-65.04307304594283', 'order' => '4']);
-        $point392 = GeoPoint::create(['latitude' => '-42.77873301439268', 'longitude' => '-65.04293130796017', 'order' => '5']);
-        $point393 = GeoPoint::create(['latitude' => '-42.77847703106976', 'longitude' => '-65.04218012179776', 'order' => '6']);
-        $point394 = GeoPoint::create(['latitude' => '-42.77817151069908', 'longitude' => '-65.04128342579627', 'order' => '7']);
-        $point395 = GeoPoint::create(['latitude' => '-42.7778995179411', 'longitude' => '-65.04048521715703', 'order' => '8']);
-        $point396 = GeoPoint::create(['latitude' => '-42.77769927427428', 'longitude' => '-65.03989722664943', 'order' => '9']);
-        $point397 = GeoPoint::create(['latitude' => '-42.777446476074566', 'longitude' => '-65.03915542821856', 'order' => '10']);
-        $point398 = GeoPoint::create(['latitude' => '-42.77698890798035', 'longitude' => '-65.0378127311492', 'order' => '11']);
-        $point399 = GeoPoint::create(['latitude' => '-42.77753532424822', 'longitude' => '-65.03748206506901', 'order' => '12']);
-        $point400 = GeoPoint::create(['latitude' => '-42.77812147073714', 'longitude' => '-65.03711552444324', 'order' => '13']);
-        $point401 = GeoPoint::create(['latitude' => '-42.778686578649115', 'longitude' => '-65.03676222722447', 'order' => '14']);
-        $point402 = GeoPoint::create(['latitude' => '-42.77888640322075', 'longitude' => '-65.03663725304816', 'order' => '15']);
-        $point403 = GeoPoint::create(['latitude' => '-42.77912671238474', 'longitude' => '-65.0373740223371', 'order' => '16']);
-        $point404 = GeoPoint::create(['latitude' => '-42.779355873617504', 'longitude' => '-65.03807667728013', 'order' => '17']);
-        $point405 = GeoPoint::create(['latitude' => '-42.77958201736513', 'longitude' => '-65.03877027976775', 'order' => '18']);
-        $point406 = GeoPoint::create(['latitude' => '-42.780646183792044', 'longitude' => '-65.03808966923006', 'order' => '19']);
-        $point407 = GeoPoint::create(['latitude' => '-42.78090954318974', 'longitude' => '-65.03887035969164', 'order' => '20']);
-        $point408 = GeoPoint::create(['latitude' => '-42.78116225757043', 'longitude' => '-65.03961970183535', 'order' => '21']);
-        $point409 = GeoPoint::create(['latitude' => '-42.78141413376079', 'longitude' => '-65.04036661322714', 'order' => '22']);
-        $point410 = GeoPoint::create(['latitude' => '-42.78167631969205', 'longitude' => '-65.04114403474648', 'order' => '23']);
-        $point411 = GeoPoint::create(['latitude' => '-42.781940014365915', 'longitude' => '-65.04192581485547', 'order' => '24']);
-        $point412 = GeoPoint::create(['latitude' => '-42.782170181427034', 'longitude' => '-65.04260785031671', 'order' => '25']);
-        $point413 = GeoPoint::create(['latitude' => '-42.78160674989573', 'longitude' => '-65.04295603457453', 'order' => '26']);
-        $point414 = GeoPoint::create(['latitude' => '-42.78113208271901', 'longitude' => '-65.04323372702666', 'order' => '27']);
-        $point415 = GeoPoint::create(['latitude' => '-42.78062304973929', 'longitude' => '-65.04356933842975', 'order' => '28']);
-        $point416 = GeoPoint::create(['latitude' => '-42.780112340378906', 'longitude' => '-65.04388575527454', 'order' => '29']);
-        $point417 = GeoPoint::create(['latitude' => '-42.77998191796553', 'longitude' => '-65.0439664730021', 'order' => '30']);
-        $point418 = GeoPoint::create(['latitude' => '-42.77963147059384', 'longitude' => '-65.0441835642943', 'order' => '31']);
-        $point419 = GeoPoint::create(['latitude' => '-42.77923877843017', 'longitude' => '-65.04441565919318', 'order' => '32']);
-
-        $zone11 = Zone::create(['name' => 'Bahía Nueva', 'description' => 'Barrio 11', 'color' => 'blue']);
-
-        $zone11->geopoints()->save($point388);
-        $zone11->geopoints()->save($point389);
-        $zone11->geopoints()->save($point390);
-        $zone11->geopoints()->save($point391);
-        $zone11->geopoints()->save($point392);
-        $zone11->geopoints()->save($point393);
-        $zone11->geopoints()->save($point394);
-        $zone11->geopoints()->save($point395);
-        $zone11->geopoints()->save($point396);
-        $zone11->geopoints()->save($point397);
-        $zone11->geopoints()->save($point398);
-        $zone11->geopoints()->save($point399);
-        $zone11->geopoints()->save($point400);
-        $zone11->geopoints()->save($point401);
-        $zone11->geopoints()->save($point402);
-        $zone11->geopoints()->save($point403);
-        $zone11->geopoints()->save($point404);
-        $zone11->geopoints()->save($point405);
-        $zone11->geopoints()->save($point406);
-        $zone11->geopoints()->save($point407);
-        $zone11->geopoints()->save($point408);
-        $zone11->geopoints()->save($point409);
-        $zone11->geopoints()->save($point410);
-        $zone11->geopoints()->save($point411);
-        $zone11->geopoints()->save($point412);
-        $zone11->geopoints()->save($point413);
-        $zone11->geopoints()->save($point414);
-        $zone11->geopoints()->save($point415);
-        $zone11->geopoints()->save($point416);
-        $zone11->geopoints()->save($point417);
-        $zone11->geopoints()->save($point418);
-        $zone11->geopoints()->save($point419);
+        $zone11 = new Zone();
+        $zone11->name = 'Bahía Nueva';
+        $zone11->description = 'Barrio 11';
+        $zone11->color = 'red';
+        $zone11->geom = new Polygon([
+            new LineString([
+                new Point(-42.77923877843017, -65.04441565919318),
+                new Point(-42.77907742679409, -65.04394208166387),
+                new Point(-42.77899360776234, -65.04369615662475),
+                new Point(-42.778781377973985, -65.04307304594283),
+                new Point(-42.77873301439268, -65.04293130796017),
+                new Point(-42.77847703106976, -65.04218012179776),
+                new Point(-42.77817151069908, -65.04128342579627),
+                new Point(-42.7778995179411, -65.04048521715703),
+                new Point(-42.77769927427428, -65.03989722664943),
+                new Point(-42.777446476074566, -65.03915542821856),
+                new Point(-42.77698890798035, -65.0378127311492),
+                new Point(-42.77753532424822, -65.03748206506901),
+                new Point(-42.77812147073714, -65.03711552444324),
+                new Point(-42.778686578649115, -65.03676222722447),
+                new Point(-42.77888640322075, -65.03663725304816),
+                new Point(-42.77912671238474, -65.0373740223371),
+                new Point(-42.779355873617504, -65.03807667728013),
+                new Point(-42.77958201736513, -65.03877027976775),
+                new Point(-42.780646183792044, -65.03808966923006),
+                new Point(-42.78090954318974, -65.03887035969164),
+                new Point(-42.78116225757043, -65.03961970183535),
+                new Point(-42.78141413376079, -65.04036661322714),
+                new Point(-42.78167631969205, -65.04114403474648),
+                new Point(-42.781940014365915, -65.04192581485547),
+                new Point(-42.782170181427034, -65.04260785031671),
+                new Point(-42.78160674989573, -65.04295603457453),
+                new Point(-42.78113208271901, -65.04323372702666),
+                new Point(-42.78062304973929, -65.04356933842975),
+                new Point(-42.780112340378906, -65.04388575527454),
+                new Point(-42.77998191796553, -65.0439664730021),
+                new Point(-42.77963147059384, -65.0441835642943),
+                new Point(-42.77923877843017, -65.04441565919318),
+            ])
+        ]);
+        $zone11->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 12: Luis Piedrabuena--------------
 
-        $point420 = GeoPoint::create(['latitude' => '-42.782289036814035', 'longitude' => '-65.03450917165142', 'order' => '1']);
-        $point421 = GeoPoint::create(['latitude' => '-42.782081249434384', 'longitude' => '-65.03389603543428', 'order' => '2']);
-        $point422 = GeoPoint::create(['latitude' => '-42.78182811595855', 'longitude' => '-65.0331359644545', 'order' => '3']);
-        $point423 = GeoPoint::create(['latitude' => '-42.78162393279723', 'longitude' => '-65.03254654902335', 'order' => '4']);
-        $point424 = GeoPoint::create(['latitude' => '-42.781499461535105', 'longitude' => '-65.03217925402629', 'order' => '5']);
-        $point425 = GeoPoint::create(['latitude' => '-42.78139552593575', 'longitude' => '-65.0318726440082', 'order' => '6']);
-        $point426 = GeoPoint::create(['latitude' => '-42.78116024591367', 'longitude' => '-65.03117837096833', 'order' => '7']);
-        $point427 = GeoPoint::create(['latitude' => '-42.78094223261211', 'longitude' => '-65.03053480844267', 'order' => '8']);
-        $point428 = GeoPoint::create(['latitude' => '-42.78083041802378', 'longitude' => '-65.03021327863694', 'order' => '9']);
-        $point429 = GeoPoint::create(['latitude' => '-42.78048022210919', 'longitude' => '-65.02917157571054', 'order' => '10']);
-        $point430 = GeoPoint::create(['latitude' => '-42.78002567150011', 'longitude' => '-65.02783005210762', 'order' => '11']);
-        $point431 = GeoPoint::create(['latitude' => '-42.77956173315945', 'longitude' => '-65.02645860511036', 'order' => '12']);
-        $point432 = GeoPoint::create(['latitude' => '-42.779140626344', 'longitude' => '-65.0251901717031', 'order' => '13']);
-        $point433 = GeoPoint::create(['latitude' => '-42.77909787863783', 'longitude' => '-65.0250396327221', 'order' => '14']);
-        $point434 = GeoPoint::create(['latitude' => '-42.779944534677384', 'longitude' => '-65.024511069908', 'order' => '15']);
-        $point435 = GeoPoint::create(['latitude' => '-42.78073980965049', 'longitude' => '-65.02402651208553', 'order' => '16']);
-        $point436 = GeoPoint::create(['latitude' => '-42.78154564582158', 'longitude' => '-65.0234870527973', 'order' => '17']);
-        $point437 = GeoPoint::create(['latitude' => '-42.78240034848818', 'longitude' => '-65.02293820577748', 'order' => '18']);
-        $point438 = GeoPoint::create(['latitude' => '-42.783148181889345', 'longitude' => '-65.02249572510895', 'order' => '19']);
-        $point439 = GeoPoint::create(['latitude' => '-42.78382854096992', 'longitude' => '-65.02208425748216', 'order' => '20']);
-        $point440 = GeoPoint::create(['latitude' => '-42.78443614513096', 'longitude' => '-65.02169676209846', 'order' => '21']);
-        $point441 = GeoPoint::create(['latitude' => '-42.78511600129738', 'longitude' => '-65.02126392061858', 'order' => '22']);
-        $point442 = GeoPoint::create(['latitude' => '-42.78585754827114', 'longitude' => '-65.02078556540447', 'order' => '23']);
-        $point443 = GeoPoint::create(['latitude' => '-42.78661351211835', 'longitude' => '-65.02031140114192', 'order' => '24']);
-        $point444 = GeoPoint::create(['latitude' => '-42.78735514291114', 'longitude' => '-65.01987118358727', 'order' => '25']);
-        $point445 = GeoPoint::create(['latitude' => '-42.78753065996361', 'longitude' => '-65.01982122744435', 'order' => '26']);
-        $point446 = GeoPoint::create(['latitude' => '-42.78842316501351', 'longitude' => '-65.01924555833439', 'order' => '27']);
-        $point447 = GeoPoint::create(['latitude' => '-42.78928272918395', 'longitude' => '-65.0186698054054', 'order' => '28']);
-        $point448 = GeoPoint::create(['latitude' => '-42.7894143250638', 'longitude' => '-65.02024023878398', 'order' => '29']);
-        $point449 = GeoPoint::create(['latitude' => '-42.78954047270656', 'longitude' => '-65.02174604768912', 'order' => '30']);
-        $point450 = GeoPoint::create(['latitude' => '-42.789682378327285', 'longitude' => '-65.02329887907104', 'order' => '31']);
-        $point451 = GeoPoint::create(['latitude' => '-42.78978078187055', 'longitude' => '-65.02448525364622', 'order' => '32']);
-        $point452 = GeoPoint::create(['latitude' => '-42.7898660258258', 'longitude' => '-65.02563214945745', 'order' => '33']);
-        $point453 = GeoPoint::create(['latitude' => '-42.78997105107257', 'longitude' => '-65.02675037915984', 'order' => '34']);
-        $point454 = GeoPoint::create(['latitude' => '-42.790063671102644', 'longitude' => '-65.02793901684886', 'order' => '35']);
-        $point455 = GeoPoint::create(['latitude' => '-42.79021052204624', 'longitude' => '-65.02957600253866', 'order' => '36']);
-        $point456 = GeoPoint::create(['latitude' => '-42.790182023575454', 'longitude' => '-65.02959494563983', 'order' => '37']);
-        $point457 = GeoPoint::create(['latitude' => '-42.789249955942545', 'longitude' => '-65.03014655868768', 'order' => '38']);
-        $point458 = GeoPoint::create(['latitude' => '-42.78836021692069', 'longitude' => '-65.03069448369813', 'order' => '39']);
-        $point459 = GeoPoint::create(['latitude' => '-42.78778412871557', 'longitude' => '-65.03106060522875', 'order' => '40']);
-        $point460 = GeoPoint::create(['latitude' => '-42.787108044405585', 'longitude' => '-65.03149051304251', 'order' => '41']);
-        $point461 = GeoPoint::create(['latitude' => '-42.7864160344796', 'longitude' => '-65.03192243251304', 'order' => '42']);
-        $point462 = GeoPoint::create(['latitude' => '-42.78637764536304', 'longitude' => '-65.03194757822256', 'order' => '43']);
-        $point463 = GeoPoint::create(['latitude' => '-42.78618326902846', 'longitude' => '-65.03207347440824', 'order' => '44']);
-        $point464 = GeoPoint::create(['latitude' => '-42.78562251970615', 'longitude' => '-65.03244018267206', 'order' => '45']);
-        $point465 = GeoPoint::create(['latitude' => '-42.78481266022152', 'longitude' => '-65.0329354693306', 'order' => '46']);
-        $point466 = GeoPoint::create(['latitude' => '-42.78468315981749', 'longitude' => '-65.03301476213463', 'order' => '47']);
-        $point467 = GeoPoint::create(['latitude' => '-42.783953347508174', 'longitude' => '-65.03346143375474', 'order' => '48']);
-        $point468 = GeoPoint::create(['latitude' => '-42.78310845166828', 'longitude' => '-65.03398102793247', 'order' => '49']);
-        $point469 = GeoPoint::create(['latitude' => '-42.78301725656178', 'longitude' => '-65.03403986889275', 'order' => '50']);
-        $point470 = GeoPoint::create(['latitude' => '-42.782289036814035', 'longitude' => '-65.03450917165142', 'order' => '51']);
-
-        $zone12 = Zone::create(['name' => 'Luis Piedrabuena', 'description' => 'Barrio 12', 'color' => 'blue']);
-
-        $zone12->geopoints()->save($point420);
-        $zone12->geopoints()->save($point421);
-        $zone12->geopoints()->save($point422);
-        $zone12->geopoints()->save($point423);
-        $zone12->geopoints()->save($point424);
-        $zone12->geopoints()->save($point425);
-        $zone12->geopoints()->save($point426);
-        $zone12->geopoints()->save($point427);
-        $zone12->geopoints()->save($point428);
-        $zone12->geopoints()->save($point429);
-        $zone12->geopoints()->save($point430);
-        $zone12->geopoints()->save($point431);
-        $zone12->geopoints()->save($point432);
-        $zone12->geopoints()->save($point433);
-        $zone12->geopoints()->save($point434);
-        $zone12->geopoints()->save($point435);
-        $zone12->geopoints()->save($point436);
-        $zone12->geopoints()->save($point437);
-        $zone12->geopoints()->save($point438);
-        $zone12->geopoints()->save($point439);
-        $zone12->geopoints()->save($point440);
-        $zone12->geopoints()->save($point441);
-        $zone12->geopoints()->save($point442);
-        $zone12->geopoints()->save($point443);
-        $zone12->geopoints()->save($point444);
-        $zone12->geopoints()->save($point445);
-        $zone12->geopoints()->save($point446);
-        $zone12->geopoints()->save($point447);
-        $zone12->geopoints()->save($point448);
-        $zone12->geopoints()->save($point449);
-        $zone12->geopoints()->save($point450);
-        $zone12->geopoints()->save($point451);
-        $zone12->geopoints()->save($point452);
-        $zone12->geopoints()->save($point453);
-        $zone12->geopoints()->save($point454);
-        $zone12->geopoints()->save($point455);
-        $zone12->geopoints()->save($point456);
-        $zone12->geopoints()->save($point457);
-        $zone12->geopoints()->save($point458);
-        $zone12->geopoints()->save($point459);
-        $zone12->geopoints()->save($point460);
-        $zone12->geopoints()->save($point461);
-        $zone12->geopoints()->save($point462);
-        $zone12->geopoints()->save($point463);
-        $zone12->geopoints()->save($point464);
-        $zone12->geopoints()->save($point465);
-        $zone12->geopoints()->save($point466);
-        $zone12->geopoints()->save($point467);
-        $zone12->geopoints()->save($point468);
-        $zone12->geopoints()->save($point469);
-        $zone12->geopoints()->save($point470);
+        $zone12 = new Zone();
+        $zone12->name = 'Luis Piedrabuena';
+        $zone12->description = 'Barrio 12';
+        $zone12->color = 'red';
+        $zone12->geom = new Polygon([
+            new LineString([
+                new Point(-42.782289036814035, -65.03450917165142),
+                new Point(-42.782081249434384, -65.03389603543428),
+                new Point(-42.78182811595855, -65.0331359644545),
+                new Point(-42.78162393279723, -65.03254654902335),
+                new Point(-42.781499461535105, -65.03217925402629),
+                new Point(-42.78139552593575, -65.0318726440082),
+                new Point(-42.78116024591367, -65.03117837096833),
+                new Point(-42.78094223261211, -65.03053480844267),
+                new Point(-42.78083041802378, -65.03021327863694),
+                new Point(-42.78048022210919, -65.02917157571054),
+                new Point(-42.78002567150011, -65.02783005210762),
+                new Point(-42.77956173315945, -65.02645860511036),
+                new Point(-42.779140626344, -65.0251901717031),
+                new Point(-42.77909787863783, -65.0250396327221),
+                new Point(-42.779944534677384, -65.024511069908),
+                new Point(-42.78073980965049, -65.02402651208553),
+                new Point(-42.78154564582158, -65.0234870527973),
+                new Point(-42.78240034848818, -65.02293820577748),
+                new Point(-42.783148181889345, -65.02249572510895),
+                new Point(-42.78382854096992, -65.02208425748216),
+                new Point(-42.78443614513096, -65.02169676209846),
+                new Point(-42.78511600129738, -65.02126392061858),
+                new Point(-42.78585754827114, -65.02078556540447),
+                new Point(-42.78661351211835, -65.02031140114192),
+                new Point(-42.78735514291114, -65.01987118358727),
+                new Point(-42.78753065996361, -65.01982122744435),
+                new Point(-42.78842316501351, -65.01924555833439),
+                new Point(-42.78928272918395, -65.0186698054054),
+                new Point(-42.7894143250638, -65.02024023878398),
+                new Point(-42.78954047270656, -65.02174604768912),
+                new Point(-42.789682378327285, -65.02329887907104),
+                new Point(-42.78978078187055, -65.02448525364622),
+                new Point(-42.7898660258258, -65.02563214945745),
+                new Point(-42.78997105107257, -65.02675037915984),
+                new Point(-42.790063671102644, -65.02793901684886),
+                new Point(-42.79021052204624, -65.02957600253866),
+                new Point(-42.790182023575454, -65.02959494563983),
+                new Point(-42.789249955942545, -65.03014655868768),
+                new Point(-42.78836021692069, -65.03069448369813),
+                new Point(-42.78778412871557, -65.03106060522875),
+                new Point(-42.787108044405585, -65.03149051304251),
+                new Point(-42.7864160344796, -65.03192243251304),
+                new Point(-42.78637764536304, -65.03194757822256),
+                new Point(-42.78618326902846, -65.03207347440824),
+                new Point(-42.78562251970615, -65.03244018267206),
+                new Point(-42.78481266022152, -65.0329354693306),
+                new Point(-42.78468315981749, -65.03301476213463),
+                new Point(-42.783953347508174, -65.03346143375474),
+                new Point(-42.78310845166828, -65.03398102793247),
+                new Point(-42.78301725656178, -65.03403986889275),
+                new Point(-42.782289036814035, -65.03450917165142),
+            ])
+        ]);
+        $zone12->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 13: Gobernador Gallina--------------
 
-        $point471 = GeoPoint::create(['latitude' => '-42.785004019070975', 'longitude' => '-65.04252143289499', 'order' => '1']);
-        $point472 = GeoPoint::create(['latitude' => '-42.784629012723', 'longitude' => '-65.04141477021899', 'order' => '2']);
-        $point473 = GeoPoint::create(['latitude' => '-42.78454125419677', 'longitude' => '-65.0411409334423', 'order' => '3']);
-        $point474 = GeoPoint::create(['latitude' => '-42.78430195086116', 'longitude' => '-65.04044951024953', 'order' => '4']);
-        $point475 = GeoPoint::create(['latitude' => '-42.784267165963', 'longitude' => '-65.04034674811662', 'order' => '5']);
-        $point476 = GeoPoint::create(['latitude' => '-42.78403230503608', 'longitude' => '-65.03965373236224', 'order' => '6']);
-        $point477 = GeoPoint::create(['latitude' => '-42.783772046942545', 'longitude' => '-65.03888553093638', 'order' => '7']);
-        $point478 = GeoPoint::create(['latitude' => '-42.78354590319492', 'longitude' => '-65.0382184152628', 'order' => '8']);
-        $point479 = GeoPoint::create(['latitude' => '-42.78351564452447', 'longitude' => '-65.03812906417497', 'order' => '9']);
-        $point480 = GeoPoint::create(['latitude' => '-42.78331431121023', 'longitude' => '-65.03753503869706', 'order' => '10']);
-        $point481 = GeoPoint::create(['latitude' => '-42.78325488351672', 'longitude' => '-65.03735943782559', 'order' => '11']);
-        $point482 = GeoPoint::create(['latitude' => '-42.78299537979447', 'longitude' => '-65.03659366715165', 'order' => '12']);
-        $point483 = GeoPoint::create(['latitude' => '-42.78276152469593', 'longitude' => '-65.0359036688824', 'order' => '13']);
-        $point484 = GeoPoint::create(['latitude' => '-42.78252557412159', 'longitude' => '-65.03520713272869', 'order' => '14']);
-        $point485 = GeoPoint::create(['latitude' => '-42.782289036814035', 'longitude' => '-65.03450917165142', 'order' => '15']);
-        $point486 = GeoPoint::create(['latitude' => '-42.78301725656178', 'longitude' => '-65.03403986889275', 'order' => '16']);
-        $point487 = GeoPoint::create(['latitude' => '-42.78310845166828', 'longitude' => '-65.03398102793247', 'order' => '17']);
-        $point488 = GeoPoint::create(['latitude' => '-42.783953347508174', 'longitude' => '-65.03346143375474', 'order' => '18']);
-        $point489 = GeoPoint::create(['latitude' => '-42.78468315981749', 'longitude' => '-65.03301476213463', 'order' => '19']);
-        $point490 = GeoPoint::create(['latitude' => '-42.78481266022152', 'longitude' => '-65.0329354693306', 'order' => '20']);
-        $point491 = GeoPoint::create(['latitude' => '-42.78562251970615', 'longitude' => '-65.03244018267206', 'order' => '21']);
-        $point492 = GeoPoint::create(['latitude' => '-42.78618326902846', 'longitude' => '-65.03207347440824', 'order' => '22']);
-        $point493 = GeoPoint::create(['latitude' => '-42.78637764536304', 'longitude' => '-65.03194757822256', 'order' => '23']);
-        $point494 = GeoPoint::create(['latitude' => '-42.7864160344796', 'longitude' => '-65.03192243251304', 'order' => '24']);
-        $point495 = GeoPoint::create(['latitude' => '-42.787108044405585', 'longitude' => '-65.03149051304251', 'order' => '25']);
-        $point496 = GeoPoint::create(['latitude' => '-42.78778412871557', 'longitude' => '-65.03106060522875', 'order' => '26']);
-        $point497 = GeoPoint::create(['latitude' => '-42.78836021692069', 'longitude' => '-65.03069448369813', 'order' => '27']);
-        $point498 = GeoPoint::create(['latitude' => '-42.789249955942545', 'longitude' => '-65.03014655868768', 'order' => '28']);
-        $point499 = GeoPoint::create(['latitude' => '-42.790182023575454', 'longitude' => '-65.02959494563983', 'order' => '29']);
-        $point500 = GeoPoint::create(['latitude' => '-42.79021052204624', 'longitude' => '-65.02957600253866', 'order' => '30']);
-        $point501 = GeoPoint::create(['latitude' => '-42.79040087506732', 'longitude' => '-65.03213516521559', 'order' => '31']);
-        $point502 = GeoPoint::create(['latitude' => '-42.790408921694365', 'longitude' => '-65.03290571357434', 'order' => '32']);
-        $point503 = GeoPoint::create(['latitude' => '-42.790744281640336', 'longitude' => '-65.03345330330866', 'order' => '33']);
-        $point504 = GeoPoint::create(['latitude' => '-42.79064445317354', 'longitude' => '-65.03457094627781', 'order' => '34']);
-        $point505 = GeoPoint::create(['latitude' => '-42.79104033046042', 'longitude' => '-65.03879358145856', 'order' => '35']);
-        $point506 = GeoPoint::create(['latitude' => '-42.790889623841366', 'longitude' => '-65.03887932832804', 'order' => '36']);
-        $point507 = GeoPoint::create(['latitude' => '-42.78980743632263', 'longitude' => '-65.03952012482564', 'order' => '37']);
-        $point508 = GeoPoint::create(['latitude' => '-42.7890646320634', 'longitude' => '-65.03996017474226', 'order' => '38']);
-        $point509 = GeoPoint::create(['latitude' => '-42.78873086467902', 'longitude' => '-65.04015773620006', 'order' => '39']);
-        $point510 = GeoPoint::create(['latitude' => '-42.788327108403166', 'longitude' => '-65.0403968718976', 'order' => '40']);
-        $point511 = GeoPoint::create(['latitude' => '-42.78753024086845', 'longitude' => '-65.04093063149169', 'order' => '41']);
-        $point512 = GeoPoint::create(['latitude' => '-42.78667914242021', 'longitude' => '-65.0414475434604', 'order' => '42']);
-        $point513 = GeoPoint::create(['latitude' => '-42.786162481908605', 'longitude' => '-65.04178600471054', 'order' => '43']);
-        $point514 = GeoPoint::create(['latitude' => '-42.78563157216157', 'longitude' => '-65.04212304103716', 'order' => '44']);
-        $point515 = GeoPoint::create(['latitude' => '-42.785004019070975', 'longitude' => '-65.04252143289499', 'order' => '45']);
-
-        $zone13 = Zone::create(['name' => 'Gobernador Gallina', 'description' => 'Barrio 13', 'color' => 'blue']);
-
-        $zone13->geopoints()->save($point471);
-        $zone13->geopoints()->save($point472);
-        $zone13->geopoints()->save($point473);
-        $zone13->geopoints()->save($point474);
-        $zone13->geopoints()->save($point475);
-        $zone13->geopoints()->save($point476);
-        $zone13->geopoints()->save($point477);
-        $zone13->geopoints()->save($point478);
-        $zone13->geopoints()->save($point479);
-        $zone13->geopoints()->save($point480);
-        $zone13->geopoints()->save($point481);
-        $zone13->geopoints()->save($point482);
-        $zone13->geopoints()->save($point483);
-        $zone13->geopoints()->save($point484);
-        $zone13->geopoints()->save($point485);
-        $zone13->geopoints()->save($point486);
-        $zone13->geopoints()->save($point487);
-        $zone13->geopoints()->save($point488);
-        $zone13->geopoints()->save($point489);
-        $zone13->geopoints()->save($point490);
-        $zone13->geopoints()->save($point491);
-        $zone13->geopoints()->save($point492);
-        $zone13->geopoints()->save($point493);
-        $zone13->geopoints()->save($point494);
-        $zone13->geopoints()->save($point495);
-        $zone13->geopoints()->save($point496);
-        $zone13->geopoints()->save($point497);
-        $zone13->geopoints()->save($point498);
-        $zone13->geopoints()->save($point499);
-        $zone13->geopoints()->save($point500);
-        $zone13->geopoints()->save($point501);
-        $zone13->geopoints()->save($point502);
-        $zone13->geopoints()->save($point503);
-        $zone13->geopoints()->save($point504);
-        $zone13->geopoints()->save($point505);
-        $zone13->geopoints()->save($point506);
-        $zone13->geopoints()->save($point507);
-        $zone13->geopoints()->save($point508);
-        $zone13->geopoints()->save($point509);
-        $zone13->geopoints()->save($point510);
-        $zone13->geopoints()->save($point511);
-        $zone13->geopoints()->save($point512);
-        $zone13->geopoints()->save($point513);
-        $zone13->geopoints()->save($point514);
-        $zone13->geopoints()->save($point515);
+        $zone13 = new Zone();
+        $zone13->name = 'Gobernador Gallina';
+        $zone13->description = 'Barrio 13';
+        $zone13->color = 'blue';
+        $zone13->geom = new Polygon([
+            new LineString([
+                new Point(-42.785004019070975, -65.04252143289499),
+                new Point(-42.784629012723, -65.04141477021899),
+                new Point(-42.78454125419677, -65.0411409334423),
+                new Point(-42.78430195086116, -65.04044951024953),
+                new Point(-42.784267165963, -65.04034674811662),
+                new Point(-42.78403230503608, -65.03965373236224),
+                new Point(-42.783772046942545, -65.03888553093638),
+                new Point(-42.78354590319492, -65.0382184152628),
+                new Point(-42.78351564452447, -65.03812906417497),
+                new Point(-42.78331431121023, -65.03753503869706),
+                new Point(-42.78325488351672, -65.03735943782559),
+                new Point(-42.78299537979447, -65.03659366715165),
+                new Point(-42.78276152469593, -65.0359036688824),
+                new Point(-42.78252557412159, -65.03520713272869),
+                new Point(-42.782289036814035, -65.03450917165142),
+                new Point(-42.78301725656178, -65.03403986889275),
+                new Point(-42.78310845166828, -65.03398102793247),
+                new Point(-42.783953347508174, -65.03346143375474),
+                new Point(-42.78468315981749, -65.03301476213463),
+                new Point(-42.78481266022152, -65.0329354693306),
+                new Point(-42.78562251970615, -65.03244018267206),
+                new Point(-42.78618326902846, -65.03207347440824),
+                new Point(-42.78637764536304, -65.03194757822256),
+                new Point(-42.7864160344796, -65.03192243251304),
+                new Point(-42.787108044405585, -65.03149051304251),
+                new Point(-42.78778412871557, -65.03106060522875),
+                new Point(-42.78836021692069, -65.03069448369813),
+                new Point(-42.789249955942545, -65.03014655868768),
+                new Point(-42.790182023575454, -65.02959494563983),
+                new Point(-42.79021052204624, -65.02957600253866),
+                new Point(-42.79040087506732, -65.03213516521559),
+                new Point(-42.790408921694365, -65.03290571357434),
+                new Point(-42.790744281640336, -65.03345330330866),
+                new Point(-42.79064445317354, -65.03457094627781),
+                new Point(-42.79104033046042, -65.03879358145856),
+                new Point(-42.790889623841366, -65.03887932832804),
+                new Point(-42.78980743632263, -65.03952012482564),
+                new Point(-42.7890646320634, -65.03996017474226),
+                new Point(-42.78873086467902, -65.04015773620006),
+                new Point(-42.788327108403166, -65.0403968718976),
+                new Point(-42.78753024086845, -65.04093063149169),
+                new Point(-42.78667914242021, -65.0414475434604),
+                new Point(-42.786162481908605, -65.04178600471054),
+                new Point(-42.78563157216157, -65.04212304103716),
+                new Point(-42.785004019070975, -65.04252143289499),
+            ])
+        ]);
+        $zone13->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 14: Parry Madryn--------------
 
-        $point516 = GeoPoint::create(['latitude' => '-42.76736405238523', 'longitude' => '-65.0406749834449', 'order' => '1']);
-        $point517 = GeoPoint::create(['latitude' => '-42.76667170718309', 'longitude' => '-65.04008062269087', 'order' => '2']);
-        $point518 = GeoPoint::create(['latitude' => '-42.76627943411458', 'longitude' => '-65.03973671320365', 'order' => '3']);
-        $point519 = GeoPoint::create(['latitude' => '-42.7658389651028', 'longitude' => '-65.03934242847836', 'order' => '4']);
-        $point520 = GeoPoint::create(['latitude' => '-42.76512843117078', 'longitude' => '-65.0387902286973', 'order' => '5']);
-        $point521 = GeoPoint::create(['latitude' => '-42.765053916051585', 'longitude' => '-65.03883850845958', 'order' => '6']);
-        $point522 = GeoPoint::create(['latitude' => '-42.76413232579765', 'longitude' => '-65.03942951645234', 'order' => '7']);
-        $point523 = GeoPoint::create(['latitude' => '-42.76368012212143', 'longitude' => '-65.03972950476692', 'order' => '8']);
-        $point524 = GeoPoint::create(['latitude' => '-42.763190032242875', 'longitude' => '-65.04006427797967', 'order' => '9']);
-        $point525 = GeoPoint::create(['latitude' => '-42.763140746652226', 'longitude' => '-65.04009780559237', 'order' => '10']);
-        $point526 = GeoPoint::create(['latitude' => '-42.7629872740051', 'longitude' => '-65.04019704732595', 'order' => '11']);
-        $point527 = GeoPoint::create(['latitude' => '-42.7624442104985', 'longitude' => '-65.03972682255791', 'order' => '12']);
-        $point528 = GeoPoint::create(['latitude' => '-42.762057134209954', 'longitude' => '-65.03939313899257', 'order' => '13']);
-        $point529 = GeoPoint::create(['latitude' => '-42.76180626384797', 'longitude' => '-65.03921753812108', 'order' => '14']);
-        $point530 = GeoPoint::create(['latitude' => '-42.76140317812434', 'longitude' => '-65.0390855231461', 'order' => '15']);
-        $point531 = GeoPoint::create(['latitude' => '-42.76110201634333', 'longitude' => '-65.03902098249166', 'order' => '16']);
-        $point532 = GeoPoint::create(['latitude' => '-42.76077042825378', 'longitude' => '-65.03899407658248', 'order' => '17']);
-        $point533 = GeoPoint::create(['latitude' => '-42.75985587879853', 'longitude' => '-65.0389125206646', 'order' => '18']);
-        $point534 = GeoPoint::create(['latitude' => '-42.75999853879053', 'longitude' => '-65.03819243136296', 'order' => '19']);
-        $point535 = GeoPoint::create(['latitude' => '-42.76007573611875', 'longitude' => '-65.03779387186707', 'order' => '20']);
-        $point536 = GeoPoint::create(['latitude' => '-42.76009266756316', 'longitude' => '-65.03770636479793', 'order' => '21']);
-        $point537 = GeoPoint::create(['latitude' => '-42.76017891734682', 'longitude' => '-65.03714653748497', 'order' => '22']);
-        $point538 = GeoPoint::create(['latitude' => '-42.760252510456695', 'longitude' => '-65.03685216504552', 'order' => '23']);
-        $point539 = GeoPoint::create(['latitude' => '-42.760262233464374', 'longitude' => '-65.0368151170335', 'order' => '24']);
-        $point540 = GeoPoint::create(['latitude' => '-42.760263909845', 'longitude' => '-65.03677597354567', 'order' => '25']);
-        $point541 = GeoPoint::create(['latitude' => '-42.760257455779566', 'longitude' => '-65.03673766824816', 'order' => '26']);
-        $point542 = GeoPoint::create(['latitude' => '-42.760243122725136', 'longitude' => '-65.03670347008322', 'order' => '27']);
-        $point543 = GeoPoint::create(['latitude' => '-42.76022241942431', 'longitude' => '-65.03667614507887', 'order' => '28']);
-        $point544 = GeoPoint::create(['latitude' => '-42.75996316715913', 'longitude' => '-65.0350365609991', 'order' => '29']);
-        $point545 = GeoPoint::create(['latitude' => '-42.760404558180255', 'longitude' => '-65.03488216634264', 'order' => '30']);
-        $point546 = GeoPoint::create(['latitude' => '-42.76260933399101', 'longitude' => '-65.03367944705629', 'order' => '31']);
-        $point547 = GeoPoint::create(['latitude' => '-42.76312884434972', 'longitude' => '-65.03334257836774', 'order' => '32']);
-        $point548 = GeoPoint::create(['latitude' => '-42.768561155796476', 'longitude' => '-65.02997313711101', 'order' => '33']);
-        $point549 = GeoPoint::create(['latitude' => '-42.76911804944331', 'longitude' => '-65.0294984699343', 'order' => '34']);
-        $point550 = GeoPoint::create(['latitude' => '-42.76962523840433', 'longitude' => '-65.02913310277496', 'order' => '35']);
-        $point551 = GeoPoint::create(['latitude' => '-42.770939772279036', 'longitude' => '-65.02778663384917', 'order' => '36']);
-        $point552 = GeoPoint::create(['latitude' => '-42.771321232692486', 'longitude' => '-65.02734624865644', 'order' => '37']);
-        $point553 = GeoPoint::create(['latitude' => '-42.772194207908', 'longitude' => '-65.02641283991903', 'order' => '38']);
-        $point554 = GeoPoint::create(['latitude' => '-42.77266384594281', 'longitude' => '-65.0277151362151', 'order' => '39']);
-        $point555 = GeoPoint::create(['latitude' => '-42.7730629083529', 'longitude' => '-65.02891114997892', 'order' => '40']);
-        $point556 = GeoPoint::create(['latitude' => '-42.77308553949146', 'longitude' => '-65.02897753465207', 'order' => '41']);
-        $point557 = GeoPoint::create(['latitude' => '-42.773519470618766', 'longitude' => '-65.03025434996249', 'order' => '42']);
-        $point558 = GeoPoint::create(['latitude' => '-42.77397485941818', 'longitude' => '-65.03159411336573', 'order' => '43']);
-        $point559 = GeoPoint::create(['latitude' => '-42.7744432401675', 'longitude' => '-65.03297201442844', 'order' => '44']);
-        $point560 = GeoPoint::create(['latitude' => '-42.77490273609948', 'longitude' => '-65.03432393159129', 'order' => '45']);
-        $point561 = GeoPoint::create(['latitude' => '-42.775354353042474', 'longitude' => '-65.03565263088235', 'order' => '46']);
-        $point562 = GeoPoint::create(['latitude' => '-42.77418717302555', 'longitude' => '-65.0363563754728', 'order' => '47']);
-        $point563 = GeoPoint::create(['latitude' => '-42.7730491620317', 'longitude' => '-65.03701653416674', 'order' => '48']);
-        $point564 = GeoPoint::create(['latitude' => '-42.771881982014776', 'longitude' => '-65.03780124794186', 'order' => '49']);
-        $point565 = GeoPoint::create(['latitude' => '-42.77087808147169', 'longitude' => '-65.03841446797803', 'order' => '50']);
-        $point566 = GeoPoint::create(['latitude' => '-42.76990737326517', 'longitude' => '-65.0390630596456', 'order' => '51']);
-        $point567 = GeoPoint::create(['latitude' => '-42.768938844353464', 'longitude' => '-65.03966513175055', 'order' => '52']);
-        $point568 = GeoPoint::create(['latitude' => '-42.767965537756965', 'longitude' => '-65.04028011198639', 'order' => '53']);
-        $point569 = GeoPoint::create(['latitude' => '-42.76736405238523', 'longitude' => '-65.0406749834449', 'order' => '54']);
-
-        $zone14 = Zone::create(['name' => 'Parry Madryn', 'description' => 'Barrio 14', 'color' => 'blue']);
-
-        $zone14->geopoints()->save($point516);
-        $zone14->geopoints()->save($point517);
-        $zone14->geopoints()->save($point518);
-        $zone14->geopoints()->save($point519);
-        $zone14->geopoints()->save($point520);
-        $zone14->geopoints()->save($point521);
-        $zone14->geopoints()->save($point522);
-        $zone14->geopoints()->save($point523);
-        $zone14->geopoints()->save($point524);
-        $zone14->geopoints()->save($point525);
-        $zone14->geopoints()->save($point526);
-        $zone14->geopoints()->save($point527);
-        $zone14->geopoints()->save($point528);
-        $zone14->geopoints()->save($point529);
-        $zone14->geopoints()->save($point530);
-        $zone14->geopoints()->save($point531);
-        $zone14->geopoints()->save($point532);
-        $zone14->geopoints()->save($point533);
-        $zone14->geopoints()->save($point534);
-        $zone14->geopoints()->save($point535);
-        $zone14->geopoints()->save($point536);
-        $zone14->geopoints()->save($point537);
-        $zone14->geopoints()->save($point538);
-        $zone14->geopoints()->save($point539);
-        $zone14->geopoints()->save($point540);
-        $zone14->geopoints()->save($point541);
-        $zone14->geopoints()->save($point542);
-        $zone14->geopoints()->save($point543);
-        $zone14->geopoints()->save($point544);
-        $zone14->geopoints()->save($point545);
-        $zone14->geopoints()->save($point546);
-        $zone14->geopoints()->save($point547);
-        $zone14->geopoints()->save($point548);
-        $zone14->geopoints()->save($point549);
-        $zone14->geopoints()->save($point550);
-        $zone14->geopoints()->save($point551);
-        $zone14->geopoints()->save($point552);
-        $zone14->geopoints()->save($point553);
-        $zone14->geopoints()->save($point554);
-        $zone14->geopoints()->save($point555);
-        $zone14->geopoints()->save($point556);
-        $zone14->geopoints()->save($point557);
-        $zone14->geopoints()->save($point558);
-        $zone14->geopoints()->save($point559);
-        $zone14->geopoints()->save($point560);
-        $zone14->geopoints()->save($point561);
-        $zone14->geopoints()->save($point562);
-        $zone14->geopoints()->save($point563);
-        $zone14->geopoints()->save($point564);
-        $zone14->geopoints()->save($point565);
-        $zone14->geopoints()->save($point566);
-        $zone14->geopoints()->save($point567);
-        $zone14->geopoints()->save($point568);
-        $zone14->geopoints()->save($point569);
+        $zone14 = new Zone();
+        $zone14->name = 'Parry Madryn';
+        $zone14->description = 'Barrio 14';
+        $zone14->color = 'green';
+        $zone14->geom = new Polygon([
+            new LineString([
+                new Point(-42.76736405238523, -65.0406749834449),
+                new Point(-42.76667170718309, -65.04008062269087),
+                new Point(-42.76627943411458, -65.03973671320365),
+                new Point(-42.7658389651028, -65.03934242847836),
+                new Point(-42.76512843117078, -65.0387902286973),
+                new Point(-42.765053916051585, -65.03883850845958),
+                new Point(-42.76413232579765, -65.03942951645234),
+                new Point(-42.76368012212143, -65.03972950476692),
+                new Point(-42.763190032242875, -65.04006427797967),
+                new Point(-42.763140746652226, -65.04009780559237),
+                new Point(-42.7629872740051, -65.04019704732595),
+                new Point(-42.7624442104985, -65.03972682255791),
+                new Point(-42.762057134209954, -65.03939313899257),
+                new Point(-42.76180626384797, -65.03921753812108),
+                new Point(-42.76140317812434, -65.0390855231461),
+                new Point(-42.76110201634333, -65.03902098249166),
+                new Point(-42.76077042825378, -65.03899407658248),
+                new Point(-42.75985587879853, -65.0389125206646),
+                new Point(-42.75999853879053, -65.03819243136296),
+                new Point(-42.76007573611875, -65.03779387186707),
+                new Point(-42.76009266756316, -65.03770636479793),
+                new Point(-42.76017891734682, -65.03714653748497),
+                new Point(-42.760252510456695, -65.03685216504552),
+                new Point(-42.760262233464374, -65.0368151170335),
+                new Point(-42.760263909845, -65.03677597354567),
+                new Point(-42.760257455779566, -65.03673766824816),
+                new Point(-42.760243122725136, -65.03670347008322),
+                new Point(-42.76022241942431, -65.03667614507887),
+                new Point(-42.75996316715913, -65.0350365609991),
+                new Point(-42.760404558180255, -65.03488216634264),
+                new Point(-42.76260933399101, -65.03367944705629),
+                new Point(-42.76312884434972, -65.03334257836774),
+                new Point(-42.768561155796476, -65.02997313711101),
+                new Point(-42.76911804944331, -65.0294984699343),
+                new Point(-42.76962523840433, -65.02913310277496),
+                new Point(-42.770939772279036, -65.02778663384917),
+                new Point(-42.771321232692486, -65.02734624865644),
+                new Point(-42.772194207908, -65.02641283991903),
+                new Point(-42.77266384594281, -65.0277151362151),
+                new Point(-42.7730629083529, -65.02891114997892),
+                new Point(-42.77308553949146, -65.02897753465207),
+                new Point(-42.773519470618766, -65.03025434996249),
+                new Point(-42.77397485941818, -65.03159411336573),
+                new Point(-42.7744432401675, -65.03297201442844),
+                new Point(-42.77490273609948, -65.03432393159129),
+                new Point(-42.775354353042474, -65.03565263088235),
+                new Point(-42.77418717302555, -65.0363563754728),
+                new Point(-42.7730491620317, -65.03701653416674),
+                new Point(-42.771881982014776, -65.03780124794186),
+                new Point(-42.77087808147169, -65.03841446797803),
+                new Point(-42.76990737326517, -65.0390630596456),
+                new Point(-42.768938844353464, -65.03966513175055),
+                new Point(-42.767965537756965, -65.04028011198639),
+                new Point(-42.76736405238523, -65.0406749834449),
+            ])
+        ]);
+        $zone14->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 15: Colonos Galeses--------------
 
-        $point570 = GeoPoint::create(['latitude' => '-42.76651815071696', 'longitude' => '-65.04725980657801', 'order' => '1']);
-        $point571 = GeoPoint::create(['latitude' => '-42.76647096060208', 'longitude' => '-65.04723482850655', 'order' => '2']);
-        $point572 = GeoPoint::create(['latitude' => '-42.76629670083511', 'longitude' => '-65.04715293731255', 'order' => '3']);
-        $point573 = GeoPoint::create(['latitude' => '-42.76560754075618', 'longitude' => '-65.04678463648709', 'order' => '4']);
-        $point574 = GeoPoint::create(['latitude' => '-42.76465644620308', 'longitude' => '-65.04631550136648', 'order' => '5']);
-        $point575 = GeoPoint::create(['latitude' => '-42.76396376572483', 'longitude' => '-65.04595625299646', 'order' => '6']);
-        $point576 = GeoPoint::create(['latitude' => '-42.76397550038928', 'longitude' => '-65.045786016543', 'order' => '7']);
-        $point577 = GeoPoint::create(['latitude' => '-42.76436333104911', 'longitude' => '-65.0441954665968', 'order' => '8']);
-        $point578 = GeoPoint::create(['latitude' => '-42.76388807713917', 'longitude' => '-65.04376405004047', 'order' => '9']);
-        $point579 = GeoPoint::create(['latitude' => '-42.7633638729147', 'longitude' => '-65.04329307090114', 'order' => '10']);
-        $point580 = GeoPoint::create(['latitude' => '-42.76328407719649', 'longitude' => '-65.04322324964771', 'order' => '11']);
-        $point581 = GeoPoint::create(['latitude' => '-42.76368741437719', 'longitude' => '-65.04243107597878', 'order' => '12']);
-        $point582 = GeoPoint::create(['latitude' => '-42.763899057432326', 'longitude' => '-65.04198960113862', 'order' => '13']);
-        $point583 = GeoPoint::create(['latitude' => '-42.7642381054157', 'longitude' => '-65.04127990539693', 'order' => '14']);
-        $point584 = GeoPoint::create(['latitude' => '-42.76357166029436', 'longitude' => '-65.0407029790015', 'order' => '15']);
-        $point585 = GeoPoint::create(['latitude' => '-42.76334677383221', 'longitude' => '-65.04050826739078', 'order' => '16']);
-        $point586 = GeoPoint::create(['latitude' => '-42.76309917241247', 'longitude' => '-65.04029394212661', 'order' => '17']);
-        $point587 = GeoPoint::create(['latitude' => '-42.7629872740051', 'longitude' => '-65.04019704732595', 'order' => '18']);
-        $point588 = GeoPoint::create(['latitude' => '-42.763140746652226', 'longitude' => '-65.04009780559237', 'order' => '19']);
-        $point589 = GeoPoint::create(['latitude' => '-42.763190032242875', 'longitude' => '-65.04006427797967', 'order' => '20']);
-        $point590 = GeoPoint::create(['latitude' => '-42.76368012212143', 'longitude' => '-65.03972950476692', 'order' => '21']);
-        $point591 = GeoPoint::create(['latitude' => '-42.76413232579765', 'longitude' => '-65.03942951645234', 'order' => '22']);
-        $point592 = GeoPoint::create(['latitude' => '-42.765053916051585', 'longitude' => '-65.03883850845958', 'order' => '23']);
-        $point593 = GeoPoint::create(['latitude' => '-42.76512843117078', 'longitude' => '-65.0387902286973', 'order' => '24']);
-        $point594 = GeoPoint::create(['latitude' => '-42.7658389651028', 'longitude' => '-65.03934242847836', 'order' => '25']);
-        $point595 = GeoPoint::create(['latitude' => '-42.76627943411458', 'longitude' => '-65.03973671320365', 'order' => '26']);
-        $point596 = GeoPoint::create(['latitude' => '-42.76667170718309', 'longitude' => '-65.04008062269087', 'order' => '27']);
-        $point597 = GeoPoint::create(['latitude' => '-42.76736405238523', 'longitude' => '-65.0406749834449', 'order' => '28']);
-        $point598 = GeoPoint::create(['latitude' => '-42.76841908253766', 'longitude' => '-65.04159397530883', 'order' => '29']);
-        $point599 = GeoPoint::create(['latitude' => '-42.76838295653499', 'longitude' => '-65.04165533084007', 'order' => '30']);
-        $point600 = GeoPoint::create(['latitude' => '-42.76835403896904', 'longitude' => '-65.04170444879267', 'order' => '31']);
-        $point601 = GeoPoint::create(['latitude' => '-42.767750374302494', 'longitude' => '-65.0420555667166', 'order' => '32']);
-        $point602 = GeoPoint::create(['latitude' => '-42.767671668231685', 'longitude' => '-65.04222873683617', 'order' => '33']);
-        $point603 = GeoPoint::create(['latitude' => '-42.76754577204602', 'longitude' => '-65.04249326970033', 'order' => '34']);
-        $point604 = GeoPoint::create(['latitude' => '-42.767163221985186', 'longitude' => '-65.043242528025', 'order' => '35']);
-        $point605 = GeoPoint::create(['latitude' => '-42.76699315316981', 'longitude' => '-65.04367184910554', 'order' => '36']);
-        $point606 = GeoPoint::create(['latitude' => '-42.76680162668228', 'longitude' => '-65.04517405379231', 'order' => '37']);
-        $point607 = GeoPoint::create(['latitude' => '-42.76678201302885', 'longitude' => '-65.04532752643942', 'order' => '38']);
-        $point608 = GeoPoint::create(['latitude' => '-42.76671512544152', 'longitude' => '-65.04585223357807', 'order' => '39']);
-        $point609 = GeoPoint::create(['latitude' => '-42.76664044268426', 'longitude' => '-65.04643762569572', 'order' => '40']);
-        $point610 = GeoPoint::create(['latitude' => '-42.76653843492264', 'longitude' => '-65.04710842940669', 'order' => '41']);
-        $point611 = GeoPoint::create(['latitude' => '-42.76651815071696', 'longitude' => '-65.04725980657801', 'order' => '42']);
-
-        $zone15 = Zone::create(['name' => 'Colonos Galeses', 'description' => 'Barrio 15', 'color' => 'blue']);
-
-        $zone15->geopoints()->save($point570);
-        $zone15->geopoints()->save($point571);
-        $zone15->geopoints()->save($point572);
-        $zone15->geopoints()->save($point573);
-        $zone15->geopoints()->save($point574);
-        $zone15->geopoints()->save($point575);
-        $zone15->geopoints()->save($point576);
-        $zone15->geopoints()->save($point577);
-        $zone15->geopoints()->save($point578);
-        $zone15->geopoints()->save($point579);
-        $zone15->geopoints()->save($point580);
-        $zone15->geopoints()->save($point581);
-        $zone15->geopoints()->save($point582);
-        $zone15->geopoints()->save($point583);
-        $zone15->geopoints()->save($point584);
-        $zone15->geopoints()->save($point585);
-        $zone15->geopoints()->save($point586);
-        $zone15->geopoints()->save($point587);
-        $zone15->geopoints()->save($point588);
-        $zone15->geopoints()->save($point589);
-        $zone15->geopoints()->save($point590);
-        $zone15->geopoints()->save($point591);
-        $zone15->geopoints()->save($point592);
-        $zone15->geopoints()->save($point593);
-        $zone15->geopoints()->save($point594);
-        $zone15->geopoints()->save($point595);
-        $zone15->geopoints()->save($point596);
-        $zone15->geopoints()->save($point597);
-        $zone15->geopoints()->save($point598);
-        $zone15->geopoints()->save($point599);
-        $zone15->geopoints()->save($point600);
-        $zone15->geopoints()->save($point601);
-        $zone15->geopoints()->save($point602);
-        $zone15->geopoints()->save($point603);
-        $zone15->geopoints()->save($point604);
-        $zone15->geopoints()->save($point605);
-        $zone15->geopoints()->save($point606);
-        $zone15->geopoints()->save($point607);
-        $zone15->geopoints()->save($point608);
-        $zone15->geopoints()->save($point609);
-        $zone15->geopoints()->save($point610);
-        $zone15->geopoints()->save($point611);
+        $zone15 = new Zone();
+        $zone15->name = 'Colonos Galeses';
+        $zone15->description = 'Barrio 15';
+        $zone15->color = 'red';
+        $zone15->geom = new Polygon([
+            new LineString([
+                new Point(-42.76651815071696, -65.04725980657801),
+                new Point(-42.76647096060208, -65.04723482850655),
+                new Point(-42.76629670083511, -65.04715293731255),
+                new Point(-42.76560754075618, -65.04678463648709),
+                new Point(-42.76465644620308, -65.04631550136648),
+                new Point(-42.76396376572483, -65.04595625299646),
+                new Point(-42.76397550038928, -65.045786016543),
+                new Point(-42.76436333104911, -65.0441954665968),
+                new Point(-42.76388807713917, -65.04376405004047),
+                new Point(-42.7633638729147, -65.04329307090114),
+                new Point(-42.76328407719649, -65.04322324964771),
+                new Point(-42.76368741437719, -65.04243107597878),
+                new Point(-42.763899057432326, -65.04198960113862),
+                new Point(-42.7642381054157, -65.04127990539693),
+                new Point(-42.76357166029436, -65.0407029790015),
+                new Point(-42.76334677383221, -65.04050826739078),
+                new Point(-42.76309917241247, -65.04029394212661),
+                new Point(-42.7629872740051, -65.04019704732595),
+                new Point(-42.763140746652226, -65.04009780559237),
+                new Point(-42.763190032242875, -65.04006427797967),
+                new Point(-42.76368012212143, -65.03972950476692),
+                new Point(-42.76413232579765, -65.03942951645234),
+                new Point(-42.765053916051585, -65.03883850845958),
+                new Point(-42.76512843117078, -65.0387902286973),
+                new Point(-42.7658389651028, -65.03934242847836),
+                new Point(-42.76627943411458, -65.03973671320365),
+                new Point(-42.76667170718309, -65.04008062269087),
+                new Point(-42.76736405238523, -65.0406749834449),
+                new Point(-42.76841908253766, -65.04159397530883),
+                new Point(-42.76838295653499, -65.04165533084007),
+                new Point(-42.76835403896904, -65.04170444879267),
+                new Point(-42.767750374302494, -65.0420555667166),
+                new Point(-42.767671668231685, -65.04222873683617),
+                new Point(-42.76754577204602, -65.04249326970033),
+                new Point(-42.767163221985186, -65.043242528025),
+                new Point(-42.76699315316981, -65.04367184910554),
+                new Point(-42.76680162668228, -65.04517405379231),
+                new Point(-42.76678201302885, -65.04532752643942),
+                new Point(-42.76671512544152, -65.04585223357807),
+                new Point(-42.76664044268426, -65.04643762569572),
+                new Point(-42.76653843492264, -65.04710842940669),
+                new Point(-42.76651815071696, -65.04725980657801),
+            ])
+        ]);
+        $zone15->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 16: Villa del Parque--------------
 
-        $point612 = GeoPoint::create(['latitude' => '-42.77698890798035', 'longitude' => '-65.0378127311492', 'order' => '1']);
-        $point613 = GeoPoint::create(['latitude' => '-42.77653603375188', 'longitude' => '-65.03648126583009', 'order' => '2']);
-        $point614 = GeoPoint::create(['latitude' => '-42.77609355308334', 'longitude' => '-65.03518475304722', 'order' => '3']);
-        $point615 = GeoPoint::create(['latitude' => '-42.775354353042474', 'longitude' => '-65.03565263088235', 'order' => '4']);
-        $point616 = GeoPoint::create(['latitude' => '-42.77490273609948', 'longitude' => '-65.03432393159129', 'order' => '5']);
-        $point617 = GeoPoint::create(['latitude' => '-42.7744432401675', 'longitude' => '-65.03297201442844', 'order' => '6']);
-        $point618 = GeoPoint::create(['latitude' => '-42.77397485941818', 'longitude' => '-65.03159411336573', 'order' => '7']);
-        $point619 = GeoPoint::create(['latitude' => '-42.773519470618766', 'longitude' => '-65.03025434996249', 'order' => '8']);
-        $point620 = GeoPoint::create(['latitude' => '-42.77308553949146', 'longitude' => '-65.02897753465207', 'order' => '9']);
-        $point621 = GeoPoint::create(['latitude' => '-42.7730629083529', 'longitude' => '-65.02891114997892', 'order' => '10']);
-        $point622 = GeoPoint::create(['latitude' => '-42.77379883945153', 'longitude' => '-65.02845048058052', 'order' => '11']);
-        $point623 = GeoPoint::create(['latitude' => '-42.77476183630713', 'longitude' => '-65.02783156085019', 'order' => '12']);
-        $point624 = GeoPoint::create(['latitude' => '-42.775713182317325', 'longitude' => '-65.02721624533821', 'order' => '13']);
-        $point625 = GeoPoint::create(['latitude' => '-42.77674264766512', 'longitude' => '-65.0265706711558', 'order' => '14']);
-        $point626 = GeoPoint::create(['latitude' => '-42.777753169911705', 'longitude' => '-65.02595711584348', 'order' => '15']);
-        $point627 = GeoPoint::create(['latitude' => '-42.77844903551318', 'longitude' => '-65.02550264905342', 'order' => '16']);
-        $point628 = GeoPoint::create(['latitude' => '-42.77909787863783', 'longitude' => '-65.0250396327221', 'order' => '17']);
-        $point629 = GeoPoint::create(['latitude' => '-42.779140626344', 'longitude' => '-65.0251901717031', 'order' => '18']);
-        $point630 = GeoPoint::create(['latitude' => '-42.77956173315945', 'longitude' => '-65.02645860511036', 'order' => '19']);
-        $point631 = GeoPoint::create(['latitude' => '-42.78002567150011', 'longitude' => '-65.02783005210762', 'order' => '20']);
-        $point632 = GeoPoint::create(['latitude' => '-42.78048022210919', 'longitude' => '-65.02917157571054', 'order' => '21']);
-        $point633 = GeoPoint::create(['latitude' => '-42.78083041802378', 'longitude' => '-65.03021327863694', 'order' => '22']);
-        $point634 = GeoPoint::create(['latitude' => '-42.78094223261211', 'longitude' => '-65.03053480844267', 'order' => '23']);
-        $point635 = GeoPoint::create(['latitude' => '-42.78116024591367', 'longitude' => '-65.03117837096833', 'order' => '24']);
-        $point636 = GeoPoint::create(['latitude' => '-42.78139552593575', 'longitude' => '-65.0318726440082', 'order' => '25']);
-        $point637 = GeoPoint::create(['latitude' => '-42.781499461535105', 'longitude' => '-65.03217925402629', 'order' => '26']);
-        $point638 = GeoPoint::create(['latitude' => '-42.78162393279723', 'longitude' => '-65.03254654902335', 'order' => '27']);
-        $point639 = GeoPoint::create(['latitude' => '-42.78182811595855', 'longitude' => '-65.0331359644545', 'order' => '28']);
-        $point640 = GeoPoint::create(['latitude' => '-42.782081249434384', 'longitude' => '-65.03389603543428', 'order' => '29']);
-        $point641 = GeoPoint::create(['latitude' => '-42.782289036814035', 'longitude' => '-65.03450917165142', 'order' => '30']);
-        $point642 = GeoPoint::create(['latitude' => '-42.78165553257219', 'longitude' => '-65.03490831788055', 'order' => '31']);
-        $point643 = GeoPoint::create(['latitude' => '-42.7810945317928', 'longitude' => '-65.03527997146725', 'order' => '32']);
-        $point644 = GeoPoint::create(['latitude' => '-42.780432948175296', 'longitude' => '-65.03567014906', 'order' => '33']);
-        $point645 = GeoPoint::create(['latitude' => '-42.77993447639358', 'longitude' => '-65.03597935746807', 'order' => '34']);
-        $point646 = GeoPoint::create(['latitude' => '-42.779277754279946', 'longitude' => '-65.03639250147549', 'order' => '35']);
-        $point647 = GeoPoint::create(['latitude' => '-42.77888640322075', 'longitude' => '-65.03663725304816', 'order' => '36']);
-        $point648 = GeoPoint::create(['latitude' => '-42.778686578649115', 'longitude' => '-65.03676222722447', 'order' => '37']);
-        $point649 = GeoPoint::create(['latitude' => '-42.77812147073714', 'longitude' => '-65.03711552444324', 'order' => '38']);
-        $point650 = GeoPoint::create(['latitude' => '-42.77753532424822', 'longitude' => '-65.03748206506901', 'order' => '39']);
-        $point651 = GeoPoint::create(['latitude' => '-42.77698890798035', 'longitude' => '-65.0378127311492', 'order' => '40']);
-
-        $zone16 = Zone::create(['name' => 'Villa del Parque', 'description' => 'Barrio 16', 'color' => 'blue']);
-
-        $zone16->geopoints()->save($point612);
-        $zone16->geopoints()->save($point613);
-        $zone16->geopoints()->save($point614);
-        $zone16->geopoints()->save($point615);
-        $zone16->geopoints()->save($point616);
-        $zone16->geopoints()->save($point617);
-        $zone16->geopoints()->save($point618);
-        $zone16->geopoints()->save($point619);
-        $zone16->geopoints()->save($point620);
-        $zone16->geopoints()->save($point621);
-        $zone16->geopoints()->save($point622);
-        $zone16->geopoints()->save($point623);
-        $zone16->geopoints()->save($point624);
-        $zone16->geopoints()->save($point625);
-        $zone16->geopoints()->save($point626);
-        $zone16->geopoints()->save($point627);
-        $zone16->geopoints()->save($point628);
-        $zone16->geopoints()->save($point629);
-        $zone16->geopoints()->save($point630);
-        $zone16->geopoints()->save($point631);
-        $zone16->geopoints()->save($point632);
-        $zone16->geopoints()->save($point633);
-        $zone16->geopoints()->save($point634);
-        $zone16->geopoints()->save($point635);
-        $zone16->geopoints()->save($point636);
-        $zone16->geopoints()->save($point637);
-        $zone16->geopoints()->save($point638);
-        $zone16->geopoints()->save($point639);
-        $zone16->geopoints()->save($point640);
-        $zone16->geopoints()->save($point641);
-        $zone16->geopoints()->save($point642);
-        $zone16->geopoints()->save($point643);
-        $zone16->geopoints()->save($point644);
-        $zone16->geopoints()->save($point645);
-        $zone16->geopoints()->save($point646);
-        $zone16->geopoints()->save($point647);
-        $zone16->geopoints()->save($point648);
-        $zone16->geopoints()->save($point649);
-        $zone16->geopoints()->save($point650);
-        $zone16->geopoints()->save($point651);
+        $zone16 = new Zone();
+        $zone16->name = 'Villa del Parque';
+        $zone16->description = 'Barrio 16';
+        $zone16->color = 'red';
+        $zone16->geom = new Polygon([
+            new LineString([
+                new Point(-42.77698890798035, -65.0378127311492),
+                new Point(-42.77653603375188, -65.03648126583009),
+                new Point(-42.77609355308334, -65.03518475304722),
+                new Point(-42.775354353042474, -65.03565263088235),
+                new Point(-42.77490273609948, -65.03432393159129),
+                new Point(-42.7744432401675, -65.03297201442844),
+                new Point(-42.77397485941818, -65.03159411336573),
+                new Point(-42.773519470618766, -65.03025434996249),
+                new Point(-42.77308553949146, -65.02897753465207),
+                new Point(-42.7730629083529, -65.02891114997892),
+                new Point(-42.77379883945153, -65.02845048058052),
+                new Point(-42.77476183630713, -65.02783156085019),
+                new Point(-42.775713182317325, -65.02721624533821),
+                new Point(-42.77674264766512, -65.0265706711558),
+                new Point(-42.777753169911705, -65.02595711584348),
+                new Point(-42.77844903551318, -65.02550264905342),
+                new Point(-42.77909787863783, -65.0250396327221),
+                new Point(-42.779140626344, -65.0251901717031),
+                new Point(-42.77956173315945, -65.02645860511036),
+                new Point(-42.78002567150011, -65.02783005210762),
+                new Point(-42.78048022210919, -65.02917157571054),
+                new Point(-42.78083041802378, -65.03021327863694),
+                new Point(-42.78094223261211, -65.03053480844267),
+                new Point(-42.78116024591367, -65.03117837096833),
+                new Point(-42.78139552593575, -65.0318726440082),
+                new Point(-42.781499461535105, -65.03217925402629),
+                new Point(-42.78162393279723, -65.03254654902335),
+                new Point(-42.78182811595855, -65.0331359644545),
+                new Point(-42.782081249434384, -65.03389603543428),
+                new Point(-42.782289036814035, -65.03450917165142),
+                new Point(-42.78165553257219, -65.03490831788055),
+                new Point(-42.7810945317928, -65.03527997146725),
+                new Point(-42.780432948175296, -65.03567014906),
+                new Point(-42.77993447639358, -65.03597935746807),
+                new Point(-42.779277754279946, -65.03639250147549),
+                new Point(-42.77888640322075, -65.03663725304816),
+                new Point(-42.778686578649115, -65.03676222722447),
+                new Point(-42.77812147073714, -65.03711552444324),
+                new Point(-42.77753532424822, -65.03748206506901),
+                new Point(-42.77698890798035, -65.0378127311492),
+            ])
+        ]);
+        $zone16->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 17: Las Bardas--------------
 
-        $point652 = GeoPoint::create(['latitude' => '-42.781464760455975', 'longitude' => '-65.05094884980274', 'order' => '1']);
-        $point653 = GeoPoint::create(['latitude' => '-42.7814223480259', 'longitude' => '-65.05082437854061', 'order' => '2']);
-        $point654 = GeoPoint::create(['latitude' => '-42.78130692921919', 'longitude' => '-65.05048583347143', 'order' => '3']);
-        $point655 = GeoPoint::create(['latitude' => '-42.78108866446058', 'longitude' => '-65.04984495315479', 'order' => '4']);
-        $point656 = GeoPoint::create(['latitude' => '-42.78086034141813', 'longitude' => '-65.04917481999605', 'order' => '5']);
-        $point657 = GeoPoint::create(['latitude' => '-42.78065900810389', 'longitude' => '-65.0485840634604', 'order' => '6']);
-        $point658 = GeoPoint::create(['latitude' => '-42.78043286435627', 'longitude' => '-65.04792013291001', 'order' => '7']);
-        $point659 = GeoPoint::create(['latitude' => '-42.78017336063402', 'longitude' => '-65.0471586370067', 'order' => '8']);
-        $point660 = GeoPoint::create(['latitude' => '-42.77992810614717', 'longitude' => '-65.04643888298118', 'order' => '9']);
-        $point661 = GeoPoint::create(['latitude' => '-42.77971881002492', 'longitude' => '-65.04582474093567', 'order' => '10']);
-        $point662 = GeoPoint::create(['latitude' => '-42.77923877843017', 'longitude' => '-65.04441565919318', 'order' => '11']);
-        $point663 = GeoPoint::create(['latitude' => '-42.77963147059384', 'longitude' => '-65.0441835642943', 'order' => '12']);
-        $point664 = GeoPoint::create(['latitude' => '-42.77998191796553', 'longitude' => '-65.0439664730021', 'order' => '13']);
-        $point665 = GeoPoint::create(['latitude' => '-42.780112340378906', 'longitude' => '-65.04388575527454', 'order' => '14']);
-        $point666 = GeoPoint::create(['latitude' => '-42.78062304973929', 'longitude' => '-65.04356933842975', 'order' => '15']);
-        $point667 = GeoPoint::create(['latitude' => '-42.78113208271901', 'longitude' => '-65.04323372702666', 'order' => '16']);
-        $point668 = GeoPoint::create(['latitude' => '-42.78160674989573', 'longitude' => '-65.04295603457453', 'order' => '17']);
-        $point669 = GeoPoint::create(['latitude' => '-42.782170181427034', 'longitude' => '-65.04260785031671', 'order' => '18']);
-        $point670 = GeoPoint::create(['latitude' => '-42.78275766902047', 'longitude' => '-65.04225564274535', 'order' => '19']);
-        $point671 = GeoPoint::create(['latitude' => '-42.783355969268996', 'longitude' => '-65.04187326032257', 'order' => '20']);
-        $point672 = GeoPoint::create(['latitude' => '-42.78394823454724', 'longitude' => '-65.04150412130682', 'order' => '21']);
-        $point673 = GeoPoint::create(['latitude' => '-42.78454125419677', 'longitude' => '-65.0411409334423', 'order' => '22']);
-        $point674 = GeoPoint::create(['latitude' => '-42.784629012723', 'longitude' => '-65.04141477021899', 'order' => '23']);
-        $point675 = GeoPoint::create(['latitude' => '-42.785004019070975', 'longitude' => '-65.04252143289499', 'order' => '24']);
-        $point676 = GeoPoint::create(['latitude' => '-42.785431579951876', 'longitude' => '-65.04383395511293', 'order' => '25']);
-        $point677 = GeoPoint::create(['latitude' => '-42.78578420661836', 'longitude' => '-65.0448956069689', 'order' => '26']);
-        $point678 = GeoPoint::create(['latitude' => '-42.78624060124616', 'longitude' => '-65.04620670426328', 'order' => '27']);
-        $point679 = GeoPoint::create(['latitude' => '-42.78630631536706', 'longitude' => '-65.04638708281958', 'order' => '28']);
-        $point680 = GeoPoint::create(['latitude' => '-42.781464760455975', 'longitude' => '-65.05094884980274', 'order' => '29']);
-
-        $zone17 = Zone::create(['name' => 'Las Bardas', 'description' => 'Barrio 17', 'color' => 'blue']);
-
-        $zone17->geopoints()->save($point652);
-        $zone17->geopoints()->save($point653);
-        $zone17->geopoints()->save($point654);
-        $zone17->geopoints()->save($point655);
-        $zone17->geopoints()->save($point656);
-        $zone17->geopoints()->save($point657);
-        $zone17->geopoints()->save($point658);
-        $zone17->geopoints()->save($point659);
-        $zone17->geopoints()->save($point660);
-        $zone17->geopoints()->save($point661);
-        $zone17->geopoints()->save($point662);
-        $zone17->geopoints()->save($point663);
-        $zone17->geopoints()->save($point664);
-        $zone17->geopoints()->save($point665);
-        $zone17->geopoints()->save($point666);
-        $zone17->geopoints()->save($point667);
-        $zone17->geopoints()->save($point668);
-        $zone17->geopoints()->save($point669);
-        $zone17->geopoints()->save($point670);
-        $zone17->geopoints()->save($point671);
-        $zone17->geopoints()->save($point672);
-        $zone17->geopoints()->save($point673);
-        $zone17->geopoints()->save($point674);
-        $zone17->geopoints()->save($point675);
-        $zone17->geopoints()->save($point676);
-        $zone17->geopoints()->save($point677);
-        $zone17->geopoints()->save($point678);
-        $zone17->geopoints()->save($point679);
-        $zone17->geopoints()->save($point680);
+        $zone17 = new Zone();
+        $zone17->name = 'Las Bardas';
+        $zone17->description = 'Barrio 17';
+        $zone17->color = 'yellow';
+        $zone17->geom = new Polygon([
+            new LineString([
+                new Point(-42.781464760455975, -65.05094884980274),
+                new Point(-42.7814223480259, -65.05082437854061),
+                new Point(-42.78130692921919, -65.05048583347143),
+                new Point(-42.78108866446058, -65.04984495315479),
+                new Point(-42.78086034141813, -65.04917481999605),
+                new Point(-42.78065900810389, -65.0485840634604),
+                new Point(-42.78043286435627, -65.04792013291001),
+                new Point(-42.78017336063402, -65.0471586370067),
+                new Point(-42.77992810614717, -65.04643888298118),
+                new Point(-42.77971881002492, -65.04582474093567),
+                new Point(-42.77923877843017, -65.04441565919318),
+                new Point(-42.77963147059384, -65.0441835642943),
+                new Point(-42.77998191796553, -65.0439664730021),
+                new Point(-42.780112340378906, -65.04388575527454),
+                new Point(-42.78062304973929, -65.04356933842975),
+                new Point(-42.78113208271901, -65.04323372702666),
+                new Point(-42.78160674989573, -65.04295603457453),
+                new Point(-42.782170181427034, -65.04260785031671),
+                new Point(-42.78275766902047, -65.04225564274535),
+                new Point(-42.783355969268996, -65.04187326032257),
+                new Point(-42.78394823454724, -65.04150412130682),
+                new Point(-42.78454125419677, -65.0411409334423),
+                new Point(-42.784629012723, -65.04141477021899),
+                new Point(-42.785004019070975, -65.04252143289499),
+                new Point(-42.785431579951876, -65.04383395511293),
+                new Point(-42.78578420661836, -65.0448956069689),
+                new Point(-42.78624060124616, -65.04620670426328),
+                new Point(-42.78630631536706, -65.04638708281958),
+                new Point(-42.781464760455975, -65.05094884980274),
+            ])
+        ]);
+        $zone17->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 18: Manuel del Villar--------------
 
-        $point681 = GeoPoint::create(['latitude' => '-42.76985046014261', 'longitude' => '-65.05198116499758', 'order' => '1']);
-        $point682 = GeoPoint::create(['latitude' => '-42.76940395616057', 'longitude' => '-65.05067207935994', 'order' => '2']);
-        $point683 = GeoPoint::create(['latitude' => '-42.769872504547976', 'longitude' => '-65.05037267777858', 'order' => '3']);
-        $point684 = GeoPoint::create(['latitude' => '-42.77018640682181', 'longitude' => '-65.05017788234883', 'order' => '4']);
-        $point685 = GeoPoint::create(['latitude' => '-42.7705194198349', 'longitude' => '-65.049969675874', 'order' => '5']);
-        $point686 = GeoPoint::create(['latitude' => '-42.77083055608068', 'longitude' => '-65.04977546717747', 'order' => '6']);
-        $point687 = GeoPoint::create(['latitude' => '-42.77113372951848', 'longitude' => '-65.04958980802216', 'order' => '7']);
-        $point688 = GeoPoint::create(['latitude' => '-42.772397720517034', 'longitude' => '-65.0502422553652', 'order' => '8']);
-        $point689 = GeoPoint::create(['latitude' => '-42.77258757062393', 'longitude' => '-65.05028030920562', 'order' => '9']);
-        $point690 = GeoPoint::create(['latitude' => '-42.7720064532769', 'longitude' => '-65.05067174408381', 'order' => '10']);
-        $point691 = GeoPoint::create(['latitude' => '-42.77190561898172', 'longitude' => '-65.05073586564308', 'order' => '11']);
-        $point692 = GeoPoint::create(['latitude' => '-42.771068350673715', 'longitude' => '-65.05123567852934', 'order' => '12']);
-        $point693 = GeoPoint::create(['latitude' => '-42.770676161424234', 'longitude' => '-65.05146827634239', 'order' => '13']);
-        $point694 = GeoPoint::create(['latitude' => '-42.77030970461749', 'longitude' => '-65.0517057356593', 'order' => '14']);
-        $point695 = GeoPoint::create(['latitude' => '-42.76985046014261', 'longitude' => '-65.05198116499758', 'order' => '15']);
-
-        $zone18 = Zone::create(['name' => 'Manuel del Villar', 'description' => 'Barrio 18', 'color' => 'blue']);
-
-        $zone18->geopoints()->save($point681);
-        $zone18->geopoints()->save($point682);
-        $zone18->geopoints()->save($point683);
-        $zone18->geopoints()->save($point684);
-        $zone18->geopoints()->save($point685);
-        $zone18->geopoints()->save($point686);
-        $zone18->geopoints()->save($point687);
-        $zone18->geopoints()->save($point688);
-        $zone18->geopoints()->save($point689);
-        $zone18->geopoints()->save($point690);
-        $zone18->geopoints()->save($point691);
-        $zone18->geopoints()->save($point692);
-        $zone18->geopoints()->save($point693);
-        $zone18->geopoints()->save($point694);
-        $zone18->geopoints()->save($point695);
+        $zone18 = new Zone();
+        $zone18->name = 'Manuel del Villar';
+        $zone18->description = 'Barrio 18';
+        $zone18->color = 'yellow';
+        $zone18->geom = new Polygon([
+            new LineString([
+                new Point(-42.76985046014261, -65.05198116499758),
+                new Point(-42.76940395616057, -65.05067207935994),
+                new Point(-42.769872504547976, -65.05037267777858),
+                new Point(-42.77018640682181, -65.05017788234883),
+                new Point(-42.7705194198349, -65.049969675874),
+                new Point(-42.77083055608068, -65.04977546717747),
+                new Point(-42.77113372951848, -65.04958980802216),
+                new Point(-42.772397720517034, -65.0502422553652),
+                new Point(-42.77258757062393, -65.05028030920562),
+                new Point(-42.7720064532769, -65.05067174408381),
+                new Point(-42.77190561898172, -65.05073586564308),
+                new Point(-42.771068350673715, -65.05123567852934),
+                new Point(-42.770676161424234, -65.05146827634239),
+                new Point(-42.77030970461749, -65.0517057356593),
+                new Point(-42.76985046014261, -65.05198116499758),
+            ])
+        ]);
+        $zone18->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 19: Anon Car--------------
 
-        $point696 = GeoPoint::create(['latitude' => '-42.766434666961345', 'longitude' => '-65.05415123972921', 'order' => '1']);
-        $point697 = GeoPoint::create(['latitude' => '-42.76611556790752', 'longitude' => '-65.05392333578192', 'order' => '2']);
-        $point698 = GeoPoint::create(['latitude' => '-42.76546957462995', 'longitude' => '-65.05312261257176', 'order' => '3']);
-        $point699 = GeoPoint::create(['latitude' => '-42.76490203596606', 'longitude' => '-65.05264543082409', 'order' => '4']);
-        $point700 = GeoPoint::create(['latitude' => '-42.76325775802053', 'longitude' => '-65.05147003654207', 'order' => '5']);
-        $point701 = GeoPoint::create(['latitude' => '-42.7633678124092', 'longitude' => '-65.05139711398445', 'order' => '6']);
-        $point702 = GeoPoint::create(['latitude' => '-42.76380727559257', 'longitude' => '-65.05110626194431', 'order' => '7']);
-        $point703 = GeoPoint::create(['latitude' => '-42.76453348368352', 'longitude' => '-65.0506603446955', 'order' => '8']);
-        $point704 = GeoPoint::create(['latitude' => '-42.765592034235304', 'longitude' => '-65.04999314520289', 'order' => '9']);
-        $point705 = GeoPoint::create(['latitude' => '-42.766683106571406', 'longitude' => '-65.04929107699307', 'order' => '10']);
-        $point706 = GeoPoint::create(['latitude' => '-42.767798821702826', 'longitude' => '-65.04849337126805', 'order' => '11']);
-        $point707 = GeoPoint::create(['latitude' => '-42.76831657186187', 'longitude' => '-65.04813831384962', 'order' => '12']);
-        $point708 = GeoPoint::create(['latitude' => '-42.768842703924065', 'longitude' => '-65.04841022278858', 'order' => '13']);
-        $point709 = GeoPoint::create(['latitude' => '-42.76977083206248', 'longitude' => '-65.04889134403072', 'order' => '14']);
-        $point710 = GeoPoint::create(['latitude' => '-42.770462506712335', 'longitude' => '-65.04925084385785', 'order' => '15']);
-        $point711 = GeoPoint::create(['latitude' => '-42.77113372951848', 'longitude' => '-65.04958980802216', 'order' => '16']);
-        $point712 = GeoPoint::create(['latitude' => '-42.77083055608068', 'longitude' => '-65.04977546717747', 'order' => '17']);
-        $point713 = GeoPoint::create(['latitude' => '-42.7705194198349', 'longitude' => '-65.049969675874', 'order' => '18']);
-        $point714 = GeoPoint::create(['latitude' => '-42.77018640682181', 'longitude' => '-65.05017788234883', 'order' => '19']);
-        $point715 = GeoPoint::create(['latitude' => '-42.769872504547976', 'longitude' => '-65.05037267777858', 'order' => '20']);
-        $point716 = GeoPoint::create(['latitude' => '-42.76940395616057', 'longitude' => '-65.05067207935994', 'order' => '21']);
-        $point717 = GeoPoint::create(['latitude' => '-42.76985046014261', 'longitude' => '-65.05198116499758', 'order' => '22']);
-        $point718 = GeoPoint::create(['latitude' => '-42.76920136556086', 'longitude' => '-65.05241937089549', 'order' => '23']);
-        $point719 = GeoPoint::create(['latitude' => '-42.768542380333365', 'longitude' => '-65.05282597701844', 'order' => '24']);
-        $point720 = GeoPoint::create(['latitude' => '-42.76802731238333', 'longitude' => '-65.05314373496775', 'order' => '25']);
-        $point721 = GeoPoint::create(['latitude' => '-42.767114355489696', 'longitude' => '-65.05371982317286', 'order' => '26']);
-        $point722 = GeoPoint::create(['latitude' => '-42.76690531082454', 'longitude' => '-65.0538525087001', 'order' => '27']);
-        $point723 = GeoPoint::create(['latitude' => '-42.766434666961345', 'longitude' => '-65.05415123972921', 'order' => '28']);
-
-        $zone19 = Zone::create(['name' => 'Anon Car', 'description' => 'Barrio 19', 'color' => 'blue']);
-
-        $zone19->geopoints()->save($point696);
-        $zone19->geopoints()->save($point697);
-        $zone19->geopoints()->save($point698);
-        $zone19->geopoints()->save($point699);
-        $zone19->geopoints()->save($point700);
-        $zone19->geopoints()->save($point701);
-        $zone19->geopoints()->save($point702);
-        $zone19->geopoints()->save($point703);
-        $zone19->geopoints()->save($point704);
-        $zone19->geopoints()->save($point705);
-        $zone19->geopoints()->save($point706);
-        $zone19->geopoints()->save($point707);
-        $zone19->geopoints()->save($point708);
-        $zone19->geopoints()->save($point709);
-        $zone19->geopoints()->save($point710);
-        $zone19->geopoints()->save($point711);
-        $zone19->geopoints()->save($point712);
-        $zone19->geopoints()->save($point713);
-        $zone19->geopoints()->save($point714);
-        $zone19->geopoints()->save($point715);
-        $zone19->geopoints()->save($point716);
-        $zone19->geopoints()->save($point717);
-        $zone19->geopoints()->save($point718);
-        $zone19->geopoints()->save($point719);
-        $zone19->geopoints()->save($point720);
-        $zone19->geopoints()->save($point721);
-        $zone19->geopoints()->save($point722);
-        $zone19->geopoints()->save($point723);
+        $zone19 = new Zone();
+        $zone19->name = 'Anon Car';
+        $zone19->description = 'Barrio 19';
+        $zone19->color = 'blue';
+        $zone19->geom = new Polygon([
+            new LineString([
+                new Point(-42.766434666961345, -65.05415123972921),
+                new Point(-42.76611556790752, -65.05392333578192),
+                new Point(-42.76546957462995, -65.05312261257176),
+                new Point(-42.76490203596606, -65.05264543082409),
+                new Point(-42.76325775802053, -65.05147003654207),
+                new Point(-42.7633678124092, -65.05139711398445),
+                new Point(-42.76380727559257, -65.05110626194431),
+                new Point(-42.76453348368352, -65.0506603446955),
+                new Point(-42.765592034235304, -65.04999314520289),
+                new Point(-42.766683106571406, -65.04929107699307),
+                new Point(-42.767798821702826, -65.04849337126805),
+                new Point(-42.76831657186187, -65.04813831384962),
+                new Point(-42.768842703924065, -65.04841022278858),
+                new Point(-42.76977083206248, -65.04889134403072),
+                new Point(-42.770462506712335, -65.04925084385785),
+                new Point(-42.77113372951848, -65.04958980802216),
+                new Point(-42.77083055608068, -65.04977546717747),
+                new Point(-42.7705194198349, -65.049969675874),
+                new Point(-42.77018640682181, -65.05017788234883),
+                new Point(-42.769872504547976, -65.05037267777858),
+                new Point(-42.76940395616057, -65.05067207935994),
+                new Point(-42.76985046014261, -65.05198116499758),
+                new Point(-42.76920136556086, -65.05241937089549),
+                new Point(-42.768542380333365, -65.05282597701844),
+                new Point(-42.76802731238333, -65.05314373496775),
+                new Point(-42.767114355489696, -65.05371982317286),
+                new Point(-42.76690531082454, -65.0538525087001),
+                new Point(-42.766434666961345, -65.05415123972921),
+            ])
+        ]);
+        $zone19->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 20: Ruca Hué--------------
 
-        $point724 = GeoPoint::create(['latitude' => '-42.76325775802053', 'longitude' => '-65.05147003654207', 'order' => '1']);
-        $point725 = GeoPoint::create(['latitude' => '-42.76303790070028', 'longitude' => '-65.0513129596766', 'order' => '2']);
-        $point726 = GeoPoint::create(['latitude' => '-42.761900141163494', 'longitude' => '-65.05050611767712', 'order' => '3']);
-        $point727 = GeoPoint::create(['latitude' => '-42.761942721231634', 'longitude' => '-65.05038977686107', 'order' => '4']);
-        $point728 = GeoPoint::create(['latitude' => '-42.76201840981727', 'longitude' => '-65.05030972968575', 'order' => '5']);
-        $point729 = GeoPoint::create(['latitude' => '-42.76216056689512', 'longitude' => '-65.05003815602294', 'order' => '6']);
-        $point730 = GeoPoint::create(['latitude' => '-42.76277772642578', 'longitude' => '-65.04876385528347', 'order' => '7']);
-        $point731 = GeoPoint::create(['latitude' => '-42.76326496645726', 'longitude' => '-65.04843151282263', 'order' => '8']);
-        $point732 = GeoPoint::create(['latitude' => '-42.76437372460904', 'longitude' => '-65.04767395641382', 'order' => '9']);
-        $point733 = GeoPoint::create(['latitude' => '-42.76556412249775', 'longitude' => '-65.046882118021', 'order' => '10']);
-        $point734 = GeoPoint::create(['latitude' => '-42.76560754075618', 'longitude' => '-65.04678463648709', 'order' => '11']);
-        $point735 = GeoPoint::create(['latitude' => '-42.76629670083511', 'longitude' => '-65.04715293731255', 'order' => '12']);
-        $point736 = GeoPoint::create(['latitude' => '-42.76647096060208', 'longitude' => '-65.04723482850655', 'order' => '13']);
-        $point737 = GeoPoint::create(['latitude' => '-42.76651815071696', 'longitude' => '-65.04725980657801', 'order' => '14']);
-        $point738 = GeoPoint::create(['latitude' => '-42.76654430225485', 'longitude' => '-65.04727397199437', 'order' => '15']);
-        $point739 = GeoPoint::create(['latitude' => '-42.76732650145899', 'longitude' => '-65.0476657421487', 'order' => '16']);
-        $point740 = GeoPoint::create(['latitude' => '-42.76831657186187', 'longitude' => '-65.04813831384962', 'order' => '17']);
-        $point741 = GeoPoint::create(['latitude' => '-42.767798821702826', 'longitude' => '-65.04849337126805', 'order' => '18']);
-        $point742 = GeoPoint::create(['latitude' => '-42.766683106571406', 'longitude' => '-65.04929107699307', 'order' => '19']);
-        $point743 = GeoPoint::create(['latitude' => '-42.765592034235304', 'longitude' => '-65.04999314520289', 'order' => '20']);
-        $point744 = GeoPoint::create(['latitude' => '-42.76453348368352', 'longitude' => '-65.0506603446955', 'order' => '21']);
-        $point745 = GeoPoint::create(['latitude' => '-42.76380727559257', 'longitude' => '-65.05110626194431', 'order' => '22']);
-        $point746 = GeoPoint::create(['latitude' => '-42.7633678124092', 'longitude' => '-65.05139711398445', 'order' => '23']);
-        $point747 = GeoPoint::create(['latitude' => '-42.76325775802053', 'longitude' => '-65.05147003654207', 'order' => '24']);
-
-        $zone20 = Zone::create(['name' => 'Ruca Hué', 'description' => 'Barrio 20', 'color' => 'blue']);
-
-        $zone20->geopoints()->save($point724);
-        $zone20->geopoints()->save($point725);
-        $zone20->geopoints()->save($point726);
-        $zone20->geopoints()->save($point727);
-        $zone20->geopoints()->save($point728);
-        $zone20->geopoints()->save($point729);
-        $zone20->geopoints()->save($point730);
-        $zone20->geopoints()->save($point731);
-        $zone20->geopoints()->save($point732);
-        $zone20->geopoints()->save($point733);
-        $zone20->geopoints()->save($point734);
-        $zone20->geopoints()->save($point735);
-        $zone20->geopoints()->save($point736);
-        $zone20->geopoints()->save($point737);
-        $zone20->geopoints()->save($point738);
-        $zone20->geopoints()->save($point739);
-        $zone20->geopoints()->save($point740);
-        $zone20->geopoints()->save($point741);
-        $zone20->geopoints()->save($point742);
-        $zone20->geopoints()->save($point743);
-        $zone20->geopoints()->save($point744);
-        $zone20->geopoints()->save($point745);
-        $zone20->geopoints()->save($point746);
-        $zone20->geopoints()->save($point747);
+        $zone20 = new Zone();
+        $zone20->name = 'Ruca Hué';
+        $zone20->description = 'Barrio 20';
+        $zone20->color = 'red';
+        $zone20->geom = new Polygon([
+            new LineString([
+                new Point(-42.76325775802053, -65.05147003654207),
+                new Point(-42.76303790070028, -65.0513129596766),
+                new Point(-42.761900141163494, -65.05050611767712),
+                new Point(-42.761942721231634, -65.05038977686107),
+                new Point(-42.76201840981727, -65.05030972968575),
+                new Point(-42.76216056689512, -65.05003815602294),
+                new Point(-42.76277772642578, -65.04876385528347),
+                new Point(-42.76326496645726, -65.04843151282263),
+                new Point(-42.76437372460904, -65.04767395641382),
+                new Point(-42.76556412249775, -65.046882118021),
+                new Point(-42.76560754075618, -65.04678463648709),
+                new Point(-42.76629670083511, -65.04715293731255),
+                new Point(-42.76647096060208, -65.04723482850655),
+                new Point(-42.76651815071696, -65.04725980657801),
+                new Point(-42.76654430225485, -65.04727397199437),
+                new Point(-42.76732650145899, -65.0476657421487),
+                new Point(-42.76831657186187, -65.04813831384962),
+                new Point(-42.767798821702826, -65.04849337126805),
+                new Point(-42.766683106571406, -65.04929107699307),
+                new Point(-42.765592034235304, -65.04999314520289),
+                new Point(-42.76453348368352, -65.0506603446955),
+                new Point(-42.76380727559257, -65.05110626194431),
+                new Point(-42.7633678124092, -65.05139711398445),
+                new Point(-42.76325775802053, -65.05147003654207),
+            ])
+        ]);
+        $zone20->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 21: Troperos Patagónicos--------------
 
-        $point748 = GeoPoint::create(['latitude' => '-42.754348968413524', 'longitude' => '-65.0553738241261', 'order' => '1']);
-        $point749 = GeoPoint::create(['latitude' => '-42.75326150029579', 'longitude' => '-65.0550199401741', 'order' => '2']);
-        $point750 = GeoPoint::create(['latitude' => '-42.75306351974282', 'longitude' => '-65.05496093157576', 'order' => '3']);
-        $point751 = GeoPoint::create(['latitude' => '-42.752096918668855', 'longitude' => '-65.05464023996034', 'order' => '4']);
-        $point752 = GeoPoint::create(['latitude' => '-42.75192450292059', 'longitude' => '-65.0538490721198', 'order' => '5']);
-        $point753 = GeoPoint::create(['latitude' => '-42.75167857788148', 'longitude' => '-65.05271961066717', 'order' => '6']);
-        $point754 = GeoPoint::create(['latitude' => '-42.75151923790213', 'longitude' => '-65.05198837343431', 'order' => '7']);
-        $point755 = GeoPoint::create(['latitude' => '-42.75136417269343', 'longitude' => '-65.05127633075972', 'order' => '8']);
-        $point756 = GeoPoint::create(['latitude' => '-42.75176818042638', 'longitude' => '-65.0514109441247', 'order' => '9']);
-        $point757 = GeoPoint::create(['latitude' => '-42.751905308362325', 'longitude' => '-65.05145662549698', 'order' => '10']);
-        $point758 = GeoPoint::create(['latitude' => '-42.753115403723484', 'longitude' => '-65.05186071704898', 'order' => '11']);
-        $point759 = GeoPoint::create(['latitude' => '-42.75383482247287', 'longitude' => '-65.05210102621297', 'order' => '12']);
-        $point760 = GeoPoint::create(['latitude' => '-42.75484324924366', 'longitude' => '-65.05243781108248', 'order' => '13']);
-        $point761 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.05263377997868', 'order' => '14']);
-        $point762 = GeoPoint::create(['latitude' => '-42.75520702384139', 'longitude' => '-65.0532373608262', 'order' => '15']);
-        $point763 = GeoPoint::create(['latitude' => '-42.755139046606644', 'longitude' => '-65.05340642381321', 'order' => '16']);
-        $point764 = GeoPoint::create(['latitude' => '-42.754652560946454', 'longitude' => '-65.05461542952696', 'order' => '17']);
-        $point765 = GeoPoint::create(['latitude' => '-42.754348968413524', 'longitude' => '-65.0553738241261', 'order' => '18']);
-
-        $zone21 = Zone::create(['name' => 'Troperos Patagónicos', 'description' => 'Barrio 21', 'color' => 'blue']);
-
-        $zone21->geopoints()->save($point748);
-        $zone21->geopoints()->save($point749);
-        $zone21->geopoints()->save($point750);
-        $zone21->geopoints()->save($point751);
-        $zone21->geopoints()->save($point752);
-        $zone21->geopoints()->save($point753);
-        $zone21->geopoints()->save($point754);
-        $zone21->geopoints()->save($point755);
-        $zone21->geopoints()->save($point756);
-        $zone21->geopoints()->save($point757);
-        $zone21->geopoints()->save($point758);
-        $zone21->geopoints()->save($point759);
-        $zone21->geopoints()->save($point760);
-        $zone21->geopoints()->save($point761);
-        $zone21->geopoints()->save($point762);
-        $zone21->geopoints()->save($point763);
-        $zone21->geopoints()->save($point764);
-        $zone21->geopoints()->save($point765);
+        $zone21 = new Zone();
+        $zone21->name = 'Troperos Patagónicos';
+        $zone21->description = 'Barrio 21';
+        $zone21->color = 'green';
+        $zone21->geom = new Polygon([
+            new LineString([
+                new Point(-42.754348968413524, -65.0553738241261),
+                new Point(-42.75326150029579, -65.0550199401741),
+                new Point(-42.75306351974282, -65.05496093157576),
+                new Point(-42.752096918668855, -65.05464023996034),
+                new Point(-42.75192450292059, -65.0538490721198),
+                new Point(-42.75167857788148, -65.05271961066717),
+                new Point(-42.75151923790213, -65.05198837343431),
+                new Point(-42.75136417269343, -65.05127633075972),
+                new Point(-42.75176818042638, -65.0514109441247),
+                new Point(-42.751905308362325, -65.05145662549698),
+                new Point(-42.753115403723484, -65.05186071704898),
+                new Point(-42.75383482247287, -65.05210102621297),
+                new Point(-42.75484324924366, -65.05243781108248),
+                new Point(-42.75542973100872, -65.05263377997868),
+                new Point(-42.75520702384139, -65.0532373608262),
+                new Point(-42.755139046606644, -65.05340642381321),
+                new Point(-42.754652560946454, -65.05461542952696),
+                new Point(-42.754348968413524, -65.0553738241261),
+            ])
+        ]);
+        $zone21->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 22: Conquista del Desierto--------------
 
-        $point766 = GeoPoint::create(['latitude' => '-42.77185876414299', 'longitude' => '-65.04588056441081', 'order' => '1']);
-        $point767 = GeoPoint::create(['latitude' => '-42.77138451606143', 'longitude' => '-65.0454669174892', 'order' => '2']);
-        $point768 = GeoPoint::create(['latitude' => '-42.77104563571612', 'longitude' => '-65.04517137158328', 'order' => '3']);
-        $point769 = GeoPoint::create(['latitude' => '-42.77088143423296', 'longitude' => '-65.04502812485806', 'order' => '4']);
-        $point770 = GeoPoint::create(['latitude' => '-42.770442557782786', 'longitude' => '-65.04464532334012', 'order' => '5']);
-        $point771 = GeoPoint::create(['latitude' => '-42.77016335658808', 'longitude' => '-65.04441247406997', 'order' => '6']);
-        $point772 = GeoPoint::create(['latitude' => '-42.77003075487988', 'longitude' => '-65.04430174912903', 'order' => '7']);
-        $point773 = GeoPoint::create(['latitude' => '-42.77001063831227', 'longitude' => '-65.04428490150366', 'order' => '8']);
-        $point774 = GeoPoint::create(['latitude' => '-42.76967946931788', 'longitude' => '-65.04397980022813', 'order' => '9']);
-        $point775 = GeoPoint::create(['latitude' => '-42.769229864031644', 'longitude' => '-65.04358777861673', 'order' => '10']);
-        $point776 = GeoPoint::create(['latitude' => '-42.76872351326094', 'longitude' => '-65.04314621995755', 'order' => '11']);
-        $point777 = GeoPoint::create(['latitude' => '-42.7682926834378', 'longitude' => '-65.04277045923827', 'order' => '12']);
-        $point778 = GeoPoint::create(['latitude' => '-42.76776722192787', 'longitude' => '-65.04231213677275', 'order' => '13']);
-        $point779 = GeoPoint::create(['latitude' => '-42.767671668231685', 'longitude' => '-65.04222873683617', 'order' => '14']);
-        $point780 = GeoPoint::create(['latitude' => '-42.767750374302494', 'longitude' => '-65.0420555667166', 'order' => '15']);
-        $point781 = GeoPoint::create(['latitude' => '-42.76835403896904', 'longitude' => '-65.04170444879267', 'order' => '16']);
-        $point782 = GeoPoint::create(['latitude' => '-42.76838295653499', 'longitude' => '-65.04165533084007', 'order' => '17']);
-        $point783 = GeoPoint::create(['latitude' => '-42.76841908253766', 'longitude' => '-65.04159397530883', 'order' => '18']);
-        $point784 = GeoPoint::create(['latitude' => '-42.76736405238523', 'longitude' => '-65.0406749834449', 'order' => '19']);
-        $point785 = GeoPoint::create(['latitude' => '-42.767965537756965', 'longitude' => '-65.04028011198639', 'order' => '20']);
-        $point786 = GeoPoint::create(['latitude' => '-42.768938844353464', 'longitude' => '-65.03966513175055', 'order' => '21']);
-        $point787 = GeoPoint::create(['latitude' => '-42.76990737326517', 'longitude' => '-65.0390630596456', 'order' => '22']);
-        $point788 = GeoPoint::create(['latitude' => '-42.77087808147169', 'longitude' => '-65.03841446797803', 'order' => '23']);
-        $point789 = GeoPoint::create(['latitude' => '-42.771881982014776', 'longitude' => '-65.03780124794186', 'order' => '24']);
-        $point790 = GeoPoint::create(['latitude' => '-42.77232991092038', 'longitude' => '-65.03912542100521', 'order' => '25']);
-        $point791 = GeoPoint::create(['latitude' => '-42.77278722755753', 'longitude' => '-65.04046451385621', 'order' => '26']);
-        $point792 = GeoPoint::create(['latitude' => '-42.77323423445375', 'longitude' => '-65.04178147848283', 'order' => '27']);
-        $point793 = GeoPoint::create(['latitude' => '-42.773696328775706', 'longitude' => '-65.04313943061597', 'order' => '28']);
-        $point794 = GeoPoint::create(['latitude' => '-42.77270600691577', 'longitude' => '-65.04377276721976', 'order' => '29']);
-        $point795 = GeoPoint::create(['latitude' => '-42.771799336449504', 'longitude' => '-65.04432102750634', 'order' => '30']);
-        $point796 = GeoPoint::create(['latitude' => '-42.77173697508987', 'longitude' => '-65.04436302084125', 'order' => '31']);
-        $point797 = GeoPoint::create(['latitude' => '-42.77181584879875', 'longitude' => '-65.04462193783027', 'order' => '32']);
-        $point798 = GeoPoint::create(['latitude' => '-42.77185775831461', 'longitude' => '-65.04475445571944', 'order' => '33']);
-        $point799 = GeoPoint::create(['latitude' => '-42.772179204301324', 'longitude' => '-65.04569918002613', 'order' => '34']);
-        $point800 = GeoPoint::create(['latitude' => '-42.77185876414299', 'longitude' => '-65.04588056441081', 'order' => '35']);
-
-        $zone22 = Zone::create(['name' => 'Conquista del Desierto', 'description' => 'Barrio 22', 'color' => 'blue']);
-
-        $zone22->geopoints()->save($point766);
-        $zone22->geopoints()->save($point767);
-        $zone22->geopoints()->save($point768);
-        $zone22->geopoints()->save($point769);
-        $zone22->geopoints()->save($point770);
-        $zone22->geopoints()->save($point771);
-        $zone22->geopoints()->save($point772);
-        $zone22->geopoints()->save($point773);
-        $zone22->geopoints()->save($point774);
-        $zone22->geopoints()->save($point775);
-        $zone22->geopoints()->save($point776);
-        $zone22->geopoints()->save($point777);
-        $zone22->geopoints()->save($point778);
-        $zone22->geopoints()->save($point779);
-        $zone22->geopoints()->save($point780);
-        $zone22->geopoints()->save($point781);
-        $zone22->geopoints()->save($point782);
-        $zone22->geopoints()->save($point783);
-        $zone22->geopoints()->save($point784);
-        $zone22->geopoints()->save($point785);
-        $zone22->geopoints()->save($point786);
-        $zone22->geopoints()->save($point787);
-        $zone22->geopoints()->save($point788);
-        $zone22->geopoints()->save($point789);
-        $zone22->geopoints()->save($point790);
-        $zone22->geopoints()->save($point791);
-        $zone22->geopoints()->save($point792);
-        $zone22->geopoints()->save($point793);
-        $zone22->geopoints()->save($point794);
-        $zone22->geopoints()->save($point795);
-        $zone22->geopoints()->save($point796);
-        $zone22->geopoints()->save($point797);
-        $zone22->geopoints()->save($point798);
-        $zone22->geopoints()->save($point799);
-        $zone22->geopoints()->save($point800);
+        $zone22 = new Zone();
+        $zone22->name = 'Conquista del Desierto';
+        $zone22->description = 'Barrio 22';
+        $zone22->color = 'green';
+        $zone22->geom = new Polygon([
+            new LineString([
+                new Point(-42.77185876414299, -65.04588056441081),
+                new Point(-42.77138451606143, -65.0454669174892),
+                new Point(-42.77104563571612, -65.04517137158328),
+                new Point(-42.77088143423296, -65.04502812485806),
+                new Point(-42.770442557782786, -65.04464532334012),
+                new Point(-42.77016335658808, -65.04441247406997),
+                new Point(-42.77003075487988, -65.04430174912903),
+                new Point(-42.77001063831227, -65.04428490150366),
+                new Point(-42.76967946931788, -65.04397980022813),
+                new Point(-42.769229864031644, -65.04358777861673),
+                new Point(-42.76872351326094, -65.04314621995755),
+                new Point(-42.7682926834378, -65.04277045923827),
+                new Point(-42.76776722192787, -65.04231213677275),
+                new Point(-42.767671668231685, -65.04222873683617),
+                new Point(-42.767750374302494, -65.0420555667166),
+                new Point(-42.76835403896904, -65.04170444879267),
+                new Point(-42.76838295653499, -65.04165533084007),
+                new Point(-42.76841908253766, -65.04159397530883),
+                new Point(-42.76736405238523, -65.0406749834449),
+                new Point(-42.767965537756965, -65.04028011198639),
+                new Point(-42.768938844353464, -65.03966513175055),
+                new Point(-42.76990737326517, -65.0390630596456),
+                new Point(-42.77087808147169, -65.03841446797803),
+                new Point(-42.771881982014776, -65.03780124794186),
+                new Point(-42.77232991092038, -65.03912542100521),
+                new Point(-42.77278722755753, -65.04046451385621),
+                new Point(-42.77323423445375, -65.04178147848283),
+                new Point(-42.773696328775706, -65.04313943061597),
+                new Point(-42.77270600691577, -65.04377276721976),
+                new Point(-42.771799336449504, -65.04432102750634),
+                new Point(-42.77173697508987, -65.04436302084125),
+                new Point(-42.77181584879875, -65.04462193783027),
+                new Point(-42.77185775831461, -65.04475445571944),
+                new Point(-42.772179204301324, -65.04569918002613),
+                new Point(-42.77185876414299, -65.04588056441081),
+            ])
+        ]);
+        $zone22->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 23: Inmigrantes--------------
 
-        $point801 = GeoPoint::create(['latitude' => '-42.77258757062393', 'longitude' => '-65.05028030920562', 'order' => '1']);
-        $point802 = GeoPoint::create(['latitude' => '-42.772397720517034', 'longitude' => '-65.0502422553652', 'order' => '2']);
-        $point803 = GeoPoint::create(['latitude' => '-42.77113372951848', 'longitude' => '-65.04958980802216', 'order' => '3']);
-        $point804 = GeoPoint::create(['latitude' => '-42.770462506712335', 'longitude' => '-65.04925084385785', 'order' => '4']);
-        $point805 = GeoPoint::create(['latitude' => '-42.76977083206248', 'longitude' => '-65.04889134403072', 'order' => '5']);
-        $point806 = GeoPoint::create(['latitude' => '-42.768842703924065', 'longitude' => '-65.04841022278858', 'order' => '6']);
-        $point807 = GeoPoint::create(['latitude' => '-42.76831657186187', 'longitude' => '-65.04813831384962', 'order' => '7']);
-        $point808 = GeoPoint::create(['latitude' => '-42.76732650145899', 'longitude' => '-65.0476657421487', 'order' => '8']);
-        $point809 = GeoPoint::create(['latitude' => '-42.76654430225485', 'longitude' => '-65.04727397199437', 'order' => '9']);
-        $point810 = GeoPoint::create(['latitude' => '-42.76651815071696', 'longitude' => '-65.04725980657801', 'order' => '10']);
-        $point811 = GeoPoint::create(['latitude' => '-42.76653843492264', 'longitude' => '-65.04710842940669', 'order' => '11']);
-        $point812 = GeoPoint::create(['latitude' => '-42.76664044268426', 'longitude' => '-65.04643762569572', 'order' => '12']);
-        $point813 = GeoPoint::create(['latitude' => '-42.76671512544152', 'longitude' => '-65.04585223357807', 'order' => '13']);
-        $point814 = GeoPoint::create(['latitude' => '-42.76678201302885', 'longitude' => '-65.04532752643942', 'order' => '14']);
-        $point815 = GeoPoint::create(['latitude' => '-42.76680162668228', 'longitude' => '-65.04517405379231', 'order' => '15']);
-        $point816 = GeoPoint::create(['latitude' => '-42.76699315316981', 'longitude' => '-65.04367184910554', 'order' => '16']);
-        $point817 = GeoPoint::create(['latitude' => '-42.767163221985186', 'longitude' => '-65.043242528025', 'order' => '17']);
-        $point818 = GeoPoint::create(['latitude' => '-42.76754577204602', 'longitude' => '-65.04249326970033', 'order' => '18']);
-        $point819 = GeoPoint::create(['latitude' => '-42.767671668231685', 'longitude' => '-65.04222873683617', 'order' => '19']);
-        $point820 = GeoPoint::create(['latitude' => '-42.76776722192787', 'longitude' => '-65.04231213677275', 'order' => '20']);
-        $point821 = GeoPoint::create(['latitude' => '-42.7682926834378', 'longitude' => '-65.04277045923827', 'order' => '21']);
-        $point822 = GeoPoint::create(['latitude' => '-42.76872351326094', 'longitude' => '-65.04314621995755', 'order' => '22']);
-        $point823 = GeoPoint::create(['latitude' => '-42.769229864031644', 'longitude' => '-65.04358777861673', 'order' => '23']);
-        $point824 = GeoPoint::create(['latitude' => '-42.76967946931788', 'longitude' => '-65.04397980022813', 'order' => '24']);
-        $point825 = GeoPoint::create(['latitude' => '-42.77001063831227', 'longitude' => '-65.04428490150366', 'order' => '25']);
-        $point826 = GeoPoint::create(['latitude' => '-42.77003075487988', 'longitude' => '-65.04430174912903', 'order' => '26']);
-        $point827 = GeoPoint::create(['latitude' => '-42.77016335658808', 'longitude' => '-65.04441247406997', 'order' => '27']);
-        $point828 = GeoPoint::create(['latitude' => '-42.770442557782786', 'longitude' => '-65.04464532334012', 'order' => '28']);
-        $point829 = GeoPoint::create(['latitude' => '-42.77088143423296', 'longitude' => '-65.04502812485806', 'order' => '29']);
-        $point830 = GeoPoint::create(['latitude' => '-42.77104563571612', 'longitude' => '-65.04517137158328', 'order' => '30']);
-        $point831 = GeoPoint::create(['latitude' => '-42.77138451606143', 'longitude' => '-65.0454669174892', 'order' => '31']);
-        $point832 = GeoPoint::create(['latitude' => '-42.77185876414299', 'longitude' => '-65.04588056441081', 'order' => '32']);
-        $point833 = GeoPoint::create(['latitude' => '-42.772179204301324', 'longitude' => '-65.04569918002613', 'order' => '33']);
-        $point834 = GeoPoint::create(['latitude' => '-42.772402246744775', 'longitude' => '-65.04635456103527', 'order' => '34']);
-        $point835 = GeoPoint::create(['latitude' => '-42.77263870023327', 'longitude' => '-65.04704950462738', 'order' => '35']);
-        $point836 = GeoPoint::create(['latitude' => '-42.77308662913887', 'longitude' => '-65.04836596633982', 'order' => '36']);
-        $point837 = GeoPoint::create(['latitude' => '-42.77354210175733', 'longitude' => '-65.04970447245759', 'order' => '37']);
-        $point838 = GeoPoint::create(['latitude' => '-42.773057879210995', 'longitude' => '-65.04999658178319', 'order' => '38']);
-        $point839 = GeoPoint::create(['latitude' => '-42.77258757062393', 'longitude' => '-65.05028030920562', 'order' => '39']);
-
-        $zone23 = Zone::create(['name' => 'Inmigrantes', 'description' => 'Barrio 23', 'color' => 'blue']);
-
-        $zone23->geopoints()->save($point801);
-        $zone23->geopoints()->save($point802);
-        $zone23->geopoints()->save($point803);
-        $zone23->geopoints()->save($point804);
-        $zone23->geopoints()->save($point805);
-        $zone23->geopoints()->save($point806);
-        $zone23->geopoints()->save($point807);
-        $zone23->geopoints()->save($point808);
-        $zone23->geopoints()->save($point809);
-        $zone23->geopoints()->save($point810);
-        $zone23->geopoints()->save($point811);
-        $zone23->geopoints()->save($point812);
-        $zone23->geopoints()->save($point813);
-        $zone23->geopoints()->save($point814);
-        $zone23->geopoints()->save($point815);
-        $zone23->geopoints()->save($point816);
-        $zone23->geopoints()->save($point817);
-        $zone23->geopoints()->save($point818);
-        $zone23->geopoints()->save($point819);
-        $zone23->geopoints()->save($point820);
-        $zone23->geopoints()->save($point821);
-        $zone23->geopoints()->save($point822);
-        $zone23->geopoints()->save($point823);
-        $zone23->geopoints()->save($point824);
-        $zone23->geopoints()->save($point825);
-        $zone23->geopoints()->save($point826);
-        $zone23->geopoints()->save($point827);
-        $zone23->geopoints()->save($point828);
-        $zone23->geopoints()->save($point829);
-        $zone23->geopoints()->save($point830);
-        $zone23->geopoints()->save($point831);
-        $zone23->geopoints()->save($point832);
-        $zone23->geopoints()->save($point833);
-        $zone23->geopoints()->save($point834);
-        $zone23->geopoints()->save($point835);
-        $zone23->geopoints()->save($point836);
-        $zone23->geopoints()->save($point837);
-        $zone23->geopoints()->save($point838);
-        $zone23->geopoints()->save($point839);
+        $zone23 = new Zone();
+        $zone23->name = 'Inmigrantes';
+        $zone23->description = 'Barrio 23';
+        $zone23->color = 'yellow';
+        $zone23->geom = new Polygon([
+            new LineString([
+                new Point(-42.77258757062393, -65.05028030920562),
+                new Point(-42.772397720517034, -65.0502422553652),
+                new Point(-42.77113372951848, -65.04958980802216),
+                new Point(-42.770462506712335, -65.04925084385785),
+                new Point(-42.76977083206248, -65.04889134403072),
+                new Point(-42.768842703924065, -65.04841022278858),
+                new Point(-42.76831657186187, -65.04813831384962),
+                new Point(-42.76732650145899, -65.0476657421487),
+                new Point(-42.76654430225485, -65.04727397199437),
+                new Point(-42.76651815071696, -65.04725980657801),
+                new Point(-42.76653843492264, -65.04710842940669),
+                new Point(-42.76664044268426, -65.04643762569572),
+                new Point(-42.76671512544152, -65.04585223357807),
+                new Point(-42.76678201302885, -65.04532752643942),
+                new Point(-42.76680162668228, -65.04517405379231),
+                new Point(-42.76699315316981, -65.04367184910554),
+                new Point(-42.767163221985186, -65.043242528025),
+                new Point(-42.76754577204602, -65.04249326970033),
+                new Point(-42.767671668231685, -65.04222873683617),
+                new Point(-42.76776722192787, -65.04231213677275),
+                new Point(-42.7682926834378, -65.04277045923827),
+                new Point(-42.76872351326094, -65.04314621995755),
+                new Point(-42.769229864031644, -65.04358777861673),
+                new Point(-42.76967946931788, -65.04397980022813),
+                new Point(-42.77001063831227, -65.04428490150366),
+                new Point(-42.77003075487988, -65.04430174912903),
+                new Point(-42.77016335658808, -65.04441247406997),
+                new Point(-42.770442557782786, -65.04464532334012),
+                new Point(-42.77088143423296, -65.04502812485806),
+                new Point(-42.77104563571612, -65.04517137158328),
+                new Point(-42.77138451606143, -65.0454669174892),
+                new Point(-42.77185876414299, -65.04588056441081),
+                new Point(-42.772179204301324, -65.04569918002613),
+                new Point(-42.772402246744775, -65.04635456103527),
+                new Point(-42.77263870023327, -65.04704950462738),
+                new Point(-42.77308662913887, -65.04836596633982),
+                new Point(-42.77354210175733, -65.04970447245759),
+                new Point(-42.773057879210995, -65.04999658178319),
+                new Point(-42.77258757062393, -65.05028030920562),
+            ])
+        ]);
+        $zone23->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 24: Perito Moreno--------------
 
-        $point840 = GeoPoint::create(['latitude' => '-42.761900141163494', 'longitude' => '-65.05050611767712', 'order' => '1']);
-        $point841 = GeoPoint::create(['latitude' => '-42.75858694247708', 'longitude' => '-65.04815667021758', 'order' => '2']);
-        $point842 = GeoPoint::create(['latitude' => '-42.758648214189265', 'longitude' => '-65.04804653200988', 'order' => '3']);
-        $point843 = GeoPoint::create(['latitude' => '-42.75895105235094', 'longitude' => '-65.04744161005785', 'order' => '4']);
-        $point844 = GeoPoint::create(['latitude' => '-42.759215501396056', 'longitude' => '-65.04691095176793', 'order' => '5']);
-        $point845 = GeoPoint::create(['latitude' => '-42.75942823409861', 'longitude' => '-65.04641943696583', 'order' => '6']);
-        $point846 = GeoPoint::create(['latitude' => '-42.75970676474105', 'longitude' => '-65.04582054998409', 'order' => '7']);
-        $point847 = GeoPoint::create(['latitude' => '-42.75999954461892', 'longitude' => '-65.04528142597195', 'order' => '8']);
-        $point848 = GeoPoint::create(['latitude' => '-42.7604247585669', 'longitude' => '-65.04439001056946', 'order' => '9']);
-        $point849 = GeoPoint::create(['latitude' => '-42.76048242606074', 'longitude' => '-65.04439512353039', 'order' => '10']);
-        $point850 = GeoPoint::create(['latitude' => '-42.76134207405022', 'longitude' => '-65.04476208325131', 'order' => '11']);
-        $point851 = GeoPoint::create(['latitude' => '-42.76137191362551', 'longitude' => '-65.04478261891411', 'order' => '12']);
-        $point852 = GeoPoint::create(['latitude' => '-42.761405357419164', 'longitude' => '-65.04478563639925', 'order' => '13']);
-        $point853 = GeoPoint::create(['latitude' => '-42.76239961877363', 'longitude' => '-65.04521587948915', 'order' => '14']);
-        $point854 = GeoPoint::create(['latitude' => '-42.762449826373626', 'longitude' => '-65.04503055560998', 'order' => '15']);
-        $point855 = GeoPoint::create(['latitude' => '-42.76328407719649', 'longitude' => '-65.04322324964771', 'order' => '16']);
-        $point856 = GeoPoint::create(['latitude' => '-42.7633638729147', 'longitude' => '-65.04329307090114', 'order' => '17']);
-        $point857 = GeoPoint::create(['latitude' => '-42.76388807713917', 'longitude' => '-65.04376405004047', 'order' => '18']);
-        $point858 = GeoPoint::create(['latitude' => '-42.76436333104911', 'longitude' => '-65.0441954665968', 'order' => '19']);
-        $point859 = GeoPoint::create(['latitude' => '-42.76397550038928', 'longitude' => '-65.045786016543', 'order' => '20']);
-        $point860 = GeoPoint::create(['latitude' => '-42.76396376572483', 'longitude' => '-65.04595625299646', 'order' => '21']);
-        $point861 = GeoPoint::create(['latitude' => '-42.76465644620308', 'longitude' => '-65.04631550136648', 'order' => '22']);
-        $point862 = GeoPoint::create(['latitude' => '-42.76560754075618', 'longitude' => '-65.04678463648709', 'order' => '23']);
-        $point863 = GeoPoint::create(['latitude' => '-42.76556412249775', 'longitude' => '-65.046882118021', 'order' => '24']);
-        $point864 = GeoPoint::create(['latitude' => '-42.76437372460904', 'longitude' => '-65.04767395641382', 'order' => '25']);
-        $point865 = GeoPoint::create(['latitude' => '-42.76326496645726', 'longitude' => '-65.04843151282263', 'order' => '26']);
-        $point866 = GeoPoint::create(['latitude' => '-42.76277772642578', 'longitude' => '-65.04876385528347', 'order' => '27']);
-        $point867 = GeoPoint::create(['latitude' => '-42.76216056689512', 'longitude' => '-65.05003815602294', 'order' => '28']);
-        $point868 = GeoPoint::create(['latitude' => '-42.76201840981727', 'longitude' => '-65.05030972968575', 'order' => '29']);
-        $point869 = GeoPoint::create(['latitude' => '-42.761942721231634', 'longitude' => '-65.05038977686107', 'order' => '30']);
-        $point870 = GeoPoint::create(['latitude' => '-42.761900141163494', 'longitude' => '-65.05050611767712', 'order' => '31']);
-
-        $zone24 = Zone::create(['name' => 'Perito Moreno', 'description' => 'Barrio 24', 'color' => 'blue']);
-
-        $zone24->geopoints()->save($point840);
-        $zone24->geopoints()->save($point841);
-        $zone24->geopoints()->save($point842);
-        $zone24->geopoints()->save($point843);
-        $zone24->geopoints()->save($point844);
-        $zone24->geopoints()->save($point845);
-        $zone24->geopoints()->save($point846);
-        $zone24->geopoints()->save($point847);
-        $zone24->geopoints()->save($point848);
-        $zone24->geopoints()->save($point849);
-        $zone24->geopoints()->save($point850);
-        $zone24->geopoints()->save($point851);
-        $zone24->geopoints()->save($point852);
-        $zone24->geopoints()->save($point853);
-        $zone24->geopoints()->save($point854);
-        $zone24->geopoints()->save($point855);
-        $zone24->geopoints()->save($point856);
-        $zone24->geopoints()->save($point857);
-        $zone24->geopoints()->save($point858);
-        $zone24->geopoints()->save($point859);
-        $zone24->geopoints()->save($point860);
-        $zone24->geopoints()->save($point861);
-        $zone24->geopoints()->save($point862);
-        $zone24->geopoints()->save($point863);
-        $zone24->geopoints()->save($point864);
-        $zone24->geopoints()->save($point865);
-        $zone24->geopoints()->save($point866);
-        $zone24->geopoints()->save($point867);
-        $zone24->geopoints()->save($point868);
-        $zone24->geopoints()->save($point869);
-        $zone24->geopoints()->save($point870);
+        $zone24 = new Zone();
+        $zone24->name = 'Perito Moreno';
+        $zone24->description = 'Barrio 24';
+        $zone24->color = 'green';
+        $zone24->geom = new Polygon([
+            new LineString([
+                new Point(-42.761900141163494, -65.05050611767712),
+                new Point(-42.75858694247708, -65.04815667021758),
+                new Point(-42.758648214189265, -65.04804653200988),
+                new Point(-42.75895105235094, -65.04744161005785),
+                new Point(-42.759215501396056, -65.04691095176793),
+                new Point(-42.75942823409861, -65.04641943696583),
+                new Point(-42.75970676474105, -65.04582054998409),
+                new Point(-42.75999954461892, -65.04528142597195),
+                new Point(-42.7604247585669, -65.04439001056946),
+                new Point(-42.76048242606074, -65.04439512353039),
+                new Point(-42.76134207405022, -65.04476208325131),
+                new Point(-42.76137191362551, -65.04478261891411),
+                new Point(-42.761405357419164, -65.04478563639925),
+                new Point(-42.76239961877363, -65.04521587948915),
+                new Point(-42.762449826373626, -65.04503055560998),
+                new Point(-42.76328407719649, -65.04322324964771),
+                new Point(-42.7633638729147, -65.04329307090114),
+                new Point(-42.76388807713917, -65.04376405004047),
+                new Point(-42.76436333104911, -65.0441954665968),
+                new Point(-42.76397550038928, -65.045786016543),
+                new Point(-42.76396376572483, -65.04595625299646),
+                new Point(-42.76465644620308, -65.04631550136648),
+                new Point(-42.76560754075618, -65.04678463648709),
+                new Point(-42.76556412249775, -65.046882118021),
+                new Point(-42.76437372460904, -65.04767395641382),
+                new Point(-42.76326496645726, -65.04843151282263),
+                new Point(-42.76277772642578, -65.04876385528347),
+                new Point(-42.76216056689512, -65.05003815602294),
+                new Point(-42.76201840981727, -65.05030972968575),
+                new Point(-42.761942721231634, -65.05038977686107),
+                new Point(-42.761900141163494, -65.05050611767712),
+            ])
+        ]);
+        $zone24->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 25: Francisco Falcon--------------
 
-        $point871 = GeoPoint::create(['latitude' => '-42.751905308362325', 'longitude' => '-65.05145662549698', 'order' => '1']);
-        $point872 = GeoPoint::create(['latitude' => '-42.75176818042638', 'longitude' => '-65.0514109441247', 'order' => '2']);
-        $point873 = GeoPoint::create(['latitude' => '-42.75136417269343', 'longitude' => '-65.05127633075972', 'order' => '3']);
-        $point874 = GeoPoint::create(['latitude' => '-42.75103216550872', 'longitude' => '-65.04975266840084', 'order' => '4']);
-        $point875 = GeoPoint::create(['latitude' => '-42.75068657964086', 'longitude' => '-65.0481662255872', 'order' => '5']);
-        $point876 = GeoPoint::create(['latitude' => '-42.75034434653432', 'longitude' => '-65.04659520547537', 'order' => '6']);
-        $point877 = GeoPoint::create(['latitude' => '-42.750147958542954', 'longitude' => '-65.04585583779644', 'order' => '7']);
-        $point878 = GeoPoint::create(['latitude' => '-42.74999021112523', 'longitude' => '-65.04514136436994', 'order' => '8']);
-        $point879 = GeoPoint::create(['latitude' => '-42.74985308318932', 'longitude' => '-65.0445015737007', 'order' => '9']);
-        $point880 = GeoPoint::create(['latitude' => '-42.74985853142638', 'longitude' => '-65.04428490150366', 'order' => '10']);
-        $point881 = GeoPoint::create(['latitude' => '-42.750026253308874', 'longitude' => '-65.04438674162722', 'order' => '11']);
-        $point882 = GeoPoint::create(['latitude' => '-42.75027435764281', 'longitude' => '-65.0446016536246', 'order' => '12']);
-        $point883 = GeoPoint::create(['latitude' => '-42.7506589193604', 'longitude' => '-65.04474900748238', 'order' => '13']);
-        $point884 = GeoPoint::create(['latitude' => '-42.75110307640958', 'longitude' => '-65.04490080374886', 'order' => '14']);
-        $point885 = GeoPoint::create(['latitude' => '-42.75149224817392', 'longitude' => '-65.04505260001532', 'order' => '15']);
-        $point886 = GeoPoint::create(['latitude' => '-42.751879743557616', 'longitude' => '-65.04517874765808', 'order' => '16']);
-        $point887 = GeoPoint::create(['latitude' => '-42.751968843188365', 'longitude' => '-65.04520674321469', 'order' => '17']);
-        $point888 = GeoPoint::create(['latitude' => '-42.752397577535696', 'longitude' => '-65.04535158250152', 'order' => '18']);
-        $point889 = GeoPoint::create(['latitude' => '-42.75281583450405', 'longitude' => '-65.045482256372', 'order' => '19']);
-        $point890 = GeoPoint::create(['latitude' => '-42.75316636569477', 'longitude' => '-65.04560178231125', 'order' => '20']);
-        $point891 = GeoPoint::create(['latitude' => '-42.75294441289873', 'longitude' => '-65.04599816251233', 'order' => '21']);
-        $point892 = GeoPoint::create(['latitude' => '-42.75281893580822', 'longitude' => '-65.04622221078417', 'order' => '22']);
-        $point893 = GeoPoint::create(['latitude' => '-42.752736876976144', 'longitude' => '-65.04671917382332', 'order' => '23']);
-        $point894 = GeoPoint::create(['latitude' => '-42.7526181054082', 'longitude' => '-65.04740213129388', 'order' => '24']);
-        $point895 = GeoPoint::create(['latitude' => '-42.75252732939683', 'longitude' => '-65.04788274962186', 'order' => '25']);
-        $point896 = GeoPoint::create(['latitude' => '-42.752379975539036', 'longitude' => '-65.0487391286691', 'order' => '26']);
-        $point897 = GeoPoint::create(['latitude' => '-42.752212337475555', 'longitude' => '-65.04973758097513', 'order' => '27']);
-        $point898 = GeoPoint::create(['latitude' => '-42.75214603662147', 'longitude' => '-65.05013220097653', 'order' => '28']);
-        $point899 = GeoPoint::create(['latitude' => '-42.752035311680544', 'longitude' => '-65.05074114624209', 'order' => '29']);
-        $point900 = GeoPoint::create(['latitude' => '-42.751905308362325', 'longitude' => '-65.05145662549698', 'order' => '30']);
-
-        $zone25 = Zone::create(['name' => 'Francisco Falcon', 'description' => 'Barrio 25', 'color' => 'blue']);
-
-        $zone25->geopoints()->save($point871);
-        $zone25->geopoints()->save($point872);
-        $zone25->geopoints()->save($point873);
-        $zone25->geopoints()->save($point874);
-        $zone25->geopoints()->save($point875);
-        $zone25->geopoints()->save($point876);
-        $zone25->geopoints()->save($point877);
-        $zone25->geopoints()->save($point878);
-        $zone25->geopoints()->save($point879);
-        $zone25->geopoints()->save($point880);
-        $zone25->geopoints()->save($point881);
-        $zone25->geopoints()->save($point882);
-        $zone25->geopoints()->save($point883);
-        $zone25->geopoints()->save($point884);
-        $zone25->geopoints()->save($point885);
-        $zone25->geopoints()->save($point886);
-        $zone25->geopoints()->save($point887);
-        $zone25->geopoints()->save($point888);
-        $zone25->geopoints()->save($point889);
-        $zone25->geopoints()->save($point890);
-        $zone25->geopoints()->save($point891);
-        $zone25->geopoints()->save($point892);
-        $zone25->geopoints()->save($point893);
-        $zone25->geopoints()->save($point894);
-        $zone25->geopoints()->save($point895);
-        $zone25->geopoints()->save($point896);
-        $zone25->geopoints()->save($point897);
-        $zone25->geopoints()->save($point898);
-        $zone25->geopoints()->save($point899);
-        $zone25->geopoints()->save($point900);
+        $zone25 = new Zone();
+        $zone25->name = 'Francisco Falcon';
+        $zone25->description = 'Barrio 25';
+        $zone25->color = 'orange';
+        $zone25->geom = new Polygon([
+            new LineString([
+                new Point(-42.751905308362325, -65.05145662549698),
+                new Point(-42.75176818042638, -65.0514109441247),
+                new Point(-42.75136417269343, -65.05127633075972),
+                new Point(-42.75103216550872, -65.04975266840084),
+                new Point(-42.75068657964086, -65.0481662255872),
+                new Point(-42.75034434653432, -65.04659520547537),
+                new Point(-42.750147958542954, -65.04585583779644),
+                new Point(-42.74999021112523, -65.04514136436994),
+                new Point(-42.74985308318932, -65.0445015737007),
+                new Point(-42.74985853142638, -65.04428490150366),
+                new Point(-42.750026253308874, -65.04438674162722),
+                new Point(-42.75027435764281, -65.0446016536246),
+                new Point(-42.7506589193604, -65.04474900748238),
+                new Point(-42.75110307640958, -65.04490080374886),
+                new Point(-42.75149224817392, -65.04505260001532),
+                new Point(-42.751879743557616, -65.04517874765808),
+                new Point(-42.751968843188365, -65.04520674321469),
+                new Point(-42.752397577535696, -65.04535158250152),
+                new Point(-42.75281583450405, -65.045482256372),
+                new Point(-42.75316636569477, -65.04560178231125),
+                new Point(-42.75294441289873, -65.04599816251233),
+                new Point(-42.75281893580822, -65.04622221078417),
+                new Point(-42.752736876976144, -65.04671917382332),
+                new Point(-42.7526181054082, -65.04740213129388),
+                new Point(-42.75252732939683, -65.04788274962186),
+                new Point(-42.752379975539036, -65.0487391286691),
+                new Point(-42.752212337475555, -65.04973758097513),
+                new Point(-42.75214603662147, -65.05013220097653),
+                new Point(-42.752035311680544, -65.05074114624209),
+                new Point(-42.751905308362325, -65.05145662549698),
+            ])
+        ]);
+        $zone25->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 26: VEPAM--------------
 
-        $point901 = GeoPoint::create(['latitude' => '-42.75541665523977', 'longitude' => '-65.05587204445074', 'order' => '1']);
-        $point902 = GeoPoint::create(['latitude' => '-42.75478583320691', 'longitude' => '-65.05584337834188', 'order' => '2']);
-        $point903 = GeoPoint::create(['latitude' => '-42.75437947854107', 'longitude' => '-65.05581471223303', 'order' => '3']);
-        $point904 = GeoPoint::create(['latitude' => '-42.75435567393606', 'longitude' => '-65.0557982837028', 'order' => '4']);
-        $point905 = GeoPoint::create(['latitude' => '-42.754215025600814', 'longitude' => '-65.05570096980696', 'order' => '5']);
-        $point906 = GeoPoint::create(['latitude' => '-42.754348968413524', 'longitude' => '-65.0553738241261', 'order' => '6']);
-        $point907 = GeoPoint::create(['latitude' => '-42.754652560946454', 'longitude' => '-65.05461542952696', 'order' => '7']);
-        $point908 = GeoPoint::create(['latitude' => '-42.755139046606644', 'longitude' => '-65.05340642381321', 'order' => '8']);
-        $point909 = GeoPoint::create(['latitude' => '-42.75520702384139', 'longitude' => '-65.0532373608262', 'order' => '9']);
-        $point910 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.05263377997868', 'order' => '10']);
-        $point911 = GeoPoint::create(['latitude' => '-42.75552520088587', 'longitude' => '-65.05237612027511', 'order' => '11']);
-        $point912 = GeoPoint::create(['latitude' => '-42.755660903898246', 'longitude' => '-65.05174202930004', 'order' => '12']);
-        $point913 = GeoPoint::create(['latitude' => '-42.75581127524117', 'longitude' => '-65.0510396258141', 'order' => '13']);
-        $point914 = GeoPoint::create(['latitude' => '-42.755819238049185', 'longitude' => '-65.05091968077969', 'order' => '14']);
-        $point915 = GeoPoint::create(['latitude' => '-42.75590423054737', 'longitude' => '-65.04964261401217', 'order' => '15']);
-        $point916 = GeoPoint::create(['latitude' => '-42.75591680340213', 'longitude' => '-65.04945293154336', 'order' => '16']);
-        $point917 = GeoPoint::create(['latitude' => '-42.75645215555781', 'longitude' => '-65.04987898368167', 'order' => '17']);
-        $point918 = GeoPoint::create(['latitude' => '-42.7566042032814', 'longitude' => '-65.04988820377515', 'order' => '18']);
-        $point919 = GeoPoint::create(['latitude' => '-42.75677100315454', 'longitude' => '-65.05003354597619', 'order' => '19']);
-        $point920 = GeoPoint::create(['latitude' => '-42.756921374497466', 'longitude' => '-65.05023211326237', 'order' => '20']);
-        $point921 = GeoPoint::create(['latitude' => '-42.75705657459565', 'longitude' => '-65.050410731619', 'order' => '21']);
-        $point922 = GeoPoint::create(['latitude' => '-42.75722262009754', 'longitude' => '-65.05053570579531', 'order' => '22']);
-        $point923 = GeoPoint::create(['latitude' => '-42.75739185072259', 'longitude' => '-65.05057484928314', 'order' => '23']);
-        $point924 = GeoPoint::create(['latitude' => '-42.7575175792702', 'longitude' => '-65.05060661669616', 'order' => '24']);
-        $point925 = GeoPoint::create(['latitude' => '-42.75773240744854', 'longitude' => '-65.0501366433852', 'order' => '25']);
-        $point926 = GeoPoint::create(['latitude' => '-42.75790574520616', 'longitude' => '-65.04973875444158', 'order' => '26']);
-        $point927 = GeoPoint::create(['latitude' => '-42.75803675435276', 'longitude' => '-65.04945335063852', 'order' => '27']);
-        $point928 = GeoPoint::create(['latitude' => '-42.75806860558484', 'longitude' => '-65.04936978306388', 'order' => '28']);
-        $point929 = GeoPoint::create(['latitude' => '-42.75822895139254', 'longitude' => '-65.04899695601073', 'order' => '29']);
-        $point930 = GeoPoint::create(['latitude' => '-42.7582756385932', 'longitude' => '-65.04889302041137', 'order' => '30']);
-        $point931 = GeoPoint::create(['latitude' => '-42.758491807876055', 'longitude' => '-65.04831844094882', 'order' => '31']);
-        $point932 = GeoPoint::create(['latitude' => '-42.758548553360555', 'longitude' => '-65.0482256532807', 'order' => '32']);
-        $point933 = GeoPoint::create(['latitude' => '-42.75858694247708', 'longitude' => '-65.04815667021758', 'order' => '33']);
-        $point934 = GeoPoint::create(['latitude' => '-42.761900141163494', 'longitude' => '-65.05050611767712', 'order' => '34']);
-        $point935 = GeoPoint::create(['latitude' => '-42.761860578580524', 'longitude' => '-65.0506144118661', 'order' => '35']);
-        $point936 = GeoPoint::create(['latitude' => '-42.761816154493715', 'longitude' => '-65.05071482706613', 'order' => '36']);
-        $point937 = GeoPoint::create(['latitude' => '-42.761702747343776', 'longitude' => '-65.05089663054596', 'order' => '37']);
-        $point938 = GeoPoint::create(['latitude' => '-42.76129412956404', 'longitude' => '-65.05113325167255', 'order' => '38']);
-        $point939 = GeoPoint::create(['latitude' => '-42.760785767136575', 'longitude' => '-65.05145830187762', 'order' => '39']);
-        $point940 = GeoPoint::create(['latitude' => '-42.76026667587305', 'longitude' => '-65.05178276534947', 'order' => '40']);
-        $point941 = GeoPoint::create(['latitude' => '-42.759768455548425', 'longitude' => '-65.05209415305237', 'order' => '41']);
-        $point942 = GeoPoint::create(['latitude' => '-42.75898877091521', 'longitude' => '-65.05257133480004', 'order' => '42']);
-        $point943 = GeoPoint::create(['latitude' => '-42.75882792219332', 'longitude' => '-65.05266973834328', 'order' => '43']);
-        $point944 = GeoPoint::create(['latitude' => '-42.758782073182964', 'longitude' => '-65.05284190263447', 'order' => '44']);
-        $point945 = GeoPoint::create(['latitude' => '-42.75846967965168', 'longitude' => '-65.05307911049428', 'order' => '45']);
-        $point946 = GeoPoint::create(['latitude' => '-42.75840681537787', 'longitude' => '-65.05318874578779', 'order' => '46']);
-        $point947 = GeoPoint::create(['latitude' => '-42.758331462068355', 'longitude' => '-65.05332017402955', 'order' => '47']);
-        $point948 = GeoPoint::create(['latitude' => '-42.757962239233564', 'longitude' => '-65.05355293948068', 'order' => '48']);
-        $point949 = GeoPoint::create(['latitude' => '-42.75758505359076', 'longitude' => '-65.0537907340737', 'order' => '49']);
-        $point950 = GeoPoint::create(['latitude' => '-42.75747751377304', 'longitude' => '-65.05378495056053', 'order' => '50']);
-        $point951 = GeoPoint::create(['latitude' => '-42.75737776912527', 'longitude' => '-65.05377941850443', 'order' => '51']);
-        $point952 = GeoPoint::create(['latitude' => '-42.756941826341205', 'longitude' => '-65.05408795636025', 'order' => '52']);
-        $point953 = GeoPoint::create(['latitude' => '-42.75670243918657', 'longitude' => '-65.05425626497598', 'order' => '53']);
-        $point954 = GeoPoint::create(['latitude' => '-42.756302370948106', 'longitude' => '-65.05453622054196', 'order' => '54']);
-        $point955 = GeoPoint::create(['latitude' => '-42.75590213507158', 'longitude' => '-65.0545807284478', 'order' => '55']);
-        $point956 = GeoPoint::create(['latitude' => '-42.755760564726984', 'longitude' => '-65.05459640260675', 'order' => '56']);
-        $point957 = GeoPoint::create(['latitude' => '-42.75561371378336', 'longitude' => '-65.05462012339272', 'order' => '57']);
-        $point958 = GeoPoint::create(['latitude' => '-42.755520255563', 'longitude' => '-65.05463521081843', 'order' => '58']);
-        $point959 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.054649879149', 'order' => '59']);
-        $point960 = GeoPoint::create(['latitude' => '-42.75541665523977', 'longitude' => '-65.05587204445074', 'order' => '60']);
-
-        $zone26 = Zone::create(['name' => 'VEPAM', 'description' => 'Barrio 26', 'color' => 'blue']);
-
-        $zone26->geopoints()->save($point901);
-        $zone26->geopoints()->save($point902);
-        $zone26->geopoints()->save($point903);
-        $zone26->geopoints()->save($point904);
-        $zone26->geopoints()->save($point905);
-        $zone26->geopoints()->save($point906);
-        $zone26->geopoints()->save($point907);
-        $zone26->geopoints()->save($point908);
-        $zone26->geopoints()->save($point909);
-        $zone26->geopoints()->save($point910);
-        $zone26->geopoints()->save($point911);
-        $zone26->geopoints()->save($point912);
-        $zone26->geopoints()->save($point913);
-        $zone26->geopoints()->save($point914);
-        $zone26->geopoints()->save($point915);
-        $zone26->geopoints()->save($point916);
-        $zone26->geopoints()->save($point917);
-        $zone26->geopoints()->save($point918);
-        $zone26->geopoints()->save($point919);
-        $zone26->geopoints()->save($point920);
-        $zone26->geopoints()->save($point921);
-        $zone26->geopoints()->save($point922);
-        $zone26->geopoints()->save($point923);
-        $zone26->geopoints()->save($point924);
-        $zone26->geopoints()->save($point925);
-        $zone26->geopoints()->save($point926);
-        $zone26->geopoints()->save($point927);
-        $zone26->geopoints()->save($point928);
-        $zone26->geopoints()->save($point929);
-        $zone26->geopoints()->save($point930);
-        $zone26->geopoints()->save($point931);
-        $zone26->geopoints()->save($point932);
-        $zone26->geopoints()->save($point933);
-        $zone26->geopoints()->save($point934);
-        $zone26->geopoints()->save($point935);
-        $zone26->geopoints()->save($point936);
-        $zone26->geopoints()->save($point937);
-        $zone26->geopoints()->save($point938);
-        $zone26->geopoints()->save($point939);
-        $zone26->geopoints()->save($point940);
-        $zone26->geopoints()->save($point941);
-        $zone26->geopoints()->save($point942);
-        $zone26->geopoints()->save($point943);
-        $zone26->geopoints()->save($point944);
-        $zone26->geopoints()->save($point945);
-        $zone26->geopoints()->save($point946);
-        $zone26->geopoints()->save($point947);
-        $zone26->geopoints()->save($point948);
-        $zone26->geopoints()->save($point949);
-        $zone26->geopoints()->save($point950);
-        $zone26->geopoints()->save($point951);
-        $zone26->geopoints()->save($point952);
-        $zone26->geopoints()->save($point953);
-        $zone26->geopoints()->save($point954);
-        $zone26->geopoints()->save($point955);
-        $zone26->geopoints()->save($point956);
-        $zone26->geopoints()->save($point957);
-        $zone26->geopoints()->save($point958);
-        $zone26->geopoints()->save($point959);
-        $zone26->geopoints()->save($point960);
+        $zone26 = new Zone();
+        $zone26->name = 'VEPAM';
+        $zone26->description = 'Barrio 26';
+        $zone26->color = 'blue';
+        $zone26->geom = new Polygon([
+            new LineString([
+                new Point(-42.75541665523977, -65.05587204445074),
+                new Point(-42.75478583320691, -65.05584337834188),
+                new Point(-42.75437947854107, -65.05581471223303),
+                new Point(-42.75435567393606, -65.0557982837028),
+                new Point(-42.754215025600814, -65.05570096980696),
+                new Point(-42.754348968413524, -65.0553738241261),
+                new Point(-42.754652560946454, -65.05461542952696),
+                new Point(-42.755139046606644, -65.05340642381321),
+                new Point(-42.75520702384139, -65.0532373608262),
+                new Point(-42.75542973100872, -65.05263377997868),
+                new Point(-42.75552520088587, -65.05237612027511),
+                new Point(-42.755660903898246, -65.05174202930004),
+                new Point(-42.75581127524117, -65.0510396258141),
+                new Point(-42.755819238049185, -65.05091968077969),
+                new Point(-42.75590423054737, -65.04964261401217),
+                new Point(-42.75591680340213, -65.04945293154336),
+                new Point(-42.75645215555781, -65.04987898368167),
+                new Point(-42.7566042032814, -65.04988820377515),
+                new Point(-42.75677100315454, -65.05003354597619),
+                new Point(-42.756921374497466, -65.05023211326237),
+                new Point(-42.75705657459565, -65.050410731619),
+                new Point(-42.75722262009754, -65.05053570579531),
+                new Point(-42.75739185072259, -65.05057484928314),
+                new Point(-42.7575175792702, -65.05060661669616),
+                new Point(-42.75773240744854, -65.0501366433852),
+                new Point(-42.75790574520616, -65.04973875444158),
+                new Point(-42.75803675435276, -65.04945335063852),
+                new Point(-42.75806860558484, -65.04936978306388),
+                new Point(-42.75822895139254, -65.04899695601073),
+                new Point(-42.7582756385932, -65.04889302041137),
+                new Point(-42.758491807876055, -65.04831844094882),
+                new Point(-42.758548553360555, -65.0482256532807),
+                new Point(-42.75858694247708, -65.04815667021758),
+                new Point(-42.761900141163494, -65.05050611767712),
+                new Point(-42.761860578580524, -65.0506144118661),
+                new Point(-42.761816154493715, -65.05071482706613),
+                new Point(-42.761702747343776, -65.05089663054596),
+                new Point(-42.76129412956404, -65.05113325167255),
+                new Point(-42.760785767136575, -65.05145830187762),
+                new Point(-42.76026667587305, -65.05178276534947),
+                new Point(-42.759768455548425, -65.05209415305237),
+                new Point(-42.75898877091521, -65.05257133480004),
+                new Point(-42.75882792219332, -65.05266973834328),
+                new Point(-42.758782073182964, -65.05284190263447),
+                new Point(-42.75846967965168, -65.05307911049428),
+                new Point(-42.75840681537787, -65.05318874578779),
+                new Point(-42.758331462068355, -65.05332017402955),
+                new Point(-42.757962239233564, -65.05355293948068),
+                new Point(-42.75758505359076, -65.0537907340737),
+                new Point(-42.75747751377304, -65.05378495056053),
+                new Point(-42.75737776912527, -65.05377941850443),
+                new Point(-42.756941826341205, -65.05408795636025),
+                new Point(-42.75670243918657, -65.05425626497598),
+                new Point(-42.756302370948106, -65.05453622054196),
+                new Point(-42.75590213507158, -65.0545807284478),
+                new Point(-42.755760564726984, -65.05459640260675),
+                new Point(-42.75561371378336, -65.05462012339272),
+                new Point(-42.755520255563, -65.05463521081843),
+                new Point(-42.75542973100872, -65.054649879149),
+                new Point(-42.75541665523977, -65.05587204445074),
+            ])
+        ]);
+        $zone26->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 27: Santa Clara del Mar--------------
 
-        $point961 = GeoPoint::create(['latitude' => '-42.7766747542494', 'longitude' => '-65.04773112099346', 'order' => '1']);
-        $point962 = GeoPoint::create(['latitude' => '-42.77621701851709', 'longitude' => '-65.04638456824863', 'order' => '2']);
-        $point963 = GeoPoint::create(['latitude' => '-42.77605533160488', 'longitude' => '-65.0459088114245', 'order' => '3']);
-        $point964 = GeoPoint::create(['latitude' => '-42.77576204881282', 'longitude' => '-65.04504597831182', 'order' => '4']);
-        $point965 = GeoPoint::create(['latitude' => '-42.77547002330627', 'longitude' => '-65.0441870008746', 'order' => '5']);
-        $point966 = GeoPoint::create(['latitude' => '-42.77530875548922', 'longitude' => '-65.04371241751691', 'order' => '6']);
-        $point967 = GeoPoint::create(['latitude' => '-42.77515863560336', 'longitude' => '-65.04327094267677', 'order' => '7']);
-        $point968 = GeoPoint::create(['latitude' => '-42.77486241914522', 'longitude' => '-65.04239930856573', 'order' => '8']);
-        $point969 = GeoPoint::create(['latitude' => '-42.77428675003526', 'longitude' => '-65.04276475954411', 'order' => '9']);
-        $point970 = GeoPoint::create(['latitude' => '-42.773696328775706', 'longitude' => '-65.04313943061597', 'order' => '10']);
-        $point971 = GeoPoint::create(['latitude' => '-42.77323423445375', 'longitude' => '-65.04178147848283', 'order' => '11']);
-        $point972 = GeoPoint::create(['latitude' => '-42.77278722755753', 'longitude' => '-65.04046451385621', 'order' => '12']);
-        $point973 = GeoPoint::create(['latitude' => '-42.77232991092038', 'longitude' => '-65.03912542100521', 'order' => '13']);
-        $point974 = GeoPoint::create(['latitude' => '-42.771881982014776', 'longitude' => '-65.03780124794186', 'order' => '14']);
-        $point975 = GeoPoint::create(['latitude' => '-42.7730491620317', 'longitude' => '-65.03701653416674', 'order' => '15']);
-        $point976 = GeoPoint::create(['latitude' => '-42.77418717302555', 'longitude' => '-65.0363563754728', 'order' => '16']);
-        $point977 = GeoPoint::create(['latitude' => '-42.775354353042474', 'longitude' => '-65.03565263088235', 'order' => '17']);
-        $point978 = GeoPoint::create(['latitude' => '-42.77609355308334', 'longitude' => '-65.03518475304722', 'order' => '18']);
-        $point979 = GeoPoint::create(['latitude' => '-42.77653603375188', 'longitude' => '-65.03648126583009', 'order' => '19']);
-        $point980 = GeoPoint::create(['latitude' => '-42.77698890798035', 'longitude' => '-65.0378127311492', 'order' => '20']);
-        $point981 = GeoPoint::create(['latitude' => '-42.777446476074566', 'longitude' => '-65.03915542821856', 'order' => '21']);
-        $point982 = GeoPoint::create(['latitude' => '-42.77769927427428', 'longitude' => '-65.03989722664943', 'order' => '22']);
-        $point983 = GeoPoint::create(['latitude' => '-42.7778995179411', 'longitude' => '-65.04048521715703', 'order' => '23']);
-        $point984 = GeoPoint::create(['latitude' => '-42.77817151069908', 'longitude' => '-65.04128342579627', 'order' => '24']);
-        $point985 = GeoPoint::create(['latitude' => '-42.77847703106976', 'longitude' => '-65.04218012179776', 'order' => '25']);
-        $point986 = GeoPoint::create(['latitude' => '-42.77873301439268', 'longitude' => '-65.04293130796017', 'order' => '26']);
-        $point987 = GeoPoint::create(['latitude' => '-42.778781377973985', 'longitude' => '-65.04307304594283', 'order' => '27']);
-        $point988 = GeoPoint::create(['latitude' => '-42.77899360776234', 'longitude' => '-65.04369615662475', 'order' => '28']);
-        $point989 = GeoPoint::create(['latitude' => '-42.77907742679409', 'longitude' => '-65.04394208166387', 'order' => '29']);
-        $point990 = GeoPoint::create(['latitude' => '-42.77923877843017', 'longitude' => '-65.04441565919318', 'order' => '30']);
-        $point991 = GeoPoint::create(['latitude' => '-42.77971881002492', 'longitude' => '-65.04582474093567', 'order' => '31']);
-        $point992 = GeoPoint::create(['latitude' => '-42.778972150090226', 'longitude' => '-65.0462968097224', 'order' => '32']);
-        $point993 = GeoPoint::create(['latitude' => '-42.777812262329064', 'longitude' => '-65.04699745300867', 'order' => '33']);
-        $point994 = GeoPoint::create(['latitude' => '-42.7766747542494', 'longitude' => '-65.04773112099346', 'order' => '34']);
-
-        $zone27 = Zone::create(['name' => 'Santa Clara del Mar', 'description' => 'Barrio 27', 'color' => 'blue']);
-
-        $zone27->geopoints()->save($point961);
-        $zone27->geopoints()->save($point962);
-        $zone27->geopoints()->save($point963);
-        $zone27->geopoints()->save($point964);
-        $zone27->geopoints()->save($point965);
-        $zone27->geopoints()->save($point966);
-        $zone27->geopoints()->save($point967);
-        $zone27->geopoints()->save($point968);
-        $zone27->geopoints()->save($point969);
-        $zone27->geopoints()->save($point970);
-        $zone27->geopoints()->save($point971);
-        $zone27->geopoints()->save($point972);
-        $zone27->geopoints()->save($point973);
-        $zone27->geopoints()->save($point974);
-        $zone27->geopoints()->save($point975);
-        $zone27->geopoints()->save($point976);
-        $zone27->geopoints()->save($point977);
-        $zone27->geopoints()->save($point978);
-        $zone27->geopoints()->save($point979);
-        $zone27->geopoints()->save($point980);
-        $zone27->geopoints()->save($point981);
-        $zone27->geopoints()->save($point982);
-        $zone27->geopoints()->save($point983);
-        $zone27->geopoints()->save($point984);
-        $zone27->geopoints()->save($point985);
-        $zone27->geopoints()->save($point986);
-        $zone27->geopoints()->save($point987);
-        $zone27->geopoints()->save($point988);
-        $zone27->geopoints()->save($point989);
-        $zone27->geopoints()->save($point990);
-        $zone27->geopoints()->save($point991);
-        $zone27->geopoints()->save($point992);
-        $zone27->geopoints()->save($point993);
-        $zone27->geopoints()->save($point994);
+        $zone27 = new Zone();
+        $zone27->name = 'Santa Clara del Mar';
+        $zone27->description = 'Barrio 27';
+        $zone27->color = 'blue';
+        $zone27->geom = new Polygon([
+            new LineString([
+                new Point(-42.7766747542494, -65.04773112099346),
+                new Point(-42.77621701851709, -65.04638456824863),
+                new Point(-42.77605533160488, -65.0459088114245),
+                new Point(-42.77576204881282, -65.04504597831182),
+                new Point(-42.77547002330627, -65.0441870008746),
+                new Point(-42.77530875548922, -65.04371241751691),
+                new Point(-42.77515863560336, -65.04327094267677),
+                new Point(-42.77486241914522, -65.04239930856573),
+                new Point(-42.77428675003526, -65.04276475954411),
+                new Point(-42.773696328775706, -65.04313943061597),
+                new Point(-42.77323423445375, -65.04178147848283),
+                new Point(-42.77278722755753, -65.04046451385621),
+                new Point(-42.77232991092038, -65.03912542100521),
+                new Point(-42.771881982014776, -65.03780124794186),
+                new Point(-42.7730491620317, -65.03701653416674),
+                new Point(-42.77418717302555, -65.0363563754728),
+                new Point(-42.775354353042474, -65.03565263088235),
+                new Point(-42.77609355308334, -65.03518475304722),
+                new Point(-42.77653603375188, -65.03648126583009),
+                new Point(-42.77698890798035, -65.0378127311492),
+                new Point(-42.777446476074566, -65.03915542821856),
+                new Point(-42.77769927427428, -65.03989722664943),
+                new Point(-42.7778995179411, -65.04048521715703),
+                new Point(-42.77817151069908, -65.04128342579627),
+                new Point(-42.77847703106976, -65.04218012179776),
+                new Point(-42.77873301439268, -65.04293130796017),
+                new Point(-42.778781377973985, -65.04307304594283),
+                new Point(-42.77899360776234, -65.04369615662475),
+                new Point(-42.77907742679409, -65.04394208166387),
+                new Point(-42.77923877843017, -65.04441565919318),
+                new Point(-42.77971881002492, -65.04582474093567),
+                new Point(-42.778972150090226, -65.0462968097224),
+                new Point(-42.777812262329064, -65.04699745300867),
+                new Point(-42.7766747542494, -65.04773112099346),
+            ])
+        ]);
+        $zone27->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 28: Parque Industrial Liviano--------------
 
-        $point995 = GeoPoint::create(['latitude' => '-42.76805614613025', 'longitude' => '-65.0700880036901', 'order' => '1']);
-        $point996 = GeoPoint::create(['latitude' => '-42.76465602710791', 'longitude' => '-65.06810451012312', 'order' => '2']);
-        $point997 = GeoPoint::create(['latitude' => '-42.763524051084346', 'longitude' => '-65.06744426761014', 'order' => '3']);
-        $point998 = GeoPoint::create(['latitude' => '-42.763563026934094', 'longitude' => '-65.06741233255906', 'order' => '4']);
-        $point999 = GeoPoint::create(['latitude' => '-42.76367157258019', 'longitude' => '-65.06683968093424', 'order' => '5']);
-        $point1000 = GeoPoint::create(['latitude' => '-42.76368816874847', 'longitude' => '-65.06675200622705', 'order' => '6']);
-        $point1001 = GeoPoint::create(['latitude' => '-42.76388757422498', 'longitude' => '-65.06594273347564', 'order' => '7']);
-        $point1002 = GeoPoint::create(['latitude' => '-42.76269214719437', 'longitude' => '-65.06532121535533', 'order' => '8']);
-        $point1003 = GeoPoint::create(['latitude' => '-42.76124584980178', 'longitude' => '-65.06456927482164', 'order' => '9']);
-        $point1004 = GeoPoint::create(['latitude' => '-42.76143712483221', 'longitude' => '-65.06406728264056', 'order' => '10']);
-        $point1005 = GeoPoint::create(['latitude' => '-42.761809281333115', 'longitude' => '-65.06309003654955', 'order' => '11']);
-        $point1006 = GeoPoint::create(['latitude' => '-42.76211622662731', 'longitude' => '-65.06228403274041', 'order' => '12']);
-        $point1007 = GeoPoint::create(['latitude' => '-42.76212402179726', 'longitude' => '-65.06210834804989', 'order' => '13']);
-        $point1008 = GeoPoint::create(['latitude' => '-42.762299706487795', 'longitude' => '-65.06165773693527', 'order' => '14']);
-        $point1009 = GeoPoint::create(['latitude' => '-42.762489305137564', 'longitude' => '-65.06117141891315', 'order' => '15']);
-        $point1010 = GeoPoint::create(['latitude' => '-42.76267303645514', 'longitude' => '-65.06070010449771', 'order' => '16']);
-        $point1011 = GeoPoint::create(['latitude' => '-42.762916279285236', 'longitude' => '-65.06007640708256', 'order' => '17']);
-        $point1012 = GeoPoint::create(['latitude' => '-42.76319573193703', 'longitude' => '-65.05931315097958', 'order' => '18']);
-        $point1013 = GeoPoint::create(['latitude' => '-42.76346076771537', 'longitude' => '-65.0586375695838', 'order' => '19']);
-        $point1014 = GeoPoint::create(['latitude' => '-42.76251176863809', 'longitude' => '-65.05797221410988', 'order' => '20']);
-        $point1015 = GeoPoint::create(['latitude' => '-42.761511975227535', 'longitude' => '-65.0572633565585', 'order' => '21']);
-        $point1016 = GeoPoint::create(['latitude' => '-42.76118583537507', 'longitude' => '-65.05703687753476', 'order' => '22']);
-        $point1017 = GeoPoint::create(['latitude' => '-42.760663223712186', 'longitude' => '-65.0566661459574', 'order' => '23']);
-        $point1018 = GeoPoint::create(['latitude' => '-42.76306757263751', 'longitude' => '-65.05495766263353', 'order' => '24']);
-        $point1019 = GeoPoint::create(['latitude' => '-42.76467413201877', 'longitude' => '-65.05381453867872', 'order' => '25']);
-        $point1020 = GeoPoint::create(['latitude' => '-42.76546957462995', 'longitude' => '-65.05312261257176', 'order' => '26']);
-        $point1021 = GeoPoint::create(['latitude' => '-42.76611556790752', 'longitude' => '-65.05392333578192', 'order' => '27']);
-        $point1022 = GeoPoint::create(['latitude' => '-42.766434666961345', 'longitude' => '-65.05415123972921', 'order' => '28']);
-        $point1023 = GeoPoint::create(['latitude' => '-42.76791340231921', 'longitude' => '-65.05520752716713', 'order' => '29']);
-        $point1024 = GeoPoint::create(['latitude' => '-42.771443357021724', 'longitude' => '-65.05772201430015', 'order' => '30']);
-        $point1025 = GeoPoint::create(['latitude' => '-42.77191064812362', 'longitude' => '-65.05806148137869', 'order' => '31']);
-        $point1026 = GeoPoint::create(['latitude' => '-42.77161627568418', 'longitude' => '-65.05870697174208', 'order' => '32']);
-        $point1027 = GeoPoint::create(['latitude' => '-42.77154385604074', 'longitude' => '-65.05891492675981', 'order' => '33']);
-        $point1028 = GeoPoint::create(['latitude' => '-42.768280781135296', 'longitude' => '-65.06936850112169', 'order' => '34']);
-        $point1029 = GeoPoint::create(['latitude' => '-42.76805614613025', 'longitude' => '-65.0700880036901', 'order' => '35']);
-
-        $zone28 = Zone::create(['name' => 'Parque Industrial Liviano', 'description' => 'Barrio 28', 'color' => 'blue']);
-
-        $zone28->geopoints()->save($point995);
-        $zone28->geopoints()->save($point996);
-        $zone28->geopoints()->save($point997);
-        $zone28->geopoints()->save($point998);
-        $zone28->geopoints()->save($point999);
-        $zone28->geopoints()->save($point1000);
-        $zone28->geopoints()->save($point1001);
-        $zone28->geopoints()->save($point1002);
-        $zone28->geopoints()->save($point1003);
-        $zone28->geopoints()->save($point1004);
-        $zone28->geopoints()->save($point1005);
-        $zone28->geopoints()->save($point1006);
-        $zone28->geopoints()->save($point1007);
-        $zone28->geopoints()->save($point1008);
-        $zone28->geopoints()->save($point1009);
-        $zone28->geopoints()->save($point1010);
-        $zone28->geopoints()->save($point1011);
-        $zone28->geopoints()->save($point1012);
-        $zone28->geopoints()->save($point1013);
-        $zone28->geopoints()->save($point1014);
-        $zone28->geopoints()->save($point1015);
-        $zone28->geopoints()->save($point1016);
-        $zone28->geopoints()->save($point1017);
-        $zone28->geopoints()->save($point1018);
-        $zone28->geopoints()->save($point1019);
-        $zone28->geopoints()->save($point1020);
-        $zone28->geopoints()->save($point1021);
-        $zone28->geopoints()->save($point1022);
-        $zone28->geopoints()->save($point1023);
-        $zone28->geopoints()->save($point1024);
-        $zone28->geopoints()->save($point1025);
-        $zone28->geopoints()->save($point1026);
-        $zone28->geopoints()->save($point1027);
-        $zone28->geopoints()->save($point1028);
-        $zone28->geopoints()->save($point1029);
+        $zone28 = new Zone();
+        $zone28->name = 'Parque Industrial Liviano';
+        $zone28->description = 'Barrio 28';
+        $zone28->color = 'red';
+        $zone28->geom = new Polygon([
+            new LineString([
+                new Point(-42.76805614613025, -65.0700880036901),
+                new Point(-42.76465602710791, -65.06810451012312),
+                new Point(-42.763524051084346, -65.06744426761014),
+                new Point(-42.763563026934094, -65.06741233255906),
+                new Point(-42.76367157258019, -65.06683968093424),
+                new Point(-42.76368816874847, -65.06675200622705),
+                new Point(-42.76388757422498, -65.06594273347564),
+                new Point(-42.76269214719437, -65.06532121535533),
+                new Point(-42.76124584980178, -65.06456927482164),
+                new Point(-42.76143712483221, -65.06406728264056),
+                new Point(-42.761809281333115, -65.06309003654955),
+                new Point(-42.76211622662731, -65.06228403274041),
+                new Point(-42.76212402179726, -65.06210834804989),
+                new Point(-42.762299706487795, -65.06165773693527),
+                new Point(-42.762489305137564, -65.06117141891315),
+                new Point(-42.76267303645514, -65.06070010449771),
+                new Point(-42.762916279285236, -65.06007640708256),
+                new Point(-42.76319573193703, -65.05931315097958),
+                new Point(-42.76346076771537, -65.0586375695838),
+                new Point(-42.76251176863809, -65.05797221410988),
+                new Point(-42.761511975227535, -65.0572633565585),
+                new Point(-42.76118583537507, -65.05703687753476),
+                new Point(-42.760663223712186, -65.0566661459574),
+                new Point(-42.76306757263751, -65.05495766263353),
+                new Point(-42.76467413201877, -65.05381453867872),
+                new Point(-42.76546957462995, -65.05312261257176),
+                new Point(-42.76611556790752, -65.05392333578192),
+                new Point(-42.766434666961345, -65.05415123972921),
+                new Point(-42.76791340231921, -65.05520752716713),
+                new Point(-42.771443357021724, -65.05772201430015),
+                new Point(-42.77191064812362, -65.05806148137869),
+                new Point(-42.77161627568418, -65.05870697174208),
+                new Point(-42.77154385604074, -65.05891492675981),
+                new Point(-42.768280781135296, -65.06936850112169),
+                new Point(-42.76805614613025, -65.0700880036901),
+            ])
+        ]);
+        $zone28->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 29: Don Bosco--------------
 
-        $point1030 = GeoPoint::create(['latitude' => '-42.75942823409861', 'longitude' => '-65.04641943696583', 'order' => '1']);
-        $point1031 = GeoPoint::create(['latitude' => '-42.75892724774593', 'longitude' => '-65.04591258328092', 'order' => '2']);
-        $point1032 = GeoPoint::create(['latitude' => '-42.75863522223935', 'longitude' => '-65.04563195716267', 'order' => '3']);
-        $point1033 = GeoPoint::create(['latitude' => '-42.75773802332366', 'longitude' => '-65.04482712681995', 'order' => '4']);
-        $point1034 = GeoPoint::create(['latitude' => '-42.75733653016166', 'longitude' => '-65.04450802776614', 'order' => '5']);
-        $point1035 = GeoPoint::create(['latitude' => '-42.756935539913826', 'longitude' => '-65.0441445046255', 'order' => '6']);
-        $point1036 = GeoPoint::create(['latitude' => '-42.75673663735153', 'longitude' => '-65.04397368143883', 'order' => '7']);
-        $point1037 = GeoPoint::create(['latitude' => '-42.756780474705124', 'longitude' => '-65.04306432876353', 'order' => '8']);
-        $point1038 = GeoPoint::create(['latitude' => '-42.756829341200614', 'longitude' => '-65.04170344296429', 'order' => '9']);
-        $point1039 = GeoPoint::create(['latitude' => '-42.75688281774287', 'longitude' => '-65.04028203982412', 'order' => '10']);
-        $point1040 = GeoPoint::create(['latitude' => '-42.75694702312117', 'longitude' => '-65.03880070607626', 'order' => '11']);
-        $point1041 = GeoPoint::create(['latitude' => '-42.75715447522472', 'longitude' => '-65.03879810768626', 'order' => '12']);
-        $point1042 = GeoPoint::create(['latitude' => '-42.758396505636966', 'longitude' => '-65.03888586621251', 'order' => '13']);
-        $point1043 = GeoPoint::create(['latitude' => '-42.75948221355503', 'longitude' => '-65.03890631805623', 'order' => '14']);
-        $point1044 = GeoPoint::create(['latitude' => '-42.75985587879853', 'longitude' => '-65.0389125206646', 'order' => '15']);
-        $point1045 = GeoPoint::create(['latitude' => '-42.76077042825378', 'longitude' => '-65.03899407658248', 'order' => '16']);
-        $point1046 = GeoPoint::create(['latitude' => '-42.76110201634333', 'longitude' => '-65.03902098249166', 'order' => '17']);
-        $point1047 = GeoPoint::create(['latitude' => '-42.76140317812434', 'longitude' => '-65.0390855231461', 'order' => '18']);
-        $point1048 = GeoPoint::create(['latitude' => '-42.76180626384797', 'longitude' => '-65.03921753812108', 'order' => '19']);
-        $point1049 = GeoPoint::create(['latitude' => '-42.762057134209954', 'longitude' => '-65.03939313899257', 'order' => '20']);
-        $point1050 = GeoPoint::create(['latitude' => '-42.7624442104985', 'longitude' => '-65.03972682255791', 'order' => '21']);
-        $point1051 = GeoPoint::create(['latitude' => '-42.7629872740051', 'longitude' => '-65.04019704732595', 'order' => '22']);
-        $point1052 = GeoPoint::create(['latitude' => '-42.76309917241247', 'longitude' => '-65.04029394212661', 'order' => '23']);
-        $point1053 = GeoPoint::create(['latitude' => '-42.76334677383221', 'longitude' => '-65.04050826739078', 'order' => '24']);
-        $point1054 = GeoPoint::create(['latitude' => '-42.76357166029436', 'longitude' => '-65.0407029790015', 'order' => '25']);
-        $point1055 = GeoPoint::create(['latitude' => '-42.7642381054157', 'longitude' => '-65.04127990539693', 'order' => '26']);
-        $point1056 = GeoPoint::create(['latitude' => '-42.763899057432326', 'longitude' => '-65.04198960113862', 'order' => '27']);
-        $point1057 = GeoPoint::create(['latitude' => '-42.76368741437719', 'longitude' => '-65.04243107597878', 'order' => '28']);
-        $point1058 = GeoPoint::create(['latitude' => '-42.76328407719649', 'longitude' => '-65.04322324964771', 'order' => '29']);
-        $point1059 = GeoPoint::create(['latitude' => '-42.762449826373626', 'longitude' => '-65.04503055560998', 'order' => '30']);
-        $point1060 = GeoPoint::create(['latitude' => '-42.76239961877363', 'longitude' => '-65.04521587948915', 'order' => '31']);
-        $point1061 = GeoPoint::create(['latitude' => '-42.761405357419164', 'longitude' => '-65.04478563639925', 'order' => '32']);
-        $point1062 = GeoPoint::create(['latitude' => '-42.76137191362551', 'longitude' => '-65.04478261891411', 'order' => '33']);
-        $point1063 = GeoPoint::create(['latitude' => '-42.76134207405022', 'longitude' => '-65.04476208325131', 'order' => '34']);
-        $point1064 = GeoPoint::create(['latitude' => '-42.76048242606074', 'longitude' => '-65.04439512353039', 'order' => '35']);
-        $point1065 = GeoPoint::create(['latitude' => '-42.7604247585669', 'longitude' => '-65.04439001056946', 'order' => '36']);
-        $point1066 = GeoPoint::create(['latitude' => '-42.75999954461892', 'longitude' => '-65.04528142597195', 'order' => '37']);
-        $point1067 = GeoPoint::create(['latitude' => '-42.75970676474105', 'longitude' => '-65.04582054998409', 'order' => '38']);
-        $point1068 = GeoPoint::create(['latitude' => '-42.75942823409861', 'longitude' => '-65.04641943696583', 'order' => '39']);
-
-        $zone29 = Zone::create(['name' => 'Don Bosco', 'description' => 'Barrio 29', 'color' => 'blue']);
-
-        $zone29->geopoints()->save($point1030);
-        $zone29->geopoints()->save($point1031);
-        $zone29->geopoints()->save($point1032);
-        $zone29->geopoints()->save($point1033);
-        $zone29->geopoints()->save($point1034);
-        $zone29->geopoints()->save($point1035);
-        $zone29->geopoints()->save($point1036);
-        $zone29->geopoints()->save($point1037);
-        $zone29->geopoints()->save($point1038);
-        $zone29->geopoints()->save($point1039);
-        $zone29->geopoints()->save($point1040);
-        $zone29->geopoints()->save($point1041);
-        $zone29->geopoints()->save($point1042);
-        $zone29->geopoints()->save($point1043);
-        $zone29->geopoints()->save($point1044);
-        $zone29->geopoints()->save($point1045);
-        $zone29->geopoints()->save($point1046);
-        $zone29->geopoints()->save($point1047);
-        $zone29->geopoints()->save($point1048);
-        $zone29->geopoints()->save($point1049);
-        $zone29->geopoints()->save($point1050);
-        $zone29->geopoints()->save($point1051);
-        $zone29->geopoints()->save($point1052);
-        $zone29->geopoints()->save($point1053);
-        $zone29->geopoints()->save($point1054);
-        $zone29->geopoints()->save($point1055);
-        $zone29->geopoints()->save($point1056);
-        $zone29->geopoints()->save($point1057);
-        $zone29->geopoints()->save($point1058);
-        $zone29->geopoints()->save($point1059);
-        $zone29->geopoints()->save($point1060);
-        $zone29->geopoints()->save($point1061);
-        $zone29->geopoints()->save($point1062);
-        $zone29->geopoints()->save($point1063);
-        $zone29->geopoints()->save($point1064);
-        $zone29->geopoints()->save($point1065);
-        $zone29->geopoints()->save($point1066);
-        $zone29->geopoints()->save($point1067);
-        $zone29->geopoints()->save($point1068);
+        $zone29 = new Zone();
+        $zone29->name = 'Don Bosco';
+        $zone29->description = 'Barrio 29';
+        $zone29->color = 'green';
+        $zone29->geom = new Polygon([
+            new LineString([
+                new Point(-42.75942823409861, -65.04641943696583),
+                new Point(-42.75892724774593, -65.04591258328092),
+                new Point(-42.75863522223935, -65.04563195716267),
+                new Point(-42.75773802332366, -65.04482712681995),
+                new Point(-42.75733653016166, -65.04450802776614),
+                new Point(-42.756935539913826, -65.0441445046255),
+                new Point(-42.75673663735153, -65.04397368143883),
+                new Point(-42.756780474705124, -65.04306432876353),
+                new Point(-42.756829341200614, -65.04170344296429),
+                new Point(-42.75688281774287, -65.04028203982412),
+                new Point(-42.75694702312117, -65.03880070607626),
+                new Point(-42.75715447522472, -65.03879810768626),
+                new Point(-42.758396505636966, -65.03888586621251),
+                new Point(-42.75948221355503, -65.03890631805623),
+                new Point(-42.75985587879853, -65.0389125206646),
+                new Point(-42.76077042825378, -65.03899407658248),
+                new Point(-42.76110201634333, -65.03902098249166),
+                new Point(-42.76140317812434, -65.0390855231461),
+                new Point(-42.76180626384797, -65.03921753812108),
+                new Point(-42.762057134209954, -65.03939313899257),
+                new Point(-42.7624442104985, -65.03972682255791),
+                new Point(-42.7629872740051, -65.04019704732595),
+                new Point(-42.76309917241247, -65.04029394212661),
+                new Point(-42.76334677383221, -65.04050826739078),
+                new Point(-42.76357166029436, -65.0407029790015),
+                new Point(-42.7642381054157, -65.04127990539693),
+                new Point(-42.763899057432326, -65.04198960113862),
+                new Point(-42.76368741437719, -65.04243107597878),
+                new Point(-42.76328407719649, -65.04322324964771),
+                new Point(-42.762449826373626, -65.04503055560998),
+                new Point(-42.76239961877363, -65.04521587948915),
+                new Point(-42.761405357419164, -65.04478563639925),
+                new Point(-42.76137191362551, -65.04478261891411),
+                new Point(-42.76134207405022, -65.04476208325131),
+                new Point(-42.76048242606074, -65.04439512353039),
+                new Point(-42.7604247585669, -65.04439001056946),
+                new Point(-42.75999954461892, -65.04528142597195),
+                new Point(-42.75970676474105, -65.04582054998409),
+                new Point(-42.75942823409861, -65.04641943696583),
+            ])
+        ]);
+        $zone29->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 30: América--------------
 
-        $point1069 = GeoPoint::create(['latitude' => '-42.75297517448336', 'longitude' => '-65.05860286850466', 'order' => '1']);
-        $point1070 = GeoPoint::create(['latitude' => '-42.75295145369739', 'longitude' => '-65.05849683742952', 'order' => '2']);
-        $point1071 = GeoPoint::create(['latitude' => '-42.75289630077452', 'longitude' => '-65.05830983716972', 'order' => '3']);
-        $point1072 = GeoPoint::create(['latitude' => '-42.752742911946456', 'longitude' => '-65.0576059249412', 'order' => '4']);
-        $point1073 = GeoPoint::create(['latitude' => '-42.75259052894674', 'longitude' => '-65.05690620366427', 'order' => '5']);
-        $point1074 = GeoPoint::create(['latitude' => '-42.75242322615941', 'longitude' => '-65.05613825369552', 'order' => '6']);
-        $point1075 = GeoPoint::create(['latitude' => '-42.75225894085721', 'longitude' => '-65.05538421768603', 'order' => '7']);
-        $point1076 = GeoPoint::create(['latitude' => '-42.752096918668855', 'longitude' => '-65.05464023996034', 'order' => '8']);
-        $point1077 = GeoPoint::create(['latitude' => '-42.75306351974282', 'longitude' => '-65.05496093157576', 'order' => '9']);
-        $point1078 = GeoPoint::create(['latitude' => '-42.75326150029579', 'longitude' => '-65.0550199401741', 'order' => '10']);
-        $point1079 = GeoPoint::create(['latitude' => '-42.754348968413524', 'longitude' => '-65.0553738241261', 'order' => '11']);
-        $point1080 = GeoPoint::create(['latitude' => '-42.754215025600814', 'longitude' => '-65.05570096980696', 'order' => '12']);
-        $point1081 = GeoPoint::create(['latitude' => '-42.7541022051841', 'longitude' => '-65.0559763153262', 'order' => '13']);
-        $point1082 = GeoPoint::create(['latitude' => '-42.7538626503914', 'longitude' => '-65.05657461557473', 'order' => '14']);
-        $point1083 = GeoPoint::create(['latitude' => '-42.75356584720001', 'longitude' => '-65.05724961023728', 'order' => '15']);
-        $point1084 = GeoPoint::create(['latitude' => '-42.753429138359245', 'longitude' => '-65.05763433959297', 'order' => '16']);
-        $point1085 = GeoPoint::create(['latitude' => '-42.75331950306574', 'longitude' => '-65.05783433180268', 'order' => '17']);
-        $point1086 = GeoPoint::create(['latitude' => '-42.75297517448336', 'longitude' => '-65.05860286850466', 'order' => '18']);
-
-        $zone30 = Zone::create(['name' => 'América', 'description' => 'Barrio 30', 'color' => 'blue']);
-
-        $zone30->geopoints()->save($point1069);
-        $zone30->geopoints()->save($point1070);
-        $zone30->geopoints()->save($point1071);
-        $zone30->geopoints()->save($point1072);
-        $zone30->geopoints()->save($point1073);
-        $zone30->geopoints()->save($point1074);
-        $zone30->geopoints()->save($point1075);
-        $zone30->geopoints()->save($point1076);
-        $zone30->geopoints()->save($point1077);
-        $zone30->geopoints()->save($point1078);
-        $zone30->geopoints()->save($point1079);
-        $zone30->geopoints()->save($point1080);
-        $zone30->geopoints()->save($point1081);
-        $zone30->geopoints()->save($point1082);
-        $zone30->geopoints()->save($point1083);
-        $zone30->geopoints()->save($point1084);
-        $zone30->geopoints()->save($point1085);
-        $zone30->geopoints()->save($point1086);
+        $zone30 = new Zone();
+        $zone30->name = 'América';
+        $zone30->description = 'Barrio 30';
+        $zone30->color = 'green';
+        $zone30->geom = new Polygon([
+            new LineString([
+                new Point(-42.75297517448336, -65.05860286850466),
+                new Point(-42.75295145369739, -65.05849683742952),
+                new Point(-42.75289630077452, -65.05830983716972),
+                new Point(-42.752742911946456, -65.0576059249412),
+                new Point(-42.75259052894674, -65.05690620366427),
+                new Point(-42.75242322615941, -65.05613825369552),
+                new Point(-42.75225894085721, -65.05538421768603),
+                new Point(-42.752096918668855, -65.05464023996034),
+                new Point(-42.75306351974282, -65.05496093157576),
+                new Point(-42.75326150029579, -65.0550199401741),
+                new Point(-42.754348968413524, -65.0553738241261),
+                new Point(-42.754215025600814, -65.05570096980696),
+                new Point(-42.7541022051841, -65.0559763153262),
+                new Point(-42.7538626503914, -65.05657461557473),
+                new Point(-42.75356584720001, -65.05724961023728),
+                new Point(-42.753429138359245, -65.05763433959297),
+                new Point(-42.75331950306574, -65.05783433180268),
+                new Point(-42.75297517448336, -65.05860286850466),
+            ])
+        ]);
+        $zone30->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 31: Patagonia--------------
 
-        $point1087 = GeoPoint::create(['latitude' => '-42.75626532293608', 'longitude' => '-65.04673325542065', 'order' => '1']);
-        $point1088 = GeoPoint::create(['latitude' => '-42.75596692718309', 'longitude' => '-65.04659822296053', 'order' => '2']);
-        $point1089 = GeoPoint::create(['latitude' => '-42.753925514665184', 'longitude' => '-65.04587687637341', 'order' => '3']);
-        $point1090 = GeoPoint::create(['latitude' => '-42.75363876975763', 'longitude' => '-65.04577545534501', 'order' => '4']);
-        $point1091 = GeoPoint::create(['latitude' => '-42.75316636569477', 'longitude' => '-65.04560178231125', 'order' => '5']);
-        $point1092 = GeoPoint::create(['latitude' => '-42.75281583450405', 'longitude' => '-65.045482256372', 'order' => '6']);
-        $point1093 = GeoPoint::create(['latitude' => '-42.752397577535696', 'longitude' => '-65.04535158250152', 'order' => '7']);
-        $point1094 = GeoPoint::create(['latitude' => '-42.751968843188365', 'longitude' => '-65.04520674321469', 'order' => '8']);
-        $point1095 = GeoPoint::create(['latitude' => '-42.751879743557616', 'longitude' => '-65.04517874765808', 'order' => '9']);
-        $point1096 = GeoPoint::create(['latitude' => '-42.75149224817392', 'longitude' => '-65.04505260001532', 'order' => '10']);
-        $point1097 = GeoPoint::create(['latitude' => '-42.75110307640958', 'longitude' => '-65.04490080374886', 'order' => '11']);
-        $point1098 = GeoPoint::create(['latitude' => '-42.7506589193604', 'longitude' => '-65.04474900748238', 'order' => '12']);
-        $point1099 = GeoPoint::create(['latitude' => '-42.75027435764281', 'longitude' => '-65.0446016536246', 'order' => '13']);
-        $point1100 = GeoPoint::create(['latitude' => '-42.750026253308874', 'longitude' => '-65.04438674162722', 'order' => '14']);
-        $point1101 = GeoPoint::create(['latitude' => '-42.74985853142638', 'longitude' => '-65.04428490150366', 'order' => '15']);
-        $point1102 = GeoPoint::create(['latitude' => '-42.74992885559399', 'longitude' => '-65.04281790081023', 'order' => '16']);
-        $point1103 = GeoPoint::create(['latitude' => '-42.750070258300525', 'longitude' => '-65.03844413991527', 'order' => '17']);
-        $point1104 = GeoPoint::create(['latitude' => '-42.75008081949852', 'longitude' => '-65.03838077272727', 'order' => '18']);
-        $point1105 = GeoPoint::create(['latitude' => '-42.75320894576288', 'longitude' => '-65.03851890649157', 'order' => '19']);
-        $point1106 = GeoPoint::create(['latitude' => '-42.75420957736375', 'longitude' => '-65.0386061621036', 'order' => '20']);
-        $point1107 = GeoPoint::create(['latitude' => '-42.754994877872065', 'longitude' => '-65.03865620206555', 'order' => '21']);
-        $point1108 = GeoPoint::create(['latitude' => '-42.75557850979004', 'longitude' => '-65.03868076104185', 'order' => '22']);
-        $point1109 = GeoPoint::create(['latitude' => '-42.756252917719394', 'longitude' => '-65.03875334832334', 'order' => '23']);
-        $point1110 = GeoPoint::create(['latitude' => '-42.75635140508166', 'longitude' => '-65.03876156258845', 'order' => '24']);
-        $point1111 = GeoPoint::create(['latitude' => '-42.75694702312117', 'longitude' => '-65.03880070607626', 'order' => '25']);
-        $point1112 = GeoPoint::create(['latitude' => '-42.75688281774287', 'longitude' => '-65.04028203982412', 'order' => '26']);
-        $point1113 = GeoPoint::create(['latitude' => '-42.756829341200614', 'longitude' => '-65.04170344296429', 'order' => '27']);
-        $point1114 = GeoPoint::create(['latitude' => '-42.756780474705124', 'longitude' => '-65.04306432876353', 'order' => '28']);
-        $point1115 = GeoPoint::create(['latitude' => '-42.75673663735153', 'longitude' => '-65.04397368143883', 'order' => '29']);
-        $point1116 = GeoPoint::create(['latitude' => '-42.75672263957324', 'longitude' => '-65.0441259806195', 'order' => '30']);
-        $point1117 = GeoPoint::create(['latitude' => '-42.756721382287765', 'longitude' => '-65.04429604943489', 'order' => '31']);
-        $point1118 = GeoPoint::create(['latitude' => '-42.7567181133455', 'longitude' => '-65.04435447130001', 'order' => '32']);
-        $point1119 = GeoPoint::create(['latitude' => '-42.75671585023164', 'longitude' => '-65.04472168247804', 'order' => '33']);
-        $point1120 = GeoPoint::create(['latitude' => '-42.7566901177889', 'longitude' => '-65.04499610598793', 'order' => '34']);
-        $point1121 = GeoPoint::create(['latitude' => '-42.75666572645068', 'longitude' => '-65.04549633796933', 'order' => '35']);
-        $point1122 = GeoPoint::create(['latitude' => '-42.75657754882928', 'longitude' => '-65.0457606193764', 'order' => '36']);
-        $point1123 = GeoPoint::create(['latitude' => '-42.75648501261827', 'longitude' => '-65.04603764127627', 'order' => '37']);
-        $point1124 = GeoPoint::create(['latitude' => '-42.75631921857348', 'longitude' => '-65.0464684710994', 'order' => '38']);
-        $point1125 = GeoPoint::create(['latitude' => '-42.75626532293608', 'longitude' => '-65.04673325542065', 'order' => '39']);
-
-        $zone31 = Zone::create(['name' => 'Patagonia', 'description' => 'Barrio 31', 'color' => 'blue']);
-
-        $zone31->geopoints()->save($point1087);
-        $zone31->geopoints()->save($point1088);
-        $zone31->geopoints()->save($point1089);
-        $zone31->geopoints()->save($point1090);
-        $zone31->geopoints()->save($point1091);
-        $zone31->geopoints()->save($point1092);
-        $zone31->geopoints()->save($point1093);
-        $zone31->geopoints()->save($point1094);
-        $zone31->geopoints()->save($point1095);
-        $zone31->geopoints()->save($point1096);
-        $zone31->geopoints()->save($point1097);
-        $zone31->geopoints()->save($point1098);
-        $zone31->geopoints()->save($point1099);
-        $zone31->geopoints()->save($point1100);
-        $zone31->geopoints()->save($point1101);
-        $zone31->geopoints()->save($point1102);
-        $zone31->geopoints()->save($point1103);
-        $zone31->geopoints()->save($point1104);
-        $zone31->geopoints()->save($point1105);
-        $zone31->geopoints()->save($point1106);
-        $zone31->geopoints()->save($point1107);
-        $zone31->geopoints()->save($point1108);
-        $zone31->geopoints()->save($point1109);
-        $zone31->geopoints()->save($point1110);
-        $zone31->geopoints()->save($point1111);
-        $zone31->geopoints()->save($point1112);
-        $zone31->geopoints()->save($point1113);
-        $zone31->geopoints()->save($point1114);
-        $zone31->geopoints()->save($point1115);
-        $zone31->geopoints()->save($point1116);
-        $zone31->geopoints()->save($point1117);
-        $zone31->geopoints()->save($point1118);
-        $zone31->geopoints()->save($point1119);
-        $zone31->geopoints()->save($point1120);
-        $zone31->geopoints()->save($point1121);
-        $zone31->geopoints()->save($point1122);
-        $zone31->geopoints()->save($point1123);
-        $zone31->geopoints()->save($point1124);
-        $zone31->geopoints()->save($point1125);
+        $zone31 = new Zone();
+        $zone31->name = 'Patagonia';
+        $zone31->description = 'Barrio 31';
+        $zone31->color = 'red';
+        $zone31->geom = new Polygon([
+            new LineString([
+                new Point(-42.75626532293608, -65.04673325542065),
+                new Point(-42.75596692718309, -65.04659822296053),
+                new Point(-42.753925514665184, -65.04587687637341),
+                new Point(-42.75363876975763, -65.04577545534501),
+                new Point(-42.75316636569477, -65.04560178231125),
+                new Point(-42.75281583450405, -65.045482256372),
+                new Point(-42.752397577535696, -65.04535158250152),
+                new Point(-42.751968843188365, -65.04520674321469),
+                new Point(-42.751879743557616, -65.04517874765808),
+                new Point(-42.75149224817392, -65.04505260001532),
+                new Point(-42.75110307640958, -65.04490080374886),
+                new Point(-42.7506589193604, -65.04474900748238),
+                new Point(-42.75027435764281, -65.0446016536246),
+                new Point(-42.750026253308874, -65.04438674162722),
+                new Point(-42.74985853142638, -65.04428490150366),
+                new Point(-42.74992885559399, -65.04281790081023),
+                new Point(-42.750070258300525, -65.03844413991527),
+                new Point(-42.75008081949852, -65.03838077272727),
+                new Point(-42.75320894576288, -65.03851890649157),
+                new Point(-42.75420957736375, -65.0386061621036),
+                new Point(-42.754994877872065, -65.03865620206555),
+                new Point(-42.75557850979004, -65.03868076104185),
+                new Point(-42.756252917719394, -65.03875334832334),
+                new Point(-42.75635140508166, -65.03876156258845),
+                new Point(-42.75694702312117, -65.03880070607626),
+                new Point(-42.75688281774287, -65.04028203982412),
+                new Point(-42.756829341200614, -65.04170344296429),
+                new Point(-42.756780474705124, -65.04306432876353),
+                new Point(-42.75673663735153, -65.04397368143883),
+                new Point(-42.75672263957324, -65.0441259806195),
+                new Point(-42.756721382287765, -65.04429604943489),
+                new Point(-42.7567181133455, -65.04435447130001),
+                new Point(-42.75671585023164, -65.04472168247804),
+                new Point(-42.7566901177889, -65.04499610598793),
+                new Point(-42.75666572645068, -65.04549633796933),
+                new Point(-42.75657754882928, -65.0457606193764),
+                new Point(-42.75648501261827, -65.04603764127627),
+                new Point(-42.75631921857348, -65.0464684710994),
+                new Point(-42.75626532293608, -65.04673325542065),
+            ])
+        ]);
+        $zone31->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 32: Sindicato de Empleados del Comercio--------------
 
-        $point1126 = GeoPoint::create(['latitude' => '-42.75699781745442', 'longitude' => '-65.05928716707975', 'order' => '1']);
-        $point1127 = GeoPoint::create(['latitude' => '-42.756918859926515', 'longitude' => '-65.05903948184097', 'order' => '2']);
-        $point1128 = GeoPoint::create(['latitude' => '-42.756907209081106', 'longitude' => '-65.05900830116117', 'order' => '3']);
-        $point1129 = GeoPoint::create(['latitude' => '-42.75679070062699', 'longitude' => '-65.05867738362387', 'order' => '4']);
-        $point1130 = GeoPoint::create(['latitude' => '-42.75645986690873', 'longitude' => '-65.05775034513289', 'order' => '5']);
-        $point1131 = GeoPoint::create(['latitude' => '-42.75615895658481', 'longitude' => '-65.05697367798483', 'order' => '6']);
-        $point1132 = GeoPoint::create(['latitude' => '-42.755843629387414', 'longitude' => '-65.05619541827517', 'order' => '7']);
-        $point1133 = GeoPoint::create(['latitude' => '-42.7557873029981', 'longitude' => '-65.0560137824334', 'order' => '8']);
-        $point1134 = GeoPoint::create(['latitude' => '-42.755712620240814', 'longitude' => '-65.0555732296026', 'order' => '9']);
-        $point1135 = GeoPoint::create(['latitude' => '-42.75568780980742', 'longitude' => '-65.05536628041324', 'order' => '10']);
-        $point1136 = GeoPoint::create(['latitude' => '-42.755637937483556', 'longitude' => '-65.05513837646595', 'order' => '11']);
-        $point1137 = GeoPoint::create(['latitude' => '-42.755520255563', 'longitude' => '-65.05463521081843', 'order' => '12']);
-        $point1138 = GeoPoint::create(['latitude' => '-42.75561371378336', 'longitude' => '-65.05462012339272', 'order' => '13']);
-        $point1139 = GeoPoint::create(['latitude' => '-42.755760564726984', 'longitude' => '-65.05459640260675', 'order' => '14']);
-        $point1140 = GeoPoint::create(['latitude' => '-42.75590213507158', 'longitude' => '-65.0545807284478', 'order' => '15']);
-        $point1141 = GeoPoint::create(['latitude' => '-42.756302370948106', 'longitude' => '-65.05453622054196', 'order' => '16']);
-        $point1142 = GeoPoint::create(['latitude' => '-42.75670243918657', 'longitude' => '-65.05425626497598', 'order' => '17']);
-        $point1143 = GeoPoint::create(['latitude' => '-42.756941826341205', 'longitude' => '-65.05408795636025', 'order' => '18']);
-        $point1144 = GeoPoint::create(['latitude' => '-42.75737776912527', 'longitude' => '-65.05377941850443', 'order' => '19']);
-        $point1145 = GeoPoint::create(['latitude' => '-42.75747751377304', 'longitude' => '-65.05378495056053', 'order' => '20']);
-        $point1146 = GeoPoint::create(['latitude' => '-42.75758505359076', 'longitude' => '-65.0537907340737', 'order' => '21']);
-        $point1147 = GeoPoint::create(['latitude' => '-42.757962239233564', 'longitude' => '-65.05355293948068', 'order' => '22']);
-        $point1148 = GeoPoint::create(['latitude' => '-42.758331462068355', 'longitude' => '-65.05332017402955', 'order' => '23']);
-        $point1149 = GeoPoint::create(['latitude' => '-42.75840681537787', 'longitude' => '-65.05318874578779', 'order' => '24']);
-        $point1150 = GeoPoint::create(['latitude' => '-42.75846967965168', 'longitude' => '-65.05307911049428', 'order' => '25']);
-        $point1151 = GeoPoint::create(['latitude' => '-42.758782073182964', 'longitude' => '-65.05284190263447', 'order' => '26']);
-        $point1152 = GeoPoint::create(['latitude' => '-42.75882792219332', 'longitude' => '-65.05266973834328', 'order' => '27']);
-        $point1153 = GeoPoint::create(['latitude' => '-42.75898877091521', 'longitude' => '-65.05257133480004', 'order' => '28']);
-        $point1154 = GeoPoint::create(['latitude' => '-42.759768455548425', 'longitude' => '-65.05209415305237', 'order' => '29']);
-        $point1155 = GeoPoint::create(['latitude' => '-42.76026667587305', 'longitude' => '-65.05178276534947', 'order' => '30']);
-        $point1156 = GeoPoint::create(['latitude' => '-42.760785767136575', 'longitude' => '-65.05145830187762', 'order' => '31']);
-        $point1157 = GeoPoint::create(['latitude' => '-42.76129412956404', 'longitude' => '-65.05113325167255', 'order' => '32']);
-        $point1158 = GeoPoint::create(['latitude' => '-42.761702747343776', 'longitude' => '-65.05089663054596', 'order' => '33']);
-        $point1159 = GeoPoint::create(['latitude' => '-42.761816154493715', 'longitude' => '-65.05071482706613', 'order' => '34']);
-        $point1160 = GeoPoint::create(['latitude' => '-42.761860578580524', 'longitude' => '-65.0506144118661', 'order' => '35']);
-        $point1161 = GeoPoint::create(['latitude' => '-42.761900141163494', 'longitude' => '-65.05050611767712', 'order' => '36']);
-        $point1162 = GeoPoint::create(['latitude' => '-42.76303790070028', 'longitude' => '-65.0513129596766', 'order' => '37']);
-        $point1163 = GeoPoint::create(['latitude' => '-42.76325775802053', 'longitude' => '-65.05147003654207', 'order' => '38']);
-        $point1164 = GeoPoint::create(['latitude' => '-42.76490203596606', 'longitude' => '-65.05264543082409', 'order' => '39']);
-        $point1165 = GeoPoint::create(['latitude' => '-42.76546957462995', 'longitude' => '-65.05312261257176', 'order' => '40']);
-        $point1166 = GeoPoint::create(['latitude' => '-42.76467413201877', 'longitude' => '-65.05381453867872', 'order' => '41']);
-        $point1167 = GeoPoint::create(['latitude' => '-42.76306757263751', 'longitude' => '-65.05495766263353', 'order' => '42']);
-        $point1168 = GeoPoint::create(['latitude' => '-42.760663223712186', 'longitude' => '-65.0566661459574', 'order' => '43']);
-        $point1169 = GeoPoint::create(['latitude' => '-42.760298946200265', 'longitude' => '-65.05692506294642', 'order' => '44']);
-        $point1170 = GeoPoint::create(['latitude' => '-42.75699781745442', 'longitude' => '-65.05928716707975', 'order' => '45']);
-
-        $zone32 = Zone::create(['name' => 'Sindicato de Empleados del Comercio', 'description' => 'Barrio 32', 'color' => 'blue']);
-
-        $zone32->geopoints()->save($point1126);
-        $zone32->geopoints()->save($point1127);
-        $zone32->geopoints()->save($point1128);
-        $zone32->geopoints()->save($point1129);
-        $zone32->geopoints()->save($point1130);
-        $zone32->geopoints()->save($point1131);
-        $zone32->geopoints()->save($point1132);
-        $zone32->geopoints()->save($point1133);
-        $zone32->geopoints()->save($point1134);
-        $zone32->geopoints()->save($point1135);
-        $zone32->geopoints()->save($point1136);
-        $zone32->geopoints()->save($point1137);
-        $zone32->geopoints()->save($point1138);
-        $zone32->geopoints()->save($point1139);
-        $zone32->geopoints()->save($point1140);
-        $zone32->geopoints()->save($point1141);
-        $zone32->geopoints()->save($point1142);
-        $zone32->geopoints()->save($point1143);
-        $zone32->geopoints()->save($point1144);
-        $zone32->geopoints()->save($point1145);
-        $zone32->geopoints()->save($point1146);
-        $zone32->geopoints()->save($point1147);
-        $zone32->geopoints()->save($point1148);
-        $zone32->geopoints()->save($point1149);
-        $zone32->geopoints()->save($point1150);
-        $zone32->geopoints()->save($point1151);
-        $zone32->geopoints()->save($point1152);
-        $zone32->geopoints()->save($point1153);
-        $zone32->geopoints()->save($point1154);
-        $zone32->geopoints()->save($point1155);
-        $zone32->geopoints()->save($point1156);
-        $zone32->geopoints()->save($point1157);
-        $zone32->geopoints()->save($point1158);
-        $zone32->geopoints()->save($point1159);
-        $zone32->geopoints()->save($point1160);
-        $zone32->geopoints()->save($point1161);
-        $zone32->geopoints()->save($point1162);
-        $zone32->geopoints()->save($point1163);
-        $zone32->geopoints()->save($point1164);
-        $zone32->geopoints()->save($point1165);
-        $zone32->geopoints()->save($point1166);
-        $zone32->geopoints()->save($point1167);
-        $zone32->geopoints()->save($point1168);
-        $zone32->geopoints()->save($point1169);
-        $zone32->geopoints()->save($point1170);
+        $zone32 = new Zone();
+        $zone32->name = 'Sindicato de Empleados del Comercio';
+        $zone32->description = 'Barrio 32';
+        $zone32->color = 'orange';
+        $zone32->geom = new Polygon([
+            new LineString([
+                new Point(-42.75699781745442, -65.05928716707975),
+                new Point(-42.756918859926515, -65.05903948184097),
+                new Point(-42.756907209081106, -65.05900830116117),
+                new Point(-42.75679070062699, -65.05867738362387),
+                new Point(-42.75645986690873, -65.05775034513289),
+                new Point(-42.75615895658481, -65.05697367798483),
+                new Point(-42.755843629387414, -65.05619541827517),
+                new Point(-42.7557873029981, -65.0560137824334),
+                new Point(-42.755712620240814, -65.0555732296026),
+                new Point(-42.75568780980742, -65.05536628041324),
+                new Point(-42.755637937483556, -65.05513837646595),
+                new Point(-42.755520255563, -65.05463521081843),
+                new Point(-42.75561371378336, -65.05462012339272),
+                new Point(-42.755760564726984, -65.05459640260675),
+                new Point(-42.75590213507158, -65.0545807284478),
+                new Point(-42.756302370948106, -65.05453622054196),
+                new Point(-42.75670243918657, -65.05425626497598),
+                new Point(-42.756941826341205, -65.05408795636025),
+                new Point(-42.75737776912527, -65.05377941850443),
+                new Point(-42.75747751377304, -65.05378495056053),
+                new Point(-42.75758505359076, -65.0537907340737),
+                new Point(-42.757962239233564, -65.05355293948068),
+                new Point(-42.758331462068355, -65.05332017402955),
+                new Point(-42.75840681537787, -65.05318874578779),
+                new Point(-42.75846967965168, -65.05307911049428),
+                new Point(-42.758782073182964, -65.05284190263447),
+                new Point(-42.75882792219332, -65.05266973834328),
+                new Point(-42.75898877091521, -65.05257133480004),
+                new Point(-42.759768455548425, -65.05209415305237),
+                new Point(-42.76026667587305, -65.05178276534947),
+                new Point(-42.760785767136575, -65.05145830187762),
+                new Point(-42.76129412956404, -65.05113325167255),
+                new Point(-42.761702747343776, -65.05089663054596),
+                new Point(-42.761816154493715, -65.05071482706613),
+                new Point(-42.761860578580524, -65.0506144118661),
+                new Point(-42.761900141163494, -65.05050611767712),
+                new Point(-42.76303790070028, -65.0513129596766),
+                new Point(-42.76325775802053, -65.05147003654207),
+                new Point(-42.76490203596606, -65.05264543082409),
+                new Point(-42.76546957462995, -65.05312261257176),
+                new Point(-42.76467413201877, -65.05381453867872),
+                new Point(-42.76306757263751, -65.05495766263353),
+                new Point(-42.760663223712186, -65.0566661459574),
+                new Point(-42.760298946200265, -65.05692506294642),
+                new Point(-42.75699781745442, -65.05928716707975),
+            ])
+        ]);
+        $zone32->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 33: Julio Argentino Roca--------------
 
-        $point1171 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.05263377997868', 'order' => '1']);
-        $point1172 = GeoPoint::create(['latitude' => '-42.75484324924366', 'longitude' => '-65.05243781108248', 'order' => '2']);
-        $point1173 = GeoPoint::create(['latitude' => '-42.75383482247287', 'longitude' => '-65.05210102621297', 'order' => '3']);
-        $point1174 = GeoPoint::create(['latitude' => '-42.753115403723484', 'longitude' => '-65.05186071704898', 'order' => '4']);
-        $point1175 = GeoPoint::create(['latitude' => '-42.751905308362325', 'longitude' => '-65.05145662549698', 'order' => '5']);
-        $point1176 = GeoPoint::create(['latitude' => '-42.752035311680544', 'longitude' => '-65.05074114624209', 'order' => '6']);
-        $point1177 = GeoPoint::create(['latitude' => '-42.75214603662147', 'longitude' => '-65.05013220097653', 'order' => '7']);
-        $point1178 = GeoPoint::create(['latitude' => '-42.752212337475555', 'longitude' => '-65.04973758097513', 'order' => '8']);
-        $point1179 = GeoPoint::create(['latitude' => '-42.752379975539036', 'longitude' => '-65.0487391286691', 'order' => '9']);
-        $point1180 = GeoPoint::create(['latitude' => '-42.75252732939683', 'longitude' => '-65.04788274962186', 'order' => '10']);
-        $point1181 = GeoPoint::create(['latitude' => '-42.7526181054082', 'longitude' => '-65.04740213129388', 'order' => '11']);
-        $point1182 = GeoPoint::create(['latitude' => '-42.752736876976144', 'longitude' => '-65.04671917382332', 'order' => '12']);
-        $point1183 = GeoPoint::create(['latitude' => '-42.75281893580822', 'longitude' => '-65.04622221078417', 'order' => '13']);
-        $point1184 = GeoPoint::create(['latitude' => '-42.75294441289873', 'longitude' => '-65.04599816251233', 'order' => '14']);
-        $point1185 = GeoPoint::create(['latitude' => '-42.75316636569477', 'longitude' => '-65.04560178231125', 'order' => '15']);
-        $point1186 = GeoPoint::create(['latitude' => '-42.75363876975763', 'longitude' => '-65.04577545534501', 'order' => '16']);
-        $point1187 = GeoPoint::create(['latitude' => '-42.753925514665184', 'longitude' => '-65.04587687637341', 'order' => '17']);
-        $point1188 = GeoPoint::create(['latitude' => '-42.75596692718309', 'longitude' => '-65.04659822296053', 'order' => '18']);
-        $point1189 = GeoPoint::create(['latitude' => '-42.75626532293608', 'longitude' => '-65.04673325542065', 'order' => '19']);
-        $point1190 = GeoPoint::create(['latitude' => '-42.75616750612605', 'longitude' => '-65.04722368057533', 'order' => '20']);
-        $point1191 = GeoPoint::create(['latitude' => '-42.75607161715374', 'longitude' => '-65.04778996195373', 'order' => '21']);
-        $point1192 = GeoPoint::create(['latitude' => '-42.755993246359054', 'longitude' => '-65.04863251086073', 'order' => '22']);
-        $point1193 = GeoPoint::create(['latitude' => '-42.75591680340213', 'longitude' => '-65.04945293154336', 'order' => '23']);
-        $point1194 = GeoPoint::create(['latitude' => '-42.75590423054737', 'longitude' => '-65.04964261401217', 'order' => '24']);
-        $point1195 = GeoPoint::create(['latitude' => '-42.755819238049185', 'longitude' => '-65.05091968077969', 'order' => '25']);
-        $point1196 = GeoPoint::create(['latitude' => '-42.75581127524117', 'longitude' => '-65.0510396258141', 'order' => '26']);
-        $point1197 = GeoPoint::create(['latitude' => '-42.755660903898246', 'longitude' => '-65.05174202930004', 'order' => '27']);
-        $point1198 = GeoPoint::create(['latitude' => '-42.75552520088587', 'longitude' => '-65.05237612027511', 'order' => '28']);
-        $point1199 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.05263377997868', 'order' => '29']);
-
-        $zone33 = Zone::create(['name' => 'Julio Argentino Roca', 'description' => 'Barrio 33', 'color' => 'blue']);
-
-        $zone33->geopoints()->save($point1171);
-        $zone33->geopoints()->save($point1172);
-        $zone33->geopoints()->save($point1173);
-        $zone33->geopoints()->save($point1174);
-        $zone33->geopoints()->save($point1175);
-        $zone33->geopoints()->save($point1176);
-        $zone33->geopoints()->save($point1177);
-        $zone33->geopoints()->save($point1178);
-        $zone33->geopoints()->save($point1179);
-        $zone33->geopoints()->save($point1180);
-        $zone33->geopoints()->save($point1181);
-        $zone33->geopoints()->save($point1182);
-        $zone33->geopoints()->save($point1183);
-        $zone33->geopoints()->save($point1184);
-        $zone33->geopoints()->save($point1185);
-        $zone33->geopoints()->save($point1186);
-        $zone33->geopoints()->save($point1187);
-        $zone33->geopoints()->save($point1188);
-        $zone33->geopoints()->save($point1189);
-        $zone33->geopoints()->save($point1190);
-        $zone33->geopoints()->save($point1191);
-        $zone33->geopoints()->save($point1192);
-        $zone33->geopoints()->save($point1193);
-        $zone33->geopoints()->save($point1194);
-        $zone33->geopoints()->save($point1195);
-        $zone33->geopoints()->save($point1196);
-        $zone33->geopoints()->save($point1197);
-        $zone33->geopoints()->save($point1198);
-        $zone33->geopoints()->save($point1199);
+        $zone33 = new Zone();
+        $zone33->name = 'Julio Argentino Roca';
+        $zone33->description = 'Barrio 33';
+        $zone33->color = 'orange';
+        $zone33->geom = new Polygon([
+            new LineString([
+                new Point(-42.75542973100872, -65.05263377997868),
+                new Point(-42.75484324924366, -65.05243781108248),
+                new Point(-42.75383482247287, -65.05210102621297),
+                new Point(-42.753115403723484, -65.05186071704898),
+                new Point(-42.751905308362325, -65.05145662549698),
+                new Point(-42.752035311680544, -65.05074114624209),
+                new Point(-42.75214603662147, -65.05013220097653),
+                new Point(-42.752212337475555, -65.04973758097513),
+                new Point(-42.752379975539036, -65.0487391286691),
+                new Point(-42.75252732939683, -65.04788274962186),
+                new Point(-42.7526181054082, -65.04740213129388),
+                new Point(-42.752736876976144, -65.04671917382332),
+                new Point(-42.75281893580822, -65.04622221078417),
+                new Point(-42.75294441289873, -65.04599816251233),
+                new Point(-42.75316636569477, -65.04560178231125),
+                new Point(-42.75363876975763, -65.04577545534501),
+                new Point(-42.753925514665184, -65.04587687637341),
+                new Point(-42.75596692718309, -65.04659822296053),
+                new Point(-42.75626532293608, -65.04673325542065),
+                new Point(-42.75616750612605, -65.04722368057533),
+                new Point(-42.75607161715374, -65.04778996195373),
+                new Point(-42.755993246359054, -65.04863251086073),
+                new Point(-42.75591680340213, -65.04945293154336),
+                new Point(-42.75590423054737, -65.04964261401217),
+                new Point(-42.755819238049185, -65.05091968077969),
+                new Point(-42.75581127524117, -65.0510396258141),
+                new Point(-42.755660903898246, -65.05174202930004),
+                new Point(-42.75552520088587, -65.05237612027511),
+                new Point(-42.75542973100872, -65.05263377997868),
+            ])
+        ]);
+        $zone33->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 34: Agustín Pujol--------------
 
-        $point1200 = GeoPoint::create(['latitude' => '-42.761084246708606', 'longitude' => '-65.06491963837429', 'order' => '1']);
-        $point1201 = GeoPoint::create(['latitude' => '-42.76005997814079', 'longitude' => '-65.06430792708068', 'order' => '2']);
-        $point1202 = GeoPoint::create(['latitude' => '-42.7589995835703', 'longitude' => '-65.0636896779026', 'order' => '3']);
-        $point1203 = GeoPoint::create(['latitude' => '-42.75795192949266', 'longitude' => '-65.0630325366938', 'order' => '4']);
-        $point1204 = GeoPoint::create(['latitude' => '-42.756907963452385', 'longitude' => '-65.06238344211204', 'order' => '5']);
-        $point1205 = GeoPoint::create(['latitude' => '-42.75643882833177', 'longitude' => '-65.0620906622342', 'order' => '6']);
-        $point1206 = GeoPoint::create(['latitude' => '-42.75604881837711', 'longitude' => '-65.06186560813399', 'order' => '7']);
-        $point1207 = GeoPoint::create(['latitude' => '-42.75563408180809', 'longitude' => '-65.06160367365982', 'order' => '8']);
-        $point1208 = GeoPoint::create(['latitude' => '-42.75524063527311', 'longitude' => '-65.06135213274557', 'order' => '9']);
-        $point1209 = GeoPoint::create(['latitude' => '-42.75444644994744', 'longitude' => '-65.06085860628671', 'order' => '10']);
-        $point1210 = GeoPoint::create(['latitude' => '-42.75400296345051', 'longitude' => '-65.0605656587708', 'order' => '11']);
-        $point1211 = GeoPoint::create(['latitude' => '-42.75387044556135', 'longitude' => '-65.06043632600483', 'order' => '12']);
-        $point1212 = GeoPoint::create(['latitude' => '-42.75310433961129', 'longitude' => '-65.06042207676944', 'order' => '13']);
-        $point1213 = GeoPoint::create(['latitude' => '-42.75262925333942', 'longitude' => '-65.06055794741987', 'order' => '14']);
-        $point1214 = GeoPoint::create(['latitude' => '-42.752255839553044', 'longitude' => '-65.06064168263259', 'order' => '15']);
-        $point1215 = GeoPoint::create(['latitude' => '-42.75224636800243', 'longitude' => '-65.06052383307397', 'order' => '16']);
-        $point1216 = GeoPoint::create(['latitude' => '-42.752255169000755', 'longitude' => '-65.0600672708081', 'order' => '17']);
-        $point1217 = GeoPoint::create(['latitude' => '-42.7523408320512', 'longitude' => '-65.05974398080271', 'order' => '18']);
-        $point1218 = GeoPoint::create(['latitude' => '-42.75247402049263', 'longitude' => '-65.05939831111583', 'order' => '19']);
-        $point1219 = GeoPoint::create(['latitude' => '-42.752640149813544', 'longitude' => '-65.05909480240192', 'order' => '20']);
-        $point1220 = GeoPoint::create(['latitude' => '-42.75297517448336', 'longitude' => '-65.05860286850466', 'order' => '21']);
-        $point1221 = GeoPoint::create(['latitude' => '-42.75331950306574', 'longitude' => '-65.05783433180268', 'order' => '22']);
-        $point1222 = GeoPoint::create(['latitude' => '-42.753429138359245', 'longitude' => '-65.05763433959297', 'order' => '23']);
-        $point1223 = GeoPoint::create(['latitude' => '-42.75356584720001', 'longitude' => '-65.05724961023728', 'order' => '24']);
-        $point1224 = GeoPoint::create(['latitude' => '-42.7538626503914', 'longitude' => '-65.05657461557473', 'order' => '25']);
-        $point1225 = GeoPoint::create(['latitude' => '-42.7541022051841', 'longitude' => '-65.0559763153262', 'order' => '26']);
-        $point1226 = GeoPoint::create(['latitude' => '-42.754215025600814', 'longitude' => '-65.05570096980696', 'order' => '27']);
-        $point1227 = GeoPoint::create(['latitude' => '-42.75435567393606', 'longitude' => '-65.0557982837028', 'order' => '28']);
-        $point1228 = GeoPoint::create(['latitude' => '-42.75437947854107', 'longitude' => '-65.05581471223303', 'order' => '29']);
-        $point1229 = GeoPoint::create(['latitude' => '-42.75478583320691', 'longitude' => '-65.05584337834188', 'order' => '30']);
-        $point1230 = GeoPoint::create(['latitude' => '-42.75541665523977', 'longitude' => '-65.05587204445074', 'order' => '31']);
-        $point1231 = GeoPoint::create(['latitude' => '-42.75542973100872', 'longitude' => '-65.054649879149', 'order' => '32']);
-        $point1232 = GeoPoint::create(['latitude' => '-42.755520255563', 'longitude' => '-65.05463521081843', 'order' => '33']);
-        $point1233 = GeoPoint::create(['latitude' => '-42.755637937483556', 'longitude' => '-65.05513837646595', 'order' => '34']);
-        $point1234 = GeoPoint::create(['latitude' => '-42.75568780980742', 'longitude' => '-65.05536628041324', 'order' => '35']);
-        $point1235 = GeoPoint::create(['latitude' => '-42.755712620240814', 'longitude' => '-65.0555732296026', 'order' => '36']);
-        $point1236 = GeoPoint::create(['latitude' => '-42.7557873029981', 'longitude' => '-65.0560137824334', 'order' => '37']);
-        $point1237 = GeoPoint::create(['latitude' => '-42.755843629387414', 'longitude' => '-65.05619541827517', 'order' => '38']);
-        $point1238 = GeoPoint::create(['latitude' => '-42.75615895658481', 'longitude' => '-65.05697367798483', 'order' => '39']);
-        $point1239 = GeoPoint::create(['latitude' => '-42.75645986690873', 'longitude' => '-65.05775034513289', 'order' => '40']);
-        $point1240 = GeoPoint::create(['latitude' => '-42.75679070062699', 'longitude' => '-65.05867738362387', 'order' => '41']);
-        $point1241 = GeoPoint::create(['latitude' => '-42.756907209081106', 'longitude' => '-65.05900830116117', 'order' => '42']);
-        $point1242 = GeoPoint::create(['latitude' => '-42.756918859926515', 'longitude' => '-65.05903948184097', 'order' => '43']);
-        $point1243 = GeoPoint::create(['latitude' => '-42.75699781745442', 'longitude' => '-65.05928716707975', 'order' => '44']);
-        $point1244 = GeoPoint::create(['latitude' => '-42.760298946200265', 'longitude' => '-65.05692506294642', 'order' => '45']);
-        $point1245 = GeoPoint::create(['latitude' => '-42.760663223712186', 'longitude' => '-65.0566661459574', 'order' => '46']);
-        $point1246 = GeoPoint::create(['latitude' => '-42.76118583537507', 'longitude' => '-65.05703687753476', 'order' => '47']);
-        $point1247 = GeoPoint::create(['latitude' => '-42.761511975227535', 'longitude' => '-65.0572633565585', 'order' => '48']);
-        $point1248 = GeoPoint::create(['latitude' => '-42.76251176863809', 'longitude' => '-65.05797221410988', 'order' => '49']);
-        $point1249 = GeoPoint::create(['latitude' => '-42.76346076771537', 'longitude' => '-65.0586375695838', 'order' => '50']);
-        $point1250 = GeoPoint::create(['latitude' => '-42.76319573193703', 'longitude' => '-65.05931315097958', 'order' => '51']);
-        $point1251 = GeoPoint::create(['latitude' => '-42.762916279285236', 'longitude' => '-65.06007640708256', 'order' => '52']);
-        $point1252 = GeoPoint::create(['latitude' => '-42.76267303645514', 'longitude' => '-65.06070010449771', 'order' => '53']);
-        $point1253 = GeoPoint::create(['latitude' => '-42.762489305137564', 'longitude' => '-65.06117141891315', 'order' => '54']);
-        $point1254 = GeoPoint::create(['latitude' => '-42.762299706487795', 'longitude' => '-65.06165773693527', 'order' => '55']);
-        $point1255 = GeoPoint::create(['latitude' => '-42.76212402179726', 'longitude' => '-65.06210834804989', 'order' => '56']);
-        $point1256 = GeoPoint::create(['latitude' => '-42.76211622662731', 'longitude' => '-65.06228403274041', 'order' => '57']);
-        $point1257 = GeoPoint::create(['latitude' => '-42.761809281333115', 'longitude' => '-65.06309003654955', 'order' => '58']);
-        $point1258 = GeoPoint::create(['latitude' => '-42.76143712483221', 'longitude' => '-65.06406728264056', 'order' => '59']);
-        $point1259 = GeoPoint::create(['latitude' => '-42.76124584980178', 'longitude' => '-65.06456927482164', 'order' => '60']);
-        $point1260 = GeoPoint::create(['latitude' => '-42.761142836211775', 'longitude' => '-65.06483975883704', 'order' => '61']);
-        $point1261 = GeoPoint::create(['latitude' => '-42.761084246708606', 'longitude' => '-65.06491963837429', 'order' => '62']);
-
-        $zone34 = Zone::create(['name' => 'Agustín Pujol', 'description' => 'Barrio 34', 'color' => 'blue']);
-
-        $zone34->geopoints()->save($point1200);
-        $zone34->geopoints()->save($point1201);
-        $zone34->geopoints()->save($point1202);
-        $zone34->geopoints()->save($point1203);
-        $zone34->geopoints()->save($point1204);
-        $zone34->geopoints()->save($point1205);
-        $zone34->geopoints()->save($point1206);
-        $zone34->geopoints()->save($point1207);
-        $zone34->geopoints()->save($point1208);
-        $zone34->geopoints()->save($point1209);
-        $zone34->geopoints()->save($point1210);
-        $zone34->geopoints()->save($point1211);
-        $zone34->geopoints()->save($point1212);
-        $zone34->geopoints()->save($point1213);
-        $zone34->geopoints()->save($point1214);
-        $zone34->geopoints()->save($point1215);
-        $zone34->geopoints()->save($point1216);
-        $zone34->geopoints()->save($point1217);
-        $zone34->geopoints()->save($point1218);
-        $zone34->geopoints()->save($point1219);
-        $zone34->geopoints()->save($point1220);
-        $zone34->geopoints()->save($point1221);
-        $zone34->geopoints()->save($point1222);
-        $zone34->geopoints()->save($point1223);
-        $zone34->geopoints()->save($point1224);
-        $zone34->geopoints()->save($point1225);
-        $zone34->geopoints()->save($point1226);
-        $zone34->geopoints()->save($point1227);
-        $zone34->geopoints()->save($point1228);
-        $zone34->geopoints()->save($point1229);
-        $zone34->geopoints()->save($point1230);
-        $zone34->geopoints()->save($point1231);
-        $zone34->geopoints()->save($point1232);
-        $zone34->geopoints()->save($point1233);
-        $zone34->geopoints()->save($point1234);
-        $zone34->geopoints()->save($point1235);
-        $zone34->geopoints()->save($point1236);
-        $zone34->geopoints()->save($point1237);
-        $zone34->geopoints()->save($point1238);
-        $zone34->geopoints()->save($point1239);
-        $zone34->geopoints()->save($point1240);
-        $zone34->geopoints()->save($point1241);
-        $zone34->geopoints()->save($point1242);
-        $zone34->geopoints()->save($point1243);
-        $zone34->geopoints()->save($point1244);
-        $zone34->geopoints()->save($point1245);
-        $zone34->geopoints()->save($point1246);
-        $zone34->geopoints()->save($point1247);
-        $zone34->geopoints()->save($point1248);
-        $zone34->geopoints()->save($point1249);
-        $zone34->geopoints()->save($point1250);
-        $zone34->geopoints()->save($point1251);
-        $zone34->geopoints()->save($point1252);
-        $zone34->geopoints()->save($point1253);
-        $zone34->geopoints()->save($point1254);
-        $zone34->geopoints()->save($point1255);
-        $zone34->geopoints()->save($point1256);
-        $zone34->geopoints()->save($point1257);
-        $zone34->geopoints()->save($point1258);
-        $zone34->geopoints()->save($point1259);
-        $zone34->geopoints()->save($point1260);
-        $zone34->geopoints()->save($point1261);
+        $zone34 = new Zone();
+        $zone34->name = 'Agustín Pujol';
+        $zone34->description = 'Barrio 34';
+        $zone34->color = 'green';
+        $zone34->geom = new Polygon([
+            new LineString([
+                new Point(-42.761084246708606, -65.06491963837429),
+                new Point(-42.76005997814079, -65.06430792708068),
+                new Point(-42.7589995835703, -65.0636896779026),
+                new Point(-42.75795192949266, -65.0630325366938),
+                new Point(-42.756907963452385, -65.06238344211204),
+                new Point(-42.75643882833177, -65.0620906622342),
+                new Point(-42.75604881837711, -65.06186560813399),
+                new Point(-42.75563408180809, -65.06160367365982),
+                new Point(-42.75524063527311, -65.06135213274557),
+                new Point(-42.75444644994744, -65.06085860628671),
+                new Point(-42.75400296345051, -65.0605656587708),
+                new Point(-42.75387044556135, -65.06043632600483),
+                new Point(-42.75310433961129, -65.06042207676944),
+                new Point(-42.75262925333942, -65.06055794741987),
+                new Point(-42.752255839553044, -65.06064168263259),
+                new Point(-42.75224636800243, -65.06052383307397),
+                new Point(-42.752255169000755, -65.0600672708081),
+                new Point(-42.7523408320512, -65.05974398080271),
+                new Point(-42.75247402049263, -65.05939831111583),
+                new Point(-42.752640149813544, -65.05909480240192),
+                new Point(-42.75297517448336, -65.05860286850466),
+                new Point(-42.75331950306574, -65.05783433180268),
+                new Point(-42.753429138359245, -65.05763433959297),
+                new Point(-42.75356584720001, -65.05724961023728),
+                new Point(-42.7538626503914, -65.05657461557473),
+                new Point(-42.7541022051841, -65.0559763153262),
+                new Point(-42.754215025600814, -65.05570096980696),
+                new Point(-42.75435567393606, -65.0557982837028),
+                new Point(-42.75437947854107, -65.05581471223303),
+                new Point(-42.75478583320691, -65.05584337834188),
+                new Point(-42.75541665523977, -65.05587204445074),
+                new Point(-42.75542973100872, -65.054649879149),
+                new Point(-42.755520255563, -65.05463521081843),
+                new Point(-42.755637937483556, -65.05513837646595),
+                new Point(-42.75568780980742, -65.05536628041324),
+                new Point(-42.755712620240814, -65.0555732296026),
+                new Point(-42.7557873029981, -65.0560137824334),
+                new Point(-42.755843629387414, -65.05619541827517),
+                new Point(-42.75615895658481, -65.05697367798483),
+                new Point(-42.75645986690873, -65.05775034513289),
+                new Point(-42.75679070062699, -65.05867738362387),
+                new Point(-42.756907209081106, -65.05900830116117),
+                new Point(-42.756918859926515, -65.05903948184097),
+                new Point(-42.75699781745442, -65.05928716707975),
+                new Point(-42.760298946200265, -65.05692506294642),
+                new Point(-42.760663223712186, -65.0566661459574),
+                new Point(-42.76118583537507, -65.05703687753476),
+                new Point(-42.761511975227535, -65.0572633565585),
+                new Point(-42.76251176863809, -65.05797221410988),
+                new Point(-42.76346076771537, -65.0586375695838),
+                new Point(-42.76319573193703, -65.05931315097958),
+                new Point(-42.762916279285236, -65.06007640708256),
+                new Point(-42.76267303645514, -65.06070010449771),
+                new Point(-42.762489305137564, -65.06117141891315),
+                new Point(-42.762299706487795, -65.06165773693527),
+                new Point(-42.76212402179726, -65.06210834804989),
+                new Point(-42.76211622662731, -65.06228403274041),
+                new Point(-42.761809281333115, -65.06309003654955),
+                new Point(-42.76143712483221, -65.06406728264056),
+                new Point(-42.76124584980178, -65.06456927482164),
+                new Point(-42.761142836211775, -65.06483975883704),
+                new Point(-42.761084246708606, -65.06491963837429),
+            ])
+        ]);
+        $zone34->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 35: Solana 2--------------
 
-        $point1262 = GeoPoint::create(['latitude' => '-42.81873556346926', 'longitude' => '-65.03160635094437', 'order' => '1']);
-        $point1263 = GeoPoint::create(['latitude' => '-42.81867144190997', 'longitude' => '-65.03071116368544', 'order' => '2']);
-        $point1264 = GeoPoint::create(['latitude' => '-42.81860874527425', 'longitude' => '-65.02980373884787', 'order' => '3']);
-        $point1265 = GeoPoint::create(['latitude' => '-42.8185423606011', 'longitude' => '-65.02888952466873', 'order' => '4']);
-        $point1266 = GeoPoint::create(['latitude' => '-42.81847438336634', 'longitude' => '-65.02781873653832', 'order' => '5']);
-        $point1267 = GeoPoint::create(['latitude' => '-42.818464408901576', 'longitude' => '-65.02766325223446', 'order' => '6']);
-        $point1268 = GeoPoint::create(['latitude' => '-42.81839852714265', 'longitude' => '-65.02675431865433', 'order' => '7']);
-        $point1269 = GeoPoint::create(['latitude' => '-42.81833222628853', 'longitude' => '-65.02583080056266', 'order' => '8']);
-        $point1270 = GeoPoint::create(['latitude' => '-42.81825620242676', 'longitude' => '-65.02490988086099', 'order' => '9']);
-        $point1271 = GeoPoint::create(['latitude' => '-42.81825578333161', 'longitude' => '-65.02437763000947', 'order' => '10']);
-        $point1272 = GeoPoint::create(['latitude' => '-42.82113060848204', 'longitude' => '-65.02395970831722', 'order' => '11']);
-        $point1273 = GeoPoint::create(['latitude' => '-42.82156043247679', 'longitude' => '-65.02390044826178', 'order' => '12']);
-        $point1274 = GeoPoint::create(['latitude' => '-42.8217611790578', 'longitude' => '-65.02382534640937', 'order' => '13']);
-        $point1275 = GeoPoint::create(['latitude' => '-42.822636082111046', 'longitude' => '-65.02370833504106', 'order' => '14']);
-        $point1276 = GeoPoint::create(['latitude' => '-42.8226713699234', 'longitude' => '-65.02423337745586', 'order' => '15']);
-        $point1277 = GeoPoint::create(['latitude' => '-42.82274177791007', 'longitude' => '-65.02516125413716', 'order' => '16']);
-        $point1278 = GeoPoint::create(['latitude' => '-42.82281847232409', 'longitude' => '-65.02608644860946', 'order' => '17']);
-        $point1279 = GeoPoint::create(['latitude' => '-42.82289281980525', 'longitude' => '-65.0269834798871', 'order' => '18']);
-        $point1280 = GeoPoint::create(['latitude' => '-42.8229056441171', 'longitude' => '-65.02712412822234', 'order' => '19']);
-        $point1281 = GeoPoint::create(['latitude' => '-42.82300656223131', 'longitude' => '-65.02822986888899', 'order' => '20']);
-        $point1282 = GeoPoint::create(['latitude' => '-42.82307638348476', 'longitude' => '-65.02912773835693', 'order' => '21']);
-        $point1283 = GeoPoint::create(['latitude' => '-42.823146037100116', 'longitude' => '-65.03003281626161', 'order' => '22']);
-        $point1284 = GeoPoint::create(['latitude' => '-42.82319792108077', 'longitude' => '-65.03070554781031', 'order' => '23']);
-        $point1285 = GeoPoint::create(['latitude' => '-42.8232241564377', 'longitude' => '-65.03096781756062', 'order' => '24']);
-        $point1286 = GeoPoint::create(['latitude' => '-42.8217683036755', 'longitude' => '-65.03116093660974', 'order' => '25']);
-        $point1287 = GeoPoint::create(['latitude' => '-42.82027707928187', 'longitude' => '-65.03138624216704', 'order' => '26']);
-        $point1288 = GeoPoint::create(['latitude' => '-42.81873556346926', 'longitude' => '-65.03160635094437', 'order' => '27']);
-
-        $zone35 = Zone::create(['name' => 'Solana 2', 'description' => 'Barrio 35', 'color' => 'blue']);
-
-        $zone35->geopoints()->save($point1262);
-        $zone35->geopoints()->save($point1263);
-        $zone35->geopoints()->save($point1264);
-        $zone35->geopoints()->save($point1265);
-        $zone35->geopoints()->save($point1266);
-        $zone35->geopoints()->save($point1267);
-        $zone35->geopoints()->save($point1268);
-        $zone35->geopoints()->save($point1269);
-        $zone35->geopoints()->save($point1270);
-        $zone35->geopoints()->save($point1271);
-        $zone35->geopoints()->save($point1272);
-        $zone35->geopoints()->save($point1273);
-        $zone35->geopoints()->save($point1274);
-        $zone35->geopoints()->save($point1275);
-        $zone35->geopoints()->save($point1276);
-        $zone35->geopoints()->save($point1277);
-        $zone35->geopoints()->save($point1278);
-        $zone35->geopoints()->save($point1279);
-        $zone35->geopoints()->save($point1280);
-        $zone35->geopoints()->save($point1281);
-        $zone35->geopoints()->save($point1282);
-        $zone35->geopoints()->save($point1283);
-        $zone35->geopoints()->save($point1284);
-        $zone35->geopoints()->save($point1285);
-        $zone35->geopoints()->save($point1286);
-        $zone35->geopoints()->save($point1287);
-        $zone35->geopoints()->save($point1288);
+        $zone35 = new Zone();
+        $zone35->name = 'Solana 2';
+        $zone35->description = 'Barrio 35';
+        $zone35->color = 'red';
+        $zone35->geom = new Polygon([
+            new LineString([
+                new Point(-42.81873556346926, -65.03160635094437),
+                new Point(-42.81867144190997, -65.03071116368544),
+                new Point(-42.81860874527425, -65.02980373884787),
+                new Point(-42.8185423606011, -65.02888952466873),
+                new Point(-42.81847438336634, -65.02781873653832),
+                new Point(-42.818464408901576, -65.02766325223446),
+                new Point(-42.81839852714265, -65.02675431865433),
+                new Point(-42.81833222628853, -65.02583080056266),
+                new Point(-42.81825620242676, -65.02490988086099),
+                new Point(-42.81825578333161, -65.02437763000947),
+                new Point(-42.82113060848204, -65.02395970831722),
+                new Point(-42.82156043247679, -65.02390044826178),
+                new Point(-42.8217611790578, -65.02382534640937),
+                new Point(-42.822636082111046, -65.02370833504106),
+                new Point(-42.8226713699234, -65.02423337745586),
+                new Point(-42.82274177791007, -65.02516125413716),
+                new Point(-42.82281847232409, -65.02608644860946),
+                new Point(-42.82289281980525, -65.0269834798871),
+                new Point(-42.8229056441171, -65.02712412822234),
+                new Point(-42.82300656223131, -65.02822986888899),
+                new Point(-42.82307638348476, -65.02912773835693),
+                new Point(-42.823146037100116, -65.03003281626161),
+                new Point(-42.82319792108077, -65.03070554781031),
+                new Point(-42.8232241564377, -65.03096781756062),
+                new Point(-42.8217683036755, -65.03116093660974),
+                new Point(-42.82027707928187, -65.03138624216704),
+                new Point(-42.81873556346926, -65.03160635094437),
+            ])
+        ]);
+        $zone35->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 36: Estilo Solana--------------
 
-        $point1289 = GeoPoint::create(['latitude' => '-42.81394681454816', 'longitude' => '-65.03957946870011', 'order' => '1']);
-        $point1290 = GeoPoint::create(['latitude' => '-42.8119026360022', 'longitude' => '-65.03879668276274', 'order' => '2']);
-        $point1291 = GeoPoint::create(['latitude' => '-42.81095137381104', 'longitude' => '-65.03846836361544', 'order' => '3']);
-        $point1292 = GeoPoint::create(['latitude' => '-42.81107852728218', 'longitude' => '-65.0376822249168', 'order' => '4']);
-        $point1293 = GeoPoint::create(['latitude' => '-42.81117072821709', 'longitude' => '-65.03711233932', 'order' => '5']);
-        $point1294 = GeoPoint::create(['latitude' => '-42.81131565132296', 'longitude' => '-65.0362174035182', 'order' => '6']);
-        $point1295 = GeoPoint::create(['latitude' => '-42.811460239152694', 'longitude' => '-65.03532372500183', 'order' => '7']);
-        $point1296 = GeoPoint::create(['latitude' => '-42.811608431200824', 'longitude' => '-65.03440783444206', 'order' => '8']);
-        $point1297 = GeoPoint::create(['latitude' => '-42.811752683754435', 'longitude' => '-65.03351683813472', 'order' => '9']);
-        $point1298 = GeoPoint::create(['latitude' => '-42.81189484083225', 'longitude' => '-65.03263841468213', 'order' => '10']);
-        $point1299 = GeoPoint::create(['latitude' => '-42.81204437398486', 'longitude' => '-65.03171456131435', 'order' => '11']);
-        $point1300 = GeoPoint::create(['latitude' => '-42.81218854271943', 'longitude' => '-65.03082364882603', 'order' => '12']);
-        $point1301 = GeoPoint::create(['latitude' => '-42.812332124720825', 'longitude' => '-65.02993617291801', 'order' => '13']);
-        $point1302 = GeoPoint::create(['latitude' => '-42.812478305112165', 'longitude' => '-65.02903277139397', 'order' => '14']);
-        $point1303 = GeoPoint::create(['latitude' => '-42.812621551837395', 'longitude' => '-65.02814806151402', 'order' => '15']);
-        $point1304 = GeoPoint::create(['latitude' => '-42.81273076803575', 'longitude' => '-65.02746753479536', 'order' => '16']);
-        $point1305 = GeoPoint::create(['latitude' => '-42.812770665894845', 'longitude' => '-65.02721708352853', 'order' => '17']);
-        $point1306 = GeoPoint::create(['latitude' => '-42.81274267033825', 'longitude' => '-65.02709412100897', 'order' => '18']);
-        $point1307 = GeoPoint::create(['latitude' => '-42.81253513441567', 'longitude' => '-65.02698884430512', 'order' => '19']);
-        $point1308 = GeoPoint::create(['latitude' => '-42.81578672611377', 'longitude' => '-65.0248848189705', 'order' => '20']);
-        $point1309 = GeoPoint::create(['latitude' => '-42.81661351704281', 'longitude' => '-65.02461525696444', 'order' => '21']);
-        $point1310 = GeoPoint::create(['latitude' => '-42.816978465106985', 'longitude' => '-65.0245578409277', 'order' => '22']);
-        $point1311 = GeoPoint::create(['latitude' => '-42.81698751756241', 'longitude' => '-65.02473972822656', 'order' => '23']);
-        $point1312 = GeoPoint::create(['latitude' => '-42.816977040183446', 'longitude' => '-65.02484751950138', 'order' => '24']);
-        $point1313 = GeoPoint::create(['latitude' => '-42.816922138717665', 'longitude' => '-65.02510191026269', 'order' => '25']);
-        $point1314 = GeoPoint::create(['latitude' => '-42.816800014388434', 'longitude' => '-65.02572191964043', 'order' => '26']);
-        $point1315 = GeoPoint::create(['latitude' => '-42.81660580569189', 'longitude' => '-65.0266119101194', 'order' => '27']);
-        $point1316 = GeoPoint::create(['latitude' => '-42.81652894363978', 'longitude' => '-65.02701533111915', 'order' => '28']);
-        $point1317 = GeoPoint::create(['latitude' => '-42.81634470940804', 'longitude' => '-65.02793935212499', 'order' => '29']);
-        $point1318 = GeoPoint::create(['latitude' => '-42.81631520510888', 'longitude' => '-65.02808737653503', 'order' => '30']);
-        $point1319 = GeoPoint::create(['latitude' => '-42.81622023814592', 'longitude' => '-65.02856455828271', 'order' => '31']);
-        $point1320 = GeoPoint::create(['latitude' => '-42.816047068026336', 'longitude' => '-65.02945505167587', 'order' => '32']);
-        $point1321 = GeoPoint::create(['latitude' => '-42.8158660189178', 'longitude' => '-65.03033481623294', 'order' => '33']);
-        $point1322 = GeoPoint::create(['latitude' => '-42.8156785157438', 'longitude' => '-65.03121516752327', 'order' => '34']);
-        $point1323 = GeoPoint::create(['latitude' => '-42.81550065175847', 'longitude' => '-65.03209116022393', 'order' => '35']);
-        $point1324 = GeoPoint::create(['latitude' => '-42.81530686215709', 'longitude' => '-65.03298785622543', 'order' => '36']);
-        $point1325 = GeoPoint::create(['latitude' => '-42.815127405610156', 'longitude' => '-65.0338543773755', 'order' => '37']);
-        $point1326 = GeoPoint::create(['latitude' => '-42.81494484775902', 'longitude' => '-65.03473606977033', 'order' => '38']);
-        $point1327 = GeoPoint::create(['latitude' => '-42.81475650639473', 'longitude' => '-65.03561130809972', 'order' => '39']);
-        $point1328 = GeoPoint::create(['latitude' => '-42.814575373467136', 'longitude' => '-65.03651462580473', 'order' => '40']);
-        $point1329 = GeoPoint::create(['latitude' => '-42.81438787029316', 'longitude' => '-65.03738952885797', 'order' => '41']);
-        $point1330 = GeoPoint::create(['latitude' => '-42.81420933575555', 'longitude' => '-65.03827951933694', 'order' => '42']);
-        $point1331 = GeoPoint::create(['latitude' => '-42.81403423779827', 'longitude' => '-65.03916272047432', 'order' => '43']);
-        $point1332 = GeoPoint::create(['latitude' => '-42.813960560869354', 'longitude' => '-65.03947360526304', 'order' => '44']);
-        $point1333 = GeoPoint::create(['latitude' => '-42.81394681454816', 'longitude' => '-65.03957946870011', 'order' => '45']);
-
-        $zone36 = Zone::create(['name' => 'Estilo Solana', 'description' => 'Barrio 36', 'color' => 'blue']);
-
-        $zone36->geopoints()->save($point1289);
-        $zone36->geopoints()->save($point1290);
-        $zone36->geopoints()->save($point1291);
-        $zone36->geopoints()->save($point1292);
-        $zone36->geopoints()->save($point1293);
-        $zone36->geopoints()->save($point1294);
-        $zone36->geopoints()->save($point1295);
-        $zone36->geopoints()->save($point1296);
-        $zone36->geopoints()->save($point1297);
-        $zone36->geopoints()->save($point1298);
-        $zone36->geopoints()->save($point1299);
-        $zone36->geopoints()->save($point1300);
-        $zone36->geopoints()->save($point1301);
-        $zone36->geopoints()->save($point1302);
-        $zone36->geopoints()->save($point1303);
-        $zone36->geopoints()->save($point1304);
-        $zone36->geopoints()->save($point1305);
-        $zone36->geopoints()->save($point1306);
-        $zone36->geopoints()->save($point1307);
-        $zone36->geopoints()->save($point1308);
-        $zone36->geopoints()->save($point1309);
-        $zone36->geopoints()->save($point1310);
-        $zone36->geopoints()->save($point1311);
-        $zone36->geopoints()->save($point1312);
-        $zone36->geopoints()->save($point1313);
-        $zone36->geopoints()->save($point1314);
-        $zone36->geopoints()->save($point1315);
-        $zone36->geopoints()->save($point1316);
-        $zone36->geopoints()->save($point1317);
-        $zone36->geopoints()->save($point1318);
-        $zone36->geopoints()->save($point1319);
-        $zone36->geopoints()->save($point1320);
-        $zone36->geopoints()->save($point1321);
-        $zone36->geopoints()->save($point1322);
-        $zone36->geopoints()->save($point1323);
-        $zone36->geopoints()->save($point1324);
-        $zone36->geopoints()->save($point1325);
-        $zone36->geopoints()->save($point1326);
-        $zone36->geopoints()->save($point1327);
-        $zone36->geopoints()->save($point1328);
-        $zone36->geopoints()->save($point1329);
-        $zone36->geopoints()->save($point1330);
-        $zone36->geopoints()->save($point1331);
-        $zone36->geopoints()->save($point1332);
-        $zone36->geopoints()->save($point1333);
+        $zone36 = new Zone();
+        $zone36->name = 'Estilo Solana';
+        $zone36->description = 'Barrio 36';
+        $zone36->color = 'yellow';
+        $zone36->geom = new Polygon([
+            new LineString([
+                new Point(-42.81394681454816, -65.03957946870011),
+                new Point(-42.8119026360022, -65.03879668276274),
+                new Point(-42.81095137381104, -65.03846836361544),
+                new Point(-42.81107852728218, -65.0376822249168),
+                new Point(-42.81117072821709, -65.03711233932),
+                new Point(-42.81131565132296, -65.0362174035182),
+                new Point(-42.811460239152694, -65.03532372500183),
+                new Point(-42.811608431200824, -65.03440783444206),
+                new Point(-42.811752683754435, -65.03351683813472),
+                new Point(-42.81189484083225, -65.03263841468213),
+                new Point(-42.81204437398486, -65.03171456131435),
+                new Point(-42.81218854271943, -65.03082364882603),
+                new Point(-42.812332124720825, -65.02993617291801),
+                new Point(-42.812478305112165, -65.02903277139397),
+                new Point(-42.812621551837395, -65.02814806151402),
+                new Point(-42.81273076803575, -65.02746753479536),
+                new Point(-42.812770665894845, -65.02721708352853),
+                new Point(-42.81274267033825, -65.02709412100897),
+                new Point(-42.81253513441567, -65.02698884430512),
+                new Point(-42.81578672611377, -65.0248848189705),
+                new Point(-42.81661351704281, -65.02461525696444),
+                new Point(-42.816978465106985, -65.0245578409277),
+                new Point(-42.81698751756241, -65.02473972822656),
+                new Point(-42.816977040183446, -65.02484751950138),
+                new Point(-42.816922138717665, -65.02510191026269),
+                new Point(-42.816800014388434, -65.02572191964043),
+                new Point(-42.81660580569189, -65.0266119101194),
+                new Point(-42.81652894363978, -65.02701533111915),
+                new Point(-42.81634470940804, -65.02793935212499),
+                new Point(-42.81631520510888, -65.02808737653503),
+                new Point(-42.81622023814592, -65.02856455828271),
+                new Point(-42.816047068026336, -65.02945505167587),
+                new Point(-42.8158660189178, -65.03033481623294),
+                new Point(-42.8156785157438, -65.03121516752327),
+                new Point(-42.81550065175847, -65.03209116022393),
+                new Point(-42.81530686215709, -65.03298785622543),
+                new Point(-42.815127405610156, -65.0338543773755),
+                new Point(-42.81494484775902, -65.03473606977033),
+                new Point(-42.81475650639473, -65.03561130809972),
+                new Point(-42.814575373467136, -65.03651462580473),
+                new Point(-42.81438787029316, -65.03738952885797),
+                new Point(-42.81420933575555, -65.03827951933694),
+                new Point(-42.81403423779827, -65.03916272047432),
+                new Point(-42.813960560869354, -65.03947360526304),
+                new Point(-42.81394681454816, -65.03957946870011),
+            ])
+        ]);
+        $zone36->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 37: Quintas del Mirador--------------
 
-        $point1334 = GeoPoint::create(['latitude' => '-42.81331213683987', 'longitude' => '-65.04776917483386', 'order' => '1']);
-        $point1335 = GeoPoint::create(['latitude' => '-42.81306956456203', 'longitude' => '-65.04774822007593', 'order' => '2']);
-        $point1336 = GeoPoint::create(['latitude' => '-42.81277301282773', 'longitude' => '-65.04773690450665', 'order' => '3']);
-        $point1337 = GeoPoint::create(['latitude' => '-42.81243991599561', 'longitude' => '-65.04772684622283', 'order' => '4']);
-        $point1338 = GeoPoint::create(['latitude' => '-42.812256268497094', 'longitude' => '-65.0477359824973', 'order' => '5']);
-        $point1339 = GeoPoint::create(['latitude' => '-42.812260627086744', 'longitude' => '-65.04771326753968', 'order' => '6']);
-        $point1340 = GeoPoint::create(['latitude' => '-42.811226970787374', 'longitude' => '-65.04733021456467', 'order' => '7']);
-        $point1341 = GeoPoint::create(['latitude' => '-42.810246539573164', 'longitude' => '-65.04694406028545', 'order' => '8']);
-        $point1342 = GeoPoint::create(['latitude' => '-42.809254122237434', 'longitude' => '-65.04657584327904', 'order' => '9']);
-        $point1343 = GeoPoint::create(['latitude' => '-42.80822951839352', 'longitude' => '-65.0461681475087', 'order' => '10']);
-        $point1344 = GeoPoint::create(['latitude' => '-42.80720927313922', 'longitude' => '-65.04577662881145', 'order' => '11']);
-        $point1345 = GeoPoint::create(['latitude' => '-42.807156215692146', 'longitude' => '-65.04603722218111', 'order' => '12']);
-        $point1346 = GeoPoint::create(['latitude' => '-42.80637108282187', 'longitude' => '-65.0457318694485', 'order' => '13']);
-        $point1347 = GeoPoint::create(['latitude' => '-42.806174946287626', 'longitude' => '-65.04576422359476', 'order' => '14']);
-        $point1348 = GeoPoint::create(['latitude' => '-42.80602641896337', 'longitude' => '-65.04581283863317', 'order' => '15']);
-        $point1349 = GeoPoint::create(['latitude' => '-42.80552736044842', 'longitude' => '-65.04456561144094', 'order' => '16']);
-        $point1350 = GeoPoint::create(['latitude' => '-42.80546793275494', 'longitude' => '-65.04419311966392', 'order' => '17']);
-        $point1351 = GeoPoint::create(['latitude' => '-42.80552736044842', 'longitude' => '-65.04369104366383', 'order' => '18']);
-        $point1352 = GeoPoint::create(['latitude' => '-42.805030229771205', 'longitude' => '-65.04200485620241', 'order' => '19']);
-        $point1353 = GeoPoint::create(['latitude' => '-42.80499251120693', 'longitude' => '-65.04187694835997', 'order' => '20']);
-        $point1354 = GeoPoint::create(['latitude' => '-42.80493316733245', 'longitude' => '-65.04158534194858', 'order' => '21']);
-        $point1355 = GeoPoint::create(['latitude' => '-42.80510130831013', 'longitude' => '-65.04063701342352', 'order' => '22']);
-        $point1356 = GeoPoint::create(['latitude' => '-42.805368020469096', 'longitude' => '-65.03928140822326', 'order' => '23']);
-        $point1357 = GeoPoint::create(['latitude' => '-42.805640432322235', 'longitude' => '-65.03787676888945', 'order' => '24']);
-        $point1358 = GeoPoint::create(['latitude' => '-42.80578870818937', 'longitude' => '-65.0370988444559', 'order' => '25']);
-        $point1359 = GeoPoint::create(['latitude' => '-42.80608995378944', 'longitude' => '-65.0372168616526', 'order' => '26']);
-        $point1360 = GeoPoint::create(['latitude' => '-42.80656043001457', 'longitude' => '-65.03753755326802', 'order' => '27']);
-        $point1361 = GeoPoint::create(['latitude' => '-42.80679403365602', 'longitude' => '-65.03761332567271', 'order' => '28']);
-        $point1362 = GeoPoint::create(['latitude' => '-42.807089831019', 'longitude' => '-65.03770938228307', 'order' => '29']);
-        $point1363 = GeoPoint::create(['latitude' => '-42.80783012070728', 'longitude' => '-65.0377129026824', 'order' => '30']);
-        $point1364 = GeoPoint::create(['latitude' => '-42.80842573874679', 'longitude' => '-65.03761776808139', 'order' => '31']);
-        $point1365 = GeoPoint::create(['latitude' => '-42.808862016806984', 'longitude' => '-65.03764651800927', 'order' => '32']);
-        $point1366 = GeoPoint::create(['latitude' => '-42.80991302364589', 'longitude' => '-65.03805270503706', 'order' => '33']);
-        $point1367 = GeoPoint::create(['latitude' => '-42.81017713741491', 'longitude' => '-65.03673138182079', 'order' => '34']);
-        $point1368 = GeoPoint::create(['latitude' => '-42.81117072821709', 'longitude' => '-65.03711233932', 'order' => '35']);
-        $point1369 = GeoPoint::create(['latitude' => '-42.81107852728218', 'longitude' => '-65.0376822249168', 'order' => '36']);
-        $point1370 = GeoPoint::create(['latitude' => '-42.81095137381104', 'longitude' => '-65.03846836361544', 'order' => '37']);
-        $point1371 = GeoPoint::create(['latitude' => '-42.8119026360022', 'longitude' => '-65.03879668276274', 'order' => '38']);
-        $point1372 = GeoPoint::create(['latitude' => '-42.81394681454816', 'longitude' => '-65.03957946870011', 'order' => '39']);
-        $point1373 = GeoPoint::create(['latitude' => '-42.81389392473912', 'longitude' => '-65.03998708065144', 'order' => '40']);
-        $point1374 = GeoPoint::create(['latitude' => '-42.813680605303375', 'longitude' => '-65.04092870365396', 'order' => '41']);
-        $point1375 = GeoPoint::create(['latitude' => '-42.813375504027846', 'longitude' => '-65.04229445095704', 'order' => '42']);
-        $point1376 = GeoPoint::create(['latitude' => '-42.814193913053714', 'longitude' => '-65.04260466519351', 'order' => '43']);
-        $point1377 = GeoPoint::create(['latitude' => '-42.81442315810551', 'longitude' => '-65.04269242371971', 'order' => '44']);
-        $point1378 = GeoPoint::create(['latitude' => '-42.81413021058958', 'longitude' => '-65.04404903474835', 'order' => '45']);
-        $point1379 = GeoPoint::create(['latitude' => '-42.813838855635275', 'longitude' => '-65.0453404345703', 'order' => '46']);
-        $point1380 = GeoPoint::create(['latitude' => '-42.81354205244392', 'longitude' => '-65.04670903172048', 'order' => '47']);
-        $point1381 = GeoPoint::create(['latitude' => '-42.81331213683987', 'longitude' => '-65.04776917483386', 'order' => '48']);
-
-        $zone37 = Zone::create(['name' => 'Quintas del Mirador', 'description' => 'Barrio 37', 'color' => 'blue']);
-
-        $zone37->geopoints()->save($point1334);
-        $zone37->geopoints()->save($point1335);
-        $zone37->geopoints()->save($point1336);
-        $zone37->geopoints()->save($point1337);
-        $zone37->geopoints()->save($point1338);
-        $zone37->geopoints()->save($point1339);
-        $zone37->geopoints()->save($point1340);
-        $zone37->geopoints()->save($point1341);
-        $zone37->geopoints()->save($point1342);
-        $zone37->geopoints()->save($point1343);
-        $zone37->geopoints()->save($point1344);
-        $zone37->geopoints()->save($point1345);
-        $zone37->geopoints()->save($point1346);
-        $zone37->geopoints()->save($point1347);
-        $zone37->geopoints()->save($point1348);
-        $zone37->geopoints()->save($point1349);
-        $zone37->geopoints()->save($point1350);
-        $zone37->geopoints()->save($point1351);
-        $zone37->geopoints()->save($point1352);
-        $zone37->geopoints()->save($point1353);
-        $zone37->geopoints()->save($point1354);
-        $zone37->geopoints()->save($point1355);
-        $zone37->geopoints()->save($point1356);
-        $zone37->geopoints()->save($point1357);
-        $zone37->geopoints()->save($point1358);
-        $zone37->geopoints()->save($point1359);
-        $zone37->geopoints()->save($point1360);
-        $zone37->geopoints()->save($point1361);
-        $zone37->geopoints()->save($point1362);
-        $zone37->geopoints()->save($point1363);
-        $zone37->geopoints()->save($point1364);
-        $zone37->geopoints()->save($point1365);
-        $zone37->geopoints()->save($point1366);
-        $zone37->geopoints()->save($point1367);
-        $zone37->geopoints()->save($point1368);
-        $zone37->geopoints()->save($point1369);
-        $zone37->geopoints()->save($point1370);
-        $zone37->geopoints()->save($point1371);
-        $zone37->geopoints()->save($point1372);
-        $zone37->geopoints()->save($point1373);
-        $zone37->geopoints()->save($point1374);
-        $zone37->geopoints()->save($point1375);
-        $zone37->geopoints()->save($point1376);
-        $zone37->geopoints()->save($point1377);
-        $zone37->geopoints()->save($point1378);
-        $zone37->geopoints()->save($point1379);
-        $zone37->geopoints()->save($point1380);
-        $zone37->geopoints()->save($point1381);
+        $zone37 = new Zone();
+        $zone37->name = 'Quintas del Mirador';
+        $zone37->description = 'Barrio 37';
+        $zone37->color = 'red';
+        $zone37->geom = new Polygon([
+            new LineString([
+                new Point(-42.81331213683987, -65.04776917483386),
+                new Point(-42.81306956456203, -65.04774822007593),
+                new Point(-42.81277301282773, -65.04773690450665),
+                new Point(-42.81243991599561, -65.04772684622283),
+                new Point(-42.812256268497094, -65.0477359824973),
+                new Point(-42.812260627086744, -65.04771326753968),
+                new Point(-42.811226970787374, -65.04733021456467),
+                new Point(-42.810246539573164, -65.04694406028545),
+                new Point(-42.809254122237434, -65.04657584327904),
+                new Point(-42.80822951839352, -65.0461681475087),
+                new Point(-42.80720927313922, -65.04577662881145),
+                new Point(-42.807156215692146, -65.04603722218111),
+                new Point(-42.80637108282187, -65.0457318694485),
+                new Point(-42.806174946287626, -65.04576422359476),
+                new Point(-42.80602641896337, -65.04581283863317),
+                new Point(-42.80552736044842, -65.04456561144094),
+                new Point(-42.80546793275494, -65.04419311966392),
+                new Point(-42.80552736044842, -65.04369104366383),
+                new Point(-42.805030229771205, -65.04200485620241),
+                new Point(-42.80499251120693, -65.04187694835997),
+                new Point(-42.80493316733245, -65.04158534194858),
+                new Point(-42.80510130831013, -65.04063701342352),
+                new Point(-42.805368020469096, -65.03928140822326),
+                new Point(-42.805640432322235, -65.03787676888945),
+                new Point(-42.80578870818937, -65.0370988444559),
+                new Point(-42.80608995378944, -65.0372168616526),
+                new Point(-42.80656043001457, -65.03753755326802),
+                new Point(-42.80679403365602, -65.03761332567271),
+                new Point(-42.807089831019, -65.03770938228307),
+                new Point(-42.80783012070728, -65.0377129026824),
+                new Point(-42.80842573874679, -65.03761776808139),
+                new Point(-42.808862016806984, -65.03764651800927),
+                new Point(-42.80991302364589, -65.03805270503706),
+                new Point(-42.81017713741491, -65.03673138182079),
+                new Point(-42.81117072821709, -65.03711233932),
+                new Point(-42.81107852728218, -65.0376822249168),
+                new Point(-42.81095137381104, -65.03846836361544),
+                new Point(-42.8119026360022, -65.03879668276274),
+                new Point(-42.81394681454816, -65.03957946870011),
+                new Point(-42.81389392473912, -65.03998708065144),
+                new Point(-42.813680605303375, -65.04092870365396),
+                new Point(-42.813375504027846, -65.04229445095704),
+                new Point(-42.814193913053714, -65.04260466519351),
+                new Point(-42.81442315810551, -65.04269242371971),
+                new Point(-42.81413021058958, -65.04404903474835),
+                new Point(-42.813838855635275, -65.0453404345703),
+                new Point(-42.81354205244392, -65.04670903172048),
+                new Point(-42.81331213683987, -65.04776917483386),
+            ])
+        ]);
+        $zone37->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 38: Solana de la Patagonia--------------
 
-        $point1382 = GeoPoint::create(['latitude' => '-42.81879800864789', 'longitude' => '-65.04499275322667', 'order' => '1']);
-        $point1383 = GeoPoint::create(['latitude' => '-42.8184578710171', 'longitude' => '-65.04413377578945', 'order' => '2']);
-        $point1384 = GeoPoint::create(['latitude' => '-42.81836885520542', 'longitude' => '-65.04398902032163', 'order' => '3']);
-        $point1385 = GeoPoint::create(['latitude' => '-42.81809870646612', 'longitude' => '-65.04354972477631', 'order' => '4']);
-        $point1386 = GeoPoint::create(['latitude' => '-42.81721047618683', 'longitude' => '-65.04261355001087', 'order' => '5']);
-        $point1387 = GeoPoint::create(['latitude' => '-42.8168964062749', 'longitude' => '-65.04239671017577', 'order' => '6']);
-        $point1388 = GeoPoint::create(['latitude' => '-42.81619735555026', 'longitude' => '-65.04168273966344', 'order' => '7']);
-        $point1389 = GeoPoint::create(['latitude' => '-42.816047068026336', 'longitude' => '-65.04153035666376', 'order' => '8']);
-        $point1390 = GeoPoint::create(['latitude' => '-42.81593030811513', 'longitude' => '-65.04134855318392', 'order' => '9']);
-        $point1391 = GeoPoint::create(['latitude' => '-42.8157611613091', 'longitude' => '-65.0411446214797', 'order' => '10']);
-        $point1392 = GeoPoint::create(['latitude' => '-42.815633840199894', 'longitude' => '-65.04103146578686', 'order' => '11']);
-        $point1393 = GeoPoint::create(['latitude' => '-42.81534265288366', 'longitude' => '-65.04081697288466', 'order' => '12']);
-        $point1394 = GeoPoint::create(['latitude' => '-42.81503964708392', 'longitude' => '-65.04058621909029', 'order' => '13']);
-        $point1395 = GeoPoint::create(['latitude' => '-42.81500821494703', 'longitude' => '-65.04054330374603', 'order' => '14']);
-        $point1396 = GeoPoint::create(['latitude' => '-42.814671178620415', 'longitude' => '-65.04020056772528', 'order' => '15']);
-        $point1397 = GeoPoint::create(['latitude' => '-42.81402971157055', 'longitude' => '-65.03956211816055', 'order' => '16']);
-        $point1398 = GeoPoint::create(['latitude' => '-42.813960560869354', 'longitude' => '-65.03947360526304', 'order' => '17']);
-        $point1399 = GeoPoint::create(['latitude' => '-42.81403423779827', 'longitude' => '-65.03916272047432', 'order' => '18']);
-        $point1400 = GeoPoint::create(['latitude' => '-42.81420933575555', 'longitude' => '-65.03827951933694', 'order' => '19']);
-        $point1401 = GeoPoint::create(['latitude' => '-42.81438787029316', 'longitude' => '-65.03738952885797', 'order' => '20']);
-        $point1402 = GeoPoint::create(['latitude' => '-42.814575373467136', 'longitude' => '-65.03651462580473', 'order' => '21']);
-        $point1403 = GeoPoint::create(['latitude' => '-42.81475650639473', 'longitude' => '-65.03561130809972', 'order' => '22']);
-        $point1404 = GeoPoint::create(['latitude' => '-42.81494484775902', 'longitude' => '-65.03473606977033', 'order' => '23']);
-        $point1405 = GeoPoint::create(['latitude' => '-42.815127405610156', 'longitude' => '-65.0338543773755', 'order' => '24']);
-        $point1406 = GeoPoint::create(['latitude' => '-42.81530686215709', 'longitude' => '-65.03298785622543', 'order' => '25']);
-        $point1407 = GeoPoint::create(['latitude' => '-42.81550065175847', 'longitude' => '-65.03209116022393', 'order' => '26']);
-        $point1408 = GeoPoint::create(['latitude' => '-42.8156785157438', 'longitude' => '-65.03121516752327', 'order' => '27']);
-        $point1409 = GeoPoint::create(['latitude' => '-42.8158660189178', 'longitude' => '-65.03033481623294', 'order' => '28']);
-        $point1410 = GeoPoint::create(['latitude' => '-42.816047068026336', 'longitude' => '-65.02945505167587', 'order' => '29']);
-        $point1411 = GeoPoint::create(['latitude' => '-42.81622023814592', 'longitude' => '-65.02856455828271', 'order' => '30']);
-        $point1412 = GeoPoint::create(['latitude' => '-42.81631520510888', 'longitude' => '-65.02808737653503', 'order' => '31']);
-        $point1413 = GeoPoint::create(['latitude' => '-42.81634470940804', 'longitude' => '-65.02793935212499', 'order' => '32']);
-        $point1414 = GeoPoint::create(['latitude' => '-42.81652894363978', 'longitude' => '-65.02701533111915', 'order' => '33']);
-        $point1415 = GeoPoint::create(['latitude' => '-42.81660580569189', 'longitude' => '-65.0266119101194', 'order' => '34']);
-        $point1416 = GeoPoint::create(['latitude' => '-42.816800014388434', 'longitude' => '-65.02572191964043', 'order' => '35']);
-        $point1417 = GeoPoint::create(['latitude' => '-42.816922138717665', 'longitude' => '-65.02510191026269', 'order' => '36']);
-        $point1418 = GeoPoint::create(['latitude' => '-42.816977040183446', 'longitude' => '-65.02484751950138', 'order' => '37']);
-        $point1419 = GeoPoint::create(['latitude' => '-42.81698751756241', 'longitude' => '-65.02473972822656', 'order' => '38']);
-        $point1420 = GeoPoint::create(['latitude' => '-42.816978465106985', 'longitude' => '-65.0245578409277', 'order' => '39']);
-        $point1421 = GeoPoint::create(['latitude' => '-42.81825578333161', 'longitude' => '-65.02437763000947', 'order' => '40']);
-        $point1422 = GeoPoint::create(['latitude' => '-42.81825620242676', 'longitude' => '-65.02490988086099', 'order' => '41']);
-        $point1423 = GeoPoint::create(['latitude' => '-42.81833222628853', 'longitude' => '-65.02583080056266', 'order' => '42']);
-        $point1424 = GeoPoint::create(['latitude' => '-42.81839852714265', 'longitude' => '-65.02675431865433', 'order' => '43']);
-        $point1425 = GeoPoint::create(['latitude' => '-42.818464408901576', 'longitude' => '-65.02766325223446', 'order' => '44']);
-        $point1426 = GeoPoint::create(['latitude' => '-42.81847438336634', 'longitude' => '-65.02781873653832', 'order' => '45']);
-        $point1427 = GeoPoint::create(['latitude' => '-42.8185423606011', 'longitude' => '-65.02888952466873', 'order' => '46']);
-        $point1428 = GeoPoint::create(['latitude' => '-42.81860874527425', 'longitude' => '-65.02980373884787', 'order' => '47']);
-        $point1429 = GeoPoint::create(['latitude' => '-42.81867144190997', 'longitude' => '-65.03071116368544', 'order' => '48']);
-        $point1430 = GeoPoint::create(['latitude' => '-42.81873556346926', 'longitude' => '-65.03160635094437', 'order' => '49']);
-        $point1431 = GeoPoint::create(['latitude' => '-42.81882692621383', 'longitude' => '-65.0327936475289', 'order' => '50']);
-        $point1432 = GeoPoint::create(['latitude' => '-42.81888945521152', 'longitude' => '-65.03369344483458', 'order' => '51']);
-        $point1433 = GeoPoint::create(['latitude' => '-42.81895106219983', 'longitude' => '-65.03462090242073', 'order' => '52']);
-        $point1434 = GeoPoint::create(['latitude' => '-42.81901007079818', 'longitude' => '-65.03553830172307', 'order' => '53']);
-        $point1435 = GeoPoint::create(['latitude' => '-42.81908081406095', 'longitude' => '-65.03652007404179', 'order' => '54']);
-        $point1436 = GeoPoint::create(['latitude' => '-42.81915172496181', 'longitude' => '-65.0374426701241', 'order' => '55']);
-        $point1437 = GeoPoint::create(['latitude' => '-42.8192248151575', 'longitude' => '-65.03833660009755', 'order' => '56']);
-        $point1438 = GeoPoint::create(['latitude' => '-42.8192885176216', 'longitude' => '-65.0392025345144', 'order' => '57']);
-        $point1439 = GeoPoint::create(['latitude' => '-42.819340569240325', 'longitude' => '-65.03991030241836', 'order' => '58']);
-        $point1440 = GeoPoint::create(['latitude' => '-42.81934995697188', 'longitude' => '-65.04003712061339', 'order' => '59']);
-        $point1441 = GeoPoint::create(['latitude' => '-42.819354315561526', 'longitude' => '-65.04009663212592', 'order' => '60']);
-        $point1442 = GeoPoint::create(['latitude' => '-42.81947040492047', 'longitude' => '-65.0416591026965', 'order' => '61']);
-        $point1443 = GeoPoint::create(['latitude' => '-42.81954123200228', 'longitude' => '-65.0423027490412', 'order' => '62']);
-        $point1444 = GeoPoint::create(['latitude' => '-42.81956704826408', 'longitude' => '-65.04261983643825', 'order' => '63']);
-        $point1445 = GeoPoint::create(['latitude' => '-42.81962823615722', 'longitude' => '-65.04337236370515', 'order' => '64']);
-        $point1446 = GeoPoint::create(['latitude' => '-42.81963720479362', 'longitude' => '-65.0434836753793', 'order' => '65']);
-        $point1447 = GeoPoint::create(['latitude' => '-42.81971834161635', 'longitude' => '-65.0444807027618', 'order' => '66']);
-        $point1448 = GeoPoint::create(['latitude' => '-42.81879800864789', 'longitude' => '-65.04499275322667', 'order' => '67']);
-
-        $zone38 = Zone::create(['name' => 'Solana de la Patagonia', 'description' => 'Barrio 38', 'color' => 'blue']);
-
-        $zone38->geopoints()->save($point1382);
-        $zone38->geopoints()->save($point1383);
-        $zone38->geopoints()->save($point1384);
-        $zone38->geopoints()->save($point1385);
-        $zone38->geopoints()->save($point1386);
-        $zone38->geopoints()->save($point1387);
-        $zone38->geopoints()->save($point1388);
-        $zone38->geopoints()->save($point1389);
-        $zone38->geopoints()->save($point1390);
-        $zone38->geopoints()->save($point1391);
-        $zone38->geopoints()->save($point1392);
-        $zone38->geopoints()->save($point1393);
-        $zone38->geopoints()->save($point1394);
-        $zone38->geopoints()->save($point1395);
-        $zone38->geopoints()->save($point1396);
-        $zone38->geopoints()->save($point1397);
-        $zone38->geopoints()->save($point1398);
-        $zone38->geopoints()->save($point1399);
-        $zone38->geopoints()->save($point1400);
-        $zone38->geopoints()->save($point1401);
-        $zone38->geopoints()->save($point1402);
-        $zone38->geopoints()->save($point1403);
-        $zone38->geopoints()->save($point1404);
-        $zone38->geopoints()->save($point1405);
-        $zone38->geopoints()->save($point1406);
-        $zone38->geopoints()->save($point1407);
-        $zone38->geopoints()->save($point1408);
-        $zone38->geopoints()->save($point1409);
-        $zone38->geopoints()->save($point1410);
-        $zone38->geopoints()->save($point1411);
-        $zone38->geopoints()->save($point1412);
-        $zone38->geopoints()->save($point1413);
-        $zone38->geopoints()->save($point1414);
-        $zone38->geopoints()->save($point1415);
-        $zone38->geopoints()->save($point1416);
-        $zone38->geopoints()->save($point1417);
-        $zone38->geopoints()->save($point1418);
-        $zone38->geopoints()->save($point1419);
-        $zone38->geopoints()->save($point1420);
-        $zone38->geopoints()->save($point1421);
-        $zone38->geopoints()->save($point1422);
-        $zone38->geopoints()->save($point1423);
-        $zone38->geopoints()->save($point1424);
-        $zone38->geopoints()->save($point1425);
-        $zone38->geopoints()->save($point1426);
-        $zone38->geopoints()->save($point1427);
-        $zone38->geopoints()->save($point1428);
-        $zone38->geopoints()->save($point1429);
-        $zone38->geopoints()->save($point1430);
-        $zone38->geopoints()->save($point1431);
-        $zone38->geopoints()->save($point1432);
-        $zone38->geopoints()->save($point1433);
-        $zone38->geopoints()->save($point1434);
-        $zone38->geopoints()->save($point1435);
-        $zone38->geopoints()->save($point1436);
-        $zone38->geopoints()->save($point1437);
-        $zone38->geopoints()->save($point1438);
-        $zone38->geopoints()->save($point1439);
-        $zone38->geopoints()->save($point1440);
-        $zone38->geopoints()->save($point1441);
-        $zone38->geopoints()->save($point1442);
-        $zone38->geopoints()->save($point1443);
-        $zone38->geopoints()->save($point1444);
-        $zone38->geopoints()->save($point1445);
-        $zone38->geopoints()->save($point1446);
-        $zone38->geopoints()->save($point1447);
-        $zone38->geopoints()->save($point1448);
+        $zone38 = new Zone();
+        $zone38->name = 'Solana de la Patagonia';
+        $zone38->description = 'Barrio 38';
+        $zone38->color = 'green';
+        $zone38->geom = new Polygon([
+            new LineString([
+                new Point(-42.81879800864789, -65.04499275322667),
+                new Point(-42.8184578710171, -65.04413377578945),
+                new Point(-42.81836885520542, -65.04398902032163),
+                new Point(-42.81809870646612, -65.04354972477631),
+                new Point(-42.81721047618683, -65.04261355001087),
+                new Point(-42.8168964062749, -65.04239671017577),
+                new Point(-42.81619735555026, -65.04168273966344),
+                new Point(-42.816047068026336, -65.04153035666376),
+                new Point(-42.81593030811513, -65.04134855318392),
+                new Point(-42.8157611613091, -65.0411446214797),
+                new Point(-42.815633840199894, -65.04103146578686),
+                new Point(-42.81534265288366, -65.04081697288466),
+                new Point(-42.81503964708392, -65.04058621909029),
+                new Point(-42.81500821494703, -65.04054330374603),
+                new Point(-42.814671178620415, -65.04020056772528),
+                new Point(-42.81402971157055, -65.03956211816055),
+                new Point(-42.813960560869354, -65.03947360526304),
+                new Point(-42.81403423779827, -65.03916272047432),
+                new Point(-42.81420933575555, -65.03827951933694),
+                new Point(-42.81438787029316, -65.03738952885797),
+                new Point(-42.814575373467136, -65.03651462580473),
+                new Point(-42.81475650639473, -65.03561130809972),
+                new Point(-42.81494484775902, -65.03473606977033),
+                new Point(-42.815127405610156, -65.0338543773755),
+                new Point(-42.81530686215709, -65.03298785622543),
+                new Point(-42.81550065175847, -65.03209116022393),
+                new Point(-42.8156785157438, -65.03121516752327),
+                new Point(-42.8158660189178, -65.03033481623294),
+                new Point(-42.816047068026336, -65.02945505167587),
+                new Point(-42.81622023814592, -65.02856455828271),
+                new Point(-42.81631520510888, -65.02808737653503),
+                new Point(-42.81634470940804, -65.02793935212499),
+                new Point(-42.81652894363978, -65.02701533111915),
+                new Point(-42.81660580569189, -65.0266119101194),
+                new Point(-42.816800014388434, -65.02572191964043),
+                new Point(-42.816922138717665, -65.02510191026269),
+                new Point(-42.816977040183446, -65.02484751950138),
+                new Point(-42.81698751756241, -65.02473972822656),
+                new Point(-42.816978465106985, -65.0245578409277),
+                new Point(-42.81825578333161, -65.02437763000947),
+                new Point(-42.81825620242676, -65.02490988086099),
+                new Point(-42.81833222628853, -65.02583080056266),
+                new Point(-42.81839852714265, -65.02675431865433),
+                new Point(-42.818464408901576, -65.02766325223446),
+                new Point(-42.81847438336634, -65.02781873653832),
+                new Point(-42.8185423606011, -65.02888952466873),
+                new Point(-42.81860874527425, -65.02980373884787),
+                new Point(-42.81867144190997, -65.03071116368544),
+                new Point(-42.81873556346926, -65.03160635094437),
+                new Point(-42.81882692621383, -65.0327936475289),
+                new Point(-42.81888945521152, -65.03369344483458),
+                new Point(-42.81895106219983, -65.03462090242073),
+                new Point(-42.81901007079818, -65.03553830172307),
+                new Point(-42.81908081406095, -65.03652007404179),
+                new Point(-42.81915172496181, -65.0374426701241),
+                new Point(-42.8192248151575, -65.03833660009755),
+                new Point(-42.8192885176216, -65.0392025345144),
+                new Point(-42.819340569240325, -65.03991030241836),
+                new Point(-42.81934995697188, -65.04003712061339),
+                new Point(-42.819354315561526, -65.04009663212592),
+                new Point(-42.81947040492047, -65.0416591026965),
+                new Point(-42.81954123200228, -65.0423027490412),
+                new Point(-42.81956704826408, -65.04261983643825),
+                new Point(-42.81962823615722, -65.04337236370515),
+                new Point(-42.81963720479362, -65.0434836753793),
+                new Point(-42.81971834161635, -65.0444807027618),
+                new Point(-42.81879800864789, -65.04499275322667),
+            ])
+        ]);
+        $zone38->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 39: El Porvenir--------------
 
-        $point1449 = GeoPoint::create(['latitude' => '-42.7575175792702', 'longitude' => '-65.05060661669616', 'order' => '1']);
-        $point1450 = GeoPoint::create(['latitude' => '-42.75739185072259', 'longitude' => '-65.05057484928314', 'order' => '2']);
-        $point1451 = GeoPoint::create(['latitude' => '-42.75722262009754', 'longitude' => '-65.05053570579531', 'order' => '3']);
-        $point1452 = GeoPoint::create(['latitude' => '-42.75705657459565', 'longitude' => '-65.050410731619', 'order' => '4']);
-        $point1453 = GeoPoint::create(['latitude' => '-42.756921374497466', 'longitude' => '-65.05023211326237', 'order' => '5']);
-        $point1454 = GeoPoint::create(['latitude' => '-42.75677100315454', 'longitude' => '-65.05003354597619', 'order' => '6']);
-        $point1455 = GeoPoint::create(['latitude' => '-42.7566042032814', 'longitude' => '-65.04988820377515', 'order' => '7']);
-        $point1456 = GeoPoint::create(['latitude' => '-42.75645215555781', 'longitude' => '-65.04987898368167', 'order' => '8']);
-        $point1457 = GeoPoint::create(['latitude' => '-42.75591680340213', 'longitude' => '-65.04945293154336', 'order' => '9']);
-        $point1458 = GeoPoint::create(['latitude' => '-42.755993246359054', 'longitude' => '-65.04863251086073', 'order' => '10']);
-        $point1459 = GeoPoint::create(['latitude' => '-42.75607161715374', 'longitude' => '-65.04778996195373', 'order' => '11']);
-        $point1460 = GeoPoint::create(['latitude' => '-42.75616750612605', 'longitude' => '-65.04722368057533', 'order' => '12']);
-        $point1461 = GeoPoint::create(['latitude' => '-42.75626532293608', 'longitude' => '-65.04673325542065', 'order' => '13']);
-        $point1462 = GeoPoint::create(['latitude' => '-42.75631921857348', 'longitude' => '-65.0464684710994', 'order' => '14']);
-        $point1463 = GeoPoint::create(['latitude' => '-42.75648501261827', 'longitude' => '-65.04603764127627', 'order' => '15']);
-        $point1464 = GeoPoint::create(['latitude' => '-42.75657754882928', 'longitude' => '-65.0457606193764', 'order' => '16']);
-        $point1465 = GeoPoint::create(['latitude' => '-42.75666572645068', 'longitude' => '-65.04549633796933', 'order' => '17']);
-        $point1466 = GeoPoint::create(['latitude' => '-42.7566901177889', 'longitude' => '-65.04499610598793', 'order' => '18']);
-        $point1467 = GeoPoint::create(['latitude' => '-42.75671585023164', 'longitude' => '-65.04472168247804', 'order' => '19']);
-        $point1468 = GeoPoint::create(['latitude' => '-42.7567181133455', 'longitude' => '-65.04435447130001', 'order' => '20']);
-        $point1469 = GeoPoint::create(['latitude' => '-42.756721382287765', 'longitude' => '-65.04429604943489', 'order' => '21']);
-        $point1470 = GeoPoint::create(['latitude' => '-42.75672263957324', 'longitude' => '-65.0441259806195', 'order' => '22']);
-        $point1471 = GeoPoint::create(['latitude' => '-42.75673663735153', 'longitude' => '-65.04397368143883', 'order' => '23']);
-        $point1472 = GeoPoint::create(['latitude' => '-42.756935539913826', 'longitude' => '-65.0441445046255', 'order' => '24']);
-        $point1473 = GeoPoint::create(['latitude' => '-42.75733653016166', 'longitude' => '-65.04450802776614', 'order' => '25']);
-        $point1474 = GeoPoint::create(['latitude' => '-42.75773802332366', 'longitude' => '-65.04482712681995', 'order' => '26']);
-        $point1475 = GeoPoint::create(['latitude' => '-42.75863522223935', 'longitude' => '-65.04563195716267', 'order' => '27']);
-        $point1476 = GeoPoint::create(['latitude' => '-42.75892724774593', 'longitude' => '-65.04591258328092', 'order' => '28']);
-        $point1477 = GeoPoint::create(['latitude' => '-42.75942823409861', 'longitude' => '-65.04641943696583', 'order' => '29']);
-        $point1478 = GeoPoint::create(['latitude' => '-42.759215501396056', 'longitude' => '-65.04691095176793', 'order' => '30']);
-        $point1479 = GeoPoint::create(['latitude' => '-42.75895105235094', 'longitude' => '-65.04744161005785', 'order' => '31']);
-        $point1480 = GeoPoint::create(['latitude' => '-42.758648214189265', 'longitude' => '-65.04804653200988', 'order' => '32']);
-        $point1481 = GeoPoint::create(['latitude' => '-42.75858694247708', 'longitude' => '-65.04815667021758', 'order' => '33']);
-        $point1482 = GeoPoint::create(['latitude' => '-42.758548553360555', 'longitude' => '-65.0482256532807', 'order' => '34']);
-        $point1483 = GeoPoint::create(['latitude' => '-42.758491807876055', 'longitude' => '-65.04831844094882', 'order' => '35']);
-        $point1484 = GeoPoint::create(['latitude' => '-42.7582756385932', 'longitude' => '-65.04889302041137', 'order' => '36']);
-        $point1485 = GeoPoint::create(['latitude' => '-42.75822895139254', 'longitude' => '-65.04899695601073', 'order' => '37']);
-        $point1486 = GeoPoint::create(['latitude' => '-42.75806860558484', 'longitude' => '-65.04936978306388', 'order' => '38']);
-        $point1487 = GeoPoint::create(['latitude' => '-42.75803675435276', 'longitude' => '-65.04945335063852', 'order' => '39']);
-        $point1488 = GeoPoint::create(['latitude' => '-42.75790574520616', 'longitude' => '-65.04973875444158', 'order' => '40']);
-        $point1489 = GeoPoint::create(['latitude' => '-42.75773240744854', 'longitude' => '-65.0501366433852', 'order' => '41']);
-        $point1490 = GeoPoint::create(['latitude' => '-42.7575175792702', 'longitude' => '-65.05060661669616', 'order' => '42']);
-
-        $zone39 = Zone::create(['name' => 'El Porvenir', 'description' => 'Barrio 39', 'color' => 'blue']);
-
-        $zone39->geopoints()->save($point1449);
-        $zone39->geopoints()->save($point1450);
-        $zone39->geopoints()->save($point1451);
-        $zone39->geopoints()->save($point1452);
-        $zone39->geopoints()->save($point1453);
-        $zone39->geopoints()->save($point1454);
-        $zone39->geopoints()->save($point1455);
-        $zone39->geopoints()->save($point1456);
-        $zone39->geopoints()->save($point1457);
-        $zone39->geopoints()->save($point1458);
-        $zone39->geopoints()->save($point1459);
-        $zone39->geopoints()->save($point1460);
-        $zone39->geopoints()->save($point1461);
-        $zone39->geopoints()->save($point1462);
-        $zone39->geopoints()->save($point1463);
-        $zone39->geopoints()->save($point1464);
-        $zone39->geopoints()->save($point1465);
-        $zone39->geopoints()->save($point1466);
-        $zone39->geopoints()->save($point1467);
-        $zone39->geopoints()->save($point1468);
-        $zone39->geopoints()->save($point1469);
-        $zone39->geopoints()->save($point1470);
-        $zone39->geopoints()->save($point1471);
-        $zone39->geopoints()->save($point1472);
-        $zone39->geopoints()->save($point1473);
-        $zone39->geopoints()->save($point1474);
-        $zone39->geopoints()->save($point1475);
-        $zone39->geopoints()->save($point1476);
-        $zone39->geopoints()->save($point1477);
-        $zone39->geopoints()->save($point1478);
-        $zone39->geopoints()->save($point1479);
-        $zone39->geopoints()->save($point1480);
-        $zone39->geopoints()->save($point1481);
-        $zone39->geopoints()->save($point1482);
-        $zone39->geopoints()->save($point1483);
-        $zone39->geopoints()->save($point1484);
-        $zone39->geopoints()->save($point1485);
-        $zone39->geopoints()->save($point1486);
-        $zone39->geopoints()->save($point1487);
-        $zone39->geopoints()->save($point1488);
-        $zone39->geopoints()->save($point1489);
-        $zone39->geopoints()->save($point1490);
+        $zone39 = new Zone();
+        $zone39->name = 'El Porvenir';
+        $zone39->description = 'Barrio 39';
+        $zone39->color = 'red';
+        $zone39->geom = new Polygon([
+            new LineString([
+                new Point(-42.7575175792702, -65.05060661669616),
+                new Point(-42.75739185072259, -65.05057484928314),
+                new Point(-42.75722262009754, -65.05053570579531),
+                new Point(-42.75705657459565, -65.050410731619),
+                new Point(-42.756921374497466, -65.05023211326237),
+                new Point(-42.75677100315454, -65.05003354597619),
+                new Point(-42.7566042032814, -65.04988820377515),
+                new Point(-42.75645215555781, -65.04987898368167),
+                new Point(-42.75591680340213, -65.04945293154336),
+                new Point(-42.755993246359054, -65.04863251086073),
+                new Point(-42.75607161715374, -65.04778996195373),
+                new Point(-42.75616750612605, -65.04722368057533),
+                new Point(-42.75626532293608, -65.04673325542065),
+                new Point(-42.75631921857348, -65.0464684710994),
+                new Point(-42.75648501261827, -65.04603764127627),
+                new Point(-42.75657754882928, -65.0457606193764),
+                new Point(-42.75666572645068, -65.04549633796933),
+                new Point(-42.7566901177889, -65.04499610598793),
+                new Point(-42.75671585023164, -65.04472168247804),
+                new Point(-42.7567181133455, -65.04435447130001),
+                new Point(-42.756721382287765, -65.04429604943489),
+                new Point(-42.75672263957324, -65.0441259806195),
+                new Point(-42.75673663735153, -65.04397368143883),
+                new Point(-42.756935539913826, -65.0441445046255),
+                new Point(-42.75733653016166, -65.04450802776614),
+                new Point(-42.75773802332366, -65.04482712681995),
+                new Point(-42.75863522223935, -65.04563195716267),
+                new Point(-42.75892724774593, -65.04591258328092),
+                new Point(-42.75942823409861, -65.04641943696583),
+                new Point(-42.759215501396056, -65.04691095176793),
+                new Point(-42.75895105235094, -65.04744161005785),
+                new Point(-42.758648214189265, -65.04804653200988),
+                new Point(-42.75858694247708, -65.04815667021758),
+                new Point(-42.758548553360555, -65.0482256532807),
+                new Point(-42.758491807876055, -65.04831844094882),
+                new Point(-42.7582756385932, -65.04889302041137),
+                new Point(-42.75822895139254, -65.04899695601073),
+                new Point(-42.75806860558484, -65.04936978306388),
+                new Point(-42.75803675435276, -65.04945335063852),
+                new Point(-42.75790574520616, -65.04973875444158),
+                new Point(-42.75773240744854, -65.0501366433852),
+                new Point(-42.7575175792702, -65.05060661669616),
+            ])
+        ]);
+        $zone39->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 40: Mapu Ngefu--------------
 
-        $point1491 = GeoPoint::create(['latitude' => '-42.72731422937477', 'longitude' => '-65.10333272715205', 'order' => '1']);
-        $point1492 = GeoPoint::create(['latitude' => '-42.72709562934', 'longitude' => '-65.0979453427063', 'order' => '2']);
-        $point1493 = GeoPoint::create(['latitude' => '-42.72695682502345', 'longitude' => '-65.09173535828312', 'order' => '3']);
-        $point1494 = GeoPoint::create(['latitude' => '-42.726713163098196', 'longitude' => '-65.08365713146158', 'order' => '4']);
-        $point1495 = GeoPoint::create(['latitude' => '-42.741024173119534', 'longitude' => '-65.08294366386345', 'order' => '5']);
-        $point1496 = GeoPoint::create(['latitude' => '-42.74115803211322', 'longitude' => '-65.08294366386345', 'order' => '6']);
-        $point1497 = GeoPoint::create(['latitude' => '-42.74125182560973', 'longitude' => '-65.08303561334127', 'order' => '7']);
-        $point1498 = GeoPoint::create(['latitude' => '-42.74142222970127', 'longitude' => '-65.08996971037962', 'order' => '8']);
-        $point1499 = GeoPoint::create(['latitude' => '-42.74153077534737', 'longitude' => '-65.09247656998075', 'order' => '9']);
-        $point1500 = GeoPoint::create(['latitude' => '-42.74160545810463', 'longitude' => '-65.09251588110664', 'order' => '10']);
-        $point1501 = GeoPoint::create(['latitude' => '-42.74165357022886', 'longitude' => '-65.09257757191399', 'order' => '11']);
-        $point1502 = GeoPoint::create(['latitude' => '-42.74168760075574', 'longitude' => '-65.09268201042754', 'order' => '12']);
-        $point1503 = GeoPoint::create(['latitude' => '-42.74168894186025', 'longitude' => '-65.09277203206761', 'order' => '13']);
-        $point1504 = GeoPoint::create(['latitude' => '-42.74167536317711', 'longitude' => '-65.09283573453173', 'order' => '14']);
-        $point1505 = GeoPoint::create(['latitude' => '-42.741638901898284', 'longitude' => '-65.09291075256513', 'order' => '15']);
-        $point1506 = GeoPoint::create(['latitude' => '-42.74156245894136', 'longitude' => '-65.0929774725144', 'order' => '16']);
-        $point1507 = GeoPoint::create(['latitude' => '-42.741497163915625', 'longitude' => '-65.0929912188356', 'order' => '17']);
-        $point1508 = GeoPoint::create(['latitude' => '-42.74159657328727', 'longitude' => '-65.09643115189802', 'order' => '18']);
-        $point1509 = GeoPoint::create(['latitude' => '-42.74165826409464', 'longitude' => '-65.09856585499824', 'order' => '19']);
-        $point1510 = GeoPoint::create(['latitude' => '-42.741715680131364', 'longitude' => '-65.10055186313618', 'order' => '20']);
-        $point1511 = GeoPoint::create(['latitude' => '-42.74177267707296', 'longitude' => '-65.10252320294356', 'order' => '21']);
-        $point1512 = GeoPoint::create(['latitude' => '-42.7398854077544', 'longitude' => '-65.10267055680134', 'order' => '22']);
-        $point1513 = GeoPoint::create(['latitude' => '-42.73784684508357', 'longitude' => '-65.10281195950789', 'order' => '23']);
-        $point1514 = GeoPoint::create(['latitude' => '-42.73712541467742', 'longitude' => '-65.10278211993258', 'order' => '24']);
-        $point1515 = GeoPoint::create(['latitude' => '-42.733530332587264', 'longitude' => '-65.10299015876936', 'order' => '25']);
-        $point1516 = GeoPoint::create(['latitude' => '-42.73300981640019', 'longitude' => '-65.10302024980174', 'order' => '26']);
-        $point1517 = GeoPoint::create(['latitude' => '-42.72731422937477', 'longitude' => '-65.10333272715205', 'order' => '27']);
-
-        $zone40 = Zone::create(['name' => 'Mapu Ngefu', 'description' => 'Barrio 40', 'color' => 'blue']);
-
-        $zone40->geopoints()->save($point1491);
-        $zone40->geopoints()->save($point1492);
-        $zone40->geopoints()->save($point1493);
-        $zone40->geopoints()->save($point1494);
-        $zone40->geopoints()->save($point1495);
-        $zone40->geopoints()->save($point1496);
-        $zone40->geopoints()->save($point1497);
-        $zone40->geopoints()->save($point1498);
-        $zone40->geopoints()->save($point1499);
-        $zone40->geopoints()->save($point1500);
-        $zone40->geopoints()->save($point1501);
-        $zone40->geopoints()->save($point1502);
-        $zone40->geopoints()->save($point1503);
-        $zone40->geopoints()->save($point1504);
-        $zone40->geopoints()->save($point1505);
-        $zone40->geopoints()->save($point1506);
-        $zone40->geopoints()->save($point1507);
-        $zone40->geopoints()->save($point1508);
-        $zone40->geopoints()->save($point1509);
-        $zone40->geopoints()->save($point1510);
-        $zone40->geopoints()->save($point1511);
-        $zone40->geopoints()->save($point1512);
-        $zone40->geopoints()->save($point1513);
-        $zone40->geopoints()->save($point1514);
-        $zone40->geopoints()->save($point1515);
-        $zone40->geopoints()->save($point1516);
-        $zone40->geopoints()->save($point1517);
+        $zone40 = new Zone();
+        $zone40->name = 'Mapu Ngefu';
+        $zone40->description = 'Barrio 40';
+        $zone40->color = 'red';
+        $zone40->geom = new Polygon([
+            new LineString([
+                new Point(-42.72731422937477, -65.10333272715205),
+                new Point(-42.72709562934, -65.0979453427063),
+                new Point(-42.72695682502345, -65.09173535828312),
+                new Point(-42.726713163098196, -65.08365713146158),
+                new Point(-42.741024173119534, -65.08294366386345),
+                new Point(-42.74115803211322, -65.08294366386345),
+                new Point(-42.74125182560973, -65.08303561334127),
+                new Point(-42.74142222970127, -65.08996971037962),
+                new Point(-42.74153077534737, -65.09247656998075),
+                new Point(-42.74160545810463, -65.09251588110664),
+                new Point(-42.74165357022886, -65.09257757191399),
+                new Point(-42.74168760075574, -65.09268201042754),
+                new Point(-42.74168894186025, -65.09277203206761),
+                new Point(-42.74167536317711, -65.09283573453173),
+                new Point(-42.741638901898284, -65.09291075256513),
+                new Point(-42.74156245894136, -65.0929774725144),
+                new Point(-42.741497163915625, -65.0929912188356),
+                new Point(-42.74159657328727, -65.09643115189802),
+                new Point(-42.74165826409464, -65.09856585499824),
+                new Point(-42.741715680131364, -65.10055186313618),
+                new Point(-42.74177267707296, -65.10252320294356),
+                new Point(-42.7398854077544, -65.10267055680134),
+                new Point(-42.73784684508357, -65.10281195950789),
+                new Point(-42.73712541467742, -65.10278211993258),
+                new Point(-42.733530332587264, -65.10299015876936),
+                new Point(-42.73300981640019, -65.10302024980174),
+                new Point(-42.72731422937477, -65.10333272715205),
+            ])
+        ]);
+        $zone40->save();
 
         // ----------------------------------------------
 
         // -------------- Zona 41: Parque Industrial Pesado--------------
 
-        $point1518 = GeoPoint::create(['latitude' => '-42.741487273269875', 'longitude' => '-65.06086581472344', 'order' => '1']);
-        $point1519 = GeoPoint::create(['latitude' => '-42.74098737656461', 'longitude' => '-65.06083907645233', 'order' => '2']);
-        $point1520 = GeoPoint::create(['latitude' => '-42.73971676386256', 'longitude' => '-65.06065710533443', 'order' => '3']);
-        $point1521 = GeoPoint::create(['latitude' => '-42.737791105427476', 'longitude' => '-65.05982763219637', 'order' => '4']);
-        $point1522 = GeoPoint::create(['latitude' => '-42.73585580780374', 'longitude' => '-65.05896261978886', 'order' => '5']);
-        $point1523 = GeoPoint::create(['latitude' => '-42.73394976302208', 'longitude' => '-65.05815971728386', 'order' => '6']);
-        $point1524 = GeoPoint::create(['latitude' => '-42.733597806907824', 'longitude' => '-65.05822182718639', 'order' => '7']);
-        $point1525 = GeoPoint::create(['latitude' => '-42.732965727589516', 'longitude' => '-65.0585678321494', 'order' => '8']);
-        $point1526 = GeoPoint::create(['latitude' => '-42.73204036547915', 'longitude' => '-65.05906026896082', 'order' => '9']);
-        $point1527 = GeoPoint::create(['latitude' => '-42.73188722810818', 'longitude' => '-65.05913126368073', 'order' => '10']);
-        $point1528 = GeoPoint::create(['latitude' => '-42.7317275528527', 'longitude' => '-65.05917116153982', 'order' => '11']);
-        $point1529 = GeoPoint::create(['latitude' => '-42.73154834776287', 'longitude' => '-65.05923763003199', 'order' => '12']);
-        $point1530 = GeoPoint::create(['latitude' => '-42.731251879847605', 'longitude' => '-65.05946830000732', 'order' => '13']);
-        $point1531 = GeoPoint::create(['latitude' => '-42.731187842107374', 'longitude' => '-65.05860211413338', 'order' => '14']);
-        $point1532 = GeoPoint::create(['latitude' => '-42.73017405091852', 'longitude' => '-65.04966876555008', 'order' => '15']);
-        $point1533 = GeoPoint::create(['latitude' => '-42.725510359992796', 'longitude' => '-65.0506223746741', 'order' => '16']);
-        $point1534 = GeoPoint::create(['latitude' => '-42.72556568055373', 'longitude' => '-65.05160096186962', 'order' => '17']);
-        $point1535 = GeoPoint::create(['latitude' => '-42.7218602087988', 'longitude' => '-65.05217813972216', 'order' => '18']);
-        $point1536 = GeoPoint::create(['latitude' => '-42.721307254646426', 'longitude' => '-65.04788702439248', 'order' => '19']);
-        $point1537 = GeoPoint::create(['latitude' => '-42.71538912809174', 'longitude' => '-65.04916685718804', 'order' => '20']);
-        $point1538 = GeoPoint::create(['latitude' => '-42.7156288505225', 'longitude' => '-65.05175150085061', 'order' => '21']);
-        $point1539 = GeoPoint::create(['latitude' => '-42.71192287585336', 'longitude' => '-65.05242901008414', 'order' => '22']);
-        $point1540 = GeoPoint::create(['latitude' => '-42.710742703886524', 'longitude' => '-65.04291856746735', 'order' => '23']);
-        $point1541 = GeoPoint::create(['latitude' => '-42.712388071479495', 'longitude' => '-65.04248044538846', 'order' => '24']);
-        $point1542 = GeoPoint::create(['latitude' => '-42.71152750148067', 'longitude' => '-65.03584415736987', 'order' => '25']);
-        $point1543 = GeoPoint::create(['latitude' => '-42.71178834630743', 'longitude' => '-65.03534736196877', 'order' => '26']);
-        $point1544 = GeoPoint::create(['latitude' => '-42.71155365301857', 'longitude' => '-65.03279222260537', 'order' => '27']);
-        $point1545 = GeoPoint::create(['latitude' => '-42.71126682429198', 'longitude' => '-65.0321711235802', 'order' => '28']);
-        $point1546 = GeoPoint::create(['latitude' => '-42.71696190840322', 'longitude' => '-65.02410270358538', 'order' => '29']);
-        $point1547 = GeoPoint::create(['latitude' => '-42.71756683035525', 'longitude' => '-65.02455323088095', 'order' => '30']);
-        $point1548 = GeoPoint::create(['latitude' => '-42.71791937320273', 'longitude' => '-65.02506025220391', 'order' => '31']);
-        $point1549 = GeoPoint::create(['latitude' => '-42.71866343474744', 'longitude' => '-65.02573005008652', 'order' => '32']);
-        $point1550 = GeoPoint::create(['latitude' => '-42.71975484235966', 'longitude' => '-65.02689865502697', 'order' => '33']);
-        $point1551 = GeoPoint::create(['latitude' => '-42.7199752025941', 'longitude' => '-65.02751053395863', 'order' => '34']);
-        $point1552 = GeoPoint::create(['latitude' => '-42.721236427564605', 'longitude' => '-65.02876027572181', 'order' => '35']);
-        $point1553 = GeoPoint::create(['latitude' => '-42.72339392944147', 'longitude' => '-65.03094091165141', 'order' => '36']);
-        $point1554 = GeoPoint::create(['latitude' => '-42.72518354958805', 'longitude' => '-65.03265501085042', 'order' => '37']);
-        $point1555 = GeoPoint::create(['latitude' => '-42.7268544819857', 'longitude' => '-65.0339317423418', 'order' => '38']);
-        $point1556 = GeoPoint::create(['latitude' => '-42.73062793097537', 'longitude' => '-65.03576696004164', 'order' => '39']);
-        $point1557 = GeoPoint::create(['latitude' => '-42.73330896652445', 'longitude' => '-65.03633500161972', 'order' => '40']);
-        $point1558 = GeoPoint::create(['latitude' => '-42.73651211082222', 'longitude' => '-65.03663666631493', 'order' => '41']);
-        $point1559 = GeoPoint::create(['latitude' => '-42.73766613125116', 'longitude' => '-65.0365774062595', 'order' => '42']);
-        $point1560 = GeoPoint::create(['latitude' => '-42.74236695400796', 'longitude' => '-65.03661395135732', 'order' => '43']);
-        $point1561 = GeoPoint::create(['latitude' => '-42.74699938043485', 'longitude' => '-65.0362396155616', 'order' => '44']);
-        $point1562 = GeoPoint::create(['latitude' => '-42.74621215208879', 'longitude' => '-65.03647967326849', 'order' => '45']);
-        $point1563 = GeoPoint::create(['latitude' => '-42.74621684595456', 'longitude' => '-65.03682416948892', 'order' => '46']);
-        $point1564 = GeoPoint::create(['latitude' => '-42.746300413529205', 'longitude' => '-65.0374828194403', 'order' => '47']);
-        $point1565 = GeoPoint::create(['latitude' => '-42.74636386453625', 'longitude' => '-65.0377110586637', 'order' => '48']);
-        $point1566 = GeoPoint::create(['latitude' => '-42.74643955312189', 'longitude' => '-65.03858654845018', 'order' => '49']);
-        $point1567 = GeoPoint::create(['latitude' => '-42.74646763249754', 'longitude' => '-65.03891126337912', 'order' => '50']);
-        $point1568 = GeoPoint::create(['latitude' => '-42.74647425420105', 'longitude' => '-65.03896591338781', 'order' => '51']);
-        $point1569 = GeoPoint::create(['latitude' => '-42.746679443190715', 'longitude' => '-65.03892484206227', 'order' => '52']);
-        $point1570 = GeoPoint::create(['latitude' => '-42.74959022670578', 'longitude' => '-65.03838270056501', 'order' => '53']);
-        $point1571 = GeoPoint::create(['latitude' => '-42.75008081949852', 'longitude' => '-65.03838077272727', 'order' => '54']);
-        $point1572 = GeoPoint::create(['latitude' => '-42.750070258300525', 'longitude' => '-65.03844413991527', 'order' => '55']);
-        $point1573 = GeoPoint::create(['latitude' => '-42.74992885559399', 'longitude' => '-65.04281790081023', 'order' => '56']);
-        $point1574 = GeoPoint::create(['latitude' => '-42.74985853142638', 'longitude' => '-65.04428490150366', 'order' => '57']);
-        $point1575 = GeoPoint::create(['latitude' => '-42.74985308318932', 'longitude' => '-65.0445015737007', 'order' => '58']);
-        $point1576 = GeoPoint::create(['latitude' => '-42.74999021112523', 'longitude' => '-65.04514136436994', 'order' => '59']);
-        $point1577 = GeoPoint::create(['latitude' => '-42.750147958542954', 'longitude' => '-65.04585583779644', 'order' => '60']);
-        $point1578 = GeoPoint::create(['latitude' => '-42.75034434653432', 'longitude' => '-65.04659520547537', 'order' => '61']);
-        $point1579 = GeoPoint::create(['latitude' => '-42.75068657964086', 'longitude' => '-65.0481662255872', 'order' => '62']);
-        $point1580 = GeoPoint::create(['latitude' => '-42.75103216550872', 'longitude' => '-65.04975266840084', 'order' => '63']);
-        $point1581 = GeoPoint::create(['latitude' => '-42.75136417269343', 'longitude' => '-65.05127633075972', 'order' => '64']);
-        $point1582 = GeoPoint::create(['latitude' => '-42.75151923790213', 'longitude' => '-65.05198837343431', 'order' => '65']);
-        $point1583 = GeoPoint::create(['latitude' => '-42.75167857788148', 'longitude' => '-65.05271961066717', 'order' => '66']);
-        $point1584 = GeoPoint::create(['latitude' => '-42.75192450292059', 'longitude' => '-65.0538490721198', 'order' => '67']);
-        $point1585 = GeoPoint::create(['latitude' => '-42.752096918668855', 'longitude' => '-65.05464023996034', 'order' => '68']);
-        $point1586 = GeoPoint::create(['latitude' => '-42.75225894085721', 'longitude' => '-65.05538421768603', 'order' => '69']);
-        $point1587 = GeoPoint::create(['latitude' => '-42.75242322615941', 'longitude' => '-65.05613825369552', 'order' => '70']);
-        $point1588 = GeoPoint::create(['latitude' => '-42.75259052894674', 'longitude' => '-65.05690620366427', 'order' => '71']);
-        $point1589 = GeoPoint::create(['latitude' => '-42.752742911946456', 'longitude' => '-65.0576059249412', 'order' => '72']);
-        $point1590 = GeoPoint::create(['latitude' => '-42.75289630077452', 'longitude' => '-65.05830983716972', 'order' => '73']);
-        $point1591 = GeoPoint::create(['latitude' => '-42.75295145369739', 'longitude' => '-65.05849683742952', 'order' => '74']);
-        $point1592 = GeoPoint::create(['latitude' => '-42.75297517448336', 'longitude' => '-65.05860286850466', 'order' => '75']);
-        $point1593 = GeoPoint::create(['latitude' => '-42.752640149813544', 'longitude' => '-65.05909480240192', 'order' => '76']);
-        $point1594 = GeoPoint::create(['latitude' => '-42.75247402049263', 'longitude' => '-65.05939831111583', 'order' => '77']);
-        $point1595 = GeoPoint::create(['latitude' => '-42.7523408320512', 'longitude' => '-65.05974398080271', 'order' => '78']);
-        $point1596 = GeoPoint::create(['latitude' => '-42.752255169000755', 'longitude' => '-65.0600672708081', 'order' => '79']);
-        $point1597 = GeoPoint::create(['latitude' => '-42.75224636800243', 'longitude' => '-65.06052383307397', 'order' => '80']);
-        $point1598 = GeoPoint::create(['latitude' => '-42.752255839553044', 'longitude' => '-65.06064168263259', 'order' => '81']);
-        $point1599 = GeoPoint::create(['latitude' => '-42.751896004449804', 'longitude' => '-65.06071452137117', 'order' => '82']);
-        $point1600 = GeoPoint::create(['latitude' => '-42.75143860399362', 'longitude' => '-65.06082248028403', 'order' => '83']);
-        $point1601 = GeoPoint::create(['latitude' => '-42.751320419158866', 'longitude' => '-65.06079884331709', 'order' => '84']);
-        $point1602 = GeoPoint::create(['latitude' => '-42.75124196454516', 'longitude' => '-65.06076011892443', 'order' => '85']);
-        $point1603 = GeoPoint::create(['latitude' => '-42.75115345164764', 'longitude' => '-65.060455269106', 'order' => '86']);
-        $point1604 = GeoPoint::create(['latitude' => '-42.7510502704196', 'longitude' => '-65.06008051421512', 'order' => '87']);
-        $point1605 = GeoPoint::create(['latitude' => '-42.75071415610233', 'longitude' => '-65.05888994868836', 'order' => '88']);
-        $point1606 = GeoPoint::create(['latitude' => '-42.75067233040548', 'longitude' => '-65.0587738593294', 'order' => '89']);
-        $point1607 = GeoPoint::create(['latitude' => '-42.750459932979076', 'longitude' => '-65.05818477917437', 'order' => '90']);
-        $point1608 = GeoPoint::create(['latitude' => '-42.74817846275428', 'longitude' => '-65.05888408135611', 'order' => '91']);
-        $point1609 = GeoPoint::create(['latitude' => '-42.741487273269875', 'longitude' => '-65.06086581472344', 'order' => '92']);
-
-        $zone41 = Zone::create(['name' => 'Parque Industrial Pesado', 'description' => 'Barrio 41', 'color' => 'blue']);
-
-        $zone41->geopoints()->save($point1518);
-        $zone41->geopoints()->save($point1519);
-        $zone41->geopoints()->save($point1520);
-        $zone41->geopoints()->save($point1521);
-        $zone41->geopoints()->save($point1522);
-        $zone41->geopoints()->save($point1523);
-        $zone41->geopoints()->save($point1524);
-        $zone41->geopoints()->save($point1525);
-        $zone41->geopoints()->save($point1526);
-        $zone41->geopoints()->save($point1527);
-        $zone41->geopoints()->save($point1528);
-        $zone41->geopoints()->save($point1529);
-        $zone41->geopoints()->save($point1530);
-        $zone41->geopoints()->save($point1531);
-        $zone41->geopoints()->save($point1532);
-        $zone41->geopoints()->save($point1533);
-        $zone41->geopoints()->save($point1534);
-        $zone41->geopoints()->save($point1535);
-        $zone41->geopoints()->save($point1536);
-        $zone41->geopoints()->save($point1537);
-        $zone41->geopoints()->save($point1538);
-        $zone41->geopoints()->save($point1539);
-        $zone41->geopoints()->save($point1540);
-        $zone41->geopoints()->save($point1541);
-        $zone41->geopoints()->save($point1542);
-        $zone41->geopoints()->save($point1543);
-        $zone41->geopoints()->save($point1544);
-        $zone41->geopoints()->save($point1545);
-        $zone41->geopoints()->save($point1546);
-        $zone41->geopoints()->save($point1547);
-        $zone41->geopoints()->save($point1548);
-        $zone41->geopoints()->save($point1549);
-        $zone41->geopoints()->save($point1550);
-        $zone41->geopoints()->save($point1551);
-        $zone41->geopoints()->save($point1552);
-        $zone41->geopoints()->save($point1553);
-        $zone41->geopoints()->save($point1554);
-        $zone41->geopoints()->save($point1555);
-        $zone41->geopoints()->save($point1556);
-        $zone41->geopoints()->save($point1557);
-        $zone41->geopoints()->save($point1558);
-        $zone41->geopoints()->save($point1559);
-        $zone41->geopoints()->save($point1560);
-        $zone41->geopoints()->save($point1561);
-        $zone41->geopoints()->save($point1562);
-        $zone41->geopoints()->save($point1563);
-        $zone41->geopoints()->save($point1564);
-        $zone41->geopoints()->save($point1565);
-        $zone41->geopoints()->save($point1566);
-        $zone41->geopoints()->save($point1567);
-        $zone41->geopoints()->save($point1568);
-        $zone41->geopoints()->save($point1569);
-        $zone41->geopoints()->save($point1570);
-        $zone41->geopoints()->save($point1571);
-        $zone41->geopoints()->save($point1572);
-        $zone41->geopoints()->save($point1573);
-        $zone41->geopoints()->save($point1574);
-        $zone41->geopoints()->save($point1575);
-        $zone41->geopoints()->save($point1576);
-        $zone41->geopoints()->save($point1577);
-        $zone41->geopoints()->save($point1578);
-        $zone41->geopoints()->save($point1579);
-        $zone41->geopoints()->save($point1580);
-        $zone41->geopoints()->save($point1581);
-        $zone41->geopoints()->save($point1582);
-        $zone41->geopoints()->save($point1583);
-        $zone41->geopoints()->save($point1584);
-        $zone41->geopoints()->save($point1585);
-        $zone41->geopoints()->save($point1586);
-        $zone41->geopoints()->save($point1587);
-        $zone41->geopoints()->save($point1588);
-        $zone41->geopoints()->save($point1589);
-        $zone41->geopoints()->save($point1590);
-        $zone41->geopoints()->save($point1591);
-        $zone41->geopoints()->save($point1592);
-        $zone41->geopoints()->save($point1593);
-        $zone41->geopoints()->save($point1594);
-        $zone41->geopoints()->save($point1595);
-        $zone41->geopoints()->save($point1596);
-        $zone41->geopoints()->save($point1597);
-        $zone41->geopoints()->save($point1598);
-        $zone41->geopoints()->save($point1599);
-        $zone41->geopoints()->save($point1600);
-        $zone41->geopoints()->save($point1601);
-        $zone41->geopoints()->save($point1602);
-        $zone41->geopoints()->save($point1603);
-        $zone41->geopoints()->save($point1604);
-        $zone41->geopoints()->save($point1605);
-        $zone41->geopoints()->save($point1606);
-        $zone41->geopoints()->save($point1607);
-        $zone41->geopoints()->save($point1608);
-        $zone41->geopoints()->save($point1609);
+        $zone41 = new Zone();
+        $zone41->name = 'Parque Industrial Pesado';
+        $zone41->description = 'Barrio 41';
+        $zone41->color = 'red';
+        $zone41->geom = new Polygon([
+            new LineString([
+                new Point(-42.741487273269875, -65.06086581472344),
+                new Point(-42.74098737656461, -65.06083907645233),
+                new Point(-42.73971676386256, -65.06065710533443),
+                new Point(-42.737791105427476, -65.05982763219637),
+                new Point(-42.73585580780374, -65.05896261978886),
+                new Point(-42.73394976302208, -65.05815971728386),
+                new Point(-42.733597806907824, -65.05822182718639),
+                new Point(-42.732965727589516, -65.0585678321494),
+                new Point(-42.73204036547915, -65.05906026896082),
+                new Point(-42.73188722810818, -65.05913126368073),
+                new Point(-42.7317275528527, -65.05917116153982),
+                new Point(-42.73154834776287, -65.05923763003199),
+                new Point(-42.731251879847605, -65.05946830000732),
+                new Point(-42.731187842107374, -65.05860211413338),
+                new Point(-42.73017405091852, -65.04966876555008),
+                new Point(-42.725510359992796, -65.0506223746741),
+                new Point(-42.72556568055373, -65.05160096186962),
+                new Point(-42.7218602087988, -65.05217813972216),
+                new Point(-42.721307254646426, -65.04788702439248),
+                new Point(-42.71538912809174, -65.04916685718804),
+                new Point(-42.7156288505225, -65.05175150085061),
+                new Point(-42.71192287585336, -65.05242901008414),
+                new Point(-42.710742703886524, -65.04291856746735),
+                new Point(-42.712388071479495, -65.04248044538846),
+                new Point(-42.71152750148067, -65.03584415736987),
+                new Point(-42.71178834630743, -65.03534736196877),
+                new Point(-42.71155365301857, -65.03279222260537),
+                new Point(-42.71126682429198, -65.0321711235802),
+                new Point(-42.71696190840322, -65.02410270358538),
+                new Point(-42.71756683035525, -65.02455323088095),
+                new Point(-42.71791937320273, -65.02506025220391),
+                new Point(-42.71866343474744, -65.02573005008652),
+                new Point(-42.71975484235966, -65.02689865502697),
+                new Point(-42.7199752025941, -65.02751053395863),
+                new Point(-42.721236427564605, -65.02876027572181),
+                new Point(-42.72339392944147, -65.03094091165141),
+                new Point(-42.72518354958805, -65.03265501085042),
+                new Point(-42.7268544819857, -65.0339317423418),
+                new Point(-42.73062793097537, -65.03576696004164),
+                new Point(-42.73330896652445, -65.03633500161972),
+                new Point(-42.73651211082222, -65.03663666631493),
+                new Point(-42.73766613125116, -65.0365774062595),
+                new Point(-42.74236695400796, -65.03661395135732),
+                new Point(-42.74699938043485, -65.0362396155616),
+                new Point(-42.74621215208879, -65.03647967326849),
+                new Point(-42.74621684595456, -65.03682416948892),
+                new Point(-42.746300413529205, -65.0374828194403),
+                new Point(-42.74636386453625, -65.0377110586637),
+                new Point(-42.74643955312189, -65.03858654845018),
+                new Point(-42.74646763249754, -65.03891126337912),
+                new Point(-42.74647425420105, -65.03896591338781),
+                new Point(-42.746679443190715, -65.03892484206227),
+                new Point(-42.74959022670578, -65.03838270056501),
+                new Point(-42.75008081949852, -65.03838077272727),
+                new Point(-42.750070258300525, -65.03844413991527),
+                new Point(-42.74992885559399, -65.04281790081023),
+                new Point(-42.74985853142638, -65.04428490150366),
+                new Point(-42.74985308318932, -65.0445015737007),
+                new Point(-42.74999021112523, -65.04514136436994),
+                new Point(-42.750147958542954, -65.04585583779644),
+                new Point(-42.75034434653432, -65.04659520547537),
+                new Point(-42.75068657964086, -65.0481662255872),
+                new Point(-42.75103216550872, -65.04975266840084),
+                new Point(-42.75136417269343, -65.05127633075972),
+                new Point(-42.75151923790213, -65.05198837343431),
+                new Point(-42.75167857788148, -65.05271961066717),
+                new Point(-42.75192450292059, -65.0538490721198),
+                new Point(-42.752096918668855, -65.05464023996034),
+                new Point(-42.75225894085721, -65.05538421768603),
+                new Point(-42.75242322615941, -65.05613825369552),
+                new Point(-42.75259052894674, -65.05690620366427),
+                new Point(-42.752742911946456, -65.0576059249412),
+                new Point(-42.75289630077452, -65.05830983716972),
+                new Point(-42.75295145369739, -65.05849683742952),
+                new Point(-42.75297517448336, -65.05860286850466),
+                new Point(-42.752640149813544, -65.05909480240192),
+                new Point(-42.75247402049263, -65.05939831111583),
+                new Point(-42.7523408320512, -65.05974398080271),
+                new Point(-42.752255169000755, -65.0600672708081),
+                new Point(-42.75224636800243, -65.06052383307397),
+                new Point(-42.752255839553044, -65.06064168263259),
+                new Point(-42.751896004449804, -65.06071452137117),
+                new Point(-42.75143860399362, -65.06082248028403),
+                new Point(-42.751320419158866, -65.06079884331709),
+                new Point(-42.75124196454516, -65.06076011892443),
+                new Point(-42.75115345164764, -65.060455269106),
+                new Point(-42.7510502704196, -65.06008051421512),
+                new Point(-42.75071415610233, -65.05888994868836),
+                new Point(-42.75067233040548, -65.0587738593294),
+                new Point(-42.750459932979076, -65.05818477917437),
+                new Point(-42.74817846275428, -65.05888408135611),
+                new Point(-42.741487273269875, -65.06086581472344),
+            ])
+        ]);
+        $zone41->save();
 
         // ----------------------------------------------
 

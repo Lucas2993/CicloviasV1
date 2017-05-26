@@ -18,7 +18,8 @@ class CreateTripsTable extends Migration
             $table->string('name', 100);
             $table->string('description', 200);
             $table->string('user', 50);
-            $table->date('time', 50);
+            $table->date('time');
+            $table->time('duration');
             $table->double('distance_km', 5, 2);
             $table->linestring('geom');
             $table->unsignedInteger('datalog_id')->nullable();

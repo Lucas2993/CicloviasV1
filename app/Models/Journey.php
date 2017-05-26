@@ -9,10 +9,10 @@ use Phaza\LaravelPostgis\Geometries\Point;
 class Journey extends Model{
 
     use PostgisTrait;
-    
+
     protected $table = 'journeys';
 
-    protected $fillable = ['peso'];
+    protected $fillable = ['name', 'description', 'ponderacion'];
 
     protected $postgisFields = ['geom'];
 
