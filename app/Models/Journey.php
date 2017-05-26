@@ -12,7 +12,7 @@ class Journey extends Model{
 
     protected $table = 'journeys';
 
-    protected $fillable = ['peso'];
+    protected $fillable = ['name', 'description', 'ponderacion'];
 
     protected $postgisFields = ['geom'];
 
