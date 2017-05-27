@@ -3,9 +3,9 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .factory('creatorStyle', [creatorStyle]);
+        .factory('creatorStyle', ['creatorColor', creatorStyle]);
 
-        function creatorStyle(){
+        function creatorStyle(creatorColor){
             var service = {
                 getStyleText: getStyleText,
                 getStyleBorder: getStyleBorder,
@@ -14,6 +14,7 @@
                 getStyleTrip: getStyleTrip,
                 getStylePolygon: getStylePolygon,
                 getStyleJourney: getStyleJourney,
+                getStyleJourneyDistinctColor: getStyleJourneyDistinctColor,
                 getStyleTripCloseToPoint: getStyleTripCloseToPoint,
                 getStyleTripsRanking: getStyleTripsRanking,
                 getStyleTemporalEditCentrality: getStyleTemporalEditCentrality
@@ -84,8 +85,22 @@
 
             function getStyleJourney(){
                 var style = new ol.style.Style({
-                    stroke: new ol.style.Stroke({color: 'blue', width: 3}),
+                    stroke: new ol.style.Stroke({
+                        color: 'yellow',
+                        width: 3}),
                 });
+                // console.log("color random: "+ creatorColor.getRandomColor());
+
+                return style;
+            }
+
+            function getStyleJourneyDistinctColor(){
+                var style = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: creatorColor.getRandomColor(),
+                        width: 3}),
+                });
+                // console.log("color random: "+ creatorColor.getRandomColor());
 
                 return style;
             }

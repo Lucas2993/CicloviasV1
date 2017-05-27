@@ -3,9 +3,9 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .factory('serviceTrip', ['creatorFeature', serviceTrip]);
+        .factory('serviceTrip', ['creatorFeature', 'creatorStyle', serviceTrip]);
 
-        function serviceTrip(creatorFeature){
+        function serviceTrip(creatorFeature, creatorStyle){
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             // *************************** FUNCIONES PUBLICAS *******************************
             var service = {
@@ -66,6 +66,7 @@
                 for (var i = 0; i < arrayCoordenatesId.length; i++) {
                     geomTrip = new ol.geom.LineString(arrayCoordenatesId[i].points);
                     featureTrip = creatorFeature.getFeatureGeomId(geomTrip, arrayCoordenatesId[i].id);
+                    // featureTrip.setStyle(color);
                     vectorFeaturesTrip.push(featureTrip);
                     console.log("Source2 --> id guardado: "+arrayCoordenatesId[i].id+" cant de puntos: "+(arrayCoordenatesId[i].points).length);
                 }
@@ -80,7 +81,6 @@
             // devuelve un vector FUENTE de features de recorridos a partir de los datos recibidos del servidor
             function getVectorFeatures(dataJsonTrips){
                 // recuperamos los datos q nos competen
-                // var arrayCoord = getInfoTrips2(dataJsonTrips);
                 var arrayCoord = getInfoTripsId(dataJsonTrips);
                 var vectorFeaturesTrip = getFeatures(arrayCoord);
 
@@ -93,8 +93,11 @@
                 var vectorFeatures = [];
                 // recorremos el json con los datos
                 for (var i = 0; i < lineStringJson.length; i++) {
+                    console.log("Paso el color random i: "+i);
                     feature = creatorFeature.getFeatureTripJson(lineStringJson[i]);
+                    feature.setStyle(creatorStyle.getStyleJourneyDistinctColor());
                     vectorFeatures.push(feature);
+                    console.log(" Se agrego el nro: "+i);
                 }
 
                 var vectorSource = new ol.source.Vector({
