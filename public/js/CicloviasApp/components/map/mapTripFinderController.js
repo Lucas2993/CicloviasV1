@@ -149,7 +149,7 @@ function MapTripFinderController(vm, creatorMap, srvLayers, dataServer,adminLaye
             }
         });
 
-        // ********************* PRIVADAS *****************************
+      // ********************* PRIVADAS *****************************
         function enableEventClick(){
             adminMenu.disableAll();
             adminMenu.setActiveTripFinder(true);
@@ -158,7 +158,7 @@ function MapTripFinderController(vm, creatorMap, srvLayers, dataServer,adminLaye
 
         // ******************************************************************************************
         // ******************************************************************************************
-        
+
     } // fin Constructor
 
-})()
+  })()

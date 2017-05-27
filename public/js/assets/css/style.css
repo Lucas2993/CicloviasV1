@@ -50,9 +50,11 @@
 }
 
 
-/*body {
-  padding-top: 50px;
-}*/
+.panel-default {
+  /*padding-top: 50px;*/
+  margin-bottom: 5px;
+  border-radius: 0;
+}
 
 
 /*
@@ -189,5 +191,6 @@ footer {
         /* 6 columns */
     }
 }
+
 
 </style>

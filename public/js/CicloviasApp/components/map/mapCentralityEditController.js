@@ -133,7 +133,7 @@
                   console.log(data);
                   alert('Se elimino correctamente la centralidad: ' + data.id);
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  srvLayersCentrality.filterCentrality(data);
+                  srvLayersCentrality.filterCentrality(data.id);
                   // vm.$apply();
               })
               .catch(function(err) {
@@ -149,12 +149,11 @@
                   // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                   console.log(data);
                   alert('Se modifico correctamente la centralidad: ' + data.id);
-                  // var cent = vm.centralitiesJson.find(findById);
-                  // adminLayers.viewCentrality(cent, vm.centralitiesLayer);
+                  srvLayersCentrality.filterCentrality(data.id);
+                  data.selected = true;
                   srvLayersCentrality.getCentralities().push(data);
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
                   adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  // vm.centralitiesJson = vm.centralitiesJson.filter((item) => item.id !== data.id);
 
               })
               .catch(function(err) {

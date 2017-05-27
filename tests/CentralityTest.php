@@ -4,45 +4,26 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\LineString;
+use Phaza\LaravelPostgis\Geometries\Point;
+use Phaza\LaravelPostgis\Geometries\Polygon;
+use Phaza\LaravelPostgis\PostgisConnection;
+
 use App\Models\Centrality;
-use App\Models\GeoPoint;
 
 class CentralityTest extends TestCase
 {
     use WithoutMiddleware;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testGeoPoint(){
-        // Se crea y persiste una nueva zona.
-        $centrality = Centrality::create(['name' => 'Plaza','location' => 'Alta plaza']);
-        // Se crean y persisten dos nuevos puntos.
-        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '-1']);
-        // Se asocian los nuevos puntos
-        $centrality->geopoint()->save($point);
-        // Se recupera la zona recientemente guardada.
-        $centrality_db = Centrality::find($centrality->id);
-        // Se recuperan los puntos.
-        $point = $centrality_db->geopoint()->get()[0];
-        // Se corrobora que los dos puntos asignados esten.
-        $this->assertTrue($point['latitude'] == '-42.7672777');
-        $this->assertTrue($point['longitude'] == '-65.036735');
-        $this->assertTrue($point['order'] == '-1');
-
-        // Se eliminan los datos usados.
-        GeoPoint::destroy($point->id);
-        Centrality::destroy($centrality->id);
-    }
 
     public function testApiShow(){
         // Se crea y persiste una nueva zona.
-        $centrality = Centrality::create(['name' => 'Plaza','location' => 'Alta plaza']);
-        // Se crean y persisten dos nuevos puntos.
-        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '-1']);
-        // Se asocian los nuevos puntos.
-        $centrality->geopoint()->save($point);
+        $centrality = new  Centrality();
+        $centrality->name = 'Plaza';
+        $centrality->location = 'Alta plaza';
+        $centrality->geom = new Point(-42.7672777, -65.036735);
+        $centrality->save();
+
         // Se solicita ver una centralidad a la api.
         $response = $this->get('/api/centrality/'.$centrality->id);
         // Se verifica que es correcto y la respuesta es como se espera.
@@ -54,7 +35,6 @@ class CentralityTest extends TestCase
                 ]);
 
         // Se eliminan los datos usados.
-        GeoPoint::destroy($point->id);
         Centrality::destroy($centrality->id);
     }
 
@@ -98,11 +78,12 @@ class CentralityTest extends TestCase
 
     public function testApiDelete(){
         // Se crea y persiste una nueva zona.
-        $centrality = Centrality::create(['name' => 'Plaza','location' => 'Alta plaza']);
-        // Se crean y persisten dos nuevos puntos.
-        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '-1']);
-        // Se asocian los nuevos puntos
-        $centrality->geopoint()->save($point);
+        $centrality = new  Centrality();
+        $centrality->name = 'Plaza';
+        $centrality->location = 'Alta plaza';
+        $centrality->geom = new Point(-42.7672777, -65.036735);
+        $centrality->save();
+
         // Se determina la cantidad de registros alamacenados antes de la operacion.
         $records_before = count(Centrality::All());
         // Se realiza el borrado del registro, recientemente guardado, mediante la api
@@ -119,11 +100,12 @@ class CentralityTest extends TestCase
 
     public function testApiUpdate(){
         // Se crea y persiste una nueva zona.
-        $centrality = Centrality::create(['name' => 'Plaza','location' => 'Alta plaza']);
-        // Se crean y persisten dos nuevos puntos.
-        $point = GeoPoint::create(['latitude' => '-42.7672777','longitude' => '-65.036735', 'order' => '-1']);
-        // Se asocian los nuevos puntos
-        $centrality->geopoint()->save($point);
+        $centrality = new  Centrality();
+        $centrality->name = 'Plaza';
+        $centrality->location = 'Alta plaza';
+        $centrality->geom = new Point(-42.7672777, -65.036735);
+        $centrality->save();
+
         // Se establecen los datos con una variacion en uno de sus atributos.
         $data = ['name' => 'Plaza1',
                 'location' => 'Alta plaza',

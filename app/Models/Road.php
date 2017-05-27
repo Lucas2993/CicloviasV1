@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\Point;
 
-class Zone extends Model{
+class Road extends Model{
 
     use PostgisTrait;
 
-    protected $table = 'zones';
+    protected $table = 'roads';
+
+    /**
+    * The attributes that are mass assignable.
+    *
+    */
 
     protected $fillable = [
-        'name', 'description', 'color'
+        'name'
     ];
 
     protected $postgisFields = [

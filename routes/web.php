@@ -24,12 +24,14 @@ Route::get('/','AngularAppController@index');
 */
 Route::resource('api/centrality', 'CentralityController', ['except' => ['create', 'edit']]);
 
-Route::resource('api/journey', 'JourneyController', ['create', 'edit']);
+Route::resource('api/journey', 'JourneyController', ['except' => ['create', 'edit', 'store', 'update']]);
 
-Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit']]);
+Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit', 'store', 'update']]);
 
 Route::get('api/trip/closeToPoint/{latitude}/{longitude}', 'TripController@getCloseToPoint');
 
-Route::resource('api/trip','TripController', ['except' => ['create', 'edit']]);
+Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'store', 'update']]);
 
 Route::get('api/trip/toDistance/{long}', 'TripController@getToDistance');
+
+Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');

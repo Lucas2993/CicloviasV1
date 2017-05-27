@@ -106,7 +106,7 @@
               function getLayerTripsFinder(dataJsonTrips){
                   // recuperamos los datos q nos competen
                     var vectorSourceNew = serviceTrip.getSourceTripFinder(dataJsonTrips);
-                    var styleLayer = creatorStyle.getStyleTripCloseToPoint();
+                    var styleLayer = creatorStyle.getStyleTripCloseToPointViolet();
 
                     var layerTrips = new ol.layer.Vector({
                       source: vectorSourceNew,
