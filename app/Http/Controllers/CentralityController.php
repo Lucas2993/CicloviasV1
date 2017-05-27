@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
+
+use Phaza\LaravelPostgis\Geometries\Point;
+
 use App\Models\Centrality;
-use App\Models\GeoPoint;
 
 /**
   *Crontoller creado por JLDEVIA el 14/04/2017.
@@ -23,9 +25,6 @@ class CentralityController extends Controller
     public function index(){
         $centralities = Centrality::all();
         // Se obtienen los puntos correspodientes.
-        foreach($centralities as $centrality){
-            $centrality->point = $centrality->geopoint()->get()[0];
-        }
         return $centralities;
     }
 
@@ -54,20 +53,17 @@ class CentralityController extends Controller
 
         }
 
-        $params_points = $request->all();
-        $params_centrality = $request->all();
+        $params = $request->all();
 
-        unset($params_points['name']);
-        unset($params_points['location']);
-        unset($params_centrality['latitude']);
-        unset($params_centrality['longitude']);
+        $centrality = new Centrality();
+        $centrality->name = $params['name'];
+        $centrality->location = $params['location'];
 
-        $params_points['order'] = '-1';
+        $point = new Point($params['latitude'], $params['longitude']);
 
-        $centrality = Centrality::create($params_centrality);
-        $point = GeoPoint::create($params_points);
-        $centrality->geopoint()->save($point);
-        $centrality->point = $centrality->geopoint()->get()[0];
+        $centrality->geom = $point;
+        $centrality->save();
+
         return $centrality;
     }
 
@@ -79,7 +75,6 @@ class CentralityController extends Controller
      */
     public function show($id){
         $centrality = Centrality::find($id);
-        $centrality->point = $centrality->geopoint()->get()[0];
         return $centrality;
     }
 
@@ -112,15 +107,9 @@ class CentralityController extends Controller
 
         $centrality->name = $request->input('name');
         $centrality->location = $request->input('location');
+        $centrality->geom = new Point($request->input('latitude'), $request->input('longitude'));
         $centrality->save();
 
-        $point = $centrality->geopoint()->get()[0];
-
-        $point->latitude = $request->input('latitude');
-        $point->longitude = $request->input('longitude');
-
-        $centrality->geopoint()->save($point);
-        $centrality->point = $centrality->geopoint()->get()[0];
         return $centrality;
     }
 
@@ -132,7 +121,6 @@ class CentralityController extends Controller
      */
     public function destroy($id){
         $centrality = Centrality::find($id);
-        $centrality->point = $centrality->geopoint()->get()[0];
         Centrality::destroy($id);
         return $centrality;
     }

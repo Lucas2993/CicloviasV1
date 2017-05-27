@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 class Zone extends Model{
 
-  protected $table = 'zones';
+    use PostgisTrait;
 
-  /**
- * The attributes that are mass assignable.
- *
- */
- protected $fillable = [
-   'name', 'description', 'color', 'points'
- ];
+    protected $table = 'zones';
 
-  public function geopoints(){
-      return $this->belongsToMany('App\Models\GeoPoint');
-  }
+    protected $fillable = [
+        'name', 'description', 'color'
+    ];
+
+    protected $postgisFields = [
+        'geom'
+    ];
 }

@@ -15,6 +15,7 @@
 
     <!-- Estilos propios -->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/slider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/session.css') }}">
 
 

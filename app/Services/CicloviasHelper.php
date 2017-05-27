@@ -16,6 +16,8 @@ class CicloviasHelper {
   * @param $long2: longitud del punto 2- double
   * @return la distancia calculada (en kilómetros) entre los dos puntos.
   */
+
+  // TODO Para corregir...
   public function calculateDistance ($lat1, $long1, $lat2, $long2){
     $degtorad = 0.01745329;
     $radtodeg = 57.29577951;
@@ -39,6 +41,8 @@ class CicloviasHelper {
   * @param $trip
   * @return int $km
   */
+
+  // TODO Para corregir...
   public function tripDistance($trip){
     //saco el numero de elementos
     $longitud = count($trip);
@@ -59,6 +63,8 @@ class CicloviasHelper {
   *@param int $long
   *@param array $result
   */
+
+  // TODO Para corregir...
   public function getToDistance($long){
     //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
     $longMin= $long - 0.05;
@@ -93,6 +99,8 @@ class CicloviasHelper {
   * @param $id
   * @return int $km
   */
+
+  // TODO Para corregir...
   public function tripIdDistance($id){
     //Busco recorrido por id
     $Trip = Trip::find($id);

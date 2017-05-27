@@ -62,13 +62,14 @@
                 vm.centralitiesLayer.getSource().clear();
             } else {
                 vm.selectedAllCentralities = true;
+                adminLayers.addCentralities(srvLayersCentrality.getCentralities(), srvLayersCentrality.getCentralitiesLayer());
                 // corregir esto
                 //  vm.centralitiesJson = getCentralities();
-                vm.centralitiesJson = srvLayersCentrality.getCentralities()
-                adminLayers.addCentralities(vm.centralitiesJson, vm.centralitiesLayer);
+                // vm.centralitiesJson = srvLayersCentrality.getCentralities()
+                // adminLayers.addCentralities(vm.centralitiesJson, vm.centralitiesLayer);
             }
 
-            angular.forEach(vm.centralitiesJson, function(centrality) {
+            angular.forEach(srvLayersCentrality.getCentralities(), function(centrality) {
                 centrality.selected = vm.selectedAllCentralities;
             });
         }

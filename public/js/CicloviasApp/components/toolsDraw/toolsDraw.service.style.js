@@ -16,7 +16,8 @@
                 getStyleJourney: getStyleJourney,
                 getStyleTripCloseToPoint: getStyleTripCloseToPoint,
                 getStyleTripsRanking: getStyleTripsRanking,
-                getStyleTemporalEditCentrality: getStyleTemporalEditCentrality
+                getStyleTemporalEditCentrality: getStyleTemporalEditCentrality,
+                getStyleTripCloseToPointViolet : getStyleTripCloseToPointViolet
             };
             return service;
 
@@ -93,6 +94,14 @@
             function getStyleTripCloseToPoint(){
                 var style = new ol.style.Style({
                     stroke: new ol.style.Stroke({color: 'yellow', width: 2}),
+                });
+
+                return style;
+            }
+
+            function getStyleTripCloseToPointViolet(){
+                var style = new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: 'black', width: 2}),
                 });
 
                 return style;

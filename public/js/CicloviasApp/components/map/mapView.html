@@ -5,28 +5,25 @@
     <div class="row row-offcanvas row-offcanvas-left" id="row-offcanvas">
         <!-- Panel de control -->
         <nav class="col-sm-3 sidebar-offcanvas" id="sidebar">
-
             <uib-accordion close-others="true">
-
                 <!-- Se agrego uib-accordion que se utiliza para los menues retractiles. -->
                 <div class="panel-default" ng-controller="mapCentralityController">
                     <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="openMenuCentralities">
-                            <form>
-                                <div>
-                                    <label>
+                        <form>
+                            <div>
+                                <label>
                                       <input type="checkbox" ng-click="checkAllCentralities()"> VER TODAS
-                                    </label>
-                                </div>
-                                <div class="checkbox" ng-repeat="centrality in getCentralities()">
+                                </label>
+                            </div>
+                            <div class="checkbox" ng-repeat="centrality in getCentralities()">
                                 <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
-                                    <label>
+                                <label>
                                       <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
-                                    </label>
-                                </div>
-                            </form>
+                                </label>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            <br>
 
                 <!-- menu de gestion de centralidades -->
                 <div class="panel-default" ng-controller="mapCentralityEditController">
@@ -66,8 +63,6 @@
                     </div>
                 </div>
 
-                <br>
-
                 <!-- menu de zonas -->
                 <div class="panel-default" ng-controller="mapZoneController">
                     <div uib-accordion-group class="panel-primary" heading="Zonas" is-open="false">
@@ -87,8 +82,6 @@
                     </div>
                 </div>
 
-                <br>
-
                 <!-- menu de opciones de recorridos -->
                 <div class="panel-default" ng-controller="mapTripController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos" is-open="false">
@@ -98,14 +91,12 @@
                             </div>
                             <div class="checkbox" ng-repeat="trip in tripsJson">
                                 <label>
-                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "viewSelectedTrip(trip)"> [[trip.name]]
+                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "viewSelectedTrip(trip)"> recorrido [[trip.id]]
                                 </label>
                             </div>
                         </form>
                     </div>
                 </div>
-
-                <br>
 
                 <!-- menu de opciones de trayectos -->
                 <div class="panel-default" ng-controller="mapJourneyController">
@@ -117,8 +108,6 @@
                         </form>
                     </div>
                 </div>
-
-                <br>
 
                 <!-- Menu de seleccion de un punto para conocer los recorridos cercanos -->
                 <div class="panel-default" ng-controller="mapTripFinderController">
@@ -144,32 +133,51 @@
                     </div>
                 </div>
 
-                <br>
-
                 <div class="panel-default" ng-controller="tripsRankingController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos ponderados" is-open="openMenuRankingTrip">
                         <form>
-                            <div>
-                                <label><input type="checkbox" ng-model="selectTripsRanking" ng-change= "viewLayerTripsRanking()" > Ver recorridos ponderados</label>
+                            <div class=" form-group">
+                                <!-- <div>
+                                    <label><input type="checkbox" ng-model="selectTripsRanking" ng-change= "viewLayerTripsRanking()" > Mostrar capa</label>
+                                </div> -->
+                                <div class="range range-primary">
+                                    <output>Ponderación min:</output>
+                                    <input type="range" name="range"   min="1" max="100" value="1" onchange="rangeSuccess.value=value">
+                                    <output id="rangeSuccess">1</output>
+                                </div>
+                                <!-- </div> -->
+                                <br>
+                                <div>
+                                    <label label-primary>Filtro por turno:</label>
+                                </div>
+                                <div class="checkbox" ng-repeat="c in list">
+                                    <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
+                                    <label>
+                                        <input type="checkbox" ng-model="c.selected" ng-change= "" > [[c.turno]]
+                                  </label>
+                                </div>
+
+                                <button class="btn btn-block btn-primary" ng-disabled="" uib-tooltip="Filtrar" ng-click="findTripsRanking()">
+                                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <br>
-
                 <!-- Menu de Muestra de Recorridos por longitud -->
                 <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false">
                     <div class="panel-body" ng-controller="mapTripByDistanceController">
-                <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
+                        <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
                         <form>
                             <div>
-                              <div class="text-center form-group">
-                                  <label><input type="checkbox" ng-disabled="!isLayerByDistanceCreated" ng-model="selectTripByDistance.checkbox" ng-change="viewTripsToSelectedDistance()" > Ver capa de recorridos con determinada distancia</label>
-                              </div>
                                 <div class="text-center form-group">
-                                   <input type="number" ng-model="distance" min="0.10" max="1000" step="0.05">
+                                    <label><input type="checkbox" ng-disabled="!isLayerByDistanceCreated" ng-model="selectTripByDistance.checkbox" ng-change="viewTripsToSelectedDistance()" > Ver capa de recorridos con determinada distancia</label>
+                                </div>
+                                <div class="text-center form-group">
+                                    <input type="number" ng-model="distance" min="0.10" max="1000" step="0.05">
                                 </div>
                                 <div class="text-center form-group">
                                     <button class="btn btn-primary" ng-click="getTripsToSelectedDistance()">Ver recorridos</button>
@@ -181,6 +189,8 @@
                         </form>
                     </div>
                 </div>
+
+
 
             </uib-accordion>
 

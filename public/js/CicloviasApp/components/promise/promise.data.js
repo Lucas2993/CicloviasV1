@@ -197,16 +197,13 @@
             // );
             // return promise;
             var respuestaServidor = [
-                {"id":1,"name":"Trayeco 1","ranking":"3", "pointIni":{"latitude":-42.79003768346739,"longitude":-65.02793149498143}, "pointFinal":{"latitude":-42.78993533003046,"longitude":-65.0268264248673}},
-                {"id":2,"name":"Trayeco 2","ranking":"4", "pointIni":{"latitude":-42.78993533003046,"longitude":-65.0268264248673}, "pointFinal":{"latitude":-42.78983297642427,"longitude":-65.02563552406468}},
-                {"id":3,"name":"Trayeco 3","ranking":"12", "pointIni":{"latitude":-42.78983297642427,"longitude":-65.02563552406468}, "pointFinal":{"latitude":-42.78975424276587,"longitude":-65.0245411827866}},
-                {"id":4,"name":"Trayeco 4","ranking":"1", "pointIni":{"latitude":-42.78975424276587,"longitude":-65.0245411827866}, "pointFinal":{"latitude":-42.789675509007324,"longitude":-65.02331809547582}},
-                {"id":5,"name":"Trayeco 5","ranking":"8", "pointIni":{"latitude":-42.789675509007324,"longitude":-65.02331809547582}, "pointFinal":{"latitude":-42.789533787989555,"longitude":-65.02181605842748}},
-                {"id":6,"name":"Trayeco 6","ranking":"9", "pointIni":{"latitude":-42.789533787989555,"longitude":-65.02181605842748}, "pointFinal":{"latitude":-42.78940781347912,"longitude":-65.02029256370702}},
-                {"id":7,"name":"Trayeco 7","ranking":"7", "pointIni":{"latitude":-42.78940781347912,"longitude":-65.02029256370702}, "pointFinal":{"latitude":-42.789281838712306,"longitude":-65.0187046959702}},
-                {"id":8,"name":"Trayeco 8","ranking":"2", "pointIni":{"latitude":-42.789281838712306,"longitude":-65.0187046959702}, "pointFinal":{"latitude":-42.789155863689096,"longitude":-65.01740650680699}},
-                {"id":9,"name":"Trayeco 9","ranking":"5", "pointIni":{"latitude":-42.789155863689096,"longitude":-65.01740650680699}, "pointFinal":{"latitude":-42.789045635333466,"longitude":-65.01615123298802}},
-                {"id":10,"name":"Trayeco 10","ranking":"15", "pointIni":{"latitude":-42.789045635333466,"longitude":-65.01615123298802}, "pointFinal":{"latitude":-42.78891965982954,"longitude":-65.01485304382481}}
+              // gales ruperto gim
+                {"id":1,"name":"Trayeco 1","ranking":"700", "pointIni":{"latitude":-42.78310326285499,"longitude":-65.07063663717577}, "pointFinal":{"latitude":-42.78169277769997,"longitude":-65.0664094757683}},
+                // gales periodista
+                {"id":2,"name":"Trayeco 2","ranking":"1000", "pointIni":{"latitude":-42.78169277769997,"longitude":-65.0664094757683}, "pointFinal":{"latitude":-42.787645535040284,"longitude":-65.06263292547533}},
+                // periodista alem
+                {"id":3,"name":"Trayeco 3","ranking":"1200", "pointIni":{"latitude":-42.787645535040284,"longitude":-65.06263292547533}, "pointFinal":{"latitude":-42.78406292559168,"longitude":-65.05197919126817}}
+                //alem buenos aires
             ];
             return respuestaServidor;
         };

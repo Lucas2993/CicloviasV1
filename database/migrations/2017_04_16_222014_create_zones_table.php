@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Phaza\LaravelPostgis\Schema\Blueprint;
 
 class CreateZonesTable extends Migration
 {
@@ -17,6 +17,7 @@ class CreateZonesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('description', 200);
+            $table->polygon('geom');
             $table->string('color', 100);
             $table->timestamps();
         });
