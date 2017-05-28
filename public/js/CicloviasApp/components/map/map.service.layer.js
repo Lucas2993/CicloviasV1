@@ -169,6 +169,7 @@
                    // crea el dibujo con los puntos
                    var draw = new ol.Feature({
                        geometry: new ol.geom.Polygon([
+                              //  infoZone.points
                                infoZone.points
                        ])
                    });

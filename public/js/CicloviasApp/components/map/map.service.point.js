@@ -20,7 +20,8 @@
             var point;
             // Recorre el json, mientras va generando puntos y los agrega a un vector
             for (var i = 0; i < pointsJson.length; i++) {
-                point = creatorFeature.getPoint(pointsJson[i].point.longitude, pointsJson[i].point.latitude, pointsJson[i]);
+                // point = creatorFeature.getPoint(pointsJson[i].point.longitude, pointsJson[i].point.latitude, pointsJson[i]);
+                point = creatorFeature.getPoint(pointsJson[i].geom.coordinates[0], pointsJson[i].geom.coordinates[1], pointsJson[i]);
                 point.setStyle(stylePoint);
                 vectorCentralities.push(point);
             }
@@ -30,7 +31,8 @@
         function getPointCentrality(pointJson) {
             var stylePoint = creatorStyle.getStylePoint();
             var point;
-            point = creatorFeature.getPoint(pointJson.point.longitude, pointJson.point.latitude, pointJson);
+            // point = creatorFeature.getPoint(pointJson.point.longitude, pointJson.point.latitude, pointJson);
+            point = creatorFeature.getPoint(pointJson.geom.coordinates[0], pointJson.geom.coordinates[1], pointJson);
             point.setStyle(stylePoint);
             return point;
         }

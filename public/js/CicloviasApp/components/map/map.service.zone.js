@@ -19,7 +19,8 @@
                 var vectorInfoZone = [];
                 var vectorPointsZone = [];
                 for (var i = 0; i < dateZonesJson.length; i++) {
-                   vectorPointsZone = getVectorPointZone(dateZonesJson[i].points);
+                  //  vectorPointsZone = getVectorPointZone(dateZonesJson[i].points);
+                   vectorPointsZone = getVectorPointZone(dateZonesJson[i].geom);
                    var infoZone = new Object();
                    infoZone.name = dateZonesJson[i].name;
                    infoZone.color = dateZonesJson[i].color;
@@ -34,11 +35,13 @@
                       var vectorPointsZone = [];
                       var point;
                       for (var i = 0; i < pointsZone.length; i++) {
-                          point = [pointsZone[i].longitude, pointsZone[i].latitude];
+                        // @TODO modificar para geo-spatial
+                          // point = [pointsZone[i].longitude, pointsZone[i].latitude];
+                          point = [pointsZone[i].[0], pointsZone[i].[1]];
                           vectorPointsZone.push(point);
                       }
-                      point = [pointsZone[0].longitude, pointsZone[0].latitude];
-                      vectorPointsZone.push(point);
+                      // point = [pointsZone[0].longitude, pointsZone[0].latitude];
+                      // vectorPointsZone.push(point);
                       return vectorPointsZone;
                   };
 
