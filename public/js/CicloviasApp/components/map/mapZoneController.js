@@ -37,7 +37,7 @@
                     // data[0].geom.coordinates[0][0][0] ... latitud del primer punto de la zona
                     // data[0].geom.coordinates[0][0][1] ... longitud del primer punto de la zona
                     // La linea a continuacion muestra la latitud del primer punto de una zona.
-                    console.warn(data[0].geom.coordinates[0][0][0]);
+                    // console.warn(data[0].geom.coordinates[0][0][0]);
                     createLayerZone(vm.zonesJson);
                 })
                 .catch(function(err) {
