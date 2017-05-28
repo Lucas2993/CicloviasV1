@@ -70,7 +70,7 @@
 
                 // obtenemos de los datos crudos, solo los datos neceasarios para visualizar las zonas
                 var infoZones = srvZone.getDataZones(infoZoneJson);
-
+                console.log(infoZones);
                 // por cada zona generamos una capa
                 for (var i = 0; i < infoZones.length; i++) {
                     var newLayer = generateZone(infoZones[i]);

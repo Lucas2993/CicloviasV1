@@ -30,6 +30,14 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.zonesJson = data;
                     console.log("Datos recuperados prom ZONES con EXITO! = " + data);
+
+                    // data[0] indica la primera zona
+                    // data[0].geom.coordinates[0] ... este vector esta de mas!!
+                    // data[0].geom.coordinates[0][0] ... primer punto de la zona
+                    // data[0].geom.coordinates[0][0][0] ... latitud del primer punto de la zona
+                    // data[0].geom.coordinates[0][0][1] ... longitud del primer punto de la zona
+                    // La linea a continuacion muestra la latitud del primer punto de una zona.
+                    console.warn(data[0].geom.coordinates[0][0][0]);
                     createLayerZone(vm.zonesJson);
                 })
                 .catch(function(err) {
