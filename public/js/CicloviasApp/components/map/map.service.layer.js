@@ -99,8 +99,8 @@
                     style: styleLayer
                   });
 
-                  return layerTrips;
-              }
+                return layerTrips;
+            }
 
               // crea y devuelve una capa que contiene los recorridos recuperados del servidor #2
               function getLayerTripsFinder(dataJsonTrips){
@@ -138,15 +138,15 @@
               function getLayerJourney(dataJsonJourney){
                       // recuperamos los datos q nos competen
                       var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
-                        var styleLayer = creatorStyle.getStyleJourney();
+                      var styleLayer = creatorStyle.getStyleJourney();
 
-                        var layerJournies = new ol.layer.Vector({
+                      var layerJournies = new ol.layer.Vector({
                           source: vectorSourceJourney,
                           style: styleLayer,
                           visible: false
-                        });
+                      });
 
-                        return layerJournies;
+                      return layerJournies;
               }
 
               function getTemporalLayer(){

@@ -129,7 +129,6 @@
         function getTrips() {
             var defered = $q.defer();
             var promise = defered.promise;
-
             $http({
                 method: 'GET',
                 url: path.TRIP
