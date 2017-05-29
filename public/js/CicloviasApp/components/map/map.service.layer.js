@@ -70,7 +70,7 @@
 
                 // obtenemos de los datos crudos, solo los datos neceasarios para visualizar las zonas
                 var infoZones = srvZone.getDataZones(infoZoneJson);
-
+                console.log(infoZones);
                 // por cada zona generamos una capa
                 for (var i = 0; i < infoZones.length; i++) {
                     var newLayer = generateZone(infoZones[i]);
@@ -169,6 +169,7 @@
                    // crea el dibujo con los puntos
                    var draw = new ol.Feature({
                        geometry: new ol.geom.Polygon([
+                              //  infoZone.points
                                infoZone.points
                        ])
                    });
