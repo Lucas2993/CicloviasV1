@@ -91,7 +91,7 @@
                             </div>
                             <div class="checkbox" ng-repeat="trip in tripsJson">
                                 <label>
-                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "viewSelectedTrip(trip)"> recorrido [[trip.id]]
+                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "viewSelectedTrip(trip)"> Recorrido [[trip.id]]
                                 </label>
                             </div>
                         </form>
@@ -177,7 +177,12 @@
                                     <label><input type="checkbox" ng-disabled="!isLayerByDistanceCreated" ng-model="selectTripByDistance.checkbox" ng-change="viewTripsToSelectedDistance()" > Ver capa de recorridos con determinada distancia</label>
                                 </div>
                                 <div class="text-center form-group">
+                                    <label> Distancia (KM):</lavel>
                                     <input type="number" ng-model="distance" min="0.10" max="1000" step="0.05">
+                                </div>
+                                <div class="text-center form-group">
+                                  <label> tolerancia (Metros):</lavel>
+                                    <input type="number" ng-model="tolerance" min="0" max="1000" step="5">
                                 </div>
                                 <div class="text-center form-group">
                                     <button class="btn btn-primary" ng-click="getTripsToSelectedDistance()">Ver recorridos</button>

@@ -168,7 +168,8 @@
                         setPoints = arrayPointsTrips[i];
                         // por cada conjunto de puntos rescatams sus long y lat de cada punto
                         for (var j = 0; j < setPoints.length; j++) {
-                            longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                            // longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                            longLat = [setPoints[j][0], setPoints[j][1]];
                             arrayLontLat.push(longLat);
                         }
                         // creamos un objeto con los datos del recorridos
@@ -195,7 +196,7 @@
 
                     // obtenemos nada mas q los puntos de las zonas con sus datos
                     for (var i = 0; i < dataJsonTrips.length; i++) {
-                        arrayPointsTrips.push((dataJsonTrips[i]).points);
+                        arrayPointsTrips.push((dataJsonTrips[i]).geom);
                     }
 
                     var setPoints;
@@ -203,10 +204,10 @@
 
                     // rescatams solo los long y lat de cada punto de cada cjto de puntos
                     for (var i = 0; i < arrayPointsTrips.length; i++) {
-                        setPoints = arrayPointsTrips[i];
+                        setPoints = arrayPointsTrips[i].coordinates;
                         // por cada conjunto de puntos rescatams sus long y lat de cada punto
                         for (var j = 0; j < setPoints.length; j++) {
-                            longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                            longLat = [(setPoints[j][1]), (setPoints[j][0])];
                             arrayLontLat.push(longLat);
                         }
                         // agregamos el cjot de puntos de cada recorrido al cjto de recorridos
