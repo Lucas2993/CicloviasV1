@@ -171,7 +171,8 @@
                         setPoints = arrayPointsTrips[i];
                         // por cada conjunto de puntos rescatams sus long y lat de cada punto
                         for (var j = 0; j < setPoints.length; j++) {
-                            longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                            // longLat = [(setPoints[j]).longitude, (setPoints[j]).latitude];
+                            longLat = [setPoints[j][0], setPoints[j][1]];
                             arrayLontLat.push(longLat);
                         }
                         // creamos un objeto con los datos del recorridos

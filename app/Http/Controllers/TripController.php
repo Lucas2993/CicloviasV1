@@ -212,48 +212,60 @@ class TripController extends Controller
             $min_distance_km = 0.5;
             $range = $max_distance_km - $min_distance_km;
             $max_distance_random = $min_distance_km + $range * (mt_rand() / mt_getrandmax());
-            // $max_distance_random = rand($min_distance_km, $max_distance_km);
             // for($i = 0;$i <= $max_distance_random; $i++){
             while($distance_completed < $max_distance_random){
                 // Se realiza un sorteo aleatorio sobre si se cambiara de calle o no.
                 $keep_going = rand(0,1);
                 // Se agrega el nuevo punto al recorrido
                 array_push($new_trip_points, $point_to_add);
+                // var_dump("-----Point to add -------");
+                // var_dump("$distance_completed");
+                // var_dump($point_to_add->getLng());
+                // var_dump($point_to_add->getLat());
+                // var_dump("-----Fin Point to add -------");
                 $last_point_added = $point_to_add;
                 $possible_next_road = null;
                 $position = 0;
 
                 // Si no se desea cambiar de calle no se necesita hacer la consulta.
                 if(!$keep_going){
-                    $possible_roads = DB::select('select *
-                                                from(
-                                                    select r.* as road,st_dwithin(r.geom, ST_MakePoint(:longitude, :latitude), 2.0, true) as distance
-	                                                from roads r) as distance
-                                                where distance.distance = \'t\'
-                                                and distance.name <> :name', ['longitude' => $point_to_add->getLng(),
-                                                                                'latitude' => $point_to_add->getLat(),
-                                                                                'name' => "\'".$random_road->name."\'",
-                                                                            ]);
+                    // $aux_possible_roads = DB::select('select r.* as road,st_dwithin(r.geom, ST_MakePoint(:longitude, :latitude), 0) as distance
+                    //                                     from roads r', ['longitude' => $point_to_add->getLng(),
+                    //                                                     'latitude' => $point_to_add->getLat(),
+                    //                                                     ]);
+                    $aux_possible_roads = DB::raw("select * from (select r.* as road,st_dwithin(r.geom, ST_MakePoint(".$point_to_add->getLng().",".$point_to_add->getLat()."), 0) as distance
+                                                from roads r) as distance
+                                                where distance.distance = 't'
+                                                and distance.id <> ".$random_road->id);
+
+                    $possible_roads = DB::select($aux_possible_roads);
+
+                    // $possible_roads =  DB::table(DB::raw("($aux_possible_roads) AS distance"))
+                    //                             ->where([
+                    //                                 ['distance.distance', '=', 't'],
+                    //                                 ['distance.name', '<>', $random_road->name]
+                    //                             ])->get();
+                    // $possible_roads = DB::select('select *
+                    //                             from(
+                    //                                 ) as distance
+                    //                             where distance = \'t\'
+                    //                             and name <> :name', ['longitude' => $point_to_add->getLng(),
+                    //                                                             'latitude' => $point_to_add->getLat(),
+                    //                                                             'name' => "\'".$random_road->name."\'",
+                    //                                                         ]);
+                    // var_dump("------------Separador------------");
                     // var_dump($possible_roads);
+                    // var_dump("---------------------------------");
+                    // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
+                    $aux = array();
+                    foreach($possible_roads as $possible_road){
+                        array_push($aux, $possible_road);
+                    }
+                    $possible_roads = $aux;
                 }
                 else{
                     $possible_roads = array();
                 }
-
-                // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
-                $aux = array();
-                foreach($possible_roads as $possible_road){
-                    array_push($aux, $possible_road);
-                }
-                $possible_roads = $aux;
-
-                // // Se quita la calle actual de la lista de alternativas a tomar.
-                // for($j = 0;$j < count($possible_roads);$j++) {
-                //     if($possible_roads[$j]->name == $random_road->name){
-                //         array_splice($possible_roads, $j, 1);
-                //         break;
-                //     }
-                // }
 
                 // Si quedan alternativas...
                 if(count($possible_roads) > 0){
@@ -274,6 +286,7 @@ class TripController extends Controller
                         $point_position++;
                     }
                     else{
+                        // Si no hay mas puntos para continuar dentro de la calle actual, se descarta el recorrido.
                         $again = true;
                         break;
                     }
@@ -307,6 +320,7 @@ class TripController extends Controller
                             }
                             $point_position = $position + 1;
                             $random_road = $possible_next_road;
+                            $random_road_points = $random_road->geom->getPoints();
                         }
                         // Se determina si dentro de la calle actual habria un punto siguiente para usar.
                         else{
@@ -334,17 +348,17 @@ class TripController extends Controller
                         }
                     }
                 }
-                $distance_completed +=  $this->clvHelperService->calculateDistance($new_trip_points[count($new_trip_points)-1]->getLat(),
-                $new_trip_points[count($new_trip_points)-1]->getLng(),
+                $distance_completed +=  $this->clvHelperService->calculateDistance($last_point_added->getLat(),
+                $last_point_added->getLng(),
                 $point_to_add->getLat(),
                 $point_to_add->getLng());
             }
-            if(count($new_trip_points) > $min_distance_km && !$again){
+            if(($distance_completed > $max_distance_random) && (!$again)){
                 // $linea_csv = "Recorrido ".$k.",Recorrido generado ".$k.",".count($new_trip_points);
                 // fwrite($file, $linea_csv . PHP_EOL);
                 $name = Name::all()->random(1)->name;
                 $new_trip = new Trip();
-                $new_trip->name = 'Recorrido '.$k;
+                $new_trip->name = 'Recorrido '.($k+1);
                 $new_trip->description = 'Recorrido generado '.$k;
                 $new_trip->distance_km = $distance_completed;
                 $new_trip->user = $name;
@@ -356,7 +370,7 @@ class TripController extends Controller
                 // $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
                 // fwrite($file, $linea_csv . PHP_EOL);
             // }
-        }
+            }
         /*
         SELECT r.*
         FROM roads r
