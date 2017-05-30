@@ -57,27 +57,28 @@
             }
 
             // crea un feature de trip a partir de los datos en formato json de los recorridos
-            function getFeatureTripJson(tripsJson){
-                var arrayLontLat = [];
+            // Modificado por JLDEVIA el 28/05/2017. S.U: Adaptación visual a spatial-data.
+            function getFeatureTripJson(tripJson){
+                //var arrayLontLat = [];
 
-                var pointsTripJson = tripsJson.points;
+                //var pointsTripJson = tripsJson.points;
 
-                var longLat;
+                //var longLat;
                 var geomTrip;
 
                 // rescatams solo los long y lat de cada punto
-                for (var i = 0; i < pointsTripJson.length; i++) {
-                    longLat = [(pointsTripJson[i]).longitude, (pointsTripJson[i]).latitude];
-                    arrayLontLat.push(longLat);
-                }
+                // for (var i = 0; i < pointsTripJson.length; i++) {
+                //     longLat = [(pointsTripJson[i]).longitude, (pointsTripJson[i]).latitude];
+                //     arrayLontLat.push(longLat);
+                // }
 
-                geomTrip = new ol.geom.LineString(arrayLontLat);
+                geomTrip = (new ol.format.GeoJSON()).readGeometry(tripJson.geom);
 
                 var feature = new ol.Feature({
                     geometry: geomTrip
                 });
                 // le asignamos un ID
-                feature.setId(tripsJson.id);
+                feature.setId(tripJson.id);
                 console.log("id del trayecto del JSON creado: "+feature.getId());
                 return feature;
             }

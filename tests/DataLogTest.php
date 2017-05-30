@@ -9,6 +9,8 @@ use App\Services\CicloviasHelper;
 
 class DataLogTest extends TestCase
 {
+
+    //use DatabaseMigrations;
     /**
      * Test de carga masiva de recorridos mediante archivo CSV.
      * @test

@@ -70,7 +70,7 @@
 
                 // obtenemos de los datos crudos, solo los datos neceasarios para visualizar las zonas
                 var infoZones = srvZone.getDataZones(infoZoneJson);
-
+                console.log(infoZones);
                 // por cada zona generamos una capa
                 for (var i = 0; i < infoZones.length; i++) {
                     var newLayer = generateZone(infoZones[i]);
@@ -99,8 +99,8 @@
                     style: styleLayer
                   });
 
-                  return layerTrips;
-              }
+                return layerTrips;
+            }
 
               // crea y devuelve una capa que contiene los recorridos recuperados del servidor #2
               function getLayerTripsFinder(dataJsonTrips){
@@ -138,15 +138,15 @@
               function getLayerJourney(dataJsonJourney){
                       // recuperamos los datos q nos competen
                       var vectorSourceJourney = serviceTrip.getSourceJourney(dataJsonJourney);
-                        // var styleLayer = creatorStyle.getStyleJourney();
+                      var styleLayer = creatorStyle.getStyleJourney();
 
-                        var layerJournies = new ol.layer.Vector({
+                      var layerJournies = new ol.layer.Vector({
                           source: vectorSourceJourney,
                         //   style: styleLayer,
                           visible: false
-                        });
+                      });
 
-                        return layerJournies;
+                      return layerJournies;
               }
 
               function getTemporalLayer(){
@@ -169,6 +169,7 @@
                    // crea el dibujo con los puntos
                    var draw = new ol.Feature({
                        geometry: new ol.geom.Polygon([
+                              //  infoZone.points
                                infoZone.points
                        ])
                    });

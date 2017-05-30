@@ -9,7 +9,7 @@
     function MapTripController(vm, creatorMap, srvLayers, dataServer, adminLayers,adminTrip) {
 
         // ******************* DECLARACION DE VARIABLES Y FUNCIONES *********************
-        
+
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ********************************** PUBLICO ***********************************
         vm.map = creatorMap.getMap();
@@ -48,6 +48,7 @@
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ************************ Descripcion de las funciones ************************
 
+        // Modificado por JLDEVIA el 28/05/2017. S.U: Adaptación visual a spatial-data.
         function findAllTrips() {
             dataServer.getTrips()
                 .then(function(data) {

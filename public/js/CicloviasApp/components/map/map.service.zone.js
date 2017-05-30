@@ -18,8 +18,11 @@
             function getDataZones(dateZonesJson) {
                 var vectorInfoZone = [];
                 var vectorPointsZone = [];
+                // para cada zona
                 for (var i = 0; i < dateZonesJson.length; i++) {
-                   vectorPointsZone = getVectorPointZone(dateZonesJson[i].points);
+                  //  vectorPointsZone = getVectorPointZone(dateZonesJson[i].points);
+                  // console.warn(data[0].geom.coordinates[0][0][0]);
+                   vectorPointsZone = dateZonesJson[i].geom.coordinates[0];
                    var infoZone = new Object();
                    infoZone.name = dateZonesJson[i].name;
                    infoZone.color = dateZonesJson[i].color;
@@ -29,16 +32,19 @@
                 return vectorInfoZone;
             };
 
+            // TODO posiblemente se deba borrar - NO USADO!!!
             // dado los puntos de una zona, devuelve un vector con esos puntos
                   function getVectorPointZone(pointsZone) {
                       var vectorPointsZone = [];
                       var point;
                       for (var i = 0; i < pointsZone.length; i++) {
-                          point = [pointsZone[i].longitude, pointsZone[i].latitude];
+                        // @TODO modificar para go
+                          // point = [pointsZone[i].longitude, pointsZone[i].latitude];
+                          // point = [pointsZone[i].[0], pointsZone[i].[1]];
                           vectorPointsZone.push(point);
                       }
-                      point = [pointsZone[0].longitude, pointsZone[0].latitude];
-                      vectorPointsZone.push(point);
+                      // point = [pointsZone[0].longitude, pointsZone[0].latitude];
+                      // vectorPointsZone.push(point);
                       return vectorPointsZone;
                   };
 

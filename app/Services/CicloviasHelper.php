@@ -41,8 +41,6 @@ class CicloviasHelper {
   * @param $trip
   * @return int $km
   */
-
-  // TODO Para corregir...
   public function tripDistance($trip){
     //saco el numero de elementos
     $longitud = count($trip);
@@ -51,7 +49,7 @@ class CicloviasHelper {
     for($i=1; $i<$longitud; $i++){
       $j= $i - 1;
       //Calculo la distancia entre los puntos del recorrido
-      $km += $this->CalculateDistance($trip[$j]->latitude, $trip[$j]->longitude, $trip[$i]->latitude, $trip[$i]->longitude);
+      $km += $this->CalculateDistance($trip[$j].'latitude', $trip[$j].'longitude', $trip[$i].'latitude', $trip[$i].'longitude');
       }
 
     return $km;
@@ -61,29 +59,26 @@ class CicloviasHelper {
   *Funcion que retorna los Recorridos que estan dentro de un rango de una determinada Distancia.
   *
   *@param int $long
+  *@param int $tolerance
   *@param array $result
   */
-
-  // TODO Para corregir...
-  public function getToDistance($long){
+  public function getToDistance($long,$tolerance){
     //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
-    $longMin= $long - 0.05;
-    $longMax= $long + 0.05;
+    $longMin= $long - ($tolerance * 0.001);
+    $longMax= $long + ($tolerance * 0.001);
+
+    $result = array();
+    $Trips = Trip::all();
 
     $result = array();
     $Trips = Trip::all();
 
     foreach($Trips as $trip){
-      $trip_points = $trip->trippoint()->get();
-      $points = array();
-      foreach($trip_points as $trip_point){
-          $point = GeoPoint::find($trip_point->geo_point_id);
-          $point->order = $trip_point->order;
-          array_push($points, $point);
-      }
-      $trip->points= $points;
-      $kmt = $this->tripDistance($points);
+      $trip_points = $trip->geom;
+
+      $kmt = $this->tripDistance($trip_points);
       $kmr = round($kmt, 2);
+
         if($kmr >= $longMin && $kmr <= $longMax){
           $result[] = $trip;
 
@@ -99,19 +94,12 @@ class CicloviasHelper {
   * @param $id
   * @return int $km
   */
-
-  // TODO Para corregir...
   public function tripIdDistance($id){
     //Busco recorrido por id
     $Trip = Trip::find($id);
 
-    $trip_points = $Trip->trippoint()->get();
-    $points = array();
-    foreach($trip_points as $trip_point){
-        $point = GeoPoint::find($trip_point->geo_point_id);
-        $point->order = $trip_point->order;
-        array_push($points, $point);
-    }
+    $points = $Trip->geom;
+
     //saco el numero de elementos
     $longitud = count($points);
     $km=0;
@@ -119,7 +107,7 @@ class CicloviasHelper {
     for($i=1; $i<$longitud; $i++){
       $j= $i - 1;
       //Calculo la distancia entre los puntos del recorrido
-      $km +=  $this->CalculateDistance($points[$j]->latitude, $points[$j]->longitude, $points[$i]->latitude, $points[$i]->longitude);
+      $km +=  $this->CalculateDistance($points[$j].'latitude', $points[$j].'longitude', $points[$i].'latitude', $points[$i].'longitude');
       }
     return $km;
   }
@@ -128,9 +116,13 @@ class CicloviasHelper {
   * Función que devuelve el punto normalizado del punto representado por los valores (latitud y longitud)
   * pasados como parámetro.
   */
-  // public function normalizeGeoPoint($lat, $long){
-  //   $qry_lat_min;
-  //   $qry_lat_max;
-  //
-  // }
+  public function normalizeGeoPoint($lat, $long){
+    $qry_lat_min;
+    $qry_lat_max;
+    $qry_long_min;
+    $qry_long_max;
+
+
+
+  }
 }//fin de la clase

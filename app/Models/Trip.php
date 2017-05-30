@@ -10,9 +10,14 @@ class Trip extends Model{
 
     use PostgisTrait;
 
-    protected $table = 'trips';
+  /**
+  * The attributes that are mass assignable.
+  *
+  */
 
-    protected $fillable = [
+  protected $table = 'trips';
+
+  protected $fillable = [
         'name', 'description', 'user', 'time', 'distance_km', 'duration'
     ];
 

@@ -19,6 +19,8 @@
         vm.layerTripsByDistance;
         // almacena la distancia especificada en la grafica
         vm.distance;
+        // almacena la tolerancia para los recorridos especificada en la grafica
+        vm.tolerance;
 
         // #################### FLAGS ####################
         // Bandera que indica si la capa de recorridos de una determinada distancia esta creada.
@@ -45,7 +47,7 @@
 
         // *********************** PUBLICAS ***********************
         function getTripsToSelectedDistance() {
-            dataServer.getTripsToDistance(vm.distance)
+            dataServer.getTripsToDistance(vm.distance,vm.tolerance)
                 .then(function(data) {
                     vm.tripstodistanceJson = data;
                     console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
@@ -93,6 +95,8 @@
             vm.selectTripByDistance.checkbox = false;
             // setea la distancia
             vm.distance = 0;
+            // setea la tolerancia
+            vm.tolerance = 0;
         }
 
     } // fin Constructor
