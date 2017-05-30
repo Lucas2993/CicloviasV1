@@ -21,5 +21,5 @@ class Trip extends Model{
         'name', 'description', 'user', 'time', 'distance_km', 'duration'
     ];
 
-    protected $postgisFields = ['geom'];
+  protected $postgisFields = ['geom'];
 }

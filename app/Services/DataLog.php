@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Trip;
-use App\Models\GeoPoint;
+
+use Phaza\LaravelPostgis\Geometries\LineString;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 class DataLog {
 
@@ -32,18 +34,19 @@ class DataLog {
           $newTrip = new Trip();
           $newTrip->name = $linea[0];
           $newTrip->description = $linea[1];
-          $cant_puntos = $linea[2];
+          $newTrip->user = $linea[2];
+          $newTrip->time = $linea[3];
+          $newTrip->duration = $linea[4];
+          $cant_puntos = $linea[5];
           $points = array();
           for($i=1; $i <= $cant_puntos; $i++){
-            $point = new GeoPoint();
             $linea = fgetcsv($arch, 1000);
             if($linea !== false){
-              $point->latitude = $linea[0];
-              $point->longitude = $linea[1];
+                $point = new Point($linea[0], $linea[1]);
             }
             $points[]=$point;
           }
-          $newTrip->points = $points;
+          $newTrip->geom = new LineString($points);
           $this->registerTrip($newTrip, $id_datalog);
         }
       });
