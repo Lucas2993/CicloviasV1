@@ -55,6 +55,8 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsJson = data;
                     console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data);
+                    console.log("Trips recuperados:");
+                    console.log(data);
                     // proceso y genracion de capa de recorridos
                     vm.layerTrips = srvLayers.getLayerTrips(vm.tripsJson);
                     vm.map.addLayer(vm.layerTrips);
