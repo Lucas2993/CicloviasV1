@@ -117,7 +117,7 @@ class TripTest extends TestCase{
 ]);
 }
 */
-}
+//}
 // private function generarDatosPrueba(){
 //     /*-------Recorrido 1------------*/
 //     $trip = Trip::create(['name' => 'Recorrido 1','description' => 'Por la costanera']);
@@ -308,22 +308,22 @@ class TripTest extends TestCase{
 //
 // }
 //
-// public function testTripToDistance(){
-//     $trips= (new TripController)->getToDistance(1.59);
-//     $countstrip = count($trips);
-//
+public function testTripToDistance(){
+    $trips= (new CicloviasHelper)->getToDistance(0.80, 50);
+    $countstrip = count($trips);
+
 //     //var_dump ($countstrip);
-//     $this->assertTrue($countstrip > 0);
+    $this->assertTrue($countstrip > 0);
+
+
+}
 //
-//
-// }
-//
-// public function testTripIdDistance(){
-//     //Control de metros o kilometros
-//     $distancia = (new TripController)->tripIdDistance('1');
-//     //var_dump ($distancia);
-//     $this->assertTrue($distancia > 0.0);
-// }
-//
-//
-// }
+public function testTripIdDistance(){
+    //Control de metros o kilometros
+    $distancia = (new CicloviasHelper)->tripIdDistance('78');
+    var_dump ($distancia);
+    $this->assertTrue($distancia > 0.0);
+}
+
+
+}
