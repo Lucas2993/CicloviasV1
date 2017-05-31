@@ -142,7 +142,7 @@
 
                       var layerJournies = new ol.layer.Vector({
                           source: vectorSourceJourney,
-                          style: styleLayer,
+                        //   style: styleLayer,
                           visible: false
                       });
 
