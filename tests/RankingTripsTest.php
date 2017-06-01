@@ -15,7 +15,7 @@ class RankingTripsTest extends TestCase{
     $trips= (new RankingTrips)->rankingedTrips();
     $countstrip = count($trips);
 
-    $this->assertTrue($countstrip > 50);
+    $this->assertTrue($countstrip > 7);
   }
 
   public function testPrueba1(){
@@ -29,5 +29,12 @@ class RankingTripsTest extends TestCase{
     $distanceTrip2 = (new RankingTrips)->rankingedTripsQuery();
 
     $this->assertTrue($distanceTrip2 > 900);
+  }
+
+  public function testPruebaQuery2(){
+    $setTripsEq = (new RankingTrips)->rankingedTripsQuery2();
+    // echo "cjtoRecuperado: ".$setTripsEq;
+
+    $this->assertTrue(count($setTripsEq) == 5);
   }
 }

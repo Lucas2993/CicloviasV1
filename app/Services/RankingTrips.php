@@ -22,15 +22,6 @@ class RankingTrips{
   }
 
   public function rankingedTrips1(){
-    // $trips = DB::table('trips')
-    //     ->join('trips_points', 'trips.id', '=', 'trips_points.trip_id')
-    //     ->join('geo_points', 'geo_points.id', '=', 'trips_points.geo_point_id')
-    //     ->select('trips.*')
-    //     ->where('geo_points.latitude', '>=', $max_lat)
-    //     ->where('geo_points.latitude', '<=', $min_lat)
-    //     ->where('geo_points.longitude', '>=', $max_long)
-    //     ->where('geo_points.longitude', '<=', $min_long)
-    //     ->get();
 
     $trips = DB::table('trips')
         ->select('trips.*')
@@ -59,19 +50,38 @@ class RankingTrips{
 
     // distancia en metros
     $distanceQuery = DB::raw($query);
-    // $distanceQuery = DB::raw("select ST_Length(geom) AS km_trips
-    //           from trips
-    //           where id = 2");
 
     $distancesRecovered = DB::select($distanceQuery);
 
     // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
     $auxDistance = $distancesRecovered[0];
 
-    echo "\n ------- DITS ------ ".$auxDistance->km_trips;
     echo "\n distancia rec 2 = ".$auxDistance->km_trips;
 
     return $auxDistance->km_trips;
+  }
+
+  public function rankingedTripsQuery2(){
+    // traemos un cjto de recorridos para analizar
+    $query = "SELECT *
+              FROM trips
+              WHERE id > 3";
+
+    $preQuery = DB::raw($query);
+    $setTrips = DB::select($preQuery);
+
+    // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
+    $aux = array();
+    foreach($setTrips as $trip){
+        array_push($aux, $trip);
+    }
+
+    $aux1 = array();
+    array_push($aux1, $setTrips[0]);
+
+    echo "rdo aux1: ".count($aux1);
+
+    return $aux;
   }
 
 }

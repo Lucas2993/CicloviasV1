@@ -118,6 +118,7 @@
 
         // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida
         function addTrips(dataJsonTrips, layer){
+            console.log("Entro a addTrips");
             // var vectorFeatureTrips = srvLayers.getVectorFeatures(dataJsonTrips);
             var vectorFeatureTrips = serviceTrip.getVectorFeatures(dataJsonTrips);
             console.log("Nro de features: "+vectorFeatureTrips.length);

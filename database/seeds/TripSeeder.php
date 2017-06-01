@@ -103,6 +103,157 @@ class TripSeeder extends Seeder
       $trip3->geom = $linestring3;
       $trip3->save();
 
+      // ********************** Usados para probar algoritmo "Recorridos similares" ********************
+      //----------Recorrido N°4 ---------------
+
+      $puntos4 = array();
+
+      $punto18 = new Point(-65.05864278820195,-42.78316309314362);
+      array_push($puntos4, $punto18);
+      $punto19 = new Point(-65.05758599785008,-42.782781192819016);
+      array_push($puntos4, $punto19);
+      $punto20 = new Point(-65.05664722469487,-42.78247409600383);
+      array_push($puntos4, $punto20);
+      $punto21 = new Point(-65.05572454479375,-42.78216699766537);
+      array_push($puntos4, $punto21);
+
+      $linestring4 = new LineString($puntos4);
+
+      $trip4 = new Trip();
+      $trip4->name = 'Recorrido 4';
+      $trip4->description = 'Recorrido similar 1';
+      $trip4->distance_km = '1.2';
+      $trip4->user = 'Juan P1';
+      $trip4->time = date(DATE_RFC2822);
+      $trip4->duration = date("12:00");
+      $trip4->geom = $linestring4;
+      $trip4->save();
+
+      //----------Recorrido N°5 ---------------
+
+      $puntos5 = array();
+
+      $punto22 = new Point(-65.05758599785008,-42.782781192819016);
+      array_push($puntos5, $punto22);
+      $punto23 = new Point(-65.05664722469487,-42.78247409600383);
+      array_push($puntos5, $punto23);
+      $punto24 = new Point(-65.05572454479375,-42.78216699766537);
+      array_push($puntos5, $punto24);
+      $punto25 = new Point(-65.05500034835973,-42.78191895558765);
+      array_push($puntos5, $punto25);
+      $punto26 = new Point(-65.0543834402863,-42.78169453570867);
+      array_push($puntos5, $punto26);
+      $punto27 = new Point(-65.05360023525395,-42.78143468009569);  // bs as
+      array_push($puntos5, $punto27);
+
+      $linestring5 = new LineString($puntos5);
+
+      $trip5 = new Trip();
+      $trip5->name = 'Recorrido 5';
+      $trip5->description = 'Recorrido similar 2';
+      $trip5->distance_km = '1.4';
+      $trip5->user = 'Juan P2';
+      $trip5->time = date(DATE_RFC2822);
+      $trip5->duration = date("15:00");
+      $trip5->geom = $linestring5;
+      $trip5->save();
+
+      //----------Recorrido N°6 ---------------
+
+      $puntos6 = array();
+
+      $punto28 = new Point(-65.0580741598908,-42.78020350088649);
+      array_push($puntos6, $punto28);
+      $punto29 = new Point(-65.05736605671086,-42.7813374308327);
+      array_push($puntos6, $punto29);
+      $punto30 = new Point(-65.05664722469487,-42.78247409600383);
+      array_push($puntos6, $punto30);
+      $punto31 = new Point(-65.05572454479375,-42.78216699766537);
+      array_push($puntos6, $punto31);
+      $punto32 = new Point(-65.05500034835973,-42.78191895558765);
+      array_push($puntos6, $punto32);
+
+      $linestring6 = new LineString($puntos6);
+
+      $trip6 = new Trip();
+      $trip6->name = 'Recorrido 6';
+      $trip6->description = 'Recorrido similar 3';
+      $trip6->distance_km = '1.3';
+      $trip6->user = 'Juan P3';
+      $trip6->time = date(DATE_RFC2822);
+      $trip6->duration = date("18:00");
+      $trip6->geom = $linestring6;
+      $trip6->save();
+
+      //----------Recorrido N°7 ---------------
+
+      $puntos7 = array();
+
+      $punto33 = new Point(-65.05641119030156,-42.77960502948685);
+      array_push($puntos7, $punto33);
+      $punto34 = new Point(-65.05570308712163,-42.780778342968475);
+      array_push($puntos7, $punto34);
+      $punto35 = new Point(-65.05500034835973,-42.78191895558765);
+      array_push($puntos7, $punto35);
+      $punto36 = new Point(-65.05453364399114,-42.782683945671025); // dobla
+      array_push($puntos7, $punto36);
+      $punto37 = new Point(-65.0538791849915,-42.78244771711581);
+      array_push($puntos7, $punto37);
+      $punto38 = new Point(-65.05310670879521,-42.782187864664); // dobla --> Bs As
+      array_push($puntos7, $punto38);
+      $punto39 = new Point(-65.052527351648,-42.78310915479904);
+      array_push($puntos7, $punto39);
+      $punto40 = new Point(-65.05192653682866,-42.78409342398366);
+      array_push($puntos7, $punto40);
+
+      $linestring7 = new LineString($puntos7);
+
+      $trip7 = new Trip();
+      $trip7->name = 'Recorrido 7';
+      $trip7->description = 'Recorrido similar 4';
+      $trip7->distance_km = '2.1';
+      $trip7->user = 'Juan P4';
+      $trip7->time = date(DATE_RFC2822);
+      $trip7->duration = date("22:00");
+      $trip7->geom = $linestring7;
+      $trip7->save();
+
+      //----------Recorrido N°8 ---------------
+
+      $puntos8 = array();
+
+      $punto41 = new Point(-65.05505935695805,-42.78510917337457);
+      array_push($puntos8, $punto41);
+      $punto42 = new Point(-65.05411521938481,-42.78480208810705); // dobla arrib
+      array_push($puntos8, $punto42);
+      $punto43 = new Point(-65.05464093235173,-42.78384145256263);
+      array_push($puntos8, $punto43);
+      $punto44 = new Point(-65.05519883182683,-42.78292804756452); // dobla der
+      array_push($puntos8, $punto44);
+      $punto45 = new Point(-65.05453364399114,-42.782683945671025);
+      array_push($puntos8, $punto45);
+      $punto46 = new Point(-65.05390064266362,-42.78244771711581); // dobla ab
+      array_push($puntos8, $punto46);
+      $punto47 = new Point(-65.05333201435246,-42.78340050010814); //dobla der
+      array_push($puntos8, $punto47);
+      $punto48 = new Point(-65.052527351648,-42.78310915479904); // dobla ab
+      array_push($puntos8, $punto48);
+      $punto49 = new Point(-65.05192653682866,-42.78409342398366);
+      array_push($puntos8, $punto49);
+
+      $linestring8 = new LineString($puntos8);
+
+      $trip8 = new Trip();
+      $trip8->name = 'Recorrido 8';
+      $trip8->description = 'Recorrido similar 5';
+      $trip8->distance_km = '2.5';
+      $trip8->user = 'Juan P5';
+      $trip8->time = date(DATE_RFC2822);
+      $trip8->duration = date("24:00");
+      $trip8->geom = $linestring8;
+      $trip8->save();
+
+      // *************************************************************************************************
 
     }
 }

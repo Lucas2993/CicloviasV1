@@ -62,12 +62,15 @@
                 var featureTrip;
                 var vectorFeaturesTrip = [];
                 //console.log("Tamaño del vector recuperado: "+arrayCoordenatesId.length);
+                console.log("Tamaño del vector json recuperado: "+tripsJson.length);
                 // recuperamos un feature a partir de las corrdeandas de cada recorrido
                 for (var i = 0; i < tripsJson.length; i++) {
                     //geomTrip = new ol.geom.LineString(arrayCoordenatesId[i].points);
                     geomTrip = (new ol.format.GeoJSON()).readGeometry(tripsJson[i].geom);
                     featureTrip = creatorFeature.getFeatureGeomId(geomTrip, i + 1);
                     vectorFeaturesTrip.push(featureTrip);
+                    console.log("Geom recuperado: ");
+                    console.log(geomTrip);
                     //console.log("Source2 --> id guardado: "+arrayCoordenatesId[i].id+" cant de puntos: //"+(arrayCoordenatesId[i].points).length);
                 }
 
@@ -142,7 +145,10 @@
                 // recuperamos un feature a partir de las corrdeandas de cada recorrido
                 for (var i = 0; i < dataJSon.length; i++) {
                     geomTrip = (new ol.format.GeoJSON()).readGeometry(dataJSon[i].geom);
+                    console.log("Geom recuperado: ");
+                    console.log(geomTrip);
                     featureTrip = creatorFeature.getFeatureGeomId(geomTrip, i + 1);
+                    // featureTrip = creatorFeature.getFeatureGeomId(geomTrip.coordinates, i + 1);
                     vectorFeaturesTrip.push(featureTrip);
                     //console.log("getFeatures PRIVADO --> id guardado: "+arrayCoordenatesId[i].id+" cant de puntos: //"+(arrayCoordenatesId[i].points).length);
                 }
