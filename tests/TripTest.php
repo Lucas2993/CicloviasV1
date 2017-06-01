@@ -11,6 +11,7 @@ use Phaza\LaravelPostgis\Geometries\Polygon;
 use Phaza\LaravelPostgis\PostgisConnection;
 
 use App\Models\Trip;
+use App\Services\CicloviasHelper;
 // use App\Http\Controllers\TripController;
 class TripTest extends TestCase{
 
@@ -45,6 +46,7 @@ class TripTest extends TestCase{
         $trip1->distance_km = '1.5';
         $trip1->user = 'Demián Barry';
         $trip1->time = date(DATE_RFC2822);
+        $trip1->duration = date("20:23");
         $trip1->geom = $linestring;
 
         $trip1->save();
@@ -320,7 +322,7 @@ public function testTripToDistance(){
 //
 public function testTripIdDistance(){
     //Control de metros o kilometros
-    $distancia = (new CicloviasHelper)->tripIdDistance('78');
+    $distancia = (new CicloviasHelper)->tripIdDistance('1');
     var_dump ($distancia);
     $this->assertTrue($distancia > 0.0);
 }
