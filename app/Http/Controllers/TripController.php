@@ -177,7 +177,7 @@ class TripController extends Controller
         //Armado de la query para obtener los recorridos cercanos a un punto
         $query = "SELECT t.id
                   FROM trips t
-                  WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),300)";
+                  WHERE ST_DWithin(t.geom,St_MakePoint(".$longitude.",".$latitude."),300)";
 
         $cercanoQuery= DB::raw($query);
 
@@ -463,12 +463,12 @@ public function tripIdDistance($id){
 * @param $longitude
 * @return $recorridosCorrectos
 */
-public function closeToCentrality($latitude, $longitude){
+public function getCloseToCentrality($latitude, $longitude){
 
   //Armado de la query para obtener los recorridos cercanos a un punto
   $query = "SELECT t.id
             FROM trips t
-            WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),100)";
+            WHERE ST_DWithin(t.geom,St_MakePoint(".$longitude.",".$latitude."),100)";
 
   $cercanoQuery= DB::raw($query);
 
