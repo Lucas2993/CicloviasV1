@@ -15,7 +15,7 @@
                 getSourceJourney: getSourceJourney,
                 getSourceTripsRanking: getSourceTripsRanking
             };
- 
+
             return service;
 
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -36,13 +36,16 @@
 
             // devuelve un vector FUENTE con los features correspondientes a los trayectos
             function getSourceTripFinder(dataJsonTrips) {
-                var arrayCoordenates = getInfoTripsFinder(dataJsonTrips);
+                // var arrayCoordenates = getInfoTripsFinder(dataJsonTrips);
+
                 var geomTrip;
                 var featureTrip;
                 var vectorFeaturesTrip = [];
                 // recuperamos un feature a partir de las corrdeandas de cada recorrido
-                for (var i = 0; i < arrayCoordenates.length; i++) {
-                    geomTrip = new ol.geom.LineString(arrayCoordenates[i]);
+                for (var i = 0; i < dataJsonTrips.length; i++) {
+                    // geomTrip = new ol.geom.LineString(arrayCoordenates[i]);
+                    geomTrip = (new ol.format.GeoJSON()).readGeometry(dataJsonTrips[i].geom);
+
                     featureTrip = creatorFeature.getFeatureGeom(geomTrip);
                     vectorFeaturesTrip.push(featureTrip);
                 }
