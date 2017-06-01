@@ -3,9 +3,9 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .factory('serviceTrip', ['creatorFeature', serviceTrip]);
+        .factory('serviceTrip', ['creatorFeature', 'creatorStyle', serviceTrip]);
 
-        function serviceTrip(creatorFeature){
+        function serviceTrip(creatorFeature, creatorStyle){
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             // *************************** FUNCIONES PUBLICAS *******************************
             var service = {
@@ -95,8 +95,11 @@
                 var vectorFeatures = [];
                 // recorremos el json con los datos
                 for (var i = 0; i < lineStringJson.length; i++) {
+                    console.log("Paso el color random i: "+i);
                     feature = creatorFeature.getFeatureTripJson(lineStringJson[i]);
+                    feature.setStyle(creatorStyle.getStyleJourneyDistinctColor());
                     vectorFeatures.push(feature);
+                    console.log(" Se agrego el nro: "+i);
                 }
 
                 var vectorSource = new ol.source.Vector({

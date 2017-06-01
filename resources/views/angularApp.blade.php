@@ -66,6 +66,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.feature.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.drawZones.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.color.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.point.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/promise/promise.data.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.zone.js') }}"></script>
