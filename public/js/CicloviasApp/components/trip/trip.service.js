@@ -15,7 +15,7 @@
                 getSourceJourney: getSourceJourney,
                 getSourceTripsRanking: getSourceTripsRanking
             };
-
+ 
             return service;
 
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
