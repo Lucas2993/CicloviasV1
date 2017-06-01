@@ -88,7 +88,7 @@ class TripController extends Controller
 
     // TODO Para corregir...
     public function getCloseToPoint($latitude, $longitude){
-        $result = array();
+    /*    $result = array();
 
         $lat = $latitude;
         $long = $longitude;
@@ -170,7 +170,37 @@ class TripController extends Controller
                 }
             }
         }
-        return $result;
+        return $result;*/
+
+        //Armado de la query para obtener los recorridos cercanos a un punto
+        $query = "SELECT t.id
+                  FROM trips t
+                  WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),300)";
+
+        $cercanoQuery= DB::raw($query);
+
+        $resultQuery= DB::select($cercanoQuery);
+
+        //Obtengo los id separados.
+        $pila= array();
+        $longitud = count($resultQuery);
+
+        for ($i=0;$i<$longitud;$i++){
+
+          array_push($pila,$resultQuery[$i]->id);
+
+        }
+
+        //hago un for con los id para obtener los recorridos
+
+        $recorridosCorrectos = array();
+        for ($j=0;$j<$longitud;$j++){
+
+          array_push($recorridosCorrectos,Trip::find($pila[$j]));
+
+        }
+        return $recorridosCorrectos;
+
     }
 
     /**
@@ -393,6 +423,45 @@ class TripController extends Controller
 */
 public function tripIdDistance($id){
   return $this->clvHelperService->tripIdDistance($id);
+}
+
+/**
+* Funcion que retorna recorridos cercanos a una centralidad
+*
+* @param $latitude
+* @param $longitude
+* @return $recorridosCorrectos
+*/
+public function closeToCentrality($latitude, $longitude){
+
+  //Armado de la query para obtener los recorridos cercanos a un punto
+  $query = "SELECT t.id
+            FROM trips t
+            WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),100)";
+
+  $cercanoQuery= DB::raw($query);
+
+  $resultQuery= DB::select($cercanoQuery);
+
+  //Obtengo los id separados.
+  $pila= array();
+  $longitud = count($resultQuery);
+
+  for ($i=0;$i<$longitud;$i++){
+
+    array_push($pila,$resultQuery[$i]->id);
+
+  }
+
+  //hago un for con los id para obtener los recorridos
+
+  $recorridosCorrectos = array();
+  for ($j=0;$j<$longitud;$j++){
+
+    array_push($recorridosCorrectos,Trip::find($pila[$j]));
+
+  }
+  return $recorridosCorrectos;
 }
 
 }
