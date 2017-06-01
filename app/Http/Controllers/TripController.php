@@ -229,41 +229,45 @@ class TripController extends Controller
             }
             $distance_completed = 0.0;
 
-            $new_trip_points = array();
+            $point_road = null;
+            $point_corner = null;
 
-            $random_centrality = Centrality::all()->random(1);
+            while(empty($point_road) || empty($point_corner)){
+                $new_trip_points = array();
 
-            $centrality_point = $random_centrality->geom;
+                $random_centrality = Centrality::all()->random(1);
 
-            array_push($new_trip_points, $centrality_point);
+                $centrality_point = $random_centrality->geom;
 
-            $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
-                                                                                    ST_Line_Locate_Point(r.geom::geometry,
-                                                                                                        ST_PointFromText('POINT(".$centrality_point->getLng()." ".$centrality_point->getLat().")',4326)))) as point
-                                                FROM roads r
-                                                WHERE r.geom && st_expand(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."), 10)
-                                                ORDER BY ST_Distance(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."),r.geom)
-                                                LIMIT 1");
+                array_push($new_trip_points, $centrality_point);
 
-            $query_centrality_point2 = DB::raw("
-            select dumped.id as id, dumped.name as name, dumped.dump as point, ST_Distance(ST_GeomFromText(dumped.dump), ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) as distancia
-            from (
-	                SELECT r.*, ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as dump
-                    FROM roads r
-                    WHERE r.id in
-                                (SELECT distance_a.road
-                                FROM(
-                                    SELECT r.id as road, ST_Distance(r.geom, ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) AS distance
-                                    from roads r
-                                    ) as distance_a
-                                order by distance_a.distance
-                                limit 4)
-                ) as dumped
-            order by distancia ASC
-            limit 1");
-            $point_road = DB::select($query_centrality_point);
-            $point_corner = DB::select($query_centrality_point2);
+                $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
+                                                                                        ST_Line_Locate_Point(r.geom::geometry,
+                                                                                                            ST_PointFromText('POINT(".$centrality_point->getLng()." ".$centrality_point->getLat().")',4326)))) as point
+                                                    FROM roads r
+                                                    WHERE r.geom && st_expand(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."), 10)
+                                                    ORDER BY ST_Distance(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."),r.geom)
+                                                    LIMIT 1");
 
+                $query_centrality_point2 = DB::raw("
+                select dumped.id as id, dumped.name as name, dumped.dump as point, ST_Distance(ST_GeomFromText(dumped.dump), ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) as distancia
+                from (
+    	                SELECT r.*, ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as dump
+                        FROM roads r
+                        WHERE r.id in
+                                    (SELECT distance_a.road
+                                    FROM(
+                                        SELECT r.id as road, ST_Distance(r.geom, ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) AS distance
+                                        from roads r
+                                        ) as distance_a
+                                    order by distance_a.distance
+                                    limit 4)
+                    ) as dumped
+                order by distancia ASC
+                limit 1");
+                $point_road = DB::select($query_centrality_point);
+                $point_corner = DB::select($query_centrality_point2);
+            }
             array_push($new_trip_points, Point::fromWKT($point_road[0]->point));
 
             $random_road = Road::find($point_corner[0]->id);
