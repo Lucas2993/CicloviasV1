@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Trip;
 use App\Models\GeoPoint;
 use App\Models\TripPoint;
@@ -117,12 +119,26 @@ class CicloviasHelper {
   * pasados como parámetro.
   */
   public function normalizeGeoPoint($lat, $long){
-    $qry_lat_min;
-    $qry_lat_max;
-    $qry_long_min;
-    $qry_long_max;
 
+    $qrySql = 'select punto, ST_Distance(ST_GeomFromText(t2.punto), ST_MakePoint('.$long.','.$lat.')) as distancia
+    from (
+    	SELECT ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as punto
+    	FROM roads r
+    	WHERE r.id in
+    		(select t1.road
+    		   from(
+    			select r.id as road, ST_Distance(r.geom, ST_MakePoint('.$long.', '.$lat.')) as distance
+    			from roads r
+    			where ST_DWithin(r.geom, ST_MakePoint('.$long.', '.$lat.'), 150)) as t1
+    		   order by t1.distance
+    		   limit 4)
+    		) as t2
+    order by distancia ASC
+    limit 1;';
 
+    $result = DB::select(DB::raw($qrySql));
+    
+    return $result;
 
   }
 }//fin de la clase

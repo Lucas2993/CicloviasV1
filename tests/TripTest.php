@@ -11,6 +11,7 @@ use Phaza\LaravelPostgis\Geometries\Polygon;
 use Phaza\LaravelPostgis\PostgisConnection;
 
 use App\Models\Trip;
+use App\Services\CicloviasHelper;
 // use App\Http\Controllers\TripController;
 class TripTest extends TestCase{
 
@@ -325,5 +326,10 @@ public function testTripIdDistance(){
     $this->assertTrue($distancia > 0.0);
 }
 
-
+public function testTripNormalizePoint(){
+  $result = (new CicloviasHelper())->normalizeGeoPoint(-42.7737557888031, -65.02675652503967);
+  dd($result);
+  $this->assertTrue($result!= null);
 }
+
+}//fin de la clase
