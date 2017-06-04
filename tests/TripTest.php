@@ -12,7 +12,8 @@ use Phaza\LaravelPostgis\PostgisConnection;
 
 use App\Models\Trip;
 use App\Services\CicloviasHelper;
-// use App\Http\Controllers\TripController;
+use App\Http\Controllers\TripController;
+
 class TripTest extends TestCase{
 
     use WithoutMiddleware;
@@ -49,6 +50,10 @@ class TripTest extends TestCase{
         $trip1->geom = $linestring;
 
         $trip1->save();
+
+        //Se eliminan los datos usados.
+        Trip::destroy($trip1->id);
+
     }
 
     // public function testModel(){
@@ -109,15 +114,21 @@ class TripTest extends TestCase{
     * @test
     * @return void
     */
-    /**  public function getCloseToPoint(){
-    $this->generarDatosPrueba();
+  public function testGetCloseToPoint(){
+  /*  $this->generarDatosPrueba();
 
     $this->getJson('api/trip/closeToPoint/-42.780875/-65.038786')
     ->seeJson([
     'name' => 'Recorrido 2',
-]);
+  ]);*/
+
+  $trips = (new TripController(new CicloviasHelper))->getCloseToPoint(-42.783851623535156, -65.01168251037598);
+  $countstrip = count($trips);
+
+  //var_dump ($countstrip);
+  $this->assertTrue($countstrip > 0);
 }
-*/
+
 //}
 // private function generarDatosPrueba(){
 //     /*-------Recorrido 1------------*/
@@ -313,7 +324,7 @@ public function testTripToDistance(){
     $trips= (new CicloviasHelper)->getToDistance(0.80, 50);
     $countstrip = count($trips);
 
-//     //var_dump ($countstrip);
+    //var_dump ($countstrip);
     $this->assertTrue($countstrip > 0);
 
 
@@ -322,7 +333,7 @@ public function testTripToDistance(){
 public function testTripIdDistance(){
     //Control de metros o kilometros
     $distancia = (new CicloviasHelper)->tripIdDistance('78');
-    var_dump ($distancia);
+    //var_dump ($distancia);
     $this->assertTrue($distancia > 0.0);
 }
 

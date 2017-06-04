@@ -71,8 +71,10 @@
                 //     longLat = [(pointsTripJson[i]).longitude, (pointsTripJson[i]).latitude];
                 //     arrayLontLat.push(longLat);
                 // }
-
+                console.log("trip");
+                console.log(tripJson);
                 geomTrip = (new ol.format.GeoJSON()).readGeometry(tripJson.geom);
+
 
                 var feature = new ol.Feature({
                     geometry: geomTrip

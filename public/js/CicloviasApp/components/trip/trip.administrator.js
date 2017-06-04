@@ -27,7 +27,6 @@
                     feature = features[i];
                     layer.getSource().removeFeature(feature);
                     break;
-
                 }
             }
             // si no se encontro el feature se lo muestra
