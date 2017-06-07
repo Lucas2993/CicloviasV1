@@ -206,14 +206,14 @@ class TripController extends Controller
     }
 
     /**
-    * Devuelve los recorridos de una determinado largo.
+    * Devuelve los recorridos de un determinado rango de distancia.
     *
-    * @param  $long
-    * @param  $tolerance
+    * @param  $longMin
+    * @param  $longMax
     * @return Response
     */
-    public function getToDistance($long,$tolerance){
-        return $this->clvHelperService->getToDistance($long,$tolerance);
+    public function getToDistance($longMin,$longMax){
+        return $this->clvHelperService->getToDistance($longMin,$longMax);
     }
 
     // TODO Para corregir...

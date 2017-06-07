@@ -207,13 +207,13 @@
             return respuestaServidor;
         };
 
-        function getTripsToDistance(long,tolerance) {
+        function getTripsToDistance(longMin,longMax) {
             var defered = $q.defer();
             var promise = defered.promise;
 
             $http({
                 method: 'GET',
-                url: path.TRIP + '/toDistance/'+ long + '/' + tolerance
+                url: path.TRIP + '/toDistance/'+ longMin + '/' + longMax
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
                 console.log('datos de promise de DISTANCE TRIP: ' + res.data);

@@ -60,35 +60,31 @@ class CicloviasHelper {
   /**
   *Funcion que retorna los Recorridos que estan dentro de un rango de una determinada Distancia.
   *
-  *@param int $long
-  *@param int $tolerance
+  *@param int $longMinima
+  *@param int $longMaxima
   *@param array $result
   */
-  public function getToDistance($long,$tolerance){
-    //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
-    $longMin= $long - ($tolerance * 0.001);
-    $longMax= $long + ($tolerance * 0.001);
+  public function getToDistance($longMinima,$longMaxima){
+   //Variables que determinan el rango de distancia en kilometros de distancia de los Recorridos.
+   $longMinKM= $longMinima * 0.001;
+   $longMaxKM= $longMaxima * 0.001;
 
-    $result = array();
-    $Trips = Trip::all();
+   $result = array();
+   $Trips = Trip::all();
 
-    $result = array();
-    $Trips = Trip::all();
+   foreach($Trips as $trip){
+     $trip_points = $trip->geom;
 
-    foreach($Trips as $trip){
-      $trip_points = $trip->geom;
+     $kmt = $this->tripDistance($trip_points);
+     $kmr = round($kmt, 3);
 
-      $kmt = $this->tripDistance($trip_points);
-      $kmr = round($kmt, 2);
+       if($kmr >= $longMinKM && $kmr <= $longMaxKM){
+         $result[] = $trip;
 
-        if($kmr >= $longMin && $kmr <= $longMax){
-          $result[] = $trip;
-
-        }
-    }
-
-    return $result;
-  }
+       }
+   }
+   return $result;
+ }
 
   /**
   * Funcion que retorna el largo en kilometros de un Recorrido.
@@ -137,7 +133,7 @@ class CicloviasHelper {
     limit 1;';
 
     $result = DB::select(DB::raw($qrySql));
-    
+
     return $result;
 
   }
