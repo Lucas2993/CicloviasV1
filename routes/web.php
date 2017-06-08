@@ -37,3 +37,5 @@ Route::get('api/trip/toDistance/{longMin}/{longMax}', 'TripController@getToDista
 Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');
 
 Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@getCloseToCentrality');
+
+Route::get('api/trip/getTripsByZone/{zone_id}', 'TripController@getTipsByZone');
