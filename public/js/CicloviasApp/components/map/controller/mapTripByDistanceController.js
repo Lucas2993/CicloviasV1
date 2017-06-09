@@ -9,9 +9,11 @@
                                                     'srvLayers',
                                                     'dataServer',
                                                     'adminLayers',
+                                                    'creatorStyle',
+                                                    'srvViewTrip',
                                                     MapTripByDistanceController]);
 
-    function MapTripByDistanceController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
+    function MapTripByDistanceController(vm, creatorMap, srvLayers, dataServer, adminLayers,creatorStyle,srvViewTrip) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         vm.map = creatorMap.getMap();
@@ -19,10 +21,10 @@
         vm.tripstodistanceJson;
         // capa que refleja los recorridos encontrados
         vm.layerTripsByDistance;
-        // almacena la distancia minima especificada en la grafica
-        vm.longMin;
-        // almacena la distancia maxima especificada en la grafica
-        vm.longMax;
+        // almacena la distancia especificada en la grafica
+        vm.distance;
+        // almacena la tolerancia para los recorridos especificada en la grafica
+        vm.tolerance;
 
         // ********************************** FLAGS PUBLICAS ****************************
         // Bandera que indica si la capa de recorridos de una determinada distancia esta creada.
@@ -32,7 +34,7 @@
             checkbox: false
         };
 
-        // *********************** FUNCIONES ***********************
+        // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         // Se obtienen todos los recorridos con la distancia seleccionada y se agregan en una capa.
         vm.getTripsToSelectedDistance = getTripsToSelectedDistance;
         // Permite la visualizacion de la capa de recorridos de una determinada distancia (si existe).
@@ -40,35 +42,16 @@
         // Se setean todo lo relacionado con los recorridos de una determinada distancia.
         vm.resetLayerToSelectedDistance = resetLayerToSelectedDistance;
 
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        vm.toogleViewTrips = toogleViewTrips;
+        // ****************************** FUNCIONES PUBLICAS ****************************
 
-
-        // **************************************************************************************
-        // *************************** Descripcion de las funciones *****************************
-
-        // *********************** PUBLICAS ***********************
         function getTripsToSelectedDistance() {
             dataServer.getTripsToDistance(vm.longMin,vm.longMax)
                 .then(function(data) {
                     vm.tripstodistanceJson = data;
                     console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
-                    // Se establece que la capa de recorridos de una Distancia se mostrara (valor del checkbox).
-                    vm.selectTripByDistance.checkbox = false;
-                    // Si la capa ya fue creada anteriormente se la elimina para poder crear una nueva actualizada.
-                    if (vm.isLayerByDistanceCreated) {
-                        vm.map.removeLayer(vm.layerTripsByDistance);
-                        vm.isLayerByDistanceCreated = false;
-                    }
-                    // Se crea una nueva capa de recorridos con los datos obtenidos.
-                    vm.layerTripsByDistance = srvLayers.getLayerTripsFinder(vm.tripstodistanceJson);
-                    // Se indica que una nueva capa de recorridos por distancia se ha creado.
-                    vm.isLayerByDistanceCreated = true;
-                    // Se agrega la capa nueva al mapa.
-                    vm.map.addLayer(vm.layerTripsByDistance);
-                    // Se establce que la capa de recorridos de una determinada distancia se mostrara (valor del checkbox).
-                    vm.selectTripByDistance.checkbox = true;
                     // Se muestra la nueva capa.
+                    resetLayerToSelectedDistance();
                     vm.viewTripsToSelectedDistance();
                 })
                 .catch(function(err) {
@@ -76,30 +59,48 @@
                 })
         }
 
-        function viewTripsToSelectedDistance() {
-            // Se comprueba que la capa existe.
-            if (vm.isLayerByDistanceCreated) {
-                // Se hace visible la capa.
-                adminLayers.viewLayer(vm.layerTripsByDistance);
-                vm.layerTripsByDistance.setVisible(vm.selectTripByDistance.checkbox);
+        // Evento que se ejecuta al checkear ver capa de recorridos, hace un toogle de la capa de recorridos
+        function toogleViewTrips() {
+            console.log("entro a la seleccion de VST recorridos");
+            if (vm.tripstodistanceJson == null) {
+                return;
             }
+            adminLayers.viewLayer(vm.layerTripsByDistance);
+        }
+
+
+        function viewTripsToSelectedDistance() {
+            if (vm.tripstodistanceJson == null) {
+                return;
+            }
+            vm.selectTripByDistance.checkbox = true;
+            srvViewTrip.addTrips(vm.tripstodistanceJson, vm.layerTripsByDistance);
         }
 
         function resetLayerToSelectedDistance() {
-            // Si la capa esta creada, es removida.
-            if (vm.isLayerByDistanceCreated) {
-                // Se remueve la capa del mapa.
-                vm.map.removeLayer(vm.layerTripsByDistance);
-            }
+            vm.layerTripsByDistance.getSource().clear();
             // Se indica que la capa ya no existe.
             vm.isLayerByDistanceCreated = false;
             // Se desmarca el checkbox.
-            vm.selectTripByDistance.checkbox = false;
-            // setea la distancia minima
-            vm.longMin = 0;
-            // setea la distancia maxima
-            vm.longMax = 0;
+            // vm.selectTripByDistance.checkbox = false;
+            // setea la distancia
+            vm.distance = 0;
+            // setea la tolerancia
+            vm.tolerance = 0;
         }
+
+        // *******************************FUNCIONES PRIVADAS ****************************
+        // Este metodo genera una capa
+        function generateLayer() {
+            // Se crea una nueva capa de recorridos con los datos obtenidos.
+            vm.layerTripsByDistance = srvLayers.getLayer(null);
+            // Se agrega la capa nueva al mapa.
+            vm.layerTripsByDistance.setStyle(creatorStyle.getStyleTrip('green', 2));
+            vm.map.addLayer(vm.layerTripsByDistance);
+        }
+
+        // ************************ Inicializacion de datos *****************************
+        generateLayer();
 
     } // fin Constructor
 

@@ -61,9 +61,6 @@
         var temporalLayer =srvLayers.getLayer(null);
         temporalLayer.setStyle(creatorStyle.getStyleTemporalEditCentrality());
 
-        temporalLayer.setMap(vm.map);
-
-
         // agregamos la capa al mapa
         temporalLayer.setMap(vm.map);
 
@@ -82,7 +79,6 @@
             }
         }
 
-        vm.toogleViewTrips = toogleViewTrips;
         // Evento que se ejecuta al checkear ver capa de recorridos, hace un toogle de la capa de recorridos
         function toogleViewTrips() {
             console.log("entro a la seleccion de VST recorridos");
