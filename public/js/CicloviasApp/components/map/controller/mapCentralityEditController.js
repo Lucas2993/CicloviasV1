@@ -1,12 +1,21 @@
-/* Controlador que permite la representacion del mapa en la pagina y que cuenta con los datos
-   necesarios para esto */
+// Responsabilidad : Este controlador permite el ABM de centralides.
 (function() {
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapCentralityEditController', ['$scope', 'creatorMap', 'srvLayers', 'srvLayersCentrality','dataServer','adminLayers', 'adminMenu', MapCentralityEditController]);
+           .controller('mapCentralityEditController',[
+                      '$scope',
+                      'creatorMap',
+                      'srvLayers',
+                      'srvModelCentrality',
+                      'dataServer',
+                      'srvViewCentrality',
+                      'adminMenu',
+                      'creatorStyle',
+                      MapCentralityEditController
+                      ]);
 
-    function MapCentralityEditController(vm, creatorMap, srvLayers, srvLayersCentrality ,dataServer,adminLayers, adminMenu) {
+    function MapCentralityEditController(vm, creatorMap, srvLayers, srvModelCentrality ,dataServer,srvViewCentrality, adminMenu,creatorStyle) {
 
       // ********************* declaracion de variables y metodos *********************
       vm.map = creatorMap.getMap();
@@ -78,9 +87,9 @@
               .then(function(data) {
                   // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                   alert('Se guardó correctamente la centralidad: ' + data.id)
-                  srvLayersCentrality.getCentralities().push(data);
+                  srvModelCentrality.getCentralities().push(data);
                   data.selected = true;
-                  adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
+                  srvViewCentrality.viewCentrality(data, srvModelCentrality.getCentralitiesLayer());
                   // vm.$apply();
               })
               .catch(function(err) {
@@ -106,7 +115,9 @@
       // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
       vm.searchCentrality = function(point) {
           vm.centralityEdit();
-          vm.newCentrality = point.get('object');
+          var ob = srvModelCentrality.getCentrality(point.getId());
+          vm.newCentrality = ob;
+
           vm.$apply();
       }
 
@@ -132,8 +143,8 @@
                   // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                   console.log(data);
                   alert('Se elimino correctamente la centralidad: ' + data.id);
-                  adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  srvLayersCentrality.filterCentrality(data.id);
+                  srvViewCentrality.viewCentrality(data, srvModelCentrality.getCentralitiesLayer());
+                  srvModelCentrality.filterCentrality(data.id);
                   // vm.$apply();
               })
               .catch(function(err) {
@@ -149,11 +160,11 @@
                   // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                   console.log(data);
                   alert('Se modifico correctamente la centralidad: ' + data.id);
-                  srvLayersCentrality.filterCentrality(data.id);
+                  srvModelCentrality.filterCentrality(data.id);
                   data.selected = true;
-                  srvLayersCentrality.getCentralities().push(data);
-                  adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
-                  adminLayers.viewCentrality(data, srvLayersCentrality.getCentralitiesLayer());
+                  srvModelCentrality.getCentralities().push(data);
+                  srvViewCentrality.viewCentrality(data, srvModelCentrality.getCentralitiesLayer());
+                  srvViewCentrality.viewCentrality(data, srvModelCentrality.getCentralitiesLayer());
 
               })
               .catch(function(err) {
@@ -165,7 +176,10 @@
       // *******************************************************************************
       // **************************** Entrando al menu *********************************
 
-        var temporalLayer = srvLayers.getTemporalLayer();
+        // var temporalLayer = srvLayers.getTemporalLayer();
+        var temporalLayer = srvLayers.getLayer(null);
+        temporalLayer.setStyle(creatorStyle.getStyleTemporalEditCentrality());
+
         temporalLayer.setMap(vm.map);
         temporalLayer.getSource().on( 'addfeature', function (ft) {
             // ft - feature being added

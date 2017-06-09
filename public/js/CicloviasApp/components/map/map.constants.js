@@ -1,4 +1,5 @@
 // Constantes utilizadas por el modulo mapModule
+// Responsabilidad : Solo guardar las Constantes del Sistema
 (function() {
     'use strict';
     angular.module('mapModule')

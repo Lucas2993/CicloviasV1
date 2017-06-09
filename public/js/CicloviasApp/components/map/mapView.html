@@ -60,6 +60,7 @@
                                               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
 
                             <div class="checkbox" ng-repeat="zone in zonesJson">
                                 <label>
-                                   <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="zone.selected" ng-change= "selectZone(zone.name, zone.selected)"> [[zone.name]]
+                                   <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="zone.selected" ng-change= "selectZone(zone.name, zone)"> [[zone.name]]
                                 </label>
                             </div>
                         </form>
@@ -88,11 +89,11 @@
                     <div uib-accordion-group class="panel-primary" heading="Recorridos" is-open="false">
                         <form>
                             <div>
-                                <label><input type="checkbox" ng-model="selectRecorrido" ng-change= "viewAllTrips()" > Ver todos los recorridos</label>
+                                <label><input type="checkbox" ng-model="selectRecorrido" ng-change= "checkAllTrips()" > Ver todos los recorridos</label>
                             </div>
                             <div class="checkbox" ng-repeat="trip in tripsJson">
                                 <label>
-                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "viewSelectedTrip(trip)"> recorrido [[trip.id]]
+                                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip)"> recorrido [[trip.id]]
                                 </label>
                             </div>
                         </form>
@@ -116,7 +117,7 @@
                         <form>
                             <div>
                                 <div class="text-center form-group">
-                                    <label><input type="checkbox" ng-disabled="!isLayerCloseToPointCreated" ng-model="selectTripCloseToPoint.checkbox" ng-change="viewTripsCloseToPoint()" > Ver capa de recorridos cercanos</label>
+                                    <label><input type="checkbox" ng-disabled="!isPointCreated" ng-model="selectTripCloseToPoint.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos cercanos</label>
                                 </div>
                                 <div class="container form-group">
                                     <p>[[selectedPoint.latitude == 0 && selectedPoint.longitude == 0 ? 'No hay un punto seleccionado' : 'Punto Seleccionado:']]</p>
@@ -139,7 +140,7 @@
                         <form>
                             <div class=" form-group">
                                 <!-- <div>
-                                    <label><input type="checkbox" ng-model="selectTripsRanking" ng-change= "viewLayerTripsRanking()" > Mostrar capa</label>
+                                    <label><input type="checkbox" ng-model="toogleViewTripsRanking" ng-change= "viewLayerTripsRanking()" > Mostrar capa</label>
                                 </div> -->
                                 <div class="range range-primary">
                                     <output>Ponderación min:</output>
@@ -151,12 +152,11 @@
                                 <div>
                                     <label label-primary>Filtro por turno:</label>
                                 </div>
-                                <div class="checkbox" ng-repeat="c in list">
-                                    <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
+                                <!-- <div class="checkbox" ng-repeat="c in list">
                                     <label>
                                         <input type="checkbox" ng-model="c.selected" ng-change= "" > [[c.turno]]
                                   </label>
-                                </div>
+                                </div> -->
 
                                 <button class="btn btn-block btn-primary" ng-disabled="" uib-tooltip="Filtrar" ng-click="findTripsRanking()">
                                               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

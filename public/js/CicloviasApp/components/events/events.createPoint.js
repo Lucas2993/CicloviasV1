@@ -1,3 +1,4 @@
+// TODO Explicar que hace este controlador
 (function() {
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get

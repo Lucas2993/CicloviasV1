@@ -1,17 +1,19 @@
-/* Controlador que permite la representacion del mapa en la pagina y que cuenta con los datos
-   necesarios para esto */
+// Responsabilidad : controlador que permite buscar los recorridos de una determinada distancia
 (function() {
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapTripByDistanceController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer','adminLayers', MapTripByDistanceController]);
+        .controller('mapTripByDistanceController', [
+                                                    '$scope',
+                                                    'creatorMap',
+                                                    'srvLayers',
+                                                    'dataServer',
+                                                    'adminLayers',
+                                                    MapTripByDistanceController]);
 
     function MapTripByDistanceController(vm, creatorMap, srvLayers, dataServer, adminLayers) {
 
-        // ******************* DECLARACION DE VARIABLES Y FUNCIONES *********************
-
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        // ********************************** PUBLICO ***********************************
+        // ********************************** VARIABLES PUBLICAS ************************
         vm.map = creatorMap.getMap();
         // usada para almacenar los datos recuperados del servidor, para no volver a pedir los datos
         vm.tripstodistanceJson;
@@ -22,7 +24,7 @@
         // almacena la tolerancia para los recorridos especificada en la grafica
         vm.tolerance;
 
-        // #################### FLAGS ####################
+        // ********************************** FLAGS PUBLICAS ****************************
         // Bandera que indica si la capa de recorridos de una determinada distancia esta creada.
         vm.isLayerByDistanceCreated = false;
         // Modelo para usar con el checkbox (es necesario declararlo asi).

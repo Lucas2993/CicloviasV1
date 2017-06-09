@@ -1,4 +1,5 @@
-// Creacion de estilos
+// Responsabilidad : Creacion de estilos
+// TODO Falta refactorizar, muchos metodos se pueden unificar.
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
@@ -76,9 +77,9 @@
                return stylePolygon;
             };
 
-            function getStyleTrip(){
+            function getStyleTrip(color, width){
                 var styleLine = new ol.style.Style({
-                    stroke: new ol.style.Stroke({color: 'red', width: 4}),
+                    stroke: new ol.style.Stroke({color: color, width: width}),
                 });
 
                 return styleLine;

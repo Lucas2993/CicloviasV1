@@ -1,5 +1,4 @@
-
-// Creacion de los dibujos de las zonas
+// Responsabilidad : Realizar las peticiones HTTP al servidor y brindar los resultados a los controladores
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])

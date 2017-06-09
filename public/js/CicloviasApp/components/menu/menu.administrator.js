@@ -1,4 +1,6 @@
-// Administrador de los eventos del mapa
+// Responsabilidad : Administrar el control de los eventos del mapa
+// Este servicio permite controlar que menu tiene el control de la vista del mapa,
+// en otras palabras que eventos estan activos en determinado momento.
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])

@@ -1,4 +1,4 @@
-// Creacion de estilos
+// Responsabilidad : Brindar colores randomicamente.
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
