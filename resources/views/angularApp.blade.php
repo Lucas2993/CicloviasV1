@@ -41,6 +41,9 @@
     <!-- Bootstrap -->
     <script src="{{ URL::asset('js/assets/libs/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
+    <!-- Imagen -->
+    <link rel="icon" type="image/x-icon" href="{{ URL::asset('favicon.ico') }}">
+
     <!-- Controladores y modulos propios -->
     <script src="{{ URL::asset('js/CicloviasApp/app.routes.module.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/app.module.js') }}"></script>

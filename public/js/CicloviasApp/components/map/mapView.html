@@ -168,26 +168,24 @@
                 </div>
 
                 <!-- Menu de Muestra de Recorridos por longitud -->
-                <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false">
+                <div uib-accordion-group class="panel-primary" heading="Recorridos por Rango de Longitud" is-open="false">
                     <div class="panel-body" ng-controller="mapTripByDistanceController">
                         <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
                         <form>
                             <div>
                                 <div class="text-center form-group">
-                                    <label><input type="checkbox" ng-disabled="!isLayerByDistanceCreated" ng-model="selectTripByDistance.checkbox" ng-change="viewTripsToSelectedDistance()" > Ver capa de recorridos con determinada distancia</label>
+                                    <label><input type="checkbox" ng-disabled="!isLayerByDistanceCreated" ng-model="selectTripByDistance.checkbox" ng-change="viewTripsToSelectedDistance()" > Ver capa de recorridos entre determinada distancia</label>
                                 </div>
                                 <div class="text-center form-group">
-                                    <input type="number" ng-model="distance" min="0.10" max="1000" step="0.05">
+                                  <label> Minimo (Metros):</lavel>
+                                    <input type="number" ng-model="longMin" min="100" max="15000" step="50">
                                 </div>
                                 <div class="text-center form-group">
-<!-- <<<<<<< HEAD
-======= -->
-                                  <label> Tolerancia (Metros):</lavel>
-                                    <input type="number" ng-model="tolerance" min="0" max="1000" step="5">
+                                  <label> Maximo (Metros):</lavel>
+                                    <input type="number" ng-model="longMax" min="100" max="15000" step="50">
                                 </div>
                                 <div class="text-center form-group">
-<!-- >>>>>>> 8d97227b216c1ff58b47c1e1db7e46743dca270f -->
                                     <button class="btn btn-primary" ng-click="getTripsToSelectedDistance()">Ver recorridos</button>
                                 </div>
                                 <div class="text-center form-group">

@@ -19,10 +19,10 @@
         vm.tripstodistanceJson;
         // capa que refleja los recorridos encontrados
         vm.layerTripsByDistance;
-        // almacena la distancia especificada en la grafica
-        vm.distance;
-        // almacena la tolerancia para los recorridos especificada en la grafica
-        vm.tolerance;
+        // almacena la distancia minima especificada en la grafica
+        vm.longMin;
+        // almacena la distancia maxima especificada en la grafica
+        vm.longMax;
 
         // ********************************** FLAGS PUBLICAS ****************************
         // Bandera que indica si la capa de recorridos de una determinada distancia esta creada.
@@ -49,7 +49,7 @@
 
         // *********************** PUBLICAS ***********************
         function getTripsToSelectedDistance() {
-            dataServer.getTripsToDistance(vm.distance,vm.tolerance)
+            dataServer.getTripsToDistance(vm.longMin,vm.longMax)
                 .then(function(data) {
                     vm.tripstodistanceJson = data;
                     console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
@@ -95,10 +95,10 @@
             vm.isLayerByDistanceCreated = false;
             // Se desmarca el checkbox.
             vm.selectTripByDistance.checkbox = false;
-            // setea la distancia
-            vm.distance = 0;
-            // setea la tolerancia
-            vm.tolerance = 0;
+            // setea la distancia minima
+            vm.longMin = 0;
+            // setea la distancia maxima
+            vm.longMax = 0;
         }
 
     } // fin Constructor
