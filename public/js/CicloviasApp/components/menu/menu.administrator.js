@@ -17,6 +17,7 @@
         var tripsRanking = false;
         var tripsToDistance = false;
         var journey = false;
+        var tripsToCentrality = false;
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -29,11 +30,13 @@
             activeTripFinder: activeTripFinder,
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
+            activeTripsToCentrality: activeTripsToCentrality,
             setActiveCentralities: setActiveCentralities,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
+            setActiveTripsToCentrality: setActiveTripsToCentrality,
             disableAll: disableAll
         };
         return service;
@@ -60,6 +63,10 @@
             return tripsToDistance;
         }
 
+        function activeTripsToCentrality(){
+            return tripsToCentrality;
+        }
+
 
         // ******************* SETTERS *******************
         // ***********************************************
@@ -83,6 +90,10 @@
             tripsToDistance = activated;
         }
 
+        function setActiveTripsToCentrality(activated){
+            tripsToCentrality = activated;
+        }
+
 
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
@@ -92,6 +103,7 @@
             setActiveTripFinder(false);
             setActiveTripsRanking(false);
             setActiveTripsToDistance(false);
+            setActiveTripsToCentrality(false);
         }
 
     }
