@@ -185,8 +185,8 @@
                 <div class="panel-default" ng-controller="mapTripByCentralityController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos dada una centralidad" is-open="openMenuTripsByCentrality">
                         <form>
-                            <div class="text-center form-group col-md-12" ng-hide="!isLayerByCentralityCreated">
-                                <label><input type="checkbox" ng-disabled="!isLayerByCentralityCreated" ng-model="selectTripByCentrality.checkbox" ng-change="viewTripsToSelectedCentrality()" > Ver capa de recorridos de una centralidad</label>
+                            <div class="text-center form-group col-md-12" ng-hide="">
+                                <label><input type="checkbox" ng-disabled="" ng-model="selectTripByCentrality.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos de una centralidad</label>
                             </div>
                             <div class="container form-group col-md-12" ng-hide="selectedCentrality.name">
                                 <label>Seleccione una centralidad...</label>

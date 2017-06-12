@@ -75,7 +75,8 @@
                 .then(function(data) {
                     vm.tripstocentralityJson = data;
                     console.log("Datos recuperados prom TRIPS de determinada centralidad con EXITO! = " + data);
-                    resetLayerToSelectedCentrality();
+                    vm.selectTripByCentrality.checkbox = true;
+                    vm.tripsLayerByCentrality.setVisible(true);
                     vm.viewTripsToSelectedCentrality();
                 })
                 .catch(function(err) {
@@ -95,9 +96,8 @@
         function resetLayerToSelectedCentrality() {
             vm.tripsLayerByCentrality.getSource().clear();
 
-            vm.isLayerByCentralityCreated = false;
             // Se desmarca el checkbox.
-            vm.selectTripByCentrality.checkbox = false;
+            // vm.selectTripByCentrality.checkbox = false;
 
             vm.selectedCentrality = {
                 id: 0,
