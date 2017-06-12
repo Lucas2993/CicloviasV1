@@ -10,18 +10,40 @@
                 <div class="panel-default" ng-controller="mapCentralityController">
                     <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="openMenuCentralities">
                         <form>
+
                             <div>
                                 <label>
                                       <input type="checkbox" ng-click="checkAllCentralities()"> VER TODAS
                                 </label>
                             </div>
 
-                            <div class="checkbox" ng-repeat="centrality in getCentralities()">
-                                <!-- <div class="checkbox" ng-repeat="centrality in centralitiesJson"> -->
+                            <div class="checkbox" ng-repeat="centrality in getCentralities()" >
                                 <label>
                                       <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
                                 </label>
                             </div>
+
+                            <!-- //principio prueba -->
+                            <!-- <div class="panel-body">
+                            			<table class="table table-hover">
+                            				<thead>
+                            					<tr>
+                            						<th><input type="checkbox" ng-click="checkAllCentralities()">VER TODAS</th>
+                            						<th> </th>
+                            					</tr>
+                            				      </thead>
+                            				<tbody>
+                            					<tr ng-repeat="centrality in getCentralities()">
+                                        <td><input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]</td>
+                            						<td><span data-ng-bind="u.name"></span></td>
+                            						<td>
+                            						</td>
+                            					</tr>
+                            				</tbody>
+                            			</table>
+                            		</div> -->
+                                <!-- // fin prueba -->
+
                         </form>
                     </div>
                 </div>
@@ -139,28 +161,21 @@
                     <div uib-accordion-group class="panel-primary" heading="Recorridos ponderados" is-open="openMenuRankingTrip">
                         <form>
                             <div class=" form-group">
-                                <!-- <div>
-                                    <label><input type="checkbox" ng-model="toogleViewTripsRanking" ng-change= "viewLayerTripsRanking()" > Mostrar capa</label>
-                                </div> -->
-                                <div class="range range-primary">
-                                    <output>Ponderación min:</output>
-                                    <input type="range" name="range"   min="1" max="100" value="1" onchange="rangeSuccess.value=value">
-                                    <output id="rangeSuccess">1</output>
-                                </div>
-                                <!-- </div> -->
-                                <br>
                                 <div>
-                                    <label label-primary>Filtro por turno:</label>
+                                    <label><input type="checkbox" ng-model="toogleViewTripsRanking" ng-change= "" > Ver capa de recorridos ponderados</label>
                                 </div>
-                                <!-- <div class="checkbox" ng-repeat="c in list">
-                                    <label>
-                                        <input type="checkbox" ng-model="c.selected" ng-change= "" > [[c.turno]]
-                                  </label>
-                                </div> -->
-
-                                <button class="btn btn-block btn-primary" ng-disabled="" uib-tooltip="Filtrar" ng-click="findTripsRanking()">
-                                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                </button>
+                                <br>
+                                <div class="text-center form-group">
+                                  <label> Minimo (Ponderacion):</lavel>
+                                    <input type="number" ng-model="pondMin" min="0" max="15000" step="50" value="100">
+                                </div>
+                                <div class="text-center form-group">
+                                  <label> Maximo (Ponderacion):</lavel>
+                                    <input type="number" ng-model="pondMax" min="0" max="15000" step="50" value="500">
+                                </div>
+                                <div class="text-center form-group">
+                                    <button class="btn btn-primary" ng-click="findTripsRanking()">Ver recorridos</button>
+                                </div>
 
                             </div>
                         </form>
