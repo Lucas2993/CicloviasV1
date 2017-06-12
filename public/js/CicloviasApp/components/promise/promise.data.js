@@ -15,6 +15,7 @@
             getTripsCloseToPoint:getTripsCloseToPoint,
             getTripsRanking: getTripsRanking,
             getTripsToDistance:getTripsToDistance,
+            getTripsToCentrality:getTripsToCentrality,
 
             // Journey
             getJourneys: getJourneys,
@@ -216,6 +217,24 @@
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
                 console.log('datos de promise de DISTANCE TRIP: ' + res.data);
+                },
+                function errorCallback(err) {
+                  defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getTripsToCentrality(latitude, longitude) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP + '/closeToCentrality/'+ latitude + '/' + longitude
+            }).then(function successCallback(res) {
+                defered.resolve(res.data);
+                console.log('datos de promise de CENTRALITY TRIP: ' + res.data);
                 },
                 function errorCallback(err) {
                   defered.reject(err)

@@ -166,6 +166,30 @@
                         </form>
                     </div>
                 </div>
+                <!-- menu de gestion de centralidades -->
+                <div class="panel-default" ng-controller="mapTripByCentralityController">
+                    <div uib-accordion-group class="panel-primary" heading="Recorridos dada una centralidad" is-open="openMenuTripsByCentrality">
+                        <form>
+                            <div class="text-center form-group col-md-12" ng-hide="!isLayerByCentralityCreated">
+                                <label><input type="checkbox" ng-disabled="!isLayerByCentralityCreated" ng-model="selectTripByCentrality.checkbox" ng-change="viewTripsToSelectedCentrality()" > Ver capa de recorridos de una centralidad</label>
+                            </div>
+                            <div class="container form-group col-md-12" ng-hide="selectedCentrality.name">
+                                <label>Seleccione una centralidad...</label>
+                            </div>
+                            <div class="container form-group col-md-12" ng-show="selectedCentrality.name">
+                                <label>Centralidad seleccionada:</label>
+                                <p>Nombre: [[selectedCentrality.name == '' ? 'No seleccionado' : selectedCentrality.name]]</p>
+                                <p>Descripcion: [[selectedCentrality.location == '' ? 'No seleccionado' : selectedCentrality.location]]</p>
+                            </div>
+                            <div class="text-center form-group" ng-hide="!selectedCentrality.name">
+                                <button type="button" class="btn btn-default btn" ng-click="getTripsToSelectedCentrality()" ng-disabled="!selectedCentrality.name">Obtener recorridos cercanos</button>
+                                <button class="btn btn-info" ng-disabled="!selectedCentrality.name" uib-tooltip="Limpiar" ng-click="resetLayerToSelectedCentrality()">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Menu de Muestra de Recorridos por longitud -->
               <div uib-accordion-group class="panel-primary" heading="Recorridos por Rango de Longitud" is-open="false">
