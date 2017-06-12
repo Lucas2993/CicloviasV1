@@ -17,10 +17,10 @@
 
     function MapCentralityEditController(vm, creatorMap, srvLayers, srvModelCentrality ,dataServer,srvViewCentrality, adminMenu,creatorStyle) {
 
-      // ********************* declaracion de variables y metodos *********************
+      // ********************************** VARIABLES PUBLICAS ************************
       vm.map = creatorMap.getMap();
 
-      // ********************************** FLAGS *************************************
+      // ********************************** FLAGS PUBLICOS ****************************
       vm.updatePointCentrality = false;
       vm.enableDrawIndicator = enableDrawIndicator;
       vm.showIndicatorSelectedPoint = false;
@@ -110,7 +110,6 @@
           })
       }
 
-      //nooooooooooooooooooo
 
       // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
       vm.searchCentrality = function(point) {

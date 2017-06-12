@@ -59,10 +59,9 @@
 
     <!-- Controlador de Eventos -->
     <script src="{{ URL::asset('js/CicloviasApp/components/events/events.createPoint.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripByCentralityController.js') }}"></script>
 
     <!-- Controladores de mapa -->
-
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripByCentralityController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapCentralityController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapCentralityEditController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapJourneyController.js') }}"></script>

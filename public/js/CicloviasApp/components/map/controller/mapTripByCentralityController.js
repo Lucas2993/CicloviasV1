@@ -4,9 +4,20 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('mapTripByCentralityController', ['$scope', 'creatorMap', 'srvLayers', 'dataServer','adminLayers', 'adminMenu', MapTripByCentralityController]);
+        .controller('mapTripByCentralityController', [
+            '$scope',
+            'creatorMap',
+            'srvLayers',
+            'dataServer',
+            'adminLayers',
+            'adminMenu',
+            'srvViewTrip',
+            'creatorStyle',
+            'srvModelCentrality',
+            MapTripByCentralityController
+        ]);
 
-    function MapTripByCentralityController(vm, creatorMap, srvLayers, dataServer, adminLayers, adminMenu) {
+    function MapTripByCentralityController(vm, creatorMap, srvLayers, dataServer, adminLayers, adminMenu,srvViewTrip,creatorStyle,srvModelCentrality) {
 
         // ******************* DECLARACION DE VARIABLES Y FUNCIONES *********************
 
@@ -16,7 +27,7 @@
         // usada para almacenar los datos recuperados del servidor, para no volver a pedir los datos
         vm.tripstocentralityJson;
         // capa que refleja los recorridos encontrados
-        vm.layerTripsByCentrality;
+        vm.tripsLayerByCentrality;
 
         vm.openMenuTripsByCentrality = false;
 
@@ -36,7 +47,7 @@
             longitude: ''
         }
 
-        // *********************** FUNCIONES ***********************
+        // *******************************FUNCIONES PUBLICAS ****************************
         // Se obtienen todos los recorridos con la distancia seleccionada y se agregan en una capa.
         vm.getTripsToSelectedCentrality = getTripsToSelectedCentrality;
         // Permite la visualizacion de la capa de recorridos de una determinada distancia (si existe).
@@ -44,35 +55,27 @@
         // Se setean todo lo relacionado con los recorridos de una determinada distancia.
         vm.resetLayerToSelectedCentrality = resetLayerToSelectedCentrality;
 
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
+        vm.toogleViewTrips = toogleViewTrips;
         // **************************************************************************************
         // *************************** Descripcion de las funciones *****************************
 
         // *********************** PUBLICAS ***********************
+        // Evento que se ejecuta al checkear ver capa de recorridos, hace un toogle de la capa de recorridos
+        function toogleViewTrips() {
+            console.log("entro a la seleccion de VST recorridos");
+            if (vm.tripstocentralityJson == null) {
+                return;
+            }
+            adminLayers.viewLayer(vm.tripsLayerByCentrality);
+        }
+
+
         function getTripsToSelectedCentrality() {
-            dataServer.getTripsToCentrality(vm.selectedCentrality.geom.coordinates[1],vm.selectedCentrality.geom.coordinates[0])
+            dataServer.getTripsToCentrality(vm.selectedCentrality.geom.coordinates[1], vm.selectedCentrality.geom.coordinates[0])
                 .then(function(data) {
                     vm.tripstocentralityJson = data;
                     console.log("Datos recuperados prom TRIPS de determinada centralidad con EXITO! = " + data);
-                    // Se establece que la capa de recorridos de una Distancia se mostrara (valor del checkbox).
-                    vm.selectTripByCentrality.checkbox = false;
-                    // Si la capa ya fue creada anteriormente se la elimina para poder crear una nueva actualizada.
-                    if (vm.isLayerByCentralityCreated) {
-                        vm.map.removeLayer(vm.layerTripsByCentrality);
-                        vm.isLayerByCentralityCreated = false;
-                    }
-                    // Se crea una nueva capa de recorridos con los datos obtenidos.
-                    vm.layerTripsByCentrality = srvLayers.getLayerTripsFinder(vm.tripstocentralityJson);
-                    // Se indica que una nueva capa de recorridos por distancia se ha creado.
-                    vm.isLayerByCentralityCreated = true;
-                    // Se agrega la capa nueva al mapa.
-                    vm.map.addLayer(vm.layerTripsByCentrality);
-                    // Se establce que la capa de recorridos de una determinada distancia se mostrara (valor del checkbox).
-                    vm.selectTripByCentrality.checkbox = true;
-                    // Se muestra la nueva capa.
+                    resetLayerToSelectedCentrality();
                     vm.viewTripsToSelectedCentrality();
                 })
                 .catch(function(err) {
@@ -81,21 +84,17 @@
         }
 
         function viewTripsToSelectedCentrality() {
-            // Se comprueba que la capa existe.
-            if (vm.isLayerByCentralityCreated) {
-                // Se hace visible la capa.
-                adminLayers.viewLayer(vm.layerTripsByCentrality);
-                vm.layerTripsByCentrality.setVisible(vm.selectTripByCentrality.checkbox);
+
+            if (vm.tripstocentralityJson == null) {
+                return;
             }
+            vm.selectTripByCentrality.checkbox = true;
+            srvViewTrip.addTrips(vm.tripstocentralityJson, vm.tripsLayerByCentrality);
         }
 
         function resetLayerToSelectedCentrality() {
-            // Si la capa esta creada, es removida.
-            if (vm.isLayerByCentralityCreated) {
-                // Se remueve la capa del mapa.
-                vm.map.removeLayer(vm.layerTripsByCentrality);
-            }
-            // Se indica que la capa ya no existe.
+            vm.tripsLayerByCentrality.getSource().clear();
+
             vm.isLayerByCentralityCreated = false;
             // Se desmarca el checkbox.
             vm.selectTripByCentrality.checkbox = false;
@@ -111,7 +110,7 @@
 
         // Se captura el evento de click dentro del mapa.
         vm.map.on('click', function(evt) {
-            if(adminMenu.activeTripsToCentrality()){
+            if (adminMenu.activeTripsToCentrality()) {
                 // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
                 vm.callbackMarkersOnClick(evt.pixel);
             }
@@ -128,22 +127,34 @@
 
         // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
         vm.searchCentrality = function(point) {
-            vm.selectedCentrality = point.get('object');
+            vm.selectedCentrality = srvModelCentrality.getCentrality(point.getId());
             vm.$apply();
         }
 
-        vm.$watch('openMenuTripsByCentrality', function(isOpen){
+        vm.$watch('openMenuTripsByCentrality', function(isOpen) {
             if (isOpen) {
-              console.log('El menu de TRIP_CENTRALITY esta abierto');
-              enableEventClick();
+                console.log('El menu de TRIP_CENTRALITY esta abierto');
+                enableEventClick();
             }
         });
 
-        function enableEventClick(){
+        function enableEventClick() {
             adminMenu.disableAll();
             adminMenu.setActiveTripsToCentrality(true);
             console.log('Entro a actualizacion de eventos TRIP_CENTRALITY');
         }
+
+        var layer;
+
+        // Este metodo genera una capa
+        function generateLayer() {
+            vm.tripsLayerByCentrality = srvLayers.getLayer(null);
+            // Se agrega la capa nueva al mapa.
+            vm.tripsLayerByCentrality.setStyle(creatorStyle.getStyleTrip('green', 2));
+            vm.map.addLayer(vm.tripsLayerByCentrality);
+        }
+
+        generateLayer();
 
     } // fin Constructor
 

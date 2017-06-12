@@ -30,7 +30,7 @@
         // Determina el estado del menu (abierto o cerrado)
         vm.openMenuCentralities = false;
 
-        // *******************************FUNCIONES PUBLICAS ****************************
+        // **************************DECLARACION DE FUNCIONES PUBLICAS ****************************
 
         // Agrega o Borra TODAS las centralidades al mapa, Al hacer click en Ver todo
         vm.checkAllCentralities = checkAllCentralities;
@@ -45,7 +45,7 @@
         // variable que contiene los datos del popup visualizado en el mapa
         var popup = null;
 
-        // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
+        // ************************DECLARACION DE FUNCIONES PRIVADAS ********************
 
         // MENU: deshabilita los eventos de los demas menues y habilita los correspondientes a este
         var enableEventClick;
