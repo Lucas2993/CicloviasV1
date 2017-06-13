@@ -17,7 +17,7 @@
 
         // permite la visualizacion del feature por Id en la capa
         function viewTrip(tripJson, layer) {
-            srvViewFeature.viewFeature(tripJson, layer,null);
+            srvViewFeature.viewFeature(tripJson, layer,creatorStyle.getStyleTrip(creatorColor.getRandomColor()));
         };
 
         // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida
