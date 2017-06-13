@@ -51,7 +51,6 @@
             vm.journiesLayer = srvLayers.getLayer(null);
             vm.map.addLayer(vm.journiesLayer);
             srvViewJourney.addJourneys(vm.journiesJson, vm.journiesLayer);
-
             vm.journiesLayer.setVisible(false);
         }
 

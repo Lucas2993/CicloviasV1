@@ -11,6 +11,8 @@
         var service = {
             viewZone: viewZone,
             addZones: addZones,
+            removeZone: removeZone,
+            addZone: addZone,
         };
 
         return service;
@@ -31,6 +33,21 @@
                 srvViewFeature.addFeature(zonesJson[i],layer ,style );
             }
         }// fin addZones
+
+        function removeZone(zoneJson , layer){
+            srvViewFeature.removeFeature(zoneJson, layer);
+        }
+
+        function addZone(zoneJson, layer) {
+            var style = creatorStyle.getStylePolygon(zoneJson.color, creatorStyle.getStyleText(zoneJson.name));
+            srvViewFeature.addFeature(zoneJson,layer,style);
+        }
+
+        function addZone(zoneJson, layer, color ) {
+          var style = creatorStyle.getStylePolygon(color, creatorStyle.getStyleText(zoneJson.name));
+          srvViewFeature.addFeature(zoneJson,layer,style);
+        }
+
 
     } // FIn SrvViewZone
 

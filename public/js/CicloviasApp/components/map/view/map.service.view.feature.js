@@ -20,24 +20,26 @@
 
         // permite la visualizacion del feature por Id en la capa
         function viewFeature(featureJson, layer,style) {
-            var feature = null;
-            var features = layer.getSource().getFeatures();
-            // buscamos el feature para de la capa o agregarlo
-            for (var i = 0; i < features.length; i++) {
-                if (angular.equals(features[i].getId(), featureJson.id)) {
-                    feature = features[i];
-                    removeFeature(feature, layer);
-                    break;
-                }
-            }
+            var feature = removeFeature(featureJson,layer);
             // si no se encontro el feature se lo muestra
             if (feature == null) {
               addFeature(featureJson, layer, style);
             }
         };
 
-        function removeFeature(feature, layer){
-            layer.getSource().removeFeature(feature);
+        function removeFeature(featureJson, layer){
+          // buscamos el feature para de la capa o agregarlo
+          var feature = null;
+          var features = layer.getSource().getFeatures();
+          for (var i = 0; i < features.length; i++) {
+              if (angular.equals(features[i].getId(), featureJson.id)) {
+                  feature = features[i];
+                  // removeFeature(feature, layer);
+                    layer.getSource().removeFeature(feature);
+                  break;
+              }
+          }
+          return feature;
         }
 
         function  addFeature(featureJson, layer, style ) {

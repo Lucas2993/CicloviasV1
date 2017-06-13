@@ -34,7 +34,9 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.zonesJson = data;
                     console.log("Datos recuperados prom ZONES con EXITO! = " + data);
-                    createLayerZone(vm.zonesJson);
+                    srvModelZone.setZones(vm.zonesJson);
+                    srvModelZone.setZonesLayer(vm.zonesLayer);
+                    console.log("srv.getZone : "+ srvModelZone.getZones());
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");
@@ -49,8 +51,7 @@
             // vm.zonesLayer.setVisible(false);
             vm.zonesLayer = srvLayers.getLayer(null); //TODO a refactorizar
             vm.map.addLayer(vm.zonesLayer);
-            srvModelZone.setZones(vm.zonesJson);
-            srvModelZone.setZonesLayer(vm.zonesLayer);
+
         }
 
 
@@ -80,6 +81,7 @@
 
         // ************************ inicializacion de datos del mapa ************************
         // **********************************************************************************
+        createLayerZone(vm.zonesJson);
         vm.findAllZones();
 
     } // fin Constructor
