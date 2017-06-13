@@ -17,7 +17,7 @@
                                 </label>
                             </div>
 
-                            <div class="checkbox" ng-repeat="centrality in getCentralities()" >
+                            <div class="checkbox" ng-repeat="centrality in getCentralities()">
                                 <label>
                                       <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
                                 </label>
@@ -42,7 +42,7 @@
                             				</tbody>
                             			</table>
                             		</div> -->
-                                <!-- // fin prueba -->
+                            <!-- // fin prueba -->
 
                         </form>
                     </div>
@@ -52,10 +52,10 @@
                 <div class="panel-default" ng-controller="mapCentralityEditController">
                     <div uib-accordion-group class="panel-primary" heading="Gestion de Centralidades" is-open="openMenuEditCentralities">
                         <form>
-                            <div class="text-center form-group">
-                                <button class="btn btn-primary" ng-disabled="isSelecting" ng-click="centralitySelection()">Agregar Centralidad</button>
+                            <div class="text-center form-group ">
+                                <button class="btn-sm btn-primary" ng-disabled="isSelecting" ng-click="centralitySelection()">Agregar Centralidad</button>
                             </div>
-                            <div class="container form-group" ng-hide="!isSelecting && !isEditing">
+                            <div class=" form-group" ng-hide="!isSelecting && !isEditing">
                                 <p>*** [[inAction]] ***</p>
                                 <p>Latitud: [[newCentrality.latitude == 0 ? 'No seleccionado' : newCentrality.latitude]]</p>
                                 <p>Longitud: [[newCentrality.longitude == 0 ? 'No seleccionado' : newCentrality.longitude]]</p>
@@ -141,16 +141,16 @@
                                 <div class="text-center form-group">
                                     <label><input type="checkbox" ng-disabled="!isPointCreated" ng-model="selectTripCloseToPoint.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos cercanos</label>
                                 </div>
-                                <div class="container form-group">
+                                <div class=" form-group">
                                     <p>[[selectedPoint.latitude == 0 && selectedPoint.longitude == 0 ? 'No hay un punto seleccionado' : 'Punto Seleccionado:']]</p>
                                     <p>Latitud: [[selectedPoint.latitude == 0 ? '-' : selectedPoint.latitude]]</p>
                                     <p>Longitud: [[selectedPoint.longitude == 0 ? '-' : selectedPoint.longitude]]</p>
                                 </div>
-                                <div class="text-center form-group">
-                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="getTripsCloseToSelectedPoint()">Ver recorridos cercanos</button>
-                                </div>
-                                <div class="text-center form-group">
-                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="resetLayerCloseToPoint()">Limpiar</button>
+
+                                <div class=" text-center btn-group-sm">
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="getTripsCloseToSelectedPoint()">Buscar</button>
+
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="resetLayerCloseToPoint()">Borrar</button>
                                 </div>
                             </div>
                         </form>
@@ -166,7 +166,7 @@
                                 </div>
                                 <br>
                                 <div class="text-center form-group">
-                                  <label> Minimo (Ponderacion):</lavel>
+                                    <label> Minimo (Ponderacion):</lavel>
                                     <input type="number" ng-model="pondMin" min="0" max="15000" step="50" value="100">
                                 </div>
                                 <div class="text-center form-group">
@@ -184,56 +184,103 @@
                 <!-- menu de gestion de centralidades -->
                 <div class="panel-default" ng-controller="mapTripByCentralityController">
                     <div uib-accordion-group class="panel-primary" heading="Recorridos dada una centralidad" is-open="openMenuTripsByCentrality">
-                        <form>
-                            <div class="text-center form-group col-md-12" ng-hide="">
-                                <label><input type="checkbox" ng-disabled="" ng-model="selectTripByCentrality.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos de una centralidad</label>
-                            </div>
-                            <div class="container form-group col-md-12" ng-hide="selectedCentrality.name">
-                                <label>Seleccione una centralidad...</label>
-                            </div>
-                            <div class="container form-group col-md-12" ng-show="selectedCentrality.name">
-                                <label>Centralidad seleccionada:</label>
-                                <p>Nombre: [[selectedCentrality.name == '' ? 'No seleccionado' : selectedCentrality.name]]</p>
-                                <p>Descripcion: [[selectedCentrality.location == '' ? 'No seleccionado' : selectedCentrality.location]]</p>
-                            </div>
-                            <div class="text-center form-group" ng-hide="!selectedCentrality.name">
-                                <button type="button" class="btn btn-default btn" ng-click="getTripsToSelectedCentrality()" ng-disabled="!selectedCentrality.name">Obtener recorridos cercanos</button>
-                                <button class="btn btn-info" ng-disabled="!selectedCentrality.name" uib-tooltip="Limpiar" ng-click="resetLayerToSelectedCentrality()">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Menu de Muestra de Recorridos por longitud -->
-              <div uib-accordion-group class="panel-primary" heading="Recorridos por Rango de Longitud" is-open="false">
-                  <div class="panel-body" ng-controller="mapTripByDistanceController">
-                      <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
-                  <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
                       <form>
-                          <div>
-                              <div class="text-center form-group">
-                                  <label><input type="checkbox" ng-disabled="" ng-model="selectTripByDistance.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos entre determinada distancia</label>
-                              </div>
-                              <div class="text-center form-group">
-                                <label> Minimo (Metros):</lavel>
+                            <div class="form-group" ng-hide="">
+                                <label><input type="checkbox" ng-disabled="" ng-model="selectTripByCentrality.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos cercanos a una centralidad</label>
+                                </div>
+                                <div class=" form-group" ng-hide="selectedCentrality.name">
+                                    <label>Seleccione una centralidad...</label>
+                                </div>
+                                <div class=" form-group" ng-show="selectedCentrality.name">
+                                    <label>Centralidad seleccionada:</label>
+                                    <p>Nombre: [[selectedCentrality.name == '' ? 'No seleccionado' : selectedCentrality.name]]</p>
+                                    <p>Descripcion: [[selectedCentrality.location == '' ? 'No seleccionado' : selectedCentrality.location]]</p>
+                                </div>
+
+                                <div class=" text-center btn-group" ng-hide="!selectedCentrality.name">
+                                    <button  class="btn-sm btn-default" ng-click="getTripsToSelectedCentrality()" ng-disabled="!selectedCentrality.name">Buscar</button>
+                                    <button class="btn-sm btn-info" ng-disabled="!selectedCentrality.name" uib-tooltip="Limpiar" ng-click="resetLayerToSelectedCentrality()">
+                                      <span class="glyphicon glyphicon-remove" ></span>
+                                    </button>
+                                </div>
+
+                      </form>
+                    </div>
+                  </div>
+                    <!-- Menu de Muestra de Recorridos por longitud -->
+                    <div uib-accordion-group class="panel-primary" heading="Recorridos por Rango de Longitud" is-open="false">
+                        <div class="panel-body" ng-controller="mapTripByDistanceController">
+                            <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
+                  <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
+                            <form>
+                                <div>
+                                    <div class="text-center form-group">
+                                        <label><input type="checkbox" ng-disabled="" ng-model="selectTripByDistance.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos entre determinada distancia</label>
+                                    </div>
+                                    <div class="text-center form-group">
+                                        <label> Minimo (Metros):</lavel>
                                   <input type="number" ng-model="longMin" min="100" max="15000" step="50" value="100">
                               </div>
                               <div class="text-center form-group">
                                 <label> Maximo (Metros):</lavel>
                                   <input type="number" ng-model="longMax" min="100" max="15000" step="50" value="500">
                               </div>
-                              <div class="text-center form-group">
+                              <div class="text-center btn-group-sm">
                                   <button class="btn btn-primary" ng-click="getTripsToSelectedDistance()">Ver recorridos</button>
-                              </div>
-                              <div class="text-center form-group">
+                              <!-- </div>
+                              <div class="text-center form-group"> -->
                                   <button class="btn btn-primary" ng-click="resetLayerToSelectedDistance()">Limpiar</button>
                               </div>
                           </div>
                       </form>
                   </div>
               </div>
+
+              <div uib-accordion-group class="panel-primary" heading="Zona de origen a destino" is-open="false">
+                  <div class="panel-body" ng-controller="mapTripBetweenZoneController">
+                      <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
+                  <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
+                      <form>
+                          <div>
+                              <div class="text-center form-group">
+                                  <label><input type="checkbox" ng-disabled="" ng-model="model" ng-change="" > Ver recorridos desde zona origen a zona destino</label>
+                              </div>
+
+                                    <div class="input-group">
+                                            <!-- <input type="text" ng-model="asyncSelected" placeholder="Zona de origen" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="" class="form-control"> -->
+                                            <input type="text" ng-model="" placeholder="Zona de origen" uib-typeahead="" typeahead-loading="loadingLocations" typeahead-no-results="" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" ng-hide="" uib-tooltip="Guardar" ng-disabled="" ng-click="">
+                                                      <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <!-- <div class="input-group">
+                                            <input type="text" ng-model="" placeholder="Zona de destino" uib-typeahead="" typeahead-loading="loadingLocations" typeahead-no-results="" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" ng-hide="" uib-tooltip="Guardar" ng-disabled="" ng-click="">
+                                                      <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div> -->
+
+                                    <br>
+                                    <div class="text-center btn-group-sm">
+
+                                    <!-- <div class="text-center form-group"> -->
+                                        <button type="button" class="btn btn-default" ng-click="">Ver recorridos</button>
+                                    <!-- </div> -->
+                                    <!-- <div class="text-center form-group"> -->
+                                        <button type="button " class="btn btn-info" ng-click="">
+                                          <span class="glyphicon glyphicon-remove" ></span>
+                                        </button>
+                                    </div>
+                                  </div>
+                            </form>
+                        </div>
+                    </div>
 
 
             </uib-accordion>
@@ -245,4 +292,4 @@
         <div id="container-fluid-map">
             <div id="map" class="map"></div>
         </div>
-    </div>
+        </div>

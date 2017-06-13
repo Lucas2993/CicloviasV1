@@ -10,10 +10,11 @@
             'dataServer',
             'adminLayers',
             'srvViewZone',
+            'srvModelZone',
             MapZoneController
         ]);
 
-    function MapZoneController(vm, creatorMap, srvLayers, dataServer, adminLayers,srvViewZone) {
+    function MapZoneController(vm, creatorMap, srvLayers, dataServer, adminLayers,srvViewZone,srvModelZone) {
 
         // ********************* declaracion de variables y metodos *********************
         vm.map = creatorMap.getMap();
@@ -48,7 +49,8 @@
             // vm.zonesLayer.setVisible(false);
             vm.zonesLayer = srvLayers.getLayer(null); //TODO a refactorizar
             vm.map.addLayer(vm.zonesLayer);
-
+            srvModelZone.setZones(vm.zonesJson);
+            srvModelZone.setZonesLayer(vm.zonesLayer);
         }
 
 

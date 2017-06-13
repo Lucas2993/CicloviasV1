@@ -70,10 +70,12 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripFinderController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripRankingController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapZoneController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripBetweenZoneController.js') }}"></script>
 
     <!-- Modelo -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.trip.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.zone.js') }}"></script>
 
     <!-- Vista -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.centrality.js') }}"></script>
