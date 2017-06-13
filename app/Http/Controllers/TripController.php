@@ -511,4 +511,32 @@ class TripController extends Controller{
 
         var_dump($resultQuery);
     }
+
+    public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){
+        $string_query = "SELECT first.tripid
+                        FROM (
+        	                    SELECT t.id as tripid, count(t.id) as counter
+        	                    FROM zones z, trips t
+        	                    WHERE
+        	                    CASE z.id WHEN ".$origin_zone_id." THEN ST_Intersects( z.geom::geometry , ST_StartPoint(t.geom::geometry))
+        	                    WHEN ".$destination_zone_id." THEN ST_Intersects( z.geom::geometry , ST_EndPoint(t.geom::geometry)) END
+        	                    GROUP BY t.id) as first
+                        WHERE first.counter > 1";
+
+        var_dump($string_query);
+
+        $query = DB::raw($string_query);
+
+        $results = DB::select($query);
+        $trips = array();
+
+        if(!empty($results)){
+            foreach ($results as $trip_id) {
+                $found_trip = Trip::find($trip_id->tripid);
+                array_push($trips, $found_trip);
+            }
+        }
+
+        return $trips;
+    }
 }
