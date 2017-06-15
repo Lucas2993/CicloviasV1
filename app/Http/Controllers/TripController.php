@@ -498,19 +498,19 @@ class TripController extends Controller{
         return $recorridosCorrectos;
     }
 
-    public function getTipsByZone($zone_id){
-        $query = "SELECT p.*
-                FROM trips p, zones z
-                WHERE z.id = ".$zone_id."
-                AND ST_Intersects(p.geom, z.geom) = 't'
-                ORDER BY p.id ASC";
-
-        $tripsZoneQuery= DB::raw($query);
-
-        $resultQuery = DB::select($tripsZoneQuery);
-
-        var_dump($resultQuery);
-    }
+    // public function getTipsByZone($zone_id){
+    //     $query = "SELECT p.*
+    //             FROM trips p, zones z
+    //             WHERE z.id = ".$zone_id."
+    //             AND ST_Intersects(p.geom, z.geom) = 't'
+    //             ORDER BY p.id ASC";
+    //
+    //     $tripsZoneQuery= DB::raw($query);
+    //
+    //     $resultQuery = DB::select($tripsZoneQuery);
+    //
+    //     var_dump($resultQuery);
+    // }
 
     public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){
         $string_query = "SELECT first.tripid
