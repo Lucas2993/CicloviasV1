@@ -1,4 +1,6 @@
-// Creacion de mapa
+
+// Responsabilidad :  Creacion de mapa  (implementando un Singleton para ser instanciado una sola vez desde
+// los distintos controladores )
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])

@@ -15,8 +15,7 @@ use App\Models\Name;
 use App\Models\Centrality;
 use App\Services\CicloviasHelper;
 
-class TripController extends Controller
-{
+class TripController extends Controller{
     private $clvHelperService;
 
     //Se declara contructor para inyectar service "CicloviasHelper"
@@ -177,7 +176,7 @@ class TripController extends Controller
         //Armado de la query para obtener los recorridos cercanos a un punto
         $query = "SELECT t.id
                   FROM trips t
-                  WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),300)";
+                  WHERE ST_DWithin(t.geom,St_MakePoint(".$longitude.",".$latitude."),300)";
 
         $cercanoQuery= DB::raw($query);
 
@@ -206,14 +205,14 @@ class TripController extends Controller
     }
 
     /**
-    * Devuelve los recorridos de una determinado largo.
+    * Devuelve los recorridos de un determinado rango de distancia.
     *
-    * @param  $long
-    * @param  $tolerance
+    * @param  $longMin
+    * @param  $longMax
     * @return Response
     */
-    public function getToDistance($long,$tolerance){
-        return json_encode($this->clvHelperService->getToDistance($long,$tolerance));
+    public function getToDistance($longMin,$longMax){
+        return $this->clvHelperService->getToDistance($longMin,$longMax);
     }
 
     // TODO Para corregir...
@@ -229,13 +228,15 @@ class TripController extends Controller
             }
             $distance_completed = 0.0;
 
-            $new_trip_points = array();
+            $point_road = null;
+            $point_corner = null;
 
-            $random_centrality = Centrality::all()->random(1);
+            while(empty($point_road) || empty($point_corner)){
+                $new_trip_points = array();
 
-            $centrality_point = $random_centrality->geom;
+                $random_centrality = Centrality::all()->random(1);
 
-            array_push($new_trip_points, $centrality_point);
+                $centrality_point = $random_centrality->geom;
 
             $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
                                                                                     ST_Line_Locate_Point(r.geom::geometry,
@@ -246,25 +247,33 @@ class TripController extends Controller
                                                 ORDER BY ST_Distance(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."),r.geom)
                                                 LIMIT 1");
 
-            $query_centrality_point2 = DB::raw("
-            select dumped.id as id, dumped.name as name, dumped.dump as point, ST_Distance(ST_GeomFromText(dumped.dump), ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) as distancia
-            from (
-	                SELECT r.*, ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as dump
-                    FROM roads r
-                    WHERE r.id in
-                                (SELECT distance_a.road
-                                FROM(
-                                    SELECT r.id as road, ST_Distance(r.geom, ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) AS distance
-                                    from roads r
-                                    ) as distance_a
-                                order by distance_a.distance
-                                limit 4)
-                ) as dumped
-            order by distancia ASC
-            limit 1");
-            $point_road = DB::select($query_centrality_point);
-            $point_corner = DB::select($query_centrality_point2);
+                $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
+                                                                                        ST_Line_Locate_Point(r.geom::geometry,
+                                                                                                            ST_PointFromText('POINT(".$centrality_point->getLng()." ".$centrality_point->getLat().")',4326)))) as point
+                                                    FROM roads r
+                                                    WHERE r.geom && st_expand(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."), 10)
+                                                    ORDER BY ST_Distance(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."),r.geom)
+                                                    LIMIT 1");
 
+                $query_centrality_point2 = DB::raw("
+                select dumped.id as id, dumped.name as name, dumped.dump as point, ST_Distance(ST_GeomFromText(dumped.dump), ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) as distancia
+                from (
+    	                SELECT r.*, ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as dump
+                        FROM roads r
+                        WHERE r.id in
+                                    (SELECT distance_a.road
+                                    FROM(
+                                        SELECT r.id as road, ST_Distance(r.geom, ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat().")) AS distance
+                                        from roads r
+                                        ) as distance_a
+                                    order by distance_a.distance
+                                    limit 4)
+                    ) as dumped
+                order by distancia ASC
+                limit 1");
+                $point_road = DB::select($query_centrality_point);
+                $point_corner = DB::select($query_centrality_point2);
+            }
             array_push($new_trip_points, Point::fromWKT($point_road[0]->point));
 
             $random_road = Road::find($point_corner[0]->id);
@@ -419,81 +428,122 @@ class TripController extends Controller
         ON gpr.geo_point_id = gp.id
         WHERE gp.latitude >= -42.742411494255066
         */
-    }
-    // fclose($file);
-    return "Ok";
-}
-
-// Devuelve la posicion de un punto si la encuentra, sino devuelve -1.
-private function getPositionOfPoint($points, $single_point){
-    $position = -1;
-    for($i = 0;$i < count($points);$i++){
-        if($points[$i]->getLat() == $single_point->getLat() && $points[$i]->getLng() == $single_point->getLng()){
-            $position = $i;
-            break;
         }
+        // fclose($file);
+        return "Ok";
     }
 
-    return $position;
-}
+    // Devuelve la posicion de un punto si la encuentra, sino devuelve -1.
+    private function getPositionOfPoint($points, $single_point){
+        $position = -1;
+        for($i = 0;$i < count($points);$i++){
+            if($points[$i]->getLat() == $single_point->getLat() && $points[$i]->getLng() == $single_point->getLng()){
+                $position = $i;
+                break;
+            }
+        }
 
-
-private function getNextPoint($points, $position){
-    $point = null;
-    if($position < count($points)-1){
-        $point = $points[$position+1];
+        return $position;
     }
 
-    return $point;
-}
 
-/**
-* Funcion que retorna el largo en kilometros de un Recorrido.
-*
-* @param $id
-* @return int $km
-*/
-public function tripIdDistance($id){
-  return $this->clvHelperService->tripIdDistance($id);
-}
+    private function getNextPoint($points, $position){
+        $point = null;
+        if($position < count($points)-1){
+            $point = $points[$position+1];
+        }
 
-/**
-* Funcion que retorna recorridos cercanos a una centralidad
-*
-* @param $latitude
-* @param $longitude
-* @return $recorridosCorrectos
-*/
-public function closeToCentrality($latitude, $longitude){
+        return $point;
+    }
 
-  //Armado de la query para obtener los recorridos cercanos a un punto
-  $query = "SELECT t.id
-            FROM trips t
-            WHERE ST_DWithin(t.geom,St_MakePoint(".$latitude.",".$longitude."),100)";
+    /**
+    * Funcion que retorna el largo en kilometros de un Recorrido.
+    *
+    * @param $id
+    * @return int $km
+    */
+    public function tripIdDistance($id){
+        return $this->clvHelperService->tripIdDistance($id);
+    }
 
-  $cercanoQuery= DB::raw($query);
+    /**
+    * Funcion que retorna recorridos cercanos a una centralidad
+    *
+    * @param $latitude
+    * @param $longitude
+    * @return $recorridosCorrectos
+    */
+    public function getCloseToCentrality($latitude, $longitude){
 
-  $resultQuery= DB::select($cercanoQuery);
+        //Armado de la query para obtener los recorridos cercanos a un punto
+        $query = "SELECT t.id
+        FROM trips t
+        WHERE ST_DWithin(t.geom,St_MakePoint(".$longitude.",".$latitude."),100)";
 
-  //Obtengo los id separados.
-  $pila= array();
-  $longitud = count($resultQuery);
+        $cercanoQuery= DB::raw($query);
 
-  for ($i=0;$i<$longitud;$i++){
+        $resultQuery= DB::select($cercanoQuery);
 
-    array_push($pila,$resultQuery[$i]->id);
+        //Obtengo los id separados.
+        $pila= array();
+        $longitud = count($resultQuery);
 
-  }
+        for ($i=0;$i<$longitud;$i++){
 
-  //hago un for con los id para obtener los recorridos
+            array_push($pila,$resultQuery[$i]->id);
 
-  $recorridosCorrectos = array();
-  for ($j=0;$j<$longitud;$j++){
+        }
 
-    array_push($recorridosCorrectos,Trip::find($pila[$j]));
+        //hago un for con los id para obtener los recorridos
 
-  }
-  return $recorridosCorrectos;
-}
+        $recorridosCorrectos = array();
+        for ($j=0;$j<$longitud;$j++){
 
+            array_push($recorridosCorrectos,Trip::find($pila[$j]));
+
+        }
+        return $recorridosCorrectos;
+    }
+
+    // public function getTipsByZone($zone_id){
+    //     $query = "SELECT p.*
+    //             FROM trips p, zones z
+    //             WHERE z.id = ".$zone_id."
+    //             AND ST_Intersects(p.geom, z.geom) = 't'
+    //             ORDER BY p.id ASC";
+    //
+    //     $tripsZoneQuery= DB::raw($query);
+    //
+    //     $resultQuery = DB::select($tripsZoneQuery);
+    //
+    //     var_dump($resultQuery);
+    // }
+
+    public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){
+        $string_query = "SELECT first.tripid
+                        FROM (
+        	                    SELECT t.id as tripid, count(t.id) as counter
+        	                    FROM zones z, trips t
+        	                    WHERE
+        	                    CASE z.id WHEN ".$origin_zone_id." THEN ST_Intersects( z.geom::geometry , ST_StartPoint(t.geom::geometry))
+        	                    WHEN ".$destination_zone_id." THEN ST_Intersects( z.geom::geometry , ST_EndPoint(t.geom::geometry)) END
+        	                    GROUP BY t.id) as first
+                        WHERE first.counter > 1";
+
+        // var_dump($string_query);
+
+        $query = DB::raw($string_query);
+
+        $results = DB::select($query);
+        $trips = array();
+
+        if(!empty($results)){
+            foreach ($results as $trip_id) {
+                $found_trip = Trip::find($trip_id->tripid);
+                array_push($trips, $found_trip);
+            }
+        }
+
+        return $trips;
+    }
 }

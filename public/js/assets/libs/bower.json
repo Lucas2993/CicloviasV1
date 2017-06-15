@@ -22,5 +22,8 @@
     "angular": "1.5.8",
     "angular-openlayers-directive": "^1.19.3",
     "bootstrap": "3.3.7"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }

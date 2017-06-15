@@ -32,10 +32,14 @@ Route::get('api/trip/closeToPoint/{latitude}/{longitude}', 'TripController@getCl
 
 Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'store', 'update']]);
 
-Route::get('api/trip/toDistance/{long}/{tolerance}', 'TripController@getToDistance');
+Route::get('api/trip/toDistance/{longMin}/{longMax}', 'TripController@getToDistance');
 
 Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');
 
 Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@getCloseToCentrality');
+
+Route::get('api/journey/getJourneysByZone/{zone_id}', 'JourneyController@getJourneysByZone');
+
+Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destination_zone_id}', 'TripController@getTripsByOriginDestinationZone');
 
 Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');

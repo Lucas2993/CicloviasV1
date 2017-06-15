@@ -1,0 +1,31 @@
+<!-- componentes que determinan las tabs que se muestran en la pantalla de inicio de la app -->
+<!-- Contenedor del mapa -->
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left" id="row-offcanvas">
+        <!-- Panel de control -->
+        <nav class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            <uib-accordion close-others="true">
+
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapCentralityView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapCentralityEditView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapZoneView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapJourneyView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripFinderView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripRankingView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripByCentralityView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripByDistanceView.html'"></div>
+              <div ng-include src="'js/CicloviasApp/components/map/view/mapTripBetweenZoneView.html'"></div>
+            </uib-accordion>
+
+            <!-- fin panel de control -->
+        </nav>
+
+        <!-- Mapa -->
+        <div class="container-fluid-map" >
+            <div id="map" class="map"></div>
+        </div>
+
+    </div>
+</div>

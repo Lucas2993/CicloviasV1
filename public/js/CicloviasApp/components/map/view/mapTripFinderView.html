@@ -1,0 +1,24 @@
+
+                <!-- Menu de seleccion de un punto para conocer los recorridos cercanos -->
+                <div class="panel-default" ng-controller="mapTripFinderController">
+                    <div uib-accordion-group class="panel-primary" heading="Recorridos cercanos a un punto" is-open="openMenuTripFinder">
+                        <form>
+                            <div>
+                                <div class="text-center form-group">
+                                    <label><input type="checkbox" ng-disabled="!isPointCreated" ng-model="selectTripCloseToPoint.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos cercanos</label>
+                                </div>
+                                <div class=" form-group">
+                                    <p>[[selectedPoint.latitude == 0 && selectedPoint.longitude == 0 ? 'No hay un punto seleccionado' : 'Punto Seleccionado:']]</p>
+                                    <p>Latitud: [[selectedPoint.latitude == 0 ? '-' : selectedPoint.latitude]]</p>
+                                    <p>Longitud: [[selectedPoint.longitude == 0 ? '-' : selectedPoint.longitude]]</p>
+                                </div>
+
+                                <div class=" text-center btn-group-sm">
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="getTripsCloseToSelectedPoint()">Buscar</button>
+
+                                    <button class="btn btn-primary" ng-disabled="selectedPoint.latitude == 0 || selectedPoint.longitude == 0" ng-click="resetLayerCloseToPoint()">Borrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>

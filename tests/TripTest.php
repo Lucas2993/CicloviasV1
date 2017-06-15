@@ -11,8 +11,8 @@ use Phaza\LaravelPostgis\Geometries\Polygon;
 use Phaza\LaravelPostgis\PostgisConnection;
 
 use App\Models\Trip;
-use App\Http\Controllers\TripController;
 use App\Services\CicloviasHelper;
+use App\Http\Controllers\TripController;
 
 class TripTest extends TestCase{
 
@@ -123,7 +123,7 @@ class TripTest extends TestCase{
     'name' => 'Recorrido 2',
   ]);*/
 
-  $trips = (new TripController(new CicloviasHelper))->getCloseToPoint(-42.783851623535156, -65.01168251037598);
+  $trips = (new TripController(new CicloviasHelper))->getCloseToPoint(-42.7847957611084, -65.00966548919678);
   $countstrip = count($trips);
 
   //var_dump ($countstrip);
@@ -320,23 +320,48 @@ class TripTest extends TestCase{
 //     $this->assertTrue($distancia > 0);
 //
 // }
-//
+
+/**
+*Test de funcion tripToDistance
+*/
 public function testTripToDistance(){
-    $trips= (new CicloviasHelper)->getToDistance(0.80, 50);
+    $trips= (new CicloviasHelper)->getToDistance(750, 1050);
     $countstrip = count($trips);
 
     //var_dump ($countstrip);
     $this->assertTrue($countstrip > 0);
 
-
 }
-//
+
+/**
+* Test de funcion que determina los kilometros de un recorrido especifico.
+*
+*/
 public function testTripIdDistance(){
     //Control de metros o kilometros
     $distancia = (new CicloviasHelper)->tripIdDistance('1');
-    var_dump ($distancia);
+    //var_dump ($distancia);
     $this->assertTrue($distancia > 0.0);
 }
 
-
+public function testTripNormalizePoint(){
+  $result = (new CicloviasHelper())->normalizeGeoPoint(-42.7737557888031, -65.02675652503967);
+  dd($result);
+  $this->assertTrue($result!= null);
 }
+
+/**
+* Test de service getCloseToCentrality el cual dado un geopoint de una centralidad
+* recuepera los recorridos a 150 mts de cercania.
+* @return void
+*/
+public function testGetCloseToCentrality(){
+
+$trips = (new TripController(new CicloviasHelper))->getCloseToCentrality(-42.785667, -65.005941);
+$countstrip = count($trips);
+
+//var_dump ($countstrip);
+$this->assertTrue($countstrip > 0);
+}
+
+}//fin de la clase

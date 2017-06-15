@@ -1,0 +1,28 @@
+<!-- Menu de Muestra de Recorridos por longitud -->
+  <div uib-accordion-group class="panel-primary"  id="TrypByDistance" heading="Recorridos por Rango de Longitud" is-open=false>
+    <div class="panel-default" ng-controller="mapTripByDistanceController">
+        <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
+<div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
+        <form>
+
+          <div class="text-center form-group">
+              <label>
+                <input type="checkbox" ng-disabled="" ng-model="selectTripByDistance.checkbox" ng-change="toogleViewTrips()" > Ver capa de recorridos entre determinada distancia
+              </label>
+          </div>
+          <div class="text-center form-group">
+              <label> Minimo (Metros):</lavel>
+              <input type="number" ng-model="longMin" min="100" max="15000" step="50" value="100">
+          </div>
+          <div class="text-center form-group">
+              <label> Maximo (Metros):</lavel>
+              <input type="number" ng-model="longMax" min="100" max="15000" step="50" value="500">
+          </div>
+          <div class="text-center btn-group-sm">
+              <button class="btn btn-primary" ng-click="getTripsToSelectedDistance()">Ver recorridos</button>
+              <button class="btn btn-primary" ng-click="resetLayerToSelectedDistance()">Limpiar</button>
+          </div>
+
+        </form>
+  </div>
+</div>

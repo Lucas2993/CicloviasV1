@@ -1,0 +1,19 @@
+<!-- menu de opciones de trayectos -->
+<div class="panel-default" ng-controller="mapJourneyController">
+    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="false">
+        <div>
+            <label>
+              <input type="checkbox" ng-model="selectTrips" ng-change= "checkAllJourneys()" > Ver todos los recorridos
+            </label>
+        </div>
+        <div class="checkbox" ng-repeat="journey in journeyJson | limitTo : pageSize : (currentPage - 1) * pageSize track by journey.id">
+            <label>
+                <input type="checkbox" checklist-model="journeyJson"  checklist-value="journey.id" ng-model="journey.selected" ng-change= "selectJourney(journey)"> trayecto [[journey.id]]
+            </label>
+        </div>
+        <div class="text-center">
+            <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
+            <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
+        </div>
+    </div>
+</div>

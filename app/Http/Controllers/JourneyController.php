@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Phaza\LaravelPostgis\Geometries\LineString;
+use Phaza\LaravelPostgis\Geometries\Point;
+use Phaza\LaravelPostgis\Geometries\Geometry;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Journey;
 
@@ -85,5 +90,26 @@ class JourneyController extends Controller
     public function destroy($id)
     {
         Journey::destroy($id);
+    }
+
+    public function getJourneysByZone($zone_id){
+        $query = "SELECT j.id as id
+                FROM journeys j, zones z
+                WHERE z.id = ".$zone_id."
+                AND ST_Intersects(j.geom, z.geom) = 't'
+                ORDER BY j.id ASC";
+
+        $journeysZoneQuery= DB::raw($query);
+
+        $resultQuery = DB::select($journeysZoneQuery);
+
+        $journeysResults = array();
+        foreach ($resultQuery as $single_result) {
+            array_push($journeysResults, Journey::find($single_result->id));
+        }
+
+        echo(get_class($journeysResults[0]->geom));
+
+        // return $journeysResults;
     }
 }

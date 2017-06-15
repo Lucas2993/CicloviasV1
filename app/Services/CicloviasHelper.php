@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Trip;
 use App\Models\GeoPoint;
 use App\Models\TripPoint;
@@ -58,35 +60,31 @@ class CicloviasHelper {
   /**
   *Funcion que retorna los Recorridos que estan dentro de un rango de una determinada Distancia.
   *
-  *@param int $long
-  *@param int $tolerance
+  *@param int $longMinima
+  *@param int $longMaxima
   *@param array $result
   */
-  public function getToDistance($long,$tolerance){
-    //Variables que determinan el rango de distancia en la que puede estar los Recorridos.
-    $longMin= $long - ($tolerance * 0.001);
-    $longMax= $long + ($tolerance * 0.001);
+  public function getToDistance($longMinima,$longMaxima){
+   //Variables que determinan el rango de distancia en kilometros de distancia de los Recorridos.
+   $longMinKM= $longMinima * 0.001;
+   $longMaxKM= $longMaxima * 0.001;
 
-    $result = array();
-    $Trips = Trip::all();
+   $result = array();
+   $Trips = Trip::all();
 
-    $result = array();
-    $Trips = Trip::all();
+   foreach($Trips as $trip){
+     $trip_points = $trip->geom;
 
-    foreach($Trips as $trip){
-      $trip_points = $trip->geom;
+     $kmt = $this->tripDistance($trip_points);
+     $kmr = round($kmt, 3);
 
-      $kmt = $this->tripDistance($trip_points);
-      $kmr = round($kmt, 2);
+       if($kmr >= $longMinKM && $kmr <= $longMaxKM){
+         $result[] = $trip;
 
-        if($kmr >= $longMin && $kmr <= $longMax){
-          $result[] = $trip;
-
-        }
-    }
-
-    return $result;
-  }
+       }
+   }
+   return $result;
+ }
 
   /**
   * Funcion que retorna el largo en kilometros de un Recorrido.
@@ -117,12 +115,26 @@ class CicloviasHelper {
   * pasados como parámetro.
   */
   public function normalizeGeoPoint($lat, $long){
-    $qry_lat_min;
-    $qry_lat_max;
-    $qry_long_min;
-    $qry_long_max;
 
+    $qrySql = 'select punto, ST_Distance(ST_GeomFromText(t2.punto), ST_MakePoint('.$long.','.$lat.')) as distancia
+    from (
+    	SELECT ST_AsText((ST_DumpPoints(r.geom::geometry)).geom) as punto
+    	FROM roads r
+    	WHERE r.id in
+    		(select t1.road
+    		   from(
+    			select r.id as road, ST_Distance(r.geom, ST_MakePoint('.$long.', '.$lat.')) as distance
+    			from roads r
+    			where ST_DWithin(r.geom, ST_MakePoint('.$long.', '.$lat.'), 150)) as t1
+    		   order by t1.distance
+    		   limit 4)
+    		) as t2
+    order by distancia ASC
+    limit 1;';
 
+    $result = DB::select(DB::raw($qrySql));
+
+    return $result;
 
   }
 }//fin de la clase

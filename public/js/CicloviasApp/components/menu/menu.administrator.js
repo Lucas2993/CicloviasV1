@@ -1,4 +1,6 @@
-// Administrador de los eventos del mapa
+// Responsabilidad : Administrar el control de los eventos del mapa
+// Este servicio permite controlar que menu tiene el control de la vista del mapa,
+// en otras palabras que eventos estan activos en determinado momento.
 (function() {
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
@@ -15,6 +17,7 @@
         var tripsRanking = false;
         var tripsToDistance = false;
         var journey = false;
+        var tripsToCentrality = false;
         var tripsCiclovias = false;
 
         // ******************************************************************************
@@ -29,12 +32,14 @@
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
             activeTripsCiclovias: activeTripsCiclovias,
+            activeTripsToCentrality: activeTripsToCentrality,
             setActiveCentralities: setActiveCentralities,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
             setActiveTripsCiclovias: setActiveTripsCiclovias,
+            setActiveTripsToCentrality: setActiveTripsToCentrality,
             disableAll: disableAll
         };
         return service;
@@ -61,9 +66,13 @@
             return tripsToDistance;
         }
 
+        function activeTripsToCentrality(){
+            return tripsToCentrality;
+        }
         function activeTripsCiclovias(){
             return tripsCiclovias;
         }
+
 
         // ******************* SETTERS *******************
         // ***********************************************
@@ -87,6 +96,9 @@
             tripsToDistance = activated;
         }
 
+        function setActiveTripsToCentrality(activated){
+            tripsToCentrality = activated;
+        }
         function setActiveTripsCiclovias(activated){
             tripsCiclovias = activated;
         }
@@ -100,6 +112,7 @@
             setActiveTripFinder(false);
             setActiveTripsRanking(false);
             setActiveTripsToDistance(false);
+            setActiveTripsToCentrality(false);
             setActiveTripsCiclovias(false);
         }
 

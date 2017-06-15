@@ -1,0 +1,39 @@
+
+                <!-- menu de gestion de centralidades -->
+                <div class="panel-default" ng-controller="mapCentralityEditController">
+                    <div uib-accordion-group class="panel-primary" heading="Gestion de Centralidades" is-open="openMenuEditCentralities">
+                        <form>
+                            <div class="text-center form-group ">
+                                <button class="btn-sm btn-primary" ng-disabled="isSelecting" ng-click="centralitySelection()">Agregar Centralidad</button>
+                            </div>
+                            <div class=" form-group" ng-hide="!isSelecting && !isEditing">
+                                <p>*** [[inAction]] ***</p>
+                                <p>Latitud: [[newCentrality.latitude == 0 ? 'No seleccionado' : newCentrality.latitude]]</p>
+                                <p>Longitud: [[newCentrality.longitude == 0 ? 'No seleccionado' : newCentrality.longitude]]</p>
+                            </div>
+                            <div class="form-group text-center" ng-hide="!isSelecting && !isEditing">
+                                <input class="form-control" type="text" ng-model="newCentrality.name" placeholder="Ingrese el nombre">
+                                <input class="form-control" type="text" ng-model="newCentrality.location" placeholder="Ingrese una descripcion">
+                            </div>
+                            <div class="text-center form-group" ng-hide="!isSelecting && !isEditing">
+                                <!-- Se utilizo el uib-tooltip para establecer el cartel que saldra al poner el cursor sobre cada boton. -->
+                                <!-- ng-hide -> oculta un segmento o elemento si la expresion es true. -->
+                                <!-- ng-disable -> desactiva un segmento o elemento si la expresion es true. -->
+                                <button type="button" class="btn btn-default btn-sm" ng-click="enableDrawIndicator()" ng-disabled="!updatePointCentrality">Reubicar punto</button>
+                                <button class="btn btn-success" ng-hide="!isEditing" uib-tooltip="Actualizar" ng-disabled="!isEditing || !newCentrality.name || !newCentrality.location || !newCentrality.latitude || !newCentrality.longitude" ng-click="centralityUpdate()">
+                                              <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-success" ng-hide="!isSelecting" uib-tooltip="Guardar" ng-disabled="!isSelecting || !newCentrality.name || !newCentrality.location || !newCentrality.latitude || !newCentrality.longitude" ng-click="centralitySave()">
+                                              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-info" ng-disabled="!isSelecting && !isEditing" uib-tooltip="Cancelar" ng-click="centralityCancel()">
+                                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-danger" ng-disabled="!isEditing" uib-tooltip="Eliminar" ng-click="centralityDelete()">
+                                              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
