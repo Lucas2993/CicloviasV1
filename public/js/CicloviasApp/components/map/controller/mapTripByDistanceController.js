@@ -33,7 +33,7 @@
         vm.selectTripByDistance = {
             checkbox: false
         };
-
+        vm.openMenuTripDistance = false;
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         // Se obtienen todos los recorridos con la distancia seleccionada y se agregan en una capa.
         vm.getTripsToSelectedDistance = getTripsToSelectedDistance;

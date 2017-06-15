@@ -11,7 +11,7 @@
             'srvViewTrip',
             MapTripController
         ]);
-
+ 
     function MapTripController(vm, creatorMap, srvLayers, dataServer, srvViewTrip) {
         // ********************************** VARIABLES PUBLICAS ************************
         // Mapa

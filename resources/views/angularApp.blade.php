@@ -5,7 +5,6 @@
 
     <!-- Styles -->
 
-
     <!-- Estilos externos -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ URL::asset('js/assets/libs/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -17,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/slider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/session.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/ol3-popup.css') }}">
 
     <!-- Scripts -->
     <!-- Librerias externas -->
@@ -30,7 +29,7 @@
     <script src="{{ URL::asset('js/assets/libs/bower_components/openlayers/ol.js') }}"></script>
     <script src="{{ URL::asset('js/assets/libs/bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js') }}"></script>
     <script src="{{ URL::asset('js/assets/libs/ol3-popup.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/assets/css/ol3-popup.css') }}">
+
 
     <!-- UI-Bootstrap -->
     <script src="{{ URL::asset('js/assets/libs/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
@@ -54,6 +53,7 @@
 
     <!-- Modulo de mapa -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
+    <!-- <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.centrality.module.js') }}"></script> -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.creatorMap.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.service.layer.js') }}"></script>
 
@@ -78,11 +78,11 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.zone.js') }}"></script>
 
     <!-- Vista -->
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.centrality.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.feature.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.trip.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.journey.js') }}"></script>
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/view/map.service.view.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.centrality.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.feature.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.trip.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.journey.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.zone.js') }}"></script>
 
     <!-- Herramientas de dibujo -->
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>

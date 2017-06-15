@@ -1,0 +1,17 @@
+<!-- menu de opciones de recorridos -->
+<div class="panel-default" ng-controller="mapTripController">
+    <div uib-accordion-group class="panel-primary" heading="Recorridos" is-open="false">
+        <form>
+            <div>
+                <label>
+                    <input type="checkbox" ng-model="selectRecorrido" ng-change= "checkAllTrips()" > Ver todos los recorridos
+                </label>
+            </div>
+            <div class="checkbox" ng-repeat="trip in tripsJson">
+                <label>
+                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip)"> recorrido [[trip.id]]
+                </label>
+            </div>
+        </form>
+    </div>
+</div>

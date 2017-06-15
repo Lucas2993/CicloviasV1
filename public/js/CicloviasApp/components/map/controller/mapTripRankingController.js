@@ -4,7 +4,7 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-        .controller('tripsRankingController', [
+        .controller('mapTripsRankingController', [
             '$scope',
             'creatorMap',
             'srvLayers',
@@ -12,18 +12,19 @@
             'adminLayers',
             'adminMenu',
             'creatorStyle',
-            TripsRankingController
+            'srvViewTrip',
+            MapTripsRankingController
         ]);
 
-    function TripsRankingController(vm, creatorMap, srvLayers, dataServer, adminLayers, adminMenu,creatorStyle) {
+    function MapTripsRankingController(vm, creatorMap, srvLayers, dataServer, adminLayers, adminMenu, creatorStyle, srvViewTrip) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         // Mapa
         vm.map = creatorMap.getMap();
         // datos del servidor
-        vm.tripsRankingJson
+        vm.tripsRankingJson;
         // capa de recorridos
-        vm.layerTripsRanking
+        vm.tripsLayerRanking;
 
         // ********************************** FLAGS PUBLICAS ****************************
         // indica si el menu se encuentra abierto o cerrado
@@ -34,6 +35,8 @@
         vm.viewLayerTripsRanking = viewLayerTripsRanking;
 
         vm.findTripsRanking = findTripsRanking;
+
+        vm.viewTripsRanking = viewTripsRanking;
 
         // ********************************** VARIABLES PRIVADAS ************************
         // variable para visualizar un solo popup en el mapa
@@ -47,29 +50,32 @@
 
         // ****************************** FUNCIONES PUBLICAS ****************************
         function viewLayerTripsRanking() {
-            adminLayers.viewLayer(vm.layerTripsRanking);
+            adminLayers.viewLayer(vm.tripsLayerRanking);
+        }
+
+
+        function viewTripsRanking() {
+            // Se hace visible la capa.
+            if (vm.tripsRankingJson == null) {
+                return;
+            }
+            srvViewTrip.addTrips(vm.tripsRankingJson, vm.tripsLayerRanking);
         }
 
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los recorridos ponderados de la BD ************** terminar
         function findTripsRanking() {
-
-            if (document.getElementById("rangeSuccess") != null) {
-                // alert("Min ponderación " + document.getElementById("rangeSuccess").value + "\nMañana:" + vm.list[0].selected + "\nTarde: " + vm.list[1].selected + "\nNoche: " + vm.list[2].selected);
-            }
-            // vm.map.removeLayer(vm.layerTripsRanking);
-
             vm.tripsRankingJson = dataServer.getTripsRanking();
-
-            // vm.layerTripsRanking = srvLayers.getLayerTripsRanking(vm.tripsRankingJson);
-            vm.layerTripsRanking = srvLayers.getLayer(null);
-            vm.layerTripsRanking.setStyle(creatorStyle.getStyleTrip('blue', 2));
-
-
-            vm.map.addLayer(vm.layerTripsRanking);
-            vm.viewLayerTripsRanking();
+            vm.toogleViewTripsRanking = true;
+            viewTripsRanking();
         }
 
+
+        function generateLayer() {
+            // Se crea una nueva capa de recorridos con los datos obtenidos.
+            vm.tripsLayerRanking = srvLayers.getLayer(null);
+            vm.map.addLayer(vm.tripsLayerRanking);
+        }
         // ************************ EVENTOS ****************************************
         // Se captura el evento dentro del mapa.
         vm.map.on('pointermove', function(evt) {
@@ -96,7 +102,8 @@
                         // idFeature: 2
                     });
                     vm.map.addOverlay(popup);
-                    popup.show(evt.coordinate, featureFound.get('ranking'));
+                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId()].ponderacion);
+                    //TODO modificar cuand lea desde el servidor
                 }
             }
         });
@@ -118,8 +125,8 @@
 
         // ************************ Inicializacion de datos *****************************
         // al crear el controlador ejecutamos esta funcion
-        findTripsRanking();
-        vm.viewLayerTripsRanking();
+        generateLayer();
+
 
     } // fin Constructor
 

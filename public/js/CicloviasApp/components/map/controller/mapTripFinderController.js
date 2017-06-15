@@ -122,8 +122,6 @@
         function generateLayer() {
             // Se crea una nueva capa de recorridos con los datos obtenidos.
             vm.layerTripsCloseToPoint = srvLayers.getLayer(null);
-            // Se agrega la capa nueva al mapa.
-            vm.layerTripsCloseToPoint.setStyle(creatorStyle.getStyleTrip('green', 2));
             vm.map.addLayer(vm.layerTripsCloseToPoint);
         }
 

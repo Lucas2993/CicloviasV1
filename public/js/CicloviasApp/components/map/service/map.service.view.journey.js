@@ -17,7 +17,7 @@
 
         // permite la visualizacion del feature por Id en la capa
         function viewJourney(journeyJson, layer) {
-            srvViewFeature.viewFeature(journeyJson, layer,null);
+            srvViewFeature.viewFeature(journeyJson, layer,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
         };
 
         // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida

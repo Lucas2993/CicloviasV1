@@ -1,0 +1,15 @@
+<!-- menu de opciones de trayectos -->
+<div class="panel-default" ng-controller="mapJourneyController">
+    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="false">
+        <div>
+            <label>
+              <input type="checkbox" ng-model="selectTrips" ng-change= "checkAllJourneys()" > Ver todos los recorridos
+            </label>
+        </div>
+        <div class="checkbox" ng-repeat="journey in journeyJson">
+            <label>
+                <input type="checkbox" checklist-model="journeyJson"  checklist-value="journey.id" ng-model="journey.selected" ng-change= "selectJourney(journey)"> trayecto [[journey.id]]
+            </label>
+        </div>
+    </div>
+</div>

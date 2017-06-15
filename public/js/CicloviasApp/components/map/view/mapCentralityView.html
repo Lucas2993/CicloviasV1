@@ -1,0 +1,42 @@
+<!-- Se agrego uib-accordion que se utiliza para los menues retractiles. -->
+<div class="panel-default" ng-controller="mapCentralityController">
+<!-- <div class="panel-default" ng-controller=""> -->
+    <div uib-accordion-group class="panel-primary" heading="Centralidades" is-open="openMenuCentralities">
+        <form>
+
+            <div>
+                <label>
+                      <input type="checkbox" ng-click="checkAllCentralities()"> VER TODAS
+                </label>
+            </div>
+
+            <div class="checkbox" ng-repeat="centrality in getCentralities()">
+                <label>
+                      <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
+                </label>
+            </div>
+
+            <!-- //principio prueba -->
+            <!-- <div class="panel-body">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox" ng-click="checkAllCentralities()">VER TODAS</th>
+                        <th> </th>
+                      </tr>
+                          </thead>
+                    <tbody>
+                      <tr ng-repeat="centrality in getCentralities()">
+                        <td><input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]</td>
+                        <td><span data-ng-bind="u.name"></span></td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> -->
+            <!-- // fin prueba -->
+
+        </form>
+    </div>
+</div>
