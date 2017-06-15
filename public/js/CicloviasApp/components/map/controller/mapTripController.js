@@ -11,7 +11,7 @@
             'srvViewTrip',
             MapTripController
         ]);
- 
+
     function MapTripController(vm, creatorMap, srvLayers, dataServer, srvViewTrip) {
         // ********************************** VARIABLES PUBLICAS ************************
         // Mapa
@@ -20,6 +20,10 @@
         vm.tripsJson = [];
         // capa de recorridos
         vm.tripLayer;
+
+        vm.pageSize = 5,
+        vm.currentPage = 1;
+        vm.totalItems = vm.tripsJson.length;
 
         // ********************************** FLAGS PUBLICAS ****************************
         // determina si se quieren ver todos los recorridos o no
@@ -60,6 +64,7 @@
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsJson = data;
+                    vm.totalItems = vm.tripsJson.length;
                     console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data);
                     // proceso y generacion de capa de recorridos
                     generateTrips();

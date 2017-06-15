@@ -7,10 +7,14 @@
                     <input type="checkbox" ng-model="selectRecorrido" ng-change= "checkAllTrips()" > Ver todos los recorridos
                 </label>
             </div>
-            <div class="checkbox" ng-repeat="trip in tripsJson">
+            <div class="checkbox" ng-repeat="trip in tripsJson | limitTo : pageSize : (currentPage - 1) * pageSize track by trip.id">
                 <label>
                    <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip)"> recorrido [[trip.id]]
                 </label>
+            </div>
+            <div class="text-center">
+                <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
+                <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
             </div>
         </form>
     </div>

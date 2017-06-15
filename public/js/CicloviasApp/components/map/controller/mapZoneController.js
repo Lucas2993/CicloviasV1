@@ -23,6 +23,12 @@
         vm.selectZone = selectZone;
         vm.toogleZonesLayer = toogleZonesLayer;
 
+        vm.zonesJson = [];
+
+        vm.pageSize = 5,
+        vm.currentPage = 1;
+        vm.totalItems = vm.zonesJson.length;
+
 
         // **********************************************************************************
         // ************************ Descripcion de las funciones ************************
@@ -33,6 +39,7 @@
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.zonesJson = data;
+                    vm.totalItems = vm.zonesJson.length;
                     console.log("Datos recuperados prom ZONES con EXITO! = " + data);
                     srvModelZone.setZones(vm.zonesJson);
                     srvModelZone.setZonesLayer(vm.zonesLayer);

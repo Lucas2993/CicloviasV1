@@ -24,6 +24,10 @@
         // capa de centralidades
         vm.centralitiesLayer;
 
+        vm.pageSize = 5,
+        vm.currentPage = 1;
+        vm.totalItems = vm.centralitiesJson.length;
+
         // ********************************** FLAGS PUBLICOS ****************************
         // Indica si todas las centralidades han si selecionadas
         vm.selectedAllCentralities = false;
@@ -86,6 +90,7 @@
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.centralitiesJson = data;
+                    vm.totalItems = vm.centralitiesJson.length;
                     console.log("Datos recuperados con EXITO! = CENTRALIDADES");
                     // Setea las centralidades
                     srvModelCentrality.setCentralities(vm.centralitiesJson);

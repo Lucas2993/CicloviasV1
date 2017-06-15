@@ -26,6 +26,10 @@
 
         vm.journeyLayer;
 
+        vm.pageSize = 5,
+        vm.currentPage = 1;
+        vm.totalItems = vm.journeyJson.length;
+
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
 
@@ -66,6 +70,7 @@
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.journeyJson = data;
+                    vm.totalItems = vm.journeyJson.length;
                     console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
                 })
                 .catch(function(err) {
