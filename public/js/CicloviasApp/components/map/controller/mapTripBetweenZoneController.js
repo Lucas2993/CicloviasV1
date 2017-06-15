@@ -65,14 +65,17 @@
         generateLayer();
         // findTripsBetweenZones();
 
+
         vm.viewLayerTripsBetweenZone = viewLayerTripsBetweenZone;
 
+        // muestra la capa de recorridos
         function viewLayerTripsBetweenZone() {
             adminLayers.viewLayer(vm.tripLayer);
         }
 
         vm.addTripsBetweenZone = addTripsBetweenZone;
 
+        // agrega recorridos a la capa de recorridos
         function addTripsBetweenZone() {
             srvViewTrip.addTrips(vm.tripsJson, vm.tripLayer);
             // vm.journiesLayer.setVisible(false);
@@ -81,6 +84,7 @@
 
         vm.resetLayerBetweenZone = resetLayerBetweenZone;
 
+        // reinicia para realizar otra consulta
         function resetLayerBetweenZone() {
             vm.tripLayer.getSource().clear();
             srvModelZone.getZonesLayer().getSource().clear();
@@ -88,7 +92,7 @@
             vm.selectedDestination = undefined;
         }
 
-
+        // selecciona las zonas
         vm.selectZoneOrigin = selectZoneOrigin;
         vm.selectZoneDestination = selectZoneDestination;
 
