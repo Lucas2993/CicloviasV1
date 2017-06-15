@@ -9,10 +9,14 @@
                                 </label>
                             </div>
 
-                            <div class="checkbox" ng-repeat="zone in zonesJson">
+                            <div class="checkbox" ng-repeat="zone in zonesJson | limitTo : pageSize : (currentPage - 1) * pageSize track by zone.id">
                                 <label>
                                    <input type="checkbox" checklist-model="zonesJson"  checklist-value="zone.id" ng-model="zone.selected" ng-change= "selectZone(zone.name, zone)"> [[zone.name]]
                                 </label>
+                            </div>
+                            <div class="text-center">
+                                <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
+                                <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
                             </div>
                         </form>
                     </div>

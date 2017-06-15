@@ -6,14 +6,18 @@
 
             <div>
                 <label>
-                      <input type="checkbox" ng-click="checkAllCentralities()"> VER TODAS
+                      <input type="checkbox" ng-click="checkAllCentralities()"> Ver todas
                 </label>
             </div>
 
-            <div class="checkbox" ng-repeat="centrality in getCentralities()">
+            <div class="checkbox" ng-repeat="centrality in getCentralities() | limitTo : pageSize : (currentPage - 1) * pageSize track by centrality.id">
                 <label>
                       <input type="checkbox" ng-model="centrality.selected" ng-change= "selectCentrality(centrality)" > [[centrality.name]]
                 </label>
+            </div>
+            <div class="text-center">
+                <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
+                <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
             </div>
 
             <!-- //principio prueba -->
