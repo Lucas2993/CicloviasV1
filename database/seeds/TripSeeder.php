@@ -44,6 +44,7 @@ class TripSeeder extends Seeder
       $trip1->distance_km = '1.5';
       $trip1->user = 'Demián Barry';
       $trip1->time = date(DATE_RFC2822);
+      $trip1->frequency = 16;
       $trip1->geom = $linestring;
       $trip1->duration = date('15:05');
 
@@ -73,6 +74,7 @@ class TripSeeder extends Seeder
       $trip2->user = 'Juan Pérez';
       $trip2->time = date(DATE_RFC2822);
       $trip2->duration = date("10:00");
+      $trip2->frequency = 3;
       $trip2->geom = $linestring2;
       $trip2->save();
 
@@ -100,6 +102,7 @@ class TripSeeder extends Seeder
       $trip3->user = 'Juan Pérez';
       $trip3->time = date(DATE_RFC2822);
       $trip3->duration = date("20:00");
+      $trip3->frequency = 30;
       $trip3->geom = $linestring3;
       $trip3->save();
 
@@ -126,6 +129,7 @@ class TripSeeder extends Seeder
       $trip4->user = 'Juan P1';
       $trip4->time = date(DATE_RFC2822);
       $trip4->duration = date("12:00");
+      $trip4->frequency = 50;
       $trip4->geom = $linestring4;
       $trip4->save();
 
@@ -155,6 +159,7 @@ class TripSeeder extends Seeder
       $trip5->user = 'Juan P2';
       $trip5->time = date(DATE_RFC2822);
       $trip5->duration = date("15:00");
+      $trip5->frequency = 20;
       $trip5->geom = $linestring5;
       $trip5->save();
 
@@ -182,6 +187,7 @@ class TripSeeder extends Seeder
       $trip6->user = 'Juan P3';
       $trip6->time = date(DATE_RFC2822);
       $trip6->duration = date("18:00");
+      $trip6->frequency = 25;
       $trip6->geom = $linestring6;
       $trip6->save();
 
@@ -215,6 +221,7 @@ class TripSeeder extends Seeder
       $trip7->user = 'Juan P4';
       $trip7->time = date(DATE_RFC2822);
       $trip7->duration = date("22:00");
+      $trip7->frequency = 110;
       $trip7->geom = $linestring7;
       $trip7->save();
 
@@ -250,6 +257,7 @@ class TripSeeder extends Seeder
       $trip8->user = 'Juan P5';
       $trip8->time = date(DATE_RFC2822);
       $trip8->duration = date("24:00");
+      $trip8->frequency = 72;
       $trip8->geom = $linestring8;
       $trip8->save();
 

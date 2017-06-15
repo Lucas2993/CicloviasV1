@@ -195,6 +195,26 @@
                     </div>
                 </div>
 
+                <br>
+
+                <!-- menu de ponderacion de recorridos por trayectos -->
+                <div class="panel-default" ng-controller="tripsCicloviasController">
+                    <div uib-accordion-group class="panel-primary" heading="Posibles ciclovias segun Zona" is-open="openMenuTripsCiclovia">
+                        <form>
+                            <div>
+                                <label label-primary>Haga click en una zona para ver las posibles ciclovias de la misma.</label>
+                            </div>
+                            <div>
+                                <label><input type="checkbox" ng-model="selectJourney" ng-change= "viewLayerTripsCiclovia()" > Ver ciclovias</label>
+                            </div>
+                            <div class="checkbox" ng-repeat="tripsCiclovia in tripsCiclovias">
+                                <label>
+                                   <input type="checkbox" checklist-model="tripsCiclovia"  checklist-value="tripsCiclovia.id" ng-model="tripsCiclovia.selected" ng-change= "viewSelectedTrip(trip)"> Recorrido [[tripsCiclovia.id]]
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 
             </uib-accordion>

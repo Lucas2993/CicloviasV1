@@ -172,6 +172,16 @@
             adminMenu.setActiveTripsRanking(true);
         }
 
+        vm.$watch('openMenuRankingTrip', function(isOpen){
+            if (isOpen) {
+              console.log('El menu de RANKING_TRIPS esta abierto');
+              enableEventClick();
+            }
+            else {
+                // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
+                // temporalLayer.getSource().clear();
+            }
+        });
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

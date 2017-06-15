@@ -171,7 +171,8 @@
                        geometry: new ol.geom.Polygon([
                               //  infoZone.points
                                infoZone.points
-                       ])
+                       ]),
+                       id: infoZone.id
                    });
                    // crea el stylo del dibujo
                   var styleDraw = creatorStyle.getStylePolygon(infoZone.color, creatorStyle.getStyleText(infoZone.name));

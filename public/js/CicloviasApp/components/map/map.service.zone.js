@@ -24,6 +24,7 @@
                   // console.warn(data[0].geom.coordinates[0][0][0]);
                    vectorPointsZone = dateZonesJson[i].geom.coordinates[0];
                    var infoZone = new Object();
+                   infoZone.id = dateZonesJson[i].id;
                    infoZone.name = dateZonesJson[i].name;
                    infoZone.color = dateZonesJson[i].color;
                    infoZone.points = vectorPointsZone;

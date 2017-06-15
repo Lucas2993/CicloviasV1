@@ -37,4 +37,10 @@ class RankingTripsTest extends TestCase{
 
     $this->assertTrue(count($setTripsEq) == 5);
   }
+
+  public function testPruebaTripsSimil(){
+    $tramos = (new RankingTrips)->getCoordenatesTripsSimil();
+
+    $this->assertTrue(count($tramos) == 4);
+  }
 }

@@ -145,10 +145,7 @@
                 // recuperamos un feature a partir de las corrdeandas de cada recorrido
                 for (var i = 0; i < dataJSon.length; i++) {
                     geomTrip = (new ol.format.GeoJSON()).readGeometry(dataJSon[i].geom);
-                    console.log("Geom recuperado: ");
-                    console.log(geomTrip);
                     featureTrip = creatorFeature.getFeatureGeomId(geomTrip, i + 1);
-                    // featureTrip = creatorFeature.getFeatureGeomId(geomTrip.coordinates, i + 1);
                     vectorFeaturesTrip.push(featureTrip);
                     //console.log("getFeatures PRIVADO --> id guardado: "+arrayCoordenatesId[i].id+" cant de puntos: //"+(arrayCoordenatesId[i].points).length);
                 }

@@ -37,3 +37,5 @@ Route::get('api/trip/toDistance/{long}/{tolerance}', 'TripController@getToDistan
 Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');
 
 Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@getCloseToCentrality');
+
+Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');

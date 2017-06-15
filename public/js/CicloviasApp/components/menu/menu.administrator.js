@@ -15,6 +15,7 @@
         var tripsRanking = false;
         var tripsToDistance = false;
         var journey = false;
+        var tripsCiclovias = false;
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -27,11 +28,13 @@
             activeTripFinder: activeTripFinder,
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
+            activeTripsCiclovias: activeTripsCiclovias,
             setActiveCentralities: setActiveCentralities,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
+            setActiveTripsCiclovias: setActiveTripsCiclovias,
             disableAll: disableAll
         };
         return service;
@@ -58,6 +61,9 @@
             return tripsToDistance;
         }
 
+        function activeTripsCiclovias(){
+            return tripsCiclovias;
+        }
 
         // ******************* SETTERS *******************
         // ***********************************************
@@ -81,6 +87,10 @@
             tripsToDistance = activated;
         }
 
+        function setActiveTripsCiclovias(activated){
+            tripsCiclovias = activated;
+        }
+
 
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
@@ -90,6 +100,7 @@
             setActiveTripFinder(false);
             setActiveTripsRanking(false);
             setActiveTripsToDistance(false);
+            setActiveTripsCiclovias(false);
         }
 
     }
