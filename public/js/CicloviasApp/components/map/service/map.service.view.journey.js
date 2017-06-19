@@ -27,6 +27,10 @@
           }
         }
 
+        function addJourney(journeysJson, layer) {
+            srvViewFeature.addFeature(journeysJson,layer,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
+        }
+
     } // Fin SrvViewtriP
 
 })()
