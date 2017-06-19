@@ -65,10 +65,35 @@
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los recorridos ponderados de la BD ************** terminar
         function findTripsRanking() {
-            vm.tripsRankingJson = dataServer.getTripsRanking();
+            // vm.tripsRankingJson = dataServer.getTripsRanking();
+            // vm.toogleViewTripsRanking = true;
+
             vm.toogleViewTripsRanking = true;
-            viewTripsRanking();
+            dataServer.getTripsRanking()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.tripsRankingJson = data;
+                    // vm.totalItems = vm.journeyJson.length;
+                    console.log("Tramos Ranking recuperados prom con EXITO! = " + data);
+                    viewTripsRanking();
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRAMOS");
+                })
+
         }
+        // function findAllJourney() {
+        //     dataServer.getJourneys()
+        //         .then(function(data) {
+        //             // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+        //             vm.journeyJson = data;
+        //             vm.totalItems = vm.journeyJson.length;
+        //             console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
+        //         })
+        //         .catch(function(err) {
+        //             console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+        //         })
+        // }
 
 
         function generateLayer() {
@@ -102,7 +127,7 @@
                         // idFeature: 2
                     });
                     vm.map.addOverlay(popup);
-                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId()].ponderacion);
+                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId() - 1].ranking);
                     //TODO modificar cuand lea desde el servidor
                 }
             }
@@ -126,7 +151,6 @@
         // ************************ Inicializacion de datos *****************************
         // al crear el controlador ejecutamos esta funcion
         generateLayer();
-
 
     } // fin Constructor
 

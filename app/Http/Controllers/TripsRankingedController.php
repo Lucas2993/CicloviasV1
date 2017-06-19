@@ -23,5 +23,8 @@ class TripsRankingedController extends Controller{
       return $this->rankHelperService->getCoordenatesTripsSimil();
   }
 
+  public function tramosRankingBySetTrips($idTrips){
+    return $this->rankHelperService->getTramosRanking($idTrips);
+  }
+
 }
-?>

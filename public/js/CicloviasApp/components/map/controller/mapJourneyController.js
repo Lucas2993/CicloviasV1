@@ -78,14 +78,13 @@
                 })
         }
 
-        generateLayer();
-
         function generateLayer() {
             vm.journeyLayer = srvLayers.getLayer(null);
             vm.map.addLayer(vm.journeyLayer);
         }
 
         // ************************ inicializacion de datos del mapa ************************
+        generateLayer();
         findAllJourney();
 
     } // fin Constructor

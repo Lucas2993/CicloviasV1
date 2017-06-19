@@ -38,9 +38,17 @@ class RankingTripsTest extends TestCase{
     $this->assertTrue(count($setTripsEq) == 5);
   }
 
-  public function testPruebaTripsSimil(){
-    $tramos = (new RankingTrips)->getCoordenatesTripsSimil();
+  // public function testPruebaTripsSimil(){
+  //   $tramos = (new RankingTrips)->getCoordenatesTripsSimil();
+  //
+  //   $this->assertTrue(count($tramos) == 4);
+  // }
 
+  public function testPruebaTramosRankinged(){
+    $arrayIds = array(4,5,6,7,8);
+    // $arrayIds = array(4,5,6);
+    $tramos = (new RankingTrips)->getTramosRanking($arrayIds);
+    // se toma solo 3 recorridos en este caso
     $this->assertTrue(count($tramos) == 4);
   }
 }
