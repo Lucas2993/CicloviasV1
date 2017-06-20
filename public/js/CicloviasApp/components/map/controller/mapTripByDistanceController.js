@@ -6,6 +6,7 @@
         .controller('mapTripByDistanceController', [
                                                     '$scope',
                                                     'creatorMap',
+                                                    'adminMenu',
                                                     'srvLayers',
                                                     'dataServer',
                                                     'adminLayers',
@@ -13,7 +14,7 @@
                                                     'srvViewTrip',
                                                     MapTripByDistanceController]);
 
-    function MapTripByDistanceController(vm, creatorMap, srvLayers, dataServer, adminLayers,creatorStyle,srvViewTrip) {
+    function MapTripByDistanceController(vm, creatorMap, adminMenu, srvLayers, dataServer, adminLayers,creatorStyle,srvViewTrip) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         vm.map = creatorMap.getMap();
@@ -34,6 +35,8 @@
             checkbox: false
         };
         vm.openMenuTripDistance = false;
+        vm.existTripsToShow = false;
+
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         // Se obtienen todos los recorridos con la distancia seleccionada y se agregan en una capa.
         vm.getTripsToSelectedDistance = getTripsToSelectedDistance;
@@ -41,22 +44,29 @@
         vm.viewTripsToSelectedDistance = viewTripsToSelectedDistance;
         // Se setean todo lo relacionado con los recorridos de una determinada distancia.
         vm.resetLayerToSelectedDistance = resetLayerToSelectedDistance;
+        // limpia todos los datos y campos mostrados en el mapa
+        vm.resetLayer = resetLayer;
 
         vm.toogleViewTrips = toogleViewTrips;
         // ****************************** FUNCIONES PUBLICAS ****************************
 
         function getTripsToSelectedDistance() {
-            dataServer.getTripsToDistance(vm.longMin,vm.longMax)
-                .then(function(data) {
-                    vm.tripstodistanceJson = data;
-                    console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
-                    // Se muestra la nueva capa.
-                    resetLayerToSelectedDistance();
-                    vm.viewTripsToSelectedDistance();
-                })
-                .catch(function(err) {
-                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS de una determinada distancia");
-                })
+            // if((vm.longMin > 0)&&(vm.longMax > 0)){
+                dataServer.getTripsToDistance(vm.longMin,vm.longMax)
+                    .then(function(data) {
+                        vm.tripstodistanceJson = data;
+                        if(data.length > 0){
+                            vm.existTripsToShow = true;
+                        }
+                        console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
+                        // Se muestra la nueva capa.
+                        resetLayerToSelectedDistance();
+                        vm.viewTripsToSelectedDistance();
+                    })
+                    .catch(function(err) {
+                        console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS de una determinada distancia");
+                    })
+            // }
         }
 
         // Evento que se ejecuta al checkear ver capa de recorridos, hace un toogle de la capa de recorridos
@@ -73,21 +83,44 @@
             if (vm.tripstodistanceJson == null) {
                 return;
             }
-            vm.selectTripByDistance.checkbox = true;
+            // vm.selectTripByDistance.checkbox = true;
             srvViewTrip.addTrips(vm.tripstodistanceJson, vm.layerTripsByDistance);
         }
 
         function resetLayerToSelectedDistance() {
+            console.log("Entro a LIMPIAR capa.\n");
             vm.layerTripsByDistance.getSource().clear();
             // Se indica que la capa ya no existe.
             vm.isLayerByDistanceCreated = false;
-            // Se desmarca el checkbox.
-            // vm.selectTripByDistance.checkbox = false;
-            // setea la distancia
             vm.distance = 0;
-            // setea la tolerancia
             vm.tolerance = 0;
         }
+
+        function resetLayer(){
+            console.log("Entro a limpiar DISTANCE\n");
+            vm.layerTripsByDistance.getSource().clear();
+            // Se indica que la capa ya no existe.
+            vm.isLayerByDistanceCreated = false;
+            vm.existTripsToShow = false;
+            vm.distance = 0;
+            vm.tolerance = 0;
+            vm.longMin = 0;
+            vm.longMax = 0;
+        }
+
+        // se encarga de observar si el menu se encuentra abierto o cerrado
+        vm.$watch('openMenuTripDistance', function(isOpen) {
+            if (isOpen) {
+                console.log('El menu de TRIPS DISTANCE esta abierto');
+                enableEventClick();
+            } else {
+                // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
+                // vm.tripLayer.getSource().clear();
+                // resetLayerToSelectedDistance();
+                console.log('El menu de TRIPS DISTANCE esta cerrado');
+                resetLayer();
+            }
+        });
 
         // *******************************FUNCIONES PRIVADAS ****************************
         // Este metodo genera una capa
@@ -98,6 +131,13 @@
             vm.layerTripsByDistance.setStyle(creatorStyle.getStyleTrip('green', 2));
             vm.map.addLayer(vm.layerTripsByDistance);
         }
+
+        // funcion que habilita el uso de los eventos de este menu
+        function enableEventClick() {
+            adminMenu.disableAll();
+            adminMenu.setActiveTripsToDistance(true);
+        }
+
 
         // ************************ Inicializacion de datos *****************************
         generateLayer();

@@ -38,6 +38,7 @@
         vm.selectTripByCentrality = {
             checkbox: false
         };
+        vm.existsTrips = false;
 
         vm.selectedCentrality = {
             id: 0,
@@ -74,8 +75,11 @@
             dataServer.getTripsToCentrality(vm.selectedCentrality.geom.coordinates[1], vm.selectedCentrality.geom.coordinates[0])
                 .then(function(data) {
                     vm.tripstocentralityJson = data;
+                    if(data.length > 0){
+                        vm.existsTrips = true;
+                    }
                     console.log("Datos recuperados prom TRIPS de determinada centralidad con EXITO! = " + data);
-                    vm.selectTripByCentrality.checkbox = true;
+                    // vm.selectTripByCentrality.checkbox = true;
                     vm.tripsLayerByCentrality.setVisible(true);
                     vm.viewTripsToSelectedCentrality();
                 })
@@ -89,7 +93,7 @@
             if (vm.tripstocentralityJson == null) {
                 return;
             }
-            vm.selectTripByCentrality.checkbox = true;
+            // vm.selectTripByCentrality.checkbox = true;
             srvViewTrip.addTrips(vm.tripstocentralityJson, vm.tripsLayerByCentrality);
         }
 
@@ -98,7 +102,7 @@
 
             // Se desmarca el checkbox.
             // vm.selectTripByCentrality.checkbox = false;
-
+            vm.existsTrips = false;
             vm.selectedCentrality = {
                 id: 0,
                 name: '',
@@ -106,6 +110,7 @@
                 latitude: '',
                 longitude: ''
             }
+            // vm.$apply();
         }
 
         // Se captura el evento de click dentro del mapa.
@@ -135,6 +140,9 @@
             if (isOpen) {
                 console.log('El menu de TRIP_CENTRALITY esta abierto');
                 enableEventClick();
+            }
+            else{
+                resetLayerToSelectedCentrality();
             }
         });
 

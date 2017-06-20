@@ -2,10 +2,10 @@
 <div class="panel-default" ng-controller="mapTripsRankingController">
   <div uib-accordion-group class="panel-primary" heading="Recorridos ponderados" is-open="openMenuRankingTrip">
     <form>
-        <div class=" form-group">
+        <div class="text-center form-group">
             <div>
                 <label>
-                  <input type="checkbox" ng-model="toogleViewTripsRanking" ng-change= "viewLayerTripsRanking()" > Ver capa de recorridos ponderados
+                  <input type="checkbox" ng-disabled="!enableChecbox" ng-model="toogleViewTripsRanking" ng-change= "viewLayerTripsRanking()" > Ocultar recorridos
                 </label>
             </div>
             <br>
@@ -19,6 +19,7 @@
             </div>
             <div class="text-center form-group">
                 <button class="btn btn-primary" ng-click="findTripsRanking()">Ver recorridos</button>
+                <button class="btn btn-primary" ng-click="resetlayer()">Limpiar</button>
             </div>
         </div>
     </form>

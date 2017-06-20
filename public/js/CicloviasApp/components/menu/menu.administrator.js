@@ -19,6 +19,7 @@
         var journey = false;
         var tripsToCentrality = false;
         var tripsCiclovias = false;
+        var tripsBetweenZones = false;
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -32,6 +33,7 @@
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
             activeTripsCiclovias: activeTripsCiclovias,
+            activeTripsBetweenZones: activeTripsBetweenZones,
             activeTripsToCentrality: activeTripsToCentrality,
             setActiveCentralities: setActiveCentralities,
             setActiveEditCentralities: setActiveEditCentralities,
@@ -39,6 +41,7 @@
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
             setActiveTripsCiclovias: setActiveTripsCiclovias,
+            setActiveTripsBetweenZones: setActiveTripsBetweenZones,
             setActiveTripsToCentrality: setActiveTripsToCentrality,
             disableAll: disableAll
         };
@@ -72,7 +75,9 @@
         function activeTripsCiclovias(){
             return tripsCiclovias;
         }
-
+        function activeTripsBetweenZones(){
+            return tripsBetweenZones;
+        }
 
         // ******************* SETTERS *******************
         // ***********************************************
@@ -102,7 +107,9 @@
         function setActiveTripsCiclovias(activated){
             tripsCiclovias = activated;
         }
-
+        function setActiveTripsBetweenZones(activated) {
+            tripsBetweenZones = activated;
+        }
 
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
@@ -114,6 +121,7 @@
             setActiveTripsToDistance(false);
             setActiveTripsToCentrality(false);
             setActiveTripsCiclovias(false);
+            setActiveTripsBetweenZones(false);
         }
 
     }
