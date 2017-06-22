@@ -1,46 +1,46 @@
-
-              <div uib-accordion-group class="panel-primary" heading="Zona de origen a destino" is-open="false">
+<div class="panel-default" ng-controller="mapTripBetweenZoneController">
+              <div uib-accordion-group class="panel-primary" heading="Zona de origen a destino" is-open="openMenuTripFinder">
+                  <!-- <div class="panel-body" ng-controller="mapTripBetweenZoneController"> -->
                   <div class="panel-body" ng-controller="mapTripBetweenZoneController">
-                      <!-- <div class="panel-default" ng-controller="mapTripByDistanceController">
-                  <div uib-accordion-group class="panel-primary" heading="Recorridos por KM de Longitud" is-open="false"> -->
+              <!-- <div class="panel-default" ng-controller="mapTripBetweenZoneController">
+                  <div uib-accordion-group class="panel-primary" heading="Zona de origen a destino" is-open="false"> -->
                       <form>
                           <div>
                               <div class="text-center form-group">
-                                  <label><input type="checkbox" ng-disabled="" ng-model="selectedLayer" ng-change="viewLayerTripsBetweenZone()" > Ver recorridos desde zona origen a zona destino</label>
+                                  <label><input type="checkbox" ng-disabled="!existTripsToShow" ng-model="selectedLayer" ng-change="viewLayerTripsBetweenZone()" > Ocultar recorridos desde zona origen a zona destino</label>
+                                  <!-- <label><input type="text" ng-hide="existTripsToShow" > ¡NO HAY RECORRIDOS PARA MOSTRAR!</label> -->
                               </div>
-
-                                    <div class="input-group">
-                                            <!-- <input type="text" ng-model="asyncSelected" placeholder="Zona de origen" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="" class="form-control"> -->
+                              <!-- <div class="text-center" ng-hide="existTripsToShow">
+                                            ¡NO HAY RECORRIDOS PARA MOSTRAR!
+                              </div> -->
+                              <div class="input-group">
+                                          <!-- <input type="text" ng-model="asyncSelected" placeholder="Zona de origen" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="" class="form-control"> -->
                                             <input type="text"  ng-model="selectedOrigin" placeholder="Zona de origen" uib-typeahead="zone as zone.name for zone in getZones() | filter:{name:$viewValue} | limitTo:8"   typeahead-on-select="selectZoneOrigin()" class="form-control">
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" ng-hide="" uib-tooltip="Guardar" ng-disabled="" ng-click="selectZoneOrigin()">
                                                       <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
                                             </button>
                                         </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="input-group">
-                                            <input type="text"  ng-model="selectedDestination" placeholder="Zona de destino" uib-typeahead="zone as zone.name for zone in getZones() | filter:{name:$viewValue} | limitTo:8"  typeahead-on-select="selectZoneDestination()" class="form-control">
+                              </div>
+                              <br>
+                              <div class="input-group">
+                                          <input type="text"  ng-model="selectedDestination" placeholder="Zona de destino" uib-typeahead="zone as zone.name for zone in getZones() | filter:{name:$viewValue} | limitTo:8"  typeahead-on-select="selectZoneDestination()" class="form-control">
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" ng-hide="" uib-tooltip="Guardar" ng-disabled="" ng-click="selectZoneDestination()">
                                                       <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
                                             </button>
                                         </div>
-                                    </div>
-
-                                    <br>
-                                    <div class="text-center btn-group-sm">
-
-                                    <!-- <div class="text-center form-group"> -->
-                                        <button type="button" class="btn btn-default" ng-click="findTripsBetweenZones()">Ver recorridos</button>
-                                    <!-- </div> -->
-                                    <!-- <div class="text-center form-group"> -->
-                                        <button type="button " class="btn btn-info" ng-click="resetLayerBetweenZone()">
+                              </div>
+                              <br>
+                              <div class="text-center btn-group-sm">
+                                        <button type="button" ng-disabled="(selectedOrigin == undefined) || (selectedDestination == undefined)" class="btn btn-default" ng-click="findTripsBetweenZones()">Ver recorridos</button>
+                                        <!-- <button type="button " class="btn btn-info" ng-click="resetLayerBetweenZone()">
                                           <span class="glyphicon glyphicon-remove" ></span>
-                                        </button>
-                                    </div>
-                                  </div>
-                            </form>
-                        </div>
-                    </div>
+                                        </button> -->
+                                        <button class="btn btn-primary" ng-click="resetLayerBetweenZone()">Limpiar</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+</div>

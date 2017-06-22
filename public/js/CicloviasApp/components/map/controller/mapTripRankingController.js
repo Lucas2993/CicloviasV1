@@ -29,6 +29,10 @@
         // ********************************** FLAGS PUBLICAS ****************************
         // indica si el menu se encuentra abierto o cerrado
         vm.openMenuRankingTrip = false;
+        // habilita o deshabilita el checbox
+        vm.enableChecbox = false;
+        // tilda o destilda el checkbox
+        vm.toogleViewTripsRanking = false;
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         // permite la visualizacion de la capa de tramos ponderados (segun el estado del checkbox)
@@ -37,6 +41,9 @@
         vm.findTripsRanking = findTripsRanking;
 
         vm.viewTripsRanking = viewTripsRanking;
+
+        // borra los datos de la capa
+        vm.resetlayer = resetlayer;
 
         // ********************************** VARIABLES PRIVADAS ************************
         // variable para visualizar un solo popup en el mapa
@@ -62,18 +69,30 @@
             srvViewTrip.addTrips(vm.tripsRankingJson, vm.tripsLayerRanking);
         }
 
+        function resetlayer(){
+            vm.tripsLayerRanking.getSource().clear();
+            vm.enableChecbox = false;
+            // if(srvModelZone.getZonesLayer() != null){
+            //     srvModelZone.getZonesLayer().getSource().clear();
+            // }
+            // vm.selectedOrigin = undefined;
+            // vm.selectedDestination = undefined;
+        }
+
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los recorridos ponderados de la BD ************** terminar
         function findTripsRanking() {
             // vm.tripsRankingJson = dataServer.getTripsRanking();
             // vm.toogleViewTripsRanking = true;
 
-            vm.toogleViewTripsRanking = true;
+            // vm.toogleViewTripsRanking = true;
             dataServer.getTripsRanking()
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsRankingJson = data;
-                    // vm.totalItems = vm.journeyJson.length;
+                    if(data.length > 0){
+                        vm.enableChecbox = true;
+                    }
                     console.log("Tramos Ranking recuperados prom con EXITO! = " + data);
                     viewTripsRanking();
                 })
@@ -139,6 +158,8 @@
                 enableEventClick();
             } else {
                 console.log('Se cerro el menu de TRIPS RANKING.');
+                adminMenu.setActiveTripsRanking(false);
+                resetlayer();
             }
         });
 
