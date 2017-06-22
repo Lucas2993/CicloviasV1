@@ -14,13 +14,16 @@ use App\Models\Road;
 use App\Models\Name;
 use App\Models\Centrality;
 use App\Services\CicloviasHelper;
+use App\Services\RankingTrips;
 
 class TripController extends Controller{
     private $clvHelperService;
+    private $rankingTrips;
 
     //Se declara contructor para inyectar service "CicloviasHelper"
-    function __construct (CicloviasHelper $helper){
+    function __construct (CicloviasHelper $helper, RankingTrips $ranking_trips){
         $this->clvHelperService = $helper;
+        $this->rankingTrips = $ranking_trips;
     }
 
     /**
@@ -505,19 +508,27 @@ class TripController extends Controller{
         return $recorridosCorrectos;
     }
 
-    // public function getTipsByZone($zone_id){
-    //     $query = "SELECT p.*
-    //             FROM trips p, zones z
-    //             WHERE z.id = ".$zone_id."
-    //             AND ST_Intersects(p.geom, z.geom) = 't'
-    //             ORDER BY p.id ASC";
-    //
-    //     $tripsZoneQuery= DB::raw($query);
-    //
-    //     $resultQuery = DB::select($tripsZoneQuery);
-    //
-    //     var_dump($resultQuery);
-    // }
+    public function getTripsByZone($zone_id){
+        $query = "SELECT p.id
+                FROM trips p, zones z
+                WHERE z.id = ".$zone_id."
+                AND ST_Intersects(p.geom, z.geom) = 't'
+                ORDER BY p.id ASC";
+
+        $tripsZoneQuery= DB::raw($query);
+
+        $resultQuery = DB::select($tripsZoneQuery);
+
+        $array_id_trips = array();
+
+        foreach ($resultQuery as $single_result) {
+            array_push($array_id_trips, $single_result->id);
+        }
+
+
+        print_r($array_id_trips);
+        var_dump($this->rankingTrips->getTramosRanking($array_id_trips));
+    }
 
     public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){
         $string_query = "SELECT first.tripid
