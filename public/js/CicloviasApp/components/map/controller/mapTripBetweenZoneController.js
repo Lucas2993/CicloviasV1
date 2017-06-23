@@ -42,8 +42,6 @@
         vm.existTripsToShow = false;
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
-        // permite la visualizacion o no de un recorrido
-        vm.selectTrip = selectTrip;
         // recupera todas las zonas del sistema
         vm.getZones = getZones;
         // recupera los recorridos correspondientes a las zonas seleccionadas
@@ -62,16 +60,11 @@
         vm.selectZoneDestinationView = selectZoneDestinationView ;
 
 
-        function selectTrip(trip) {
-            console.log("entro a la seleccion de VST recorridos");
-            srvViewTrip.viewTrip(trip, vm.tripLayer);
-        }
-
         // metodo utilizado por el typeahead
         function getZones() {
             return srvModelZone.getZones();
         }
-
+        // :Publico
         function findTripsBetweenZones() {
             // if(){
             dataServer.getTripsBetweenZones(vm.selectedOrigin.id, vm.selectedDestination.id)
@@ -97,6 +90,7 @@
             srvViewTrip.addTrips(vm.tripsJson, vm.tripLayer);
         }
 
+        // reinicia el formulario de recorridos entre zonas :Publico
         function resetLayerBetweenZone() {
             console.log("Entro en resetLayerBetweenZone");
             vm.tripLayer.getSource().clear();
@@ -111,35 +105,32 @@
 
         }
 
-        // Muesta la zona de origen en el mapa
+        // Muesta la zona de origen en el mapa :Publico
         function selectZoneOrigin() {
             selectZone(vm.selectedOrigin, vm.selectedDestination, 'green', 'red');
         }
-        // Muesta la zona de destino en el mapa
+        // Muesta la zona de destino en el mapa :Publico
         function selectZoneDestination() {
             selectZone(vm.selectedDestination, vm.selectedOrigin, 'red', 'green');
         }
 
-        // Permite seleccionar zona de origen desde la grafica
+        // Permite seleccionar zona de origen desde la grafica :Publico
         function selectZoneOriginView(){
           vm.zoneSelected = -1;
-          toogleZonesLayer();
+          activeZonesLayer();
         }
-        // Permite seleccionar zona de destino desde la grafica
+        // Permite seleccionar zona de destino desde la grafica :Publico
         function selectZoneDestinationView(){
           vm.zoneSelected = 1;
-          toogleZonesLayer();
+          activeZonesLayer();
         }
 
+        // ****************************** FUNCIONES PRIVADAS ****************************
         // Toogle de capa de zonas, en realidad solo las muestras a tener el FALSE
-        function toogleZonesLayer() {
-            console.log("zoneSelected toogleZonesLayer : " + vm.zoneSelected);
+        function activeZonesLayer() {
             vm.selectedAllZones = srvViewZone.toogleAllZones(false, srvModelZone.getZones(), srvModelZone.getZonesLayer());
         }
 
-
-
-        // ****************************** FUNCIONES PRIVADAS ****************************
         // crea las capas donde se reflejan los datos (capa de zonas, capa de recorridos)
         function generateLayer() {
             console.log("Tomo los cambios 8.\n");
@@ -215,8 +206,6 @@
         }
         // ************************ Inicializacion de datos *****************************
         generateLayer();
-
-
 
     } // fin Constructor
 
