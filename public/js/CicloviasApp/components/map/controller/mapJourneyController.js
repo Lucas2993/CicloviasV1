@@ -71,14 +71,12 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.journeyJson = data;
                     vm.totalItems = vm.journeyJson.length;
-                    console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
+                    console.log("Datos recuperados prom JOURNEY con EXITO! = " + data.length);
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
                 })
         }
-
-        generateLayer();
 
         function generateLayer() {
             vm.journeyLayer = srvLayers.getLayer(null);
@@ -86,6 +84,7 @@
         }
 
         // ************************ inicializacion de datos del mapa ************************
+        generateLayer();
         findAllJourney();
 
     } // fin Constructor

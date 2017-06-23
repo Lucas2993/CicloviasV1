@@ -18,6 +18,8 @@
         var tripsToDistance = false;
         var journey = false;
         var tripsToCentrality = false;
+        var tripsCiclovias = false;
+        var tripsBetweenZones = false;
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -30,12 +32,16 @@
             activeTripFinder: activeTripFinder,
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
+            activeTripsCiclovias: activeTripsCiclovias,
+            activeTripsBetweenZones: activeTripsBetweenZones,
             activeTripsToCentrality: activeTripsToCentrality,
             setActiveCentralities: setActiveCentralities,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
+            setActiveTripsCiclovias: setActiveTripsCiclovias,
+            setActiveTripsBetweenZones: setActiveTripsBetweenZones,
             setActiveTripsToCentrality: setActiveTripsToCentrality,
             disableAll: disableAll
         };
@@ -66,7 +72,12 @@
         function activeTripsToCentrality(){
             return tripsToCentrality;
         }
-
+        function activeTripsCiclovias(){
+            return tripsCiclovias;
+        }
+        function activeTripsBetweenZones(){
+            return tripsBetweenZones;
+        }
 
         // ******************* SETTERS *******************
         // ***********************************************
@@ -93,7 +104,12 @@
         function setActiveTripsToCentrality(activated){
             tripsToCentrality = activated;
         }
-
+        function setActiveTripsCiclovias(activated){
+            tripsCiclovias = activated;
+        }
+        function setActiveTripsBetweenZones(activated) {
+            tripsBetweenZones = activated;
+        }
 
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
@@ -104,6 +120,8 @@
             setActiveTripsRanking(false);
             setActiveTripsToDistance(false);
             setActiveTripsToCentrality(false);
+            setActiveTripsCiclovias(false);
+            setActiveTripsBetweenZones(false);
         }
 
     }

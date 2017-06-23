@@ -238,7 +238,14 @@ class TripController extends Controller{
 
                 $centrality_point = $random_centrality->geom;
 
-                array_push($new_trip_points, $centrality_point);
+            $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
+                                                                                    ST_Line_Locate_Point(r.geom::geometry,
+                                                                                        /* crea un punto a partir de una linea de texto con los datos*/
+                                                                                                        ST_PointFromText('POINT(".$centrality_point->getLng()." ".$centrality_point->getLat().")',4326)))) as point
+                                                FROM roads r
+                                                WHERE r.geom && st_expand(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."), 10)
+                                                ORDER BY ST_Distance(ST_MakePoint(".$centrality_point->getLng().",".$centrality_point->getLat()."),r.geom)
+                                                LIMIT 1");
 
                 $query_centrality_point = DB::raw("SELECT r.*,ST_AsText(ST_Line_Interpolate_Point(r.geom::geometry,
                                                                                         ST_Line_Locate_Point(r.geom::geometry,

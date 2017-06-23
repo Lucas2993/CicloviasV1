@@ -41,3 +41,5 @@ Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@
 Route::get('api/journey/getJourneysByZone/{zone_id}', 'JourneyController@getJourneysByZone');
 
 Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destination_zone_id}', 'TripController@getTripsByOriginDestinationZone');
+
+Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');

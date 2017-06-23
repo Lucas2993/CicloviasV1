@@ -59,6 +59,8 @@
 
     <!-- Controlador de Eventos -->
     <script src="{{ URL::asset('js/CicloviasApp/components/events/events.createPoint.js') }}"></script>
+    <!-- <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripByDistanceController.js') }}"></script> -->
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.trip.ciclovias.js') }}"></script>
 
     <!-- Controladores de mapa -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripByCentralityController.js') }}"></script>

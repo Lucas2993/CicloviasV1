@@ -29,6 +29,10 @@
         // ********************************** FLAGS PUBLICAS ****************************
         // indica si el menu se encuentra abierto o cerrado
         vm.openMenuRankingTrip = false;
+        // habilita o deshabilita el checbox
+        vm.enableChecbox = false;
+        // tilda o destilda el checkbox
+        vm.toogleViewTripsRanking = false;
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         vm.viewLayerTripsRanking = viewLayerTripsRanking;
@@ -37,6 +41,9 @@
         vm.findTripsRanking = findTripsRanking;
 
         vm.viewTripsRanking = viewTripsRanking;
+
+        // borra los datos de la capa
+        vm.resetlayer = resetlayer;
 
         // ********************************** VARIABLES PRIVADAS ************************
         // variable para visualizar un solo popup en el mapa
@@ -63,13 +70,50 @@
             srvViewTrip.addTrips(vm.tripsRankingJson, vm.tripsLayerRanking);
         }
 
+        function resetlayer(){
+            vm.tripsLayerRanking.getSource().clear();
+            vm.enableChecbox = false;
+            // if(srvModelZone.getZonesLayer() != null){
+            //     srvModelZone.getZonesLayer().getSource().clear();
+            // }
+            // vm.selectedOrigin = undefined;
+            // vm.selectedDestination = undefined;
+        }
+
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los recorridos ponderados de la BD ************** terminar
         function findTripsRanking() {
-            vm.tripsRankingJson = dataServer.getTripsRanking();
-            vm.toogleViewTripsRanking = true;
-            viewTripsRanking();
+            // vm.tripsRankingJson = dataServer.getTripsRanking();
+            // vm.toogleViewTripsRanking = true;
+
+            // vm.toogleViewTripsRanking = true;
+            dataServer.getTripsRanking()
+                .then(function(data) {
+                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                    vm.tripsRankingJson = data;
+                    if(data.length > 0){
+                        vm.enableChecbox = true;
+                    }
+                    console.log("Tramos Ranking recuperados prom con EXITO! = " + data);
+                    viewTripsRanking();
+                })
+                .catch(function(err) {
+                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRAMOS");
+                })
+
         }
+        // function findAllJourney() {
+        //     dataServer.getJourneys()
+        //         .then(function(data) {
+        //             // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+        //             vm.journeyJson = data;
+        //             vm.totalItems = vm.journeyJson.length;
+        //             console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
+        //         })
+        //         .catch(function(err) {
+        //             console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+        //         })
+        // }
 
 
         function generateLayer() {
@@ -103,7 +147,7 @@
                         // idFeature: 2
                     });
                     vm.map.addOverlay(popup);
-                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId()].ponderacion);
+                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId() - 1].ranking);
                     //TODO modificar cuand lea desde el servidor
                 }
             }
@@ -115,6 +159,8 @@
                 enableEventClick();
             } else {
                 console.log('Se cerro el menu de TRIPS RANKING.');
+                adminMenu.setActiveTripsRanking(false);
+                resetlayer();
             }
         });
 
@@ -127,7 +173,6 @@
         // ************************ Inicializacion de datos *****************************
         // al crear el controlador ejecutamos esta funcion
         generateLayer();
-
 
     } // fin Constructor
 

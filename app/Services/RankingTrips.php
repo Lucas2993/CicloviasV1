@@ -2,245 +2,675 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
+
+use App\Services\stdClass;
+use App\Models\Centrality;
+use App\Models\Trip;
+use Phaza\LaravelPostgis\Geometries\LineString;
+
 /**
 *
 */
 class RankingTrips{
 
   public function rankingedTrips(){
-    // creo los datos artificiales de los recorridos (serian datos que recupero del servidor o desde la vista)
-    $trip1 = new stdClass();
-    $trip1->id = 1;
-    $trip1->idUser = 24;
-    $trip1->rangeDay = "morning";
-    $trip1->weight = 1;
-    $trip1->points = [["id"=>1 ,"long"=>-65.05864278820195, "lat" => -42.78316309314362],
-                      ["id"=>2 ,"long" => -65.05758599785008, "lat" => -42.782781192819016],
-                      ["id"=>3 ,"long" => -65.05664722469487, "lat" => -42.78247409600383],
-                      ["id"=>4 ,"long" => -65.05572454479375, "lat" => -42.78216699766537]
-                     ];
+    // obtenemos todos los recorridos de la base de datos
+    // $tripsRecovered = new stdClass();
 
-    $trip2 = new stdClass();
-    $trip2->id = 2;
-    $trip2->idUser = 4;
-    $trip2->rangeDay = "morning";
-    $trip2->weight = 1;
-    $trip2->points = [ ["id"=>2 ,"long" => -65.05758599785008, "lat" => -42.782781192819016],
-                      ["id"=>3 ,"long" => -65.05664722469487, "lat" => -42.78247409600383],
-                      ["id"=>4 ,"long" => -65.05572454479375, "lat" => -42.78216699766537],
-                      ["id"=>5 ,"long" => -65.05500034835973, "lat" => -42.78191895558765],
-                      ["id"=>6 ,"long" => -65.0543834402863, "lat" => -42.78169453570867],
-                      ["id"=>7 ,"long" => -65.05360023525395, "lat" => -42.78143468009569] // bs As
-                    ];
+    $trips = Trip::all();
 
-    $trip3 = new stdClass();
-    $trip3->id = 3;
-    $trip3->idUser = 11;
-    $trip3->rangeDay = "night";
-    $trip3->weight = 1;
-    $trip3->points = [  ["id"=>8 ,"long" => -65.0580741598908, "lat" => -42.78020350088649],
-                        ["id"=>9 ,"long" => -65.05736605671086, "lat" => -42.7813374308327],
-                        ["id"=>3 ,"long" => -65.05664722469487, "lat" => -42.78247409600383],
-                        ["id"=>4 ,"long" => -65.05572454479375, "lat" => -42.78216699766537],
-                        ["id"=>5 ,"long" => -65.05500034835973, "lat" => -42.78191895558765]
-                      ];
+    return $trips;
+  }
 
-    $trip4 = new stdClass();
-    $trip4->id = 4;
-    $trip4->idUser = 5;
-    $trip4->rangeDay = "morning";
-    $trip4->weight = 1;
-    $trip4->points = [  ["id"=>10 ,"long" => -65.05641119030156, "lat" => -42.77960502948685],
-                        ["id"=>11 ,"long" => -65.05570308712163, "lat" => -42.780778342968475],
-                        ["id"=>5 ,"long" => -65.05500034835973, "lat" => -42.78191895558765],
-                        ["id"=>12 ,"long" => -65.05453364399114, "lat" => -42.782683945671025], // dobla
-                        ["id"=>13 ,"long" => -65.0538791849915, "lat" => -42.78244771711581],
-                        ["id"=>14 ,"long" => -65.05310670879521, "lat" => -42.782187864664], // dobla --> Bs As
-                        ["id"=>15 ,"long" => -65.052527351648, "lat" => -42.78310915479904],
-                        ["id"=>16 ,"long" => -65.05192653682866, "lat" => -42.78409342398366]
-                      ];
+  public function rankingedTrips1(){
 
+    $trips = DB::table('trips')
+        ->select('trips.*')
+        ->where('distance_km', '=', 1)
+        ->get();
 
-    $trip5 = new stdClass();
-    $trip5->id = 5;
-    $trip5->idUser = 5;
-    $trip5->rangeDay = "lasthight";
-    $trip5->weight = 1;
-    $trip5->points = [  ["id"=>17 ,"long" => -65.05505935695805, "lat" => -42.78510917337457],
-                        ["id"=>18 ,"long" => -65.05411521938481, "lat" => -42.78480208810705], // dobla arr
-                        ["id"=>19 ,"long" => -65.05464093235173, "lat" => -42.78384145256263],
-                        ["id"=>20 ,"long" => -65.05519883182683, "lat" => -42.78292804756452], // dobla der
-                        ["id"=>12 ,"long" => -65.05453364399114, "lat" => -42.782683945671025],
-                        ["id"=>13 ,"long" => -65.05390064266362, "lat" => -42.78244771711581], // dobla ab
-                        ["id"=>21 ,"long" => -65.05333201435246, "lat" => -42.78340050010814], //dobla der
-                        ["id"=>15 ,"long" => -65.052527351648, "lat" => -42.78310915479904], // dobla ab
-                        ["id"=>16 ,"long" => -65.05192653682866, "lat" => -42.78409342398366]
-                      ];
+    echo"Paso la prueba 1\n";
 
-    // $tripsRecovered = [$trip1, $trip2, $trip3, $trip4, $trip5];
-    // ********************* TEST_1 (2 recorridos con trayectos interseccion) *********************
-    // $tripsRecovered = [$trip5, $trip4];
-    // ********************* TEST_2 (2 recorridos sin trayectos interseccion) *********************
-    // $tripsRecovered = [$trip5, $trip1];
-    // ********************* TEST_3 (2 recorridos iguales)*********************
-    // $tripsRecovered = [$trip1, $trip1];
-    // ********************* TEST_4 (2 recorridos con que se cruzan pero no tienen un trayecto interseccion) *********************
-    // $tripsRecovered = [$trip2, $trip4];
-    // ********************* TEST_5 ===> 2 recorridos con un trayecto de 3 puntos(R2 y R3)
-    $tripsRecovered = [$trip2, $trip3];
+    return $trips;
+  }
 
-    $numberTrips = count($tripsRecovered);
-    $numberPointsTripComparated= count(($tripsRecovered[0])->points);
-    $numberPoinsToCompare;
-    // recorridos que se van a comparar
-    $tripComparated;
-    $tripToCompare;
+  public function rankingedTripsQuery(){
+    // $polygon = DB::connection('pgsql')
+    // ->select(DB::raw("SELECT row_to_json(fc)
+    //      FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
+    //      FROM (SELECT 'Feature' As type
+    //         , ST_AsGeoJSON(ST_Transform(geom,4326))::json As geometry
+    //         , row_to_json((SELECT l FROM (SELECT areal) As l
+    //           )) As properties
+    //        FROM jbb2013 As lg, (SELECT geom from points where customer_id in (1,2,3) as pts WHERE ST_Intersects(lg.geom, pts.geom) As f )  As fc;")
+    //     );
 
-    $journiesIntersection = array();
-    // se van guardando los trayectos interseecion q se encuentran
-    //$journeyIntersectionTemp = new stdClass();
-    $pointsIntersection;
+    $query = "SELECT ST_Length(geom) AS km_trips
+              FROM trips
+              WHERE id = 2";
 
-    $end_intersection = false;
+    // distancia en metros
+    $distanceQuery = DB::raw($query);
 
-    $pointTrip;$pointTripNext;
-    $pointTripToCompare;$pointTripToCompareNext;$pointTripToCompareBefore;
+    $distancesRecovered = DB::select($distanceQuery);
 
-    $finTrip = false;
-    $finTrip_R = false;
+    // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
+    $auxDistance = $distancesRecovered[0];
 
-    $j_increment = 1;
+    // echo "\n distancia rec 2 = ".$auxDistance->km_trips;
 
-    $cant_int_puntos = 0;
+    return $auxDistance->km_trips;
+  }
 
-    // con esto vamos agarrando los recorridos recuperados
-    for ($i=0 ; ($i < $numberTrips)&&(!$finTrip) ; $i++) {
-      if(($i + 1) < $numberTrips){
-        $pointsIntersection = array();
-        $tripComparated = $tripsRecovered[$i];
-        $tripToCompare = $tripsRecovered[$i + 1];
-        // buscamos si se encuentra dentro del otro recorrido
-        $numberPoinsToCompare = count($tripComparated->points);
-        // con esto recorremos el 1er recorrido R1
-        for ($j=0; $j < $numberPoinsToCompare; $j += $j_increment) {
-          if($j_increment <> 1){
-            $j_increment = 1;
-          }
-          // vamos tomando de uno todos los puntos del recorrido R1
-          $pointTrip = $tripComparated->points[$j];
-          echo" Valor de j: ".$j."\n";
-          // comparamos contra todos los puntos del recorrido R
-          for ($i_R=0; $i_R < (count($tripToCompare->points))&&(!$finTrip_R) ; $i_R++) {
-            // vemos que no nos pasems de los puntos del recorrido R1
-            if(($j + 1) < $numberPoinsToCompare){
-              echo" Valor de i_R: ".$i_R."\n";
-              // vamos tomando de a uno los puntos de R
-              $pointTripToCompare = $tripToCompare->points[$i_R];
-              // comparamos los id de en busca de una interseccion
-              if ($pointTrip["id"] == $pointTripToCompare["id"]) {
-                $cant_int_puntos++;
-                // siguiente punto del 1er recorrido(R1)
-                $pointTripNext = $tripComparated->points[$j + 1];
-                // siguiente y anterior del recorrido donde se busca
-                $pointTripToCompareNext = $tripToCompare->points[$i_R + 1];
-                $pointTripToCompareBefore = $tripToCompare->points[$i_R - 1];
-                print_r($pointTrip);
-                echo"\n";
-                print_r($pointTripToCompareNext);
-                // vemos si el siguiente punto de R1 es igual al sig de R
-                if($pointTripNext["id"] == $pointTripToCompareNext["id"]){
-                  echo"idR1: ".$pointTripNext["id"]." - "."idR: ".$pointTripToCompareNext["id"]."\n";
-                  $pointsIntersection = array();
-                  $journeyIntersectionTemp = new stdClass();
-                  // si son iguales, se encontro un trayecto interseccion, se guarda
-                  array_push($pointsIntersection, $pointTrip, $pointTripNext);
-                  // actualizamos el incremento
-                  $j_increment += 1;
-                  // comparamos con los siguientes puntos
-                  for ($i_aux_next= $j + 2, $j_der=$i_R + 2; ($j_der < (count($tripToCompare->points))) && (!$end_intersection); $i_aux_next++, $j_der++) {
-                    // $pointTripNext = $tripsRecovered[$i_aux_next];
-                    $pointTripNext = $tripComparated->points[$i_aux_next];
-                    // siguiente y anterior del recorrido donde se busca
-                    $pointTripToCompareNext = $tripToCompare->points[$j_der];
-                    echo"Entra a ver si el los siguientes(+2) son iguales";
-                    echo"id_R(+2): " .$pointTripNext["id"]. " - - - id_R1(+2): " .$pointTripToCompareNext["id"] . "\n";
-                    // vemos si el siguiente punto de R1 es igual al sig de R
-                    if($pointTripNext["id"] == $pointTripToCompareNext["id"]){
-                      // si son iguales, se guarda
-                      array_push($pointsIntersection, $pointTripNext);
-                      echo"Los siguientes (+2) son IGUALES";
-                      $j_increment += 1;
-                    }
-                    else {
-                      // vaciamos el contenedor de los puntos del trayecto interseccion
-                      // $pointsIntersection = array();
-                      echo"************** SE SETEA EL ARRAY *************\n";
-                      print_r($journiesIntersection);
-                      echo"************** FIN ARRAY SETEADO *************\n";
-                      $end_intersection = true;
-                    }
-                  }
-                  // una vez que finaliza el trayecto interseccion se crea un objeto con los datos y se guarda
-                  $journeyIntersectionTemp -> id = 1;
-                  $journeyIntersectionTemp -> points = $pointsIntersection;
-                  array_push($journiesIntersection, $journeyIntersectionTemp);
-                  echo"Se guardo un trayecto.\n";
-                  echo"************** trayecto guardado *************\n";
-                  echo $journiesIntersectionTemp;
-                  echo"************** trayecto encontrados *************\n";
-                  print_r($journiesIntersection);
-                  echo"************** FIN TRAYECTO *************\n";
-                  // una vez guardado el trayecto lo lipiamos y lo volvems a inicializar
-                }
-                // vemos si el siguiente punto de R1 es igual al anterior de R
-                elseif ($pointTripNext["id"] == $pointTripToCompareBefore["id"]) {
-                  // si son iguales, se encontro un trayecto interseccion, se guarda
-                  array_push($pointsIntersection, $pointTrip, $pointTripToCompare);
-                  array_push($pointsIntersection, $pointTripNext, $pointTripToCompareBefore);
-                  // actualizamos el incremento
-                  $j_increment += 1;
-                  // comparamos con los siguientes puntos
-                  for ($i_aux_next= $j + 2, $j_izq= $i_R - 2; ($j_izq < 0) && (!$end_intersection); $i_aux_next++, $j_izq++) {
-                    $pointTripNext = $tripsRecovered[$i_aux_next];
-                    // siguiente y anterior del recorrido donde se busca
-                    $pointTripToCompareNext = $tripToCompare->points[$j_izq];
-                    // vemos si el siguiente punto de R1 es igual al sig de R
-                    if($pointTripNext["id"] == $pointTripToCompareNext["id"]){
-                      // si son iguales, se guarda
-                      array_push($pointsIntersection, $pointTripNext, $pointTripToCompareBefore);
-                      $j_increment += 1;
-                    }
-                    else {
-                      // vaciamos el contenedor de los puntos del trayecto interseccion
-                      $pointsIntersection = array();
-                      $end_intersection = true;
-                    }
-                  }
-                  // una vez que finaliza el trayecto interseccion se crea un objeto con los datos y se guarda
-                  $journeyIntersectionTemp -> id = 1;
-                  $journeyIntersectionTemp -> points = $pointsIntersection;
-                  array_push($journiesIntersection, $journeyIntersectionTemp);
-                }
-              }
-            }
-            else{
-              $finTrip_R = true;
-            }
-          }
-        }
-      }
-      else{
-        $finTrip = true;
-      }
+  public function rankingedTripsQuery2(){
+    // traemos un cjto de recorridos para analizar
+    $query = "SELECT *
+              FROM trips
+              WHERE id > 3";
+
+    $preQuery = DB::raw($query);
+    $setTrips = DB::select($preQuery);
+
+    // Se convierte el tipo de array devuelto por la base de datos a un array convensional.
+    $aux = array();
+    foreach($setTrips as $trip){
+        array_push($aux, $trip);
     }
-    echo "Cantidad de trayectos interseccion: ". $cant_int_puntos . "\n";
-    echo"Imprime el cjto de interseccion: " . "\n";
-    print_r($journiesIntersection);
+
+    return $aux;
   }
 
-  public function prueba($int, $string){
-    // return $string;  //returns the second argument passed into the function
-    echo $int ." - ".$string;
+  public function getCoordenatesTripsSimil(){
+    // obtenemos los tramos interseccion con su frecuencia y densidad
+    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsGeoJSON(tramos.geomInter) as tramo
+              FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+              	FROM trips t
+              	WHERE t.id in (4,5,6,7,8)) trips,
+                    (SELECT *
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              		FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              		     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+              	WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+              	UNION
+              	SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              			FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              			     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+              	WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+              	UNION
+              	SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              			FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              			     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+              	WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+              WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+              	AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+              GROUP BY tramos.geomInter";
+
+    $preQuery = DB::raw($query);
+    $setTramosRankinged = DB::select($preQuery);
+
+    // pasamos los datos de la DB a datos comunes
+    $tramosInterseccion = array();
+    foreach($setTramosRankinged as $tramoRanking){
+      array_push($tramosInterseccion, $tramoRanking);
+      // echo "geom del tramo: ".$tramoRanking->tramo."\n";
+      // echo "geom inter: ".$inter->intD;
+    }
+
+    // obtenemos la cantidad de usuarios distintos
+    $query = "SELECT count(t.id) as cantUser
+              FROM trips t
+              WHERE t.id in (4,5,6,7,8)";
+
+    $preQuery = DB::raw($query);
+    $cantTotalUser = DB::select($preQuery);
+
+    $nroUser = array();
+    foreach($cantTotalUser as $cantUser){
+      array_push($nroUser, $cantUser);
+      $userTotal = $cantUser->cantuser;
+      // echo "cant de usuarios: ".$userTotal."\n";
+    }
+
+    // obtenemos las frec min y max del cjto analizado
+    $query = "SELECT min((tramosRanking.frequency):: int) as minFrec, max((tramosRanking.frequency):: int) as maxFrec
+              FROM(SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, tramos.geomInter as tramo
+              	FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+              		FROM trips t
+              		WHERE t.id in (4,5,6,7,8)) trips,
+              	      (SELECT *
+              		FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              			FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              			     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+              		WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+              		UNION
+              		SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+              		FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              			FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              			     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              				   FROM trips t1, trips t2
+              				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+              		WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+                  UNION
+                	SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+                	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                			FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                				   FROM trips t1, trips t2
+                				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                			     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                			     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                				   FROM trips t1, trips t2
+                				   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                	WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+              	WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+              		AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+              	GROUP BY tramos.geomInter) as tramosRanking";
+
+    $preQuery = DB::raw($query);
+    $rangosFrec = DB::select($preQuery);
+
+    $aux = array();
+    foreach($rangosFrec as $frec){
+      array_push($aux, $frec);
+      $min_frec = $frec->minfrec;
+      $max_frec = $frec->maxfrec;
+      // echo "frec min: ".$min_frec." - frec max: ".$max_frec."\n";
+    }
+
+
+    // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
+    // con sus datos para devolverlos desde un servicio
+    $tramosRankinged = array();
+    $idTramosRankinged = 1;
+    foreach ($tramosInterseccion as $tramo) {
+      // el this lo usamos para llamar una funcion privada
+      $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
+      // creamos el tramo con los datos correspondientes
+      $auxTramo = new \stdClass();
+      $auxTramo->id = $idTramosRankinged;
+      $auxTramo->geom = $tramo->tramo;
+      $auxTramo->ranking = $peso;
+      $auxTramo->frequency = $tramo->frequency;
+      $auxTramo->density = $tramo->idu;
+      // agregamos el tramo a la lista que se va a devolver
+      array_push($tramosRankinged,$auxTramo);
+      $idTramosRankinged += 1;
+      // echo"PESO ponderacion: ".$peso."\n";
+    }
+    // echo "cant de tramos ponderados = ".count($tramosRankinged)."\n";
+
+    return $tramosRankinged;
   }
 
+  public function getTramosRanking($idTrips){
+    // cjto de recorridos a analizar
+    // $arrayIds = array(4,5,6,7,8);
+    // $arrayIds = array(4,5,6);
+
+    $arrayIds = $idTrips;
+
+    // obtenemos los tramos interseccion con su frecuencia y densidad
+    $tramosInterseccion = $this->getTramosRankngedBySetTrips($arrayIds);
+    echo "Cant de tramos interseccion ponderados(nuevo): ".count($tramosInterseccion)."\n";
+
+    // obtenemos la cantidad de usuarios distintos
+    $userTotal = $this->getDistinctUserBySetTrips($arrayIds);
+    echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
+
+    // obtenemos la frec min y max del cjto de recorridos
+    $frequency = $this->getFreqMinMaxBySetTrips($arrayIds);
+    $min_frec = $frequency[0];
+    $max_frec = $frequency[1];
+
+    echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
+
+    // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
+    // con sus datos para devolverlos desde un servicio
+    $tramosRankinged = array();
+    $idTramosRankinged = 1;
+    foreach ($tramosInterseccion as $tramo) {
+      // el this lo usamos para llamar una funcion privada
+      $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
+      // creamos el tramo con los datos correspondientes
+      $auxTramo = new \stdClass();
+      $auxTramo->id = $idTramosRankinged;
+      $auxTramo->geom = $tramo->tramo;
+      $auxTramo->ranking = $peso;
+      $auxTramo->frequency = $tramo->frequency;
+      $auxTramo->density = $tramo->idu;
+      // agregamos el tramo a la lista que se va a devolver
+      array_push($tramosRankinged,$auxTramo);
+      $idTramosRankinged += 1;
+      // echo"PESO ponderacion: ".$peso."\n";
+    }
+    // echo "cant de tramos ponderados = ".count($tramosRankinged)."\n";
+
+    return $tramosRankinged;
+  }
+
+
+  // *******************************************************************************************
+  // ***************************** METODOS PRIVADOS ******************************************
+
+  // ****************** QUERIES POSTGIS *******************
+  // Seleccionamos los tramos inteseccion con sus datos de ponderacion
+  // se le debe poder pasar el cjto de recorridos a analizar (4,5,6 --> en este caso) **********
+  private function getTramosRanknged(){
+    // obtenemos los tramos interseccion con su frecuencia y densidad, puntos de inicio y fin
+    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+              		ST_X(ST_StartPoint(tramos.geomInter :: geometry)) as lonIni,ST_Y(ST_StartPoint(tramos.geomInter :: geometry)) as latIni,ST_X(ST_EndPoint(tramos.geomInter :: geometry)) as lonFin,ST_Y(ST_EndPoint(tramos.geomInter :: geometry)) as latFin
+              FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+              	FROM trips t
+              	WHERE t.id in (4,5,6,7,8)) trips,
+                    (SELECT *
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              		FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              		     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+              	WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+              	UNION
+              	SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              		FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              		     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+              	WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+                UNION
+                SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+                FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+              WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+              	AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+              GROUP BY tramos.geomInter";
+
+    $preQuery = DB::raw($query);
+    $setTramosRankinged = DB::select($preQuery);
+
+    // pasamos los datos de la DB a datos comunes
+    $tramosInterseccion = array();
+    foreach($setTramosRankinged as $tramoRanking){
+      array_push($tramosInterseccion, $tramoRanking);
+      echo "geom del tramo: ".$tramoRanking->tramo."\n";
+      echo "inicio: (".$tramoRanking->lonini.";".$tramoRanking->latini.") - fin : (".$tramoRanking->lonfin.";".$tramoRanking->latfin.")\n";
+      // echo "rdo de textGeom: ".$this->createTextLineString($tramoRanking->lonini, $tramoRanking->latini, $tramoRanking->lonfin, $tramoRanking->latfin)."\n";
+    }
+    echo "frecTramo1: ".($tramosInterseccion[0])->frequency."\n";
+    if ($this->tramosContinuos($tramosInterseccion[1], $tramosInterseccion[2])) {
+      echo "Los tramos 2 y 3 son CONTINUOS.\n";
+      echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
+    }
+
+    return $tramosInterseccion;
+  }
+
+  // Seleccionamos los tramos inteseccion con sus datos de ponderacion
+  private function getTramosRankngedBySetTrips($idTrips){
+    // $rangoId = "(4,5,6,7,8)";
+    $rangoId = $this->getRangoId($idTrips);
+    echo "rango de ids(interseccion)): ".$rangoId."\n";
+    // obtenemos los tramos interseccion con su frecuencia y densidad, puntos de inicio y fin
+    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+              		ST_X(ST_StartPoint(tramos.geomInter :: geometry)) as lonIni,ST_Y(ST_StartPoint(tramos.geomInter :: geometry)) as latIni,ST_X(ST_EndPoint(tramos.geomInter :: geometry)) as lonFin,ST_Y(ST_EndPoint(tramos.geomInter :: geometry)) as latFin
+              FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+              	FROM trips t
+              	-- WHERE t.id in (4,5,6,7,8)) trips,
+                WHERE t.id in ".$rangoId.") trips,
+                    (SELECT *
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              		FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                       WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              		     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+                       WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+              	WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+              	UNION
+              	SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+              	FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+              		FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                       WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+              		     (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+              		     FROM (SELECT t1.geom as geom1, t2.geom as geom2
+              			   FROM trips t1, trips t2
+              			   -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+                       WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+              	WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+                UNION
+                SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+                FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         -- WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+              WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+              	AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+              GROUP BY tramos.geomInter";
+
+    $preQuery = DB::raw($query);
+    $setTramosRankinged = DB::select($preQuery);
+
+    // pasamos los datos de la DB a datos comunes
+    $tramosInterseccion = array();
+    foreach($setTramosRankinged as $tramoRanking){
+      array_push($tramosInterseccion, $tramoRanking);
+      // echo "geom del tramo: ".$tramoRanking->tramo."\n";
+      // echo "inicio: (".$tramoRanking->lonini.";".$tramoRanking->latini.") - fin : (".$tramoRanking->lonfin.";".$tramoRanking->latfin.")\n";
+      // echo "rdo de textGeom: ".$this->createTextLineString($tramoRanking->lonini, $tramoRanking->latini, $tramoRanking->lonfin, $tramoRanking->latfin)."\n";
+    }
+    // echo "frecTramo1: ".($tramosInterseccion[0])->frequency."\n";
+    // if ($this->tramosContinuos($tramosInterseccion[1], $tramosInterseccion[2])) {
+    //   echo "Los tramos 2 y 3 son CONTINUOS.\n";
+    //   echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
+    // }
+
+    return $tramosInterseccion;
+  }
+
+  // determina la cant de usuarios distintos de un cjto de recorridos analizados
+  // se le debe poder pasar el cjto de recorridos a analizar (4,5,6,7,8 --> en este caso) **********
+  private function getDistinctUser(){
+    // cant de usuarios obtenidos de la DB
+    $query = "SELECT count(t.id) as cantUser
+              FROM trips t
+              WHERE t.id in (4,5,6,7,8)";
+
+    $preQuery = DB::raw($query);
+    $cantTotalUserDB = DB::select($preQuery);
+
+    $cantTotalUser = array();
+    foreach($cantTotalUserDB as $cantUserDB){
+      array_push($cantTotalUser, $cantUserDB);
+      $cantDistinctUser = $cantUserDB->cantuser;
+    }
+
+    return $cantDistinctUser;
+  }
+
+  private function getDistinctUserBySetTrips($idTrips){
+    $rangoId = $this->getRangoId($idTrips);
+    echo "rango(UserDist): ".$rangoId."\n";
+    // cant de usuarios obtenidos de la DB
+    $query = "SELECT count(t.id) as cantUser
+              FROM trips t
+              WHERE t.id in ".$rangoId;
+              // WHERE t.id in (4,5,6,7,8)";
+
+    $preQuery = DB::raw($query);
+    $cantTotalUserDB = DB::select($preQuery);
+
+    $cantTotalUser = array();
+    foreach($cantTotalUserDB as $cantUserDB){
+      array_push($cantTotalUser, $cantUserDB);
+      $cantDistinctUser = $cantUserDB->cantuser;
+    }
+
+    return $cantDistinctUser;
+  }
+
+  // obtenemos las frec min y max del cjto analizado
+  // tmb deberia realizar esta accion segun el el cjto de recorridos recibidos ************
+  private function getFreqMinMax(){
+    $query = "SELECT min((tramosRanking.frequency):: int) as minFrec, max((tramosRanking.frequency):: int) as maxFrec
+              FROM(SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, tramos.geomInter as tramo
+                FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+                  FROM trips t
+                  WHERE t.id in (4,5,6,7,8)) trips,
+                      (SELECT *
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+                  WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+                  UNION
+                  SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                         WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+                  WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+                  UNION
+                  SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                      FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                           FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                           FROM trips t1, trips t2
+                           WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                           (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                           FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                           FROM trips t1, trips t2
+                           WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                  WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+                WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+                  AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+                GROUP BY tramos.geomInter) as tramosRanking";
+
+    $preQuery = DB::raw($query);
+    $rangosFrec = DB::select($preQuery);
+
+    $aux = array();
+    foreach($rangosFrec as $frec){
+      array_push($aux, $frec);
+      $min_frec = $frec->minfrec;
+      $max_frec = $frec->maxfrec;
+      // echo "frec min: ".$min_frec." - frec max: ".$max_frec."\n";
+    }
+
+    $frequency = array();
+    array_push($frequency, $min_frec);
+    array_push($frequency, $max_frec);
+
+    return $frequency;
+  }
+
+  private function getFreqMinMaxBySetTrips($idTrips){
+    $rangoId = $this->getRangoId($idTrips);
+    echo "rango(freq): ".$rangoId."\n";
+    $query = "SELECT min((tramosRanking.frequency):: int) as minFrec, max((tramosRanking.frequency):: int) as maxFrec
+              FROM(SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, tramos.geomInter as tramo
+                FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
+                  FROM trips t
+                  -- WHERE t.id in (4,5,6,7,8)) trips,
+                  WHERE t.id in ".$rangoId.") trips,
+                      (SELECT *
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                        --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                        --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col1
+                  WHERE ST_GeometryType((col1.geomInter):: geometry) = 'ST_LineString'
+                  UNION
+                  SELECT DISTINCT(ST_Dump((col2.geomInter)::geometry)).geom as singleGeom
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                    FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                        --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                         (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                         FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                         FROM trips t1, trips t2
+                        --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+                         WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col2
+                  WHERE ST_GeometryType((col2.geomInter):: geometry) = 'ST_MultiLineString'
+                  UNION
+                  SELECT DISTINCT(ST_Dump(ST_CollectionExtract((col3.geomInter)::geometry, 2))).geom as singleMultiGeom
+                  FROM	(SELECT DISTINCT((ST_Intersection(c1.inters, c2.inters))) as geomInter
+                      FROM(SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                           FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                           FROM trips t1, trips t2
+                          --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                           WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c1 ,
+                           (SELECT DISTINCT( ST_Intersection(inter.geom1, inter.geom2)) as inters
+                           FROM (SELECT t1.geom as geom1, t2.geom as geom2
+                           FROM trips t1, trips t2
+                          --  WHERE t1.id in (4,5,6,7,8) AND t2.id in (4,5,6,7,8) AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                           WHERE t1.id in ".$rangoId." AND t2.id in ".$rangoId." AND ST_Intersects(t1.geom, t2.geom) AND (t1.id <> t2.id)) AS inter) As c2) AS col3
+                  WHERE ST_GeometryType((col3.geomInter):: geometry) = 'ST_GeometryCollection') tramos
+                WHERE (ST_Distance((trips.geom)::geometry, (ST_StartPoint(tramos.geomInter :: geometry))) < 0.00001)
+                  AND (ST_Distance((trips.geom)::geometry, (ST_EndPoint(tramos.geomInter :: geometry))) < 0.00001)
+                GROUP BY tramos.geomInter) as tramosRanking";
+
+    $preQuery = DB::raw($query);
+    $rangosFrec = DB::select($preQuery);
+
+    $aux = array();
+    foreach($rangosFrec as $frec){
+      array_push($aux, $frec);
+      $min_frec = $frec->minfrec;
+      $max_frec = $frec->maxfrec;
+      // echo "frec min: ".$min_frec." - frec max: ".$max_frec."\n";
+    }
+
+    $frequency = array();
+    array_push($frequency, $min_frec);
+    array_push($frequency, $max_frec);
+
+    return $frequency;
+  }
+
+  // pondera un tramo a partir de un cjto de datos analizados
+  private function ponderacion($frecMin, $frecMax, $totalUser, $frec, $densidad){
+    // factodr de frecuencia
+    $facFrec = ($frec - $frecMin)/($frecMax - $frecMin);
+    // factor de densidad
+    $facDensidad = $densidad/$totalUser;
+    $peso = intval(70*$facFrec + 30*$facDensidad);
+
+    return $peso;
+  }
+
+  // recibe un array con los id de los recorridos seleccionados y devuelve un string
+  // con el rango de id para ser incorporado en una consulta
+  private function getRangoId($idTrips){
+    if(count($idTrips) == 0){
+      // no hay rango
+      return null;
+    }
+    $rangoId = "(";
+    $ultimoId;
+
+    // vamos agregando los ids al rango
+    for ($i=0; $i < count($idTrips) - 1; $i++) {
+      $rangoId .= ($idTrips[$i].",");
+      // echo "Dato de array recibido: ".($idTrips[$i])."\n";
+      // echo "Rdo rango: ".$rangoId."\n";
+      $ultimoId = $i;
+    }
+    // agregamos el ultimo dato al rango
+    $rangoId .= $idTrips[$ultimoId + 1].")";
+
+    return $rangoId;
+  }
+
+  // *******************************************************************************
+  // **************************** UNIFICACION DE TRAMOS ****************************
+  // recibe un cjto de tramos ponderados y los junta si es q existen tramos continuos
+  private function unionTramos($tramosPonderados){
+    // hacemos union de las uniones, mientras hayn uniones y tramos por analizar
+
+    while ($a <= 10) {
+      # code...
+    }
+  }
+
+  // unir tramos
+  private function unifyTramos($tramo1, $tramo2){
+    $lineCreadted = $this->createTextLineString();
+  }
+
+  // determina si los tramos son continuos
+  private function tramosContinuos($tramo1, $tramo2){
+    // falta ver lo de frecuencia y la densidad (ver como cmparar float)
+    if(($tramo1->lonfin == $tramo2->lonini) && ($tramo1->latfin == $tramo2->latini)){
+      return True;
+    }
+    return False;
+  }
+
+  // crea un texto de LINESTRING con los datos recibidos
+  // private function createTextLineString($lngIni, $latIni, $lngFin, $latFin){
+  //   $textLinestring = "LINESTRING(".$lngIni." ".$latIni.",".$lngFin." ".$latFin.")";
+  private function createTextLineString($tramo1, $tramo2){
+    $textLinestring = "LINESTRING(".$tramo1->lonini." ".$tramo1->latini.",".$tramo2->lonfin." ".$tramo2->latfin.")";
+    return $textLinestring;
+  }
 }

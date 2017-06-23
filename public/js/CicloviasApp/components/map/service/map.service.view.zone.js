@@ -10,9 +10,10 @@
 
         var service = {
             viewZone: viewZone,
-            addZones: addZones,
+            addAll: addAll,
             removeZone: removeZone,
             addZone: addZone,
+            toogleAllZones : toogleAllZones
         };
 
         return service;
@@ -26,13 +27,13 @@
         }
 
         // agrega zonas a partir de los datos recuperados del servidor a la capa recibida
-        function addZones(zonesJson, layer) {
+        function addAll(zonesJson, layer) {
             var style;
             for (var i = 0; i < zonesJson.length; i++) {
                 style = creatorStyle.getStylePolygon(zonesJson[i].color, creatorStyle.getStyleText(zonesJson[i].name));
                 srvViewFeature.addFeature(zonesJson[i],layer ,style );
             }
-        }// fin addZones
+        }// fin addAll
 
         function removeZone(zoneJson , layer){
             srvViewFeature.removeFeature(zoneJson, layer);
@@ -48,7 +49,9 @@
           srvViewFeature.addFeature(zoneJson,layer,style);
         }
 
-
+        function toogleAllZones(isSelectedAllFeatures, featuresJson , layer ){
+          return srvViewFeature.toogleAllFeatures(isSelectedAllFeatures, featuresJson , layer ,this);
+        }
     } // FIn SrvViewZone
 
 })()

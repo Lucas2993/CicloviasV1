@@ -18,7 +18,7 @@ class Trip extends Model{
   protected $table = 'trips';
 
   protected $fillable = [
-        'name', 'description', 'user', 'time', 'distance_km', 'duration'
+        'name', 'description', 'user', 'time', 'distance_km', 'duration', 'frequency'
     ];
 
   protected $postgisFields = ['geom'];
