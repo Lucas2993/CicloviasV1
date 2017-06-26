@@ -416,6 +416,7 @@ class TripController extends Controller{
                 $new_trip->time = date(DATE_RFC2822);
                 $new_trip->duration = date("H:i:s");
                 $new_trip->geom = new LineString($new_trip_points);
+                $new_trip->frequency = '1';
                 $new_trip->save();
             // foreach($new_trip_points as $new_trip_point){
                 // $linea_csv = $new_trip_point->latitude.",".$new_trip_point->longitude;
