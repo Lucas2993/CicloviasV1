@@ -8,7 +8,7 @@
         </div>
         <div class="checkbox" ng-repeat="journey in journeyJson | limitTo : pageSize : (currentPage - 1) * pageSize track by journey.id">
             <label>
-                <input type="checkbox" checklist-model="journeyJson"  checklist-value="journey.id" ng-model="journey.selected" ng-change= "selectJourney(journey)"> trayecto [[journey.id]]
+                <input type="checkbox" checklist-model="journeyJson"  checklist-value="journey.id" ng-model="journey.selected" ng-change= "selectJourney(journey)"> Trayecto [[journey.id]]
             </label>
         </div>
         <div class="text-center">

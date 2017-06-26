@@ -531,16 +531,24 @@ class TripController extends Controller{
     }
 
     public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){
-        $string_query = "SELECT first.tripid
-                        FROM (
-        	                    SELECT t.id as tripid, count(t.id) as counter
-        	                    FROM zones z, trips t
-        	                    WHERE
-        	                    CASE z.id WHEN ".$origin_zone_id." THEN ST_Intersects( z.geom::geometry , ST_StartPoint(t.geom::geometry))
-        	                    WHEN ".$destination_zone_id." THEN ST_Intersects( z.geom::geometry , ST_EndPoint(t.geom::geometry)) END
-        	                    GROUP BY t.id) as first
-                        WHERE first.counter > 1";
-
+        if($origin_zone_id != $destination_zone_id){
+            $string_query = "SELECT first.tripid
+                            FROM (
+            	                    SELECT t.id as tripid, count(t.id) as counter
+            	                    FROM zones z, trips t
+            	                    WHERE
+            	                    CASE z.id WHEN ".$origin_zone_id." THEN ST_Intersects( z.geom::geometry , ST_StartPoint(t.geom::geometry))
+            	                    WHEN ".$destination_zone_id." THEN ST_Intersects( z.geom::geometry , ST_EndPoint(t.geom::geometry)) END
+            	                    GROUP BY t.id) as first
+                            WHERE first.counter > 1";
+        }
+        else{
+            $string_query = "SELECT t.id as tripid
+	                          FROM zones z, trips t
+	                          WHERE z.id = ".$origin_zone_id."
+	                          AND ST_Intersects( z.geom::geometry , ST_StartPoint(t.geom::geometry))
+	                          AND ST_Intersects( z.geom::geometry , ST_EndPoint(t.geom::geometry))";
+        }
         // var_dump($string_query);
 
         $query = DB::raw($string_query);
@@ -557,4 +565,60 @@ class TripController extends Controller{
 
         return $trips;
     }
+
+    // public function createRoute($latitude_1, $longitude_1, $latitude_2, $longitude_2){
+    //     $id_1 = $this->getCloseId($latitude_1, $longitude_1);
+    //     $id_2 = $this->getCloseId($latitude_2, $longitude_2);
+    //
+    //     $result_geom = $this->makeRoute($id_1, $id_2);
+    //     var_dump($result_geom);
+    // }
+    //
+    // private function makeQuery($string_query = null){
+    //     $results = null;
+    //     if(!empty($string_query)){
+    //         $query = DB::raw($string_query);
+    //         $results = DB::select($query);
+    //     }
+    //
+    //     return $results;
+    // }
+    //
+    // private function getCloseId($latitude, $longitude){
+    //     $id = 0;
+    //     if((!empty($latitude)) && (!empty($longitude))){
+    //         $string_query = "SELECT *
+    //                 FROM
+    //                    (SELECT ST_Distance(the_geom, ST_SetSRID(ST_MakePoint(".$longitude.",".$latitude."),4326)) as distance, id as id, the_geom as geom
+    //                       FROM roads_noded_vertices_pgr) as dist
+    //                       ORDER BY dist.distance
+    //                       LIMIT 1";
+    //         $results = $this->makeQuery($string_query);
+    //
+    //         if(!empty($results))
+    //             $id = $results[0]->id;
+    //     }
+    //
+    //     return $id;
+    // }
+    //
+    // private function makeRoute($id_1, $id_2){
+    //     $result_geom = 0;
+    //
+    //     if((!empty($id_1)) && (!empty($id_2))){
+    //         $string_query = "SELECT ST_MakeLine(array_agg(way.the_geom)) as geom
+    //                         FROM(
+    // 	                        SELECT seq, id1 AS node, id2 AS edge, cost as cost, rdd.the_geom as the_geom, rd.geom as geom
+    // 	                        FROM pgr_dijkstra('SELECT id, source::int4, target::int4, 0.1::float8 as cost FROM roads_noded'::text,".$id_1.",".$id_2.", true, false) as pt
+    // 	                        LEFT JOIN roads_noded_vertices_pgr rdd ON pt.id1 = rdd.id
+    // 	                        LEFT JOIN roads_noded rd ON pt.id2 = rd.id
+    //                         ) as way";
+    //         $results = $this->makeQuery($string_query);
+    //
+    //         if(!empty($results))
+    //             $result_geom = $results[0]->geom;
+    //     }
+    //
+    //     return $result_geom;
+    // }
 }

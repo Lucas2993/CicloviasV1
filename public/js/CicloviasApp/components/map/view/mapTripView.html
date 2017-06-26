@@ -9,7 +9,7 @@
             </div>
             <div class="checkbox" ng-repeat="trip in tripsJson | limitTo : pageSize : (currentPage - 1) * pageSize track by trip.id">
                 <label>
-                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip)"> recorrido [[trip.id]]
+                   <input type="checkbox" checklist-model="tripsJson"  checklist-value="trip.id" ng-model="trip.selected" ng-change= "selectTrip(trip)"> Recorrido [[trip.id]]
                 </label>
             </div>
             <div class="text-center">
