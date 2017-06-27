@@ -35,8 +35,8 @@
         vm.toogleViewTripsRanking = false;
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
-        // permite la visualizacion de la capa de tramos ponderados (segun el estado del checkbox)
         vm.viewLayerTripsRanking = viewLayerTripsRanking;
+        // permite la visualizacion de la capa de tramos ponderados (segun el estado del checkbox)
 
         vm.findTripsRanking = findTripsRanking;
 
@@ -63,6 +63,7 @@
 
         function viewTripsRanking() {
             // Se hace visible la capa.
+
             if (vm.tripsRankingJson == null) {
                 return;
             }

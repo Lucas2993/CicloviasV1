@@ -65,7 +65,7 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsJson = data;
                     vm.totalItems = vm.tripsJson.length;
-                    console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data);
+                    console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data.length);
                     // proceso y generacion de capa de recorridos
                     generateTrips();
                 })

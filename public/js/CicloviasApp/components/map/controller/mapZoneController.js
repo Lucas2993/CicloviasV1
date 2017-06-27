@@ -40,10 +40,9 @@
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.zonesJson = data;
                     vm.totalItems = vm.zonesJson.length;
-                    console.log("Datos recuperados prom ZONES con EXITO! = " + data);
+                    console.log("Datos recuperados prom ZONES con EXITO! = " + data.length);
                     srvModelZone.setZones(vm.zonesJson);
                     srvModelZone.setZonesLayer(vm.zonesLayer);
-                    // console.log("srv.getZone : "+ srvModelZone.getZones());
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");
@@ -61,23 +60,11 @@
 
         }
 
-
         vm.selectedAllZones = false;
         // Toogle de capa de zonas
         function toogleZonesLayer() {
+            vm.selectedAllZones = srvViewZone.toogleAllZones(vm.selectedAllZones, vm.zonesJson , vm.zonesLayer );
             console.log("toogle zones");
-            if (vm.selectedAllZones) {
-                vm.selectedAllZones = false;
-                vm.zonesLayer.getSource().clear();
-            } else {
-                vm.selectedAllZones = true;
-                srvViewZone.addZones(vm.zonesJson, vm.zonesLayer);
-            }
-
-            angular.forEach(vm.zonesJson, function(zone) {
-                zone.selected = vm.selectedAllZones;
-            });
-
         }
 
         // permite la visualizacion o no de una zona

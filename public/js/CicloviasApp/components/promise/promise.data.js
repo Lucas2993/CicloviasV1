@@ -39,7 +39,7 @@
                 url: path.ZONE
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise ZONES: ' + res.data);
+                    console.log('datos de promise ZONES: ' + res.data.length);
                     console.log('datos de promise ZONES color: ' + ((res.data)[0]).color);
                 },
                 function errorCallback(err) {
@@ -59,7 +59,7 @@
                 url: path.CENTRALITY
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise CENTRALITY: ');
+                    console.log('datos de promise CENTRALITY: '+ res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -135,7 +135,7 @@
                 url: path.TRIP
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise TRIP: ' + res.data);
+                    console.log('datos de promise TRIP: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -153,7 +153,7 @@
                 url: path.JOURNEY
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise JOURNEY: ' + res.data);
+                    console.log('datos de promise JOURNEY: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -171,7 +171,7 @@
                 url: path.TRIP + '/closeToPoint/' + point.latitude + '/' + point.longitude
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise TRIP: ' + res.data);
+                    console.log('datos de promise TRIP-Close-TO_Point: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -189,7 +189,7 @@
                 url: path.TRIPS_RANKING
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
-                console.log('datos de promise TRIPS_RANKINGED: ' + res.data);
+                console.log('datos de promise TRIPS_RANKINGED: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -207,7 +207,7 @@
                 url: path.TRIP + '/toDistance/' + longMin + '/' + longMax
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de DISTANCE TRIP: ' + res.data);
+                    console.log('datos de promise de DISTANCE TRIP: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -225,7 +225,7 @@
                 url: path.TRIP + '/getTripsByOriginDestinationZone/' + idOrigin + '/' + idDestination
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de Trips_BetweentZones: ' + res.data);
+                    console.log('datos de promise de Trips_BetweentZones: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -261,7 +261,7 @@
                 url: path.TRIP + '/closeToCentrality/' + latitude + '/' + longitude
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de CENTRALITY TRIP: ' + res.data);
+                    console.log('datos de promise de CENTRALITY : ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
