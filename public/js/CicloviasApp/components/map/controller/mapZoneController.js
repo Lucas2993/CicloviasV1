@@ -43,7 +43,7 @@
                     console.log("Datos recuperados prom ZONES con EXITO! = " + data);
                     srvModelZone.setZones(vm.zonesJson);
                     srvModelZone.setZonesLayer(vm.zonesLayer);
-                    console.log("srv.getZone : "+ srvModelZone.getZones());
+                    // console.log("srv.getZone : "+ srvModelZone.getZones());
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");

@@ -526,8 +526,9 @@ class TripController extends Controller{
         }
 
 
-        print_r($array_id_trips);
-        var_dump($this->rankingTrips->getTramosRanking($array_id_trips));
+        // print_r($array_id_trips);
+        // var_dump($this->rankingTrips->getTramosRanking($array_id_trips));
+         return $this->rankingTrips->getTramosRanking($array_id_trips);
     }
 
     public function getTripsByOriginDestinationZone($origin_zone_id, $destination_zone_id){

@@ -1,0 +1,24 @@
+<!-- menu de opciones de trayectos -->
+<div class="panel-default"  ng-controller="tripsCicloviasByZoneController">
+    <div uib-accordion-group class="panel-primary" heading="Ciclovias por Zona" is-open="openMenuTripsCiclovia">
+      <form>
+        <div class="text-center form-group">
+            <label>
+              <input type="checkbox" ng-disabled="" ng-model="algo" ng-change="viewLayerZones()" > Mostrar todas las zonas
+            </label>
+            <div class="text-center form-group" ng-hide="selectedZone.name">
+                <label>Seleccione una zona...</label>
+            </div>
+            <div class="text-center form-group" ng-show="selectedZone.name">
+                <label>Zona seleccionada:</label>
+                <p>Nombre: [[selectedZone.name == '' ? 'No seleccionado' : selectedZone.name]]</p>
+                <label><input type="checkbox" ng-model="isZoneSelected" ng-change="viewZoneSelected()" > Ver zona seleccionada </label>
+            </div>
+        </div>
+        <div class="text-center btn-group-sm">
+          <button class="btn btn-primary" ng-disabled="" ng-click="findTripsByZone()">Buscar trayectos</button>
+          <button class="btn btn-primary" ng-click="resetLayer()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+</div>
