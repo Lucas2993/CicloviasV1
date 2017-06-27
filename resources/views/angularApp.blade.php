@@ -78,6 +78,8 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.trip.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.journey.js') }}"></script>
+
 
     <!-- Vista -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.centrality.js') }}"></script>

@@ -3,15 +3,15 @@
     'use strict';
     // Se llama al modulo "mapModule"(), seria una especie de get
     angular.module('mapModule')
-           .controller('mapCentralityController', [
-                                                   '$scope',
-                                                   'creatorMap',
-                                                   'srvLayers',
-                                                   'srvModelCentrality',
-                                                   'dataServer',
-                                                   'srvViewCentrality',
-                                                   'adminMenu',
-                                                   MapCentralityController
+        .controller('mapCentralityController', [
+            '$scope',
+            'creatorMap',
+            'srvLayers',
+            'srvModelCentrality',
+            'dataServer',
+            'srvViewCentrality',
+            'adminMenu',
+            MapCentralityController
         ]);
 
     function MapCentralityController(vm, creatorMap, srvLayers, srvModelCentrality, dataServer, srvViewCentrality, adminMenu) {
@@ -25,7 +25,7 @@
         vm.centralitiesLayer;
 
         vm.pageSize = 5,
-        vm.currentPage = 1;
+            vm.currentPage = 1;
         vm.totalItems = vm.centralitiesJson.length;
 
         // ********************************** FLAGS PUBLICOS ****************************
@@ -86,19 +86,22 @@
         // ************************ FUNCIONES PRIVADAS **********************************
 
         function findAllCentralities() {
-            dataServer.getCentralities()
-                .then(function(data) {
-                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-                    vm.centralitiesJson = data;
-                    vm.totalItems = vm.centralitiesJson.length;
-                    console.log("Datos recuperados con EXITO! = CENTRALIDADES");
-                    // Setea las centralidades
-                    srvModelCentrality.setCentralities(vm.centralitiesJson);
-                    generateCentralitiesPoints();
-                })
-                .catch(function(err) {
-                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las CENTRALIDADES");
-                })
+            if (! srvModelCentrality.isCentralitiesWanted()) {
+                dataServer.getCentralities()
+                    .then(function(data) {
+                        // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                        vm.centralitiesJson = data;
+                        srvModelCentrality.setCentralitiesWanted(true);
+                        vm.totalItems = vm.centralitiesJson.length;
+                        console.log("Datos recuperados con EXITO! = CENTRALIDADES");
+                        // Setea las centralidades
+                        srvModelCentrality.setCentralities(vm.centralitiesJson);
+                        generateCentralitiesPoints();
+                    })
+                    .catch(function(err) {
+                        console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las CENTRALIDADES");
+                    })
+            }
         }
 
         function generateCentralitiesPoints() {
