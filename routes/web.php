@@ -34,7 +34,7 @@ Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'st
 
 Route::get('api/trip/toDistance/{longMin}/{longMax}', 'TripController@getToDistance');
 
-Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');
+Route::get('api/trip/generateTrips/{quantity}/{min_distance}/{max_distance}/{mode}', 'TripController@generateTrips');
 
 Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@getCloseToCentrality');
 
