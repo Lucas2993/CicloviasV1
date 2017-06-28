@@ -37,6 +37,7 @@ class CentralityController extends Controller
     public function store(Request $request){
         $v = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
+                'type' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'latitude' => 'required|numeric|min:-85|max:85',
                 'longitude' => 'required|numeric|min:-180|max:180',
@@ -57,6 +58,7 @@ class CentralityController extends Controller
 
         $centrality = new Centrality();
         $centrality->name = $params['name'];
+        $centrality->type = $params['type'];
         $centrality->location = $params['location'];
 
         $point = new Point($params['latitude'], $params['longitude']);
@@ -87,6 +89,7 @@ class CentralityController extends Controller
     public function update($id, Request $request){
         $v = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
+                'type' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'latitude' => 'required|numeric|min:-85|max:85',
                 'longitude' => 'required|numeric|min:-180|max:180',
@@ -106,6 +109,7 @@ class CentralityController extends Controller
         $centrality = Centrality::find($id);
 
         $centrality->name = $request->input('name');
+        $centrality->type = $request->input('type');
         $centrality->location = $request->input('location');
         $centrality->geom = new Point($request->input('latitude'), $request->input('longitude'));
         $centrality->save();

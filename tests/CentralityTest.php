@@ -20,6 +20,7 @@ class CentralityTest extends TestCase
         // Se crea y persiste una nueva zona.
         $centrality = new  Centrality();
         $centrality->name = 'Plaza';
+        $centrality->type = 'Espacio Publico';
         $centrality->location = 'Alta plaza';
         $centrality->geom = new Point(-42.7672777, -65.036735);
         $centrality->save();
@@ -41,6 +42,7 @@ class CentralityTest extends TestCase
     public function testApiStore(){
         // Se establece el set de datos a utilizar
         $data = ['name' => 'Plaza',
+                'type' => 'Espacio Publico',
                 'location' => 'Alta plaza',
                 'latitude' => '-42.7672777',
                 'longitude' => '-65.036735'];
@@ -80,6 +82,7 @@ class CentralityTest extends TestCase
         // Se crea y persiste una nueva zona.
         $centrality = new  Centrality();
         $centrality->name = 'Plaza';
+        $centrality->type = 'Espacio Publico';
         $centrality->location = 'Alta plaza';
         $centrality->geom = new Point(-42.7672777, -65.036735);
         $centrality->save();
@@ -102,12 +105,14 @@ class CentralityTest extends TestCase
         // Se crea y persiste una nueva zona.
         $centrality = new  Centrality();
         $centrality->name = 'Plaza';
+        $centrality->type = 'Espacio Publico';
         $centrality->location = 'Alta plaza';
         $centrality->geom = new Point(-42.7672777, -65.036735);
         $centrality->save();
 
         // Se establecen los datos con una variacion en uno de sus atributos.
         $data = ['name' => 'Plaza1',
+                'type' => 'Espacio Publico',
                 'location' => 'Alta plaza',
                 'latitude' => '-42.7672777',
                 'longitude' => '-65.036735'];

@@ -47,3 +47,5 @@ Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destinati
 Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');
 
 Route::resource('api/road', 'RoadController',['except' => ['create', 'edit', 'store', 'update']]);
+
+Route::get('api/journey/getSimilarTripsJourney/{$long1}/{$lat1}/{$long2}/{$lat2}', 'JourneyController@getSimilarTripsJourney');
