@@ -1,6 +1,6 @@
 <!-- menu de opciones de trayectos -->
 <div class="panel-default" ng-controller="mapJourneyController">
-    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="false">
+    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="">
         <div>
             <label>
               <input type="checkbox" ng-model="selectTrips" ng-change= "checkAllJourneys()" > Ver todos los recorridos
@@ -12,8 +12,8 @@
             </label>
         </div>
         <div class="text-center btn-group-sm">
-            <button type="button"  class="btn btn-default" ng-click="viewJourneyData()">Ver recorridos</button>
-            <button class="btn btn-primary" ng-click="">Limpiar</button>
+            <!-- <button type="button"  class="btn btn-default" ng-click="viewJourneyData()">Ver recorridos</button> -->
+            <button class="btn btn-primary" ng-click="resetLayer()">Limpiar</button>
         </div>
 
         <div class="text-center">

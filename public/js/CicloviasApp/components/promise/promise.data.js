@@ -19,6 +19,9 @@
             getTripsBetweenZones: getTripsBetweenZones,
             // Journey
             getJourneys: getJourneys,
+            // roads
+            getRoads: getRoads,
+
 
             // Centralidades
             getCentralities: getCentralities,
@@ -150,6 +153,24 @@
             $http({
                 method: 'GET',
                 url: path.JOURNEY
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise JOURNEY: ' + res.data.length);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getRoads() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.ROAD
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     console.log('datos de promise JOURNEY: ' + res.data.length);

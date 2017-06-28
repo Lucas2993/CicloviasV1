@@ -14,7 +14,7 @@
             MapJourneyController
         ]);
 
-    function MapJourneyController(vm, creatorMap, srvLayers, srvViewJourney, dataServer, adminLayers,srvModelJourney) {
+    function MapJourneyController(vm, creatorMap, srvLayers, srvViewJourney, dataServer, adminLayers, srvModelJourney) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         vm.map = creatorMap.getMap();
@@ -28,7 +28,7 @@
         vm.journeyLayer;
 
         vm.pageSize = 5,
-        vm.currentPage = 1;
+            vm.currentPage = 1;
         vm.totalItems = vm.journeyJson.length;
 
 
@@ -38,8 +38,8 @@
         vm.checkAllJourneys = checkAllJourneys;
         // permite la visualizacion o no de un recorrido
         vm.selectJourney = selectJourney;
-
-
+        // Permite borrar capa de trayectos
+        vm.resetLayer = resetLayer;
 
         // ****************************** FUNCIONES PUBLICAS ****************************
 
@@ -63,24 +63,28 @@
             srvViewJourney.viewJourney(journey, vm.journeyLayer);
         }
 
+        function resetLayer() {
+            vm.journeyLayer.getSource().clear();
+        }
+
 
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los trayectos de la BD
         function findAllJourney() {
-          if(!srvModelJourney.isJourneysWanted()){
-            dataServer.getJourneys()
-                .then(function(data) {
-                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-                    vm.journeyJson = data;
-                    vm.totalItems = vm.journeyJson.length;
-                    srvModelJourney.setJourneys(vm.journeyJson);
-                    srvModelJourney.setJourneysWanted(true);
-                    console.log("Datos recuperados prom JOURNEY con EXITO! = " + data.length);
-                })
-                .catch(function(err) {
-                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
-                })
-          }
+            if (!srvModelJourney.isJourneysWanted()) {
+                dataServer.getJourneys()
+                    .then(function(data) {
+                        // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
+                        vm.journeyJson = data;
+                        vm.totalItems = vm.journeyJson.length;
+                        srvModelJourney.setJourneys(vm.journeyJson);
+                        srvModelJourney.setJourneysWanted(true);
+                        console.log("Datos recuperados prom JOURNEY con EXITO! = " + data.length);
+                    })
+                    .catch(function(err) {
+                        console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
+                    })
+            }
         }
 
         function generateLayer() {
@@ -92,13 +96,6 @@
         // ************************ inicializacion de datos del mapa ************************
         generateLayer();
         findAllJourney();
-
-        vm.viewJourneyData = viewJourneyData;
-
-        function viewJourneyData(){
-            console.log("Data : ");
-        }
-
 
     } // fin Constructor
 
