@@ -29,7 +29,7 @@
               srvViewFeature.addFeature(roadsJson[i],layer ,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
           }
         }
-
+ 
         function addRoad(roadsJson, layer) {
             srvViewFeature.addFeature(roadsJson,layer,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
         }

@@ -10,7 +10,8 @@
 
         var service = {
             viewJourney: viewJourney,
-            addJourneys: addJourneys,
+            addAll: addAll,
+            toogleAll: toogleAll,
         };
 
         return service;
@@ -21,7 +22,7 @@
         };
 
         // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida
-        function addJourneys(journeysJson, layer) {
+        function addAll(journeysJson, layer) {
           for (var i = 0; i < journeysJson.length; i++) {
               srvViewFeature.addFeature(journeysJson[i],layer ,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
           }
@@ -31,7 +32,11 @@
             srvViewFeature.addFeature(journeysJson,layer,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
         }
 
-        
+
+        function toogleAll(isSelectedAllFeatures, featuresJson , layer ){
+          return srvViewFeature.toogleAllFeatures(isSelectedAllFeatures, featuresJson , layer ,this);
+        }
+
 
     } // Fin SrvViewtriP
 

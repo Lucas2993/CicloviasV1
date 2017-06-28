@@ -17,7 +17,7 @@
         var tripFinder = false;
         var tripsRanking = false;
         var tripsToDistance = false;
-        var journies = false;
+        var journeys = false;
         var tripsToCentrality = false;
         var tripsCiclovias = false;
         var tripsBetweenZones = false;
@@ -30,7 +30,7 @@
         var service = {
             activeRoads: activeRoads,
             activeCentralities: activeCentralities,
-            activeJournies: activeJournies,
+            activeJourneys: activeJourneys,
             activeEditCentralities: activeEditCentralities,
             activeTripFinder: activeTripFinder,
             activeTripsRanking: activeTripsRanking,
@@ -40,7 +40,7 @@
             activeTripsToCentrality: activeTripsToCentrality,
             setActiveRoads: setActiveRoads,
             setActiveCentralities: setActiveCentralities,
-            setActiveJournies: setActiveJournies,
+            setActiveJourneys: setActiveJourneys,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
@@ -62,8 +62,8 @@
             return centralities;
         };
 
-        function activeJournies() {
-            return journies;
+        function activeJourneys() {
+            return journeys;
         };
 
         function activeEditCentralities() {
@@ -96,8 +96,8 @@
 
         // ******************* SETTERS *******************
         // ***********************************************
-        function setActiveJournies(activated) {
-            journies = activated;
+        function setActiveJourneys(activated) {
+            journeys = activated;
         };
 
         function setActiveRoads(activated) {
@@ -139,7 +139,7 @@
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
         function disableAll() {
-            setActiveJournies(false);
+            setActiveJourneys(false);
             setActiveCentralities(false);
             setActiveEditCentralities(false);
             setActiveTripFinder(false);

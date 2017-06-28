@@ -1,9 +1,9 @@
 <!-- menu de opciones de trayectos -->
 <div class="panel-default" ng-controller="mapJourneyController">
-    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="">
+    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="openMenuJourney">
         <div>
             <label>
-              <input type="checkbox" ng-model="selectTrips" ng-change= "checkAllJourneys()" > Ver todos los recorridos
+              <input type="checkbox" ng-model="selectAllJourney" ng-change = "checkAllJourneys()" > Ver todos los trayectos
             </label>
         </div>
         <div class="checkbox" ng-repeat="journey in journeyJson | limitTo : pageSize : (currentPage - 1) * pageSize track by journey.id">

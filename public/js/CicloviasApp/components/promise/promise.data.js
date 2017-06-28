@@ -90,6 +90,26 @@
             return promise;
         };
 
+        function saveTrip(listPoint) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'POST',
+                url: path.TRIP,
+                data: listPoint
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    // console.log('datos de promise CENTRALITY: '+res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+
+            return promise;
+        };
+
         function updateCentrality(centrality) {
             var defered = $q.defer();
             var promise = defered.promise;

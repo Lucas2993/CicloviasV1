@@ -11,10 +11,11 @@
             'dataServer',
             'adminLayers',
             'srvModelJourney',
+            'adminMenu',
             MapJourneyController
         ]);
 
-    function MapJourneyController(vm, creatorMap, srvLayers, srvViewJourney, dataServer, adminLayers, srvModelJourney) {
+    function MapJourneyController(vm, creatorMap, srvLayers, srvViewJourney, dataServer, adminLayers, srvModelJourney,adminMenu) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         vm.map = creatorMap.getMap();
@@ -45,18 +46,11 @@
 
 
         function checkAllJourneys() {
-            if (vm.selectAllJourney) {
-                vm.selectAllJourney = false;
-                vm.journeyLayer.getSource().clear();
-            } else {
-                vm.selectAllJourney = true;
-                srvViewJourney.addJourneys(vm.journeyJson, vm.journeyLayer);
+            if(srvModelJourney.getJourneysLayer() != null ){
+                vm.selectAllJourney = srvViewJourney.toogleAll(vm.selectAllJourney, srvModelJourney.getJourneys(), srvModelJourney.getJourneysLayer());
             }
 
-            angular.forEach(vm.journeyJson, function(journey) {
-                journey.selected = vm.selectAllJourney;
-            });
-            console.log("Ver todos los trayectos: " + vm.selectAllJourney);
+
         }
 
         function selectJourney(journey) {
@@ -64,7 +58,10 @@
         }
 
         function resetLayer() {
-            vm.journeyLayer.getSource().clear();
+            if(srvModelJourney.getJourneysLayer() != null ){
+                vm.selectAllJourney = srvViewJourney.toogleAll(true, srvModelJourney.getJourneys(), srvModelJourney.getJourneysLayer());
+                vm.selectAllJourney = false;
+            }
         }
 
 
@@ -93,9 +90,33 @@
             vm.map.addLayer(vm.journeyLayer);
         }
 
+        // se encarga de observar si el menu se encuentra abierto o cerrado
+        vm.$watch('openMenuJourney', function(isOpen) {
+            if (isOpen) {
+                console.log('El menu de ROADS esta abierto');
+                enableEventClick();
+            } else {
+                // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
+                // vm.tripLayer.getSource().clear();
+                console.log('El menu de ROADS esta cerrado');
+                vm.resetLayer();
+
+            }
+        });
+
+        // funcion que habilita el uso de los eventos de este menu
+        function enableEventClick() {
+            adminMenu.disableAll();
+            adminMenu.setActiveJourneys(true);
+        }
+
+
+
         // ************************ inicializacion de datos del mapa ************************
         generateLayer();
         findAllJourney();
+
+
 
     } // fin Constructor
 
