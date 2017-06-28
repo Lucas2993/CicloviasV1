@@ -27,7 +27,9 @@
             getCentralities: getCentralities,
             saveCentrality: saveCentrality,
             updateCentrality: updateCentrality,
-            deleteCentrality: deleteCentrality
+            deleteCentrality: deleteCentrality,
+            saveTrip : saveTrip,
+
         };
         return service;
 

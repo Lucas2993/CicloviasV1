@@ -163,6 +163,7 @@
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     alert('Se guardó correctamente el recorrido: ' + data.id)
+                    console.log(data);
                     // srvModelCentrality.getCentralities().push(data);
                     // data.selected = true;
                     // srvViewCentrality.viewCentrality(data, srvModelCentrality.getCentralitiesLayer());

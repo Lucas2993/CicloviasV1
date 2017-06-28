@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+
 use Phaza\LaravelPostgis\Geometries\LineString;
 use Phaza\LaravelPostgis\Geometries\Point;
 use Phaza\LaravelPostgis\Geometries\Geometry;
@@ -52,8 +55,10 @@ class TripController extends Controller{
     *
     * @return Response
     */
-    public function store() {
-        $points = Request::input('points');
+    public function store(Request $request ) {
+        $params = $request->all();
+
+        $points = $params['points'];
         $points_objects = array();
         $distance_completed = 0.0;
         foreach ($points as $point) {
