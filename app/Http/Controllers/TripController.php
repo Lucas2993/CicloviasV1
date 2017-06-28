@@ -63,7 +63,6 @@ class TripController extends Controller{
         $distance_completed = 0.0;
         foreach ($points as $point) {
             $new_point = new Point($point[1], $point[0]);
-            array_push($points_objects, $new_point);
             if(count($points_objects) > 0){
                 $last_point_added = $points_objects[count($points_objects)-1];
                 $distance_completed +=  $this->clvHelperService->calculateDistance($last_point_added->getLat(),
@@ -71,6 +70,7 @@ class TripController extends Controller{
                 $new_point->getLat(),
                 $new_point->getLng());
             }
+            array_push($points_objects, $new_point);
         }
         $name = Name::all()->random(1)->name;
         $new_trip = new Trip();
