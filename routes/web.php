@@ -30,7 +30,7 @@ Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit', 'st
 
 Route::get('api/trip/closeToPoint/{latitude}/{longitude}', 'TripController@getCloseToPoint');
 
-Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'store', 'update']]);
+Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'update']]);
 
 Route::get('api/trip/toDistance/{longMin}/{longMax}', 'TripController@getToDistance');
 
