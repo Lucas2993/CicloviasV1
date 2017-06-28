@@ -53,8 +53,33 @@ class TripController extends Controller{
     * @return Response
     */
     public function store() {
-        $Trip = Trip::create(Request::all());
-        return $Trip;
+        $points = Request::input('points');
+        $points_objects = array();
+        $distance_completed = 0.0;
+        foreach ($points as $point) {
+            $new_point = new Point($point[1], $point[0]);
+            array_push($points_objects, $new_point);
+            if(count($points_objects) > 0){
+                $last_point_added = $points_objects[count($points_objects)-1];
+                $distance_completed +=  $this->clvHelperService->calculateDistance($last_point_added->getLat(),
+                $last_point_added->getLng(),
+                $new_point->getLat(),
+                $new_point->getLng());
+            }
+        }
+        $name = Name::all()->random(1)->name;
+        $new_trip = new Trip();
+        $new_trip->name = 'Recorrido 1';
+        $new_trip->description = 'Recorrido guardado 1';
+        $new_trip->distance_km = $distance_completed;
+        $new_trip->user = $name;
+        $new_trip->time = date(DATE_RFC2822);
+        $new_trip->duration = date("H:i:s");
+        $new_trip->geom = new LineString($points_objects);
+        $new_trip->frequency = '1';
+        $new_trip->save();
+
+        return $new_trip;
     }
 
     // /**
