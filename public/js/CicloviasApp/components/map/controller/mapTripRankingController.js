@@ -72,7 +72,7 @@
             vm.tripsLayerRanking.getSource().clear();
             vm.enableChecbox = false;
             vm.pondMin = 0;
-            vm.pondMax = 0;
+            vm.pondMax = 100;
         }
 
         // ****************************** FUNCIONES PRIVADAS ****************************

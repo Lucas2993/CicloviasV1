@@ -28,8 +28,6 @@
         vm.tolerance;
 
         // ********************************** FLAGS PUBLICAS ****************************
-        // Bandera que indica si la capa de recorridos de una determinada distancia esta creada.
-        vm.isLayerByDistanceCreated = false;
         // Modelo para usar con el checkbox (es necesario declararlo asi).
         vm.selectTripByDistance = {
             checkbox: false
@@ -42,8 +40,6 @@
         vm.getTripsToSelectedDistance = getTripsToSelectedDistance;
         // Permite la visualizacion de la capa de recorridos de una determinada distancia (si existe).
         vm.viewTripsToSelectedDistance = viewTripsToSelectedDistance;
-        // Se setean todo lo relacionado con los recorridos de una determinada distancia.
-        vm.resetLayerToSelectedDistance = resetLayerToSelectedDistance;
         // limpia todos los datos y campos mostrados en el mapa
         vm.resetLayer = resetLayer;
 
@@ -60,7 +56,7 @@
                         }
                         console.log("Datos recuperados prom TRIPS de determinada distancia con EXITO! = " + data);
                         // Se muestra la nueva capa.
-                        resetLayerToSelectedDistance();
+                        resetLayer();
                         vm.viewTripsToSelectedDistance();
                     })
                     .catch(function(err) {
@@ -87,25 +83,16 @@
             srvViewTrip.addTrips(vm.tripstodistanceJson, vm.layerTripsByDistance);
         }
 
-        function resetLayerToSelectedDistance() {
-            console.log("Entro a LIMPIAR capa.\n");
-            vm.layerTripsByDistance.getSource().clear();
-            // Se indica que la capa ya no existe.
-            vm.isLayerByDistanceCreated = false;
-            vm.distance = 0;
-            vm.tolerance = 0;
-        }
 
         function resetLayer(){
             console.log("Entro a limpiar DISTANCE\n");
             vm.layerTripsByDistance.getSource().clear();
             // Se indica que la capa ya no existe.
-            vm.isLayerByDistanceCreated = false;
             vm.existTripsToShow = false;
             vm.distance = 0;
             vm.tolerance = 0;
-            vm.longMin = 0;
-            vm.longMax = 0;
+            vm.longMin = 100;
+            vm.longMax = 500;
         }
 
         // se encarga de observar si el menu se encuentra abierto o cerrado
