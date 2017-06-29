@@ -6,7 +6,6 @@ use Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use Phaza\LaravelPostgis\Geometries\Point;
 
@@ -146,7 +145,6 @@ class CentralityController extends Controller
         // echo "cant de tipos de centralidad: ".count($typesCentralitiesResults);
         return $typesCentralitiesResults;
     }
-}
 
     /*
     * Función destinada a la genereción de datos para el dashboard del sistema.

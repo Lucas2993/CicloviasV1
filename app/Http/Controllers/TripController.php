@@ -740,6 +740,7 @@ class TripController extends Controller{
             array_push($array_id_trips, $single_result->id);
         }
 
+        // echo "id zona recibida: ".$zone_id." - cant tramos inter: ".count($array_id_trips);
 
         // print_r($array_id_trips);
         // var_dump($this->rankingTrips->getTramosRanking($array_id_trips));
