@@ -22,7 +22,7 @@
         // Mapa
         vm.map = creatorMap.getMap();
         // datos del servidor
-        vm.tripsRankingJson;
+        vm.tripsRankingJson=[];
         // capa de recorridos
         vm.tripsLayerRanking;
 
@@ -52,8 +52,6 @@
         // *************************** DECLARACION FUNCIONES PRIVADAS ********************
         // MENU: deshabilita los eventos de los demas menues y habilita los correspondientes a este
         var enableEventClick;
-        // recupera los datos del servidor y los guarda en una variable
-        var findTripsRanking;
 
         // ****************************** FUNCIONES PUBLICAS ****************************
         function viewLayerTripsRanking() {
@@ -70,28 +68,22 @@
             srvViewTrip.addTrips(vm.tripsRankingJson, vm.tripsLayerRanking);
         }
 
-        function resetlayer(){
+        function resetlayer() {
             vm.tripsLayerRanking.getSource().clear();
             vm.enableChecbox = false;
-            // if(srvModelZone.getZonesLayer() != null){
-            //     srvModelZone.getZonesLayer().getSource().clear();
-            // }
-            // vm.selectedOrigin = undefined;
-            // vm.selectedDestination = undefined;
+            vm.pondMin = 0;
+            vm.pondMax = 0;
         }
 
         // ****************************** FUNCIONES PRIVADAS ****************************
         // Busca todas los recorridos ponderados de la BD ************** terminar
         function findTripsRanking() {
-            // vm.tripsRankingJson = dataServer.getTripsRanking();
-            // vm.toogleViewTripsRanking = true;
-
-            // vm.toogleViewTripsRanking = true;
-            dataServer.getTripsRanking()
+            console.log("min : " + vm.pondMin + " max : " + vm.pondMax);
+            dataServer.getTripsRanking(vm.pondMin, vm.pondMax)
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsRankingJson = data;
-                    if(data.length > 0){
+                    if (data.length > 0) {
                         vm.enableChecbox = true;
                     }
                     console.log("Tramos Ranking recuperados prom con EXITO! = " + data);
@@ -102,19 +94,6 @@
                 })
 
         }
-        // function findAllJourney() {
-        //     dataServer.getJourneys()
-        //         .then(function(data) {
-        //             // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-        //             vm.journeyJson = data;
-        //             vm.totalItems = vm.journeyJson.length;
-        //             console.log("Datos recuperados prom JOURNEY con EXITO! = " + data);
-        //         })
-        //         .catch(function(err) {
-        //             console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
-        //         })
-        // }
-
 
         function generateLayer() {
             // Se crea una nueva capa de recorridos con los datos obtenidos.
@@ -147,11 +126,25 @@
                         // idFeature: 2
                     });
                     vm.map.addOverlay(popup);
-                    popup.show(evt.coordinate, vm.tripsRankingJson[featureFound.getId() - 1].ranking);
+                    for (var i = 0; i < vm.tripsRankingJson.length; i++) {
+                        if (vm.tripsRankingJson[i].id == featureFound.getId()) {
+                            var ranking = vm.tripsRankingJson[i].ranking;
+                            popup.show(evt.coordinate, "Ponderación: " + ranking);
+                        }
+                    }
+
                     //TODO modificar cuand lea desde el servidor
                 }
             }
         });
+
+
+        function getTrip(id) {
+
+            return null;
+        }
+
+
         // se encarga de observar si el menu se encuentra abierto o cerrado
         vm.$watch('openMenuRankingTrip', function(isOpen) {
             if (isOpen) {

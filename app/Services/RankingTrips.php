@@ -239,21 +239,25 @@ class RankingTrips{
     // $arrayIds = array(4,5,6);
 
     $arrayIds = $idTrips;
+    // foreach ($variable as $key => $value) {
+      # code...
+      // echo("array : ".count($arrayIds));
+    // }
 
     // obtenemos los tramos interseccion con su frecuencia y densidad
     $tramosInterseccion = $this->getTramosRankngedBySetTrips($arrayIds);
-    echo "Cant de tramos interseccion ponderados(nuevo): ".count($tramosInterseccion)."\n";
+    // echo "Cant de tramos interseccion ponderados(nuevo): ".count($tramosInterseccion)."\n";
 
     // obtenemos la cantidad de usuarios distintos
     $userTotal = $this->getDistinctUserBySetTrips($arrayIds);
-    echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
+    // echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
 
     // obtenemos la frec min y max del cjto de recorridos
     $frequency = $this->getFreqMinMaxBySetTrips($arrayIds);
     $min_frec = $frequency[0];
     $max_frec = $frequency[1];
 
-    echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
+    // echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
 
     // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
     // con sus datos para devolverlos desde un servicio
@@ -262,6 +266,7 @@ class RankingTrips{
     foreach ($tramosInterseccion as $tramo) {
       // el this lo usamos para llamar una funcion privada
       $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
+      // echo("ponderacion : ".$peso);
       // creamos el tramo con los datos correspondientes
       $auxTramo = new \stdClass();
       $auxTramo->id = $idTramosRankinged;
@@ -345,8 +350,8 @@ class RankingTrips{
     }
     echo "frecTramo1: ".($tramosInterseccion[0])->frequency."\n";
     if ($this->tramosContinuos($tramosInterseccion[1], $tramosInterseccion[2])) {
-      echo "Los tramos 2 y 3 son CONTINUOS.\n";
-      echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
+      // echo "Los tramos 2 y 3 son CONTINUOS.\n";
+      // echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
     }
 
     return $tramosInterseccion;
@@ -356,9 +361,11 @@ class RankingTrips{
   private function getTramosRankngedBySetTrips($idTrips){
     // $rangoId = "(4,5,6,7,8)";
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango de ids(interseccion)): ".$rangoId."\n";
+    // echo "rango de ids(interseccion)): ".$rangoId."\n";
     // obtenemos los tramos interseccion con su frecuencia y densidad, puntos de inicio y fin
-    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+    //$query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+
+     $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsGeoJSON(tramos.geomInter) as tramo,
               		ST_X(ST_StartPoint(tramos.geomInter :: geometry)) as lonIni,ST_Y(ST_StartPoint(tramos.geomInter :: geometry)) as latIni,ST_X(ST_EndPoint(tramos.geomInter :: geometry)) as lonFin,ST_Y(ST_EndPoint(tramos.geomInter :: geometry)) as latFin
               FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
               	FROM trips t
@@ -451,7 +458,7 @@ class RankingTrips{
 
   private function getDistinctUserBySetTrips($idTrips){
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango(UserDist): ".$rangoId."\n";
+    // echo "rango(UserDist): ".$rangoId."\n";
     // cant de usuarios obtenidos de la DB
     $query = "SELECT count(t.id) as cantUser
               FROM trips t
@@ -537,7 +544,7 @@ class RankingTrips{
 
   private function getFreqMinMaxBySetTrips($idTrips){
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango(freq): ".$rangoId."\n";
+    // echo "rango(freq): ".$rangoId."\n";
     $query = "SELECT min((tramosRanking.frequency):: int) as minFrec, max((tramosRanking.frequency):: int) as maxFrec
               FROM(SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, tramos.geomInter as tramo
                 FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
@@ -670,7 +677,7 @@ class RankingTrips{
   // private function createTextLineString($lngIni, $latIni, $lngFin, $latFin){
   //   $textLinestring = "LINESTRING(".$lngIni." ".$latIni.",".$lngFin." ".$latFin.")";
   private function createTextLineString($tramo1, $tramo2){
-    $textLinestring = "LINESTRING(".$tramo1->lonini." ".$tramo1->latini.",".$tramo2->lonfin." ".$tramo2->latfin.")";
+    $textLinestring = "GATO(".$tramo1->lonini." ".$tramo1->latini.",".$tramo2->lonfin." ".$tramo2->latfin.")";
     return $textLinestring;
   }
 }

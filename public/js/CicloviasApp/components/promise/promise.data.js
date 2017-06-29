@@ -222,13 +222,13 @@
             return promise;
         };
 
-        function getTripsRanking() {
+        function getTripsRanking(pondMin, pondMax) {
             var defered = $q.defer();
             var promise = defered.promise;
 
             $http({
                 method: 'GET',
-                url: path.TRIPS_RANKING
+                url: path.TRIPS_RANKING+"/"+pondMin+"/"+pondMax
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
                 console.log('datos de promise TRIPS_RANKINGED: ' + res.data.length);

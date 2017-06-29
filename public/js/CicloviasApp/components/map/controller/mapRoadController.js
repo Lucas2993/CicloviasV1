@@ -144,7 +144,7 @@
             vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
                 // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
                 // Si es un punto lo agrega a la lista de puntos de un recorrido
-                if (feature.getId() > 100000) {
+                if (feature.getId() > 99999) {
                     feature.setStyle(creatorStyle.getStylePoint(5, 'red', 'blue'));
                     console.log(feature.getGeometry().getCoordinates());
                     vm.pointList.push(feature.getGeometry().getCoordinates());
