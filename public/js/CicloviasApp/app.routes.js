@@ -29,15 +29,12 @@
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW
                                                 })
-<<<<<<< HEAD
-																								.when('/dashboard', {
-																									templateUrl: base_route + path.DASHBOARD_VIEW
-																								})
-=======
+												.when('/dashboard', {
+													templateUrl: base_route + path.DASHBOARD_VIEW
+												})
                                                 .when('/setting', {
                                                     templateUrl: base_route + path.SETTING_VIEW
                                                 })
->>>>>>> 05590b5b81a1b419ac0db7bc7be20bad8ed4c384
                                                 .otherwise({
                                                     redirectTo: '/home'
                                                 });

@@ -29,7 +29,7 @@
             saveCentrality: saveCentrality,
             updateCentrality: updateCentrality,
             deleteCentrality: deleteCentrality,
-            getDataDashboard: getDataDashboard
+            getDataDashboard: getDataDashboard,
             saveTrip : saveTrip,
         };
         return service;

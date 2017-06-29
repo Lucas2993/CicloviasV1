@@ -9,7 +9,7 @@
         TRIPS_RANKING: 'api/rankinged',
         JOURNEY: 'api/journey',
         ZONE: 'api/zone',
-        DASHBOARD: 'api/dashboard'
+        DASHBOARD: 'api/dashboard',
         ROAD: 'api/road',
     })
     .constant('propiertiesMap',{
