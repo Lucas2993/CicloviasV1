@@ -20,12 +20,17 @@
             getTripsRankingByZone: getTripsRankingByZone,
             // Journey
             getJourneys: getJourneys,
+            // roads
+            getRoads: getRoads,
+
 
             // Centralidades
             getCentralities: getCentralities,
             saveCentrality: saveCentrality,
             updateCentrality: updateCentrality,
-            deleteCentrality: deleteCentrality
+            deleteCentrality: deleteCentrality,
+            saveTrip : saveTrip,
+
         };
         return service;
 
@@ -76,6 +81,26 @@
                 method: 'POST',
                 url: path.CENTRALITY,
                 data: newCentrality
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    // console.log('datos de promise CENTRALITY: '+res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+
+            return promise;
+        };
+
+        function saveTrip(listPoint) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'POST',
+                url: path.TRIP,
+                data: listPoint
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     // console.log('datos de promise CENTRALITY: '+res.data);
@@ -151,6 +176,24 @@
             $http({
                 method: 'GET',
                 url: path.JOURNEY
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise JOURNEY: ' + res.data.length);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getRoads() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.ROAD
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     console.log('datos de promise JOURNEY: ' + res.data.length);

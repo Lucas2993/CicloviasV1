@@ -10,14 +10,17 @@
 
         var centralitiesJson = [];
         var centralitiesLayer = null;
+        var centralitiesWanted = false;
 
         var service = {
             getCentralities: getCentralities,
             setCentralities: setCentralities,
             getCentralitiesLayer: getCentralitiesLayer,
             setCentralitiesLayer: setCentralitiesLayer,
+            getCentrality: getCentrality,
             filterCentrality: filterCentrality,
-            getCentrality: getCentrality
+            isCentralitiesWanted: isCentralitiesWanted,
+            setCentralitiesWanted: setCentralitiesWanted
         };
 
         return service;
@@ -56,6 +59,13 @@
             console.log("Cant de centralidades DESPUES de borrar: "+centralitiesJson.length);
         }
 
+        function isCentralitiesWanted(){
+          return centralitiesWanted;
+        }
+
+        function setCentralitiesWanted( value ){
+          centralitiesWanted = value;
+        }
     }
 
 })()

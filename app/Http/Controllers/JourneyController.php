@@ -9,6 +9,7 @@ use Phaza\LaravelPostgis\Geometries\Geometry;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Journey;
+use App\Services\JourneyFunctions;
 
 class JourneyController extends Controller
 {
@@ -112,4 +113,15 @@ class JourneyController extends Controller
 
         // return $journeysResults;
     }
+
+    /**
+      *Funcion encargada de retornar los Trayectos de Recorridos Similares
+      *
+      * @return \Illuminate\Http\Response
+      */
+      public function getSimilarTripsJourney($long1,$lat1,$long2,$lat2){
+          return (new JourneyFunctions)->getSimilarTripsJourney($long1,$lat1,$long2,$lat2);
+
+    }
+
 }

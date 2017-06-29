@@ -26,13 +26,13 @@
         vm.tripLayer;
 
 
-        // capa de recorridos
+        // capa de zonas
         vm.zonesLayer;
         //Zona seleccionada desde el mapa :  -1 para origen ... 1 para destino
         vm.zoneSelected = 0;
 
-        vm.selectedOrigin = "";
-        vm.selectedDestination = "";
+        vm.selectedOrigin = undefined;
+        vm.selectedDestination = undefined;
 
         // ********************************** FLAGS PUBLICAS ****************************
         // determina si se quieren ver todos los recorridos o no
@@ -93,10 +93,13 @@
         // reinicia el formulario de recorridos entre zonas :Publico
         function resetLayerBetweenZone() {
             console.log("Entro en resetLayerBetweenZone");
+            srvViewZone.removeZone(vm.selectedOrigin , vm.zoneslayer);
+            srvViewZone.removeZone(vm.selectedDestination , vm.zoneslayer);
+
+            // vm.zoneslayer.getSource().clear();
+
             vm.tripLayer.getSource().clear();
             vm.zoneslayer.getSource().clear();
-            srvViewZone.removeZone(vm.selectedOrigin, vm.zoneslayer);
-            srvViewZone.removeZone(vm.selectedDestination, vm.zoneslayer);
             vm.selectedOrigin = undefined;
             vm.selectedDestination = undefined;
             vm.existTripsToShow = false;
@@ -148,7 +151,7 @@
             // console.log(selectedZone);
             vm.tripLayer.getSource().clear();
             vm.zoneslayer.getSource().clear();
-            if (otherZone != null) {
+            if (otherZone != undefined) {
                 srvViewZone.addZone(otherZone, vm.zoneslayer, otherColor);
             }
             srvViewZone.addZone(selectedZone, vm.zoneslayer, color);
@@ -196,8 +199,8 @@
             } else {
                 // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
                 // vm.tripLayer.getSource().clear();
-                resetLayerBetweenZone();
                 console.log('El menu de TRIPS BETWEEN esta cerrado');
+                vm.resetLayerBetweenZone();
 
             }
         });

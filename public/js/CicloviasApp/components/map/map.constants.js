@@ -8,7 +8,8 @@
         TRIP:'api/trip',
         TRIPS_RANKING: 'api/rankinged',
         JOURNEY: 'api/journey',
-        ZONE: 'api/zone'
+        ZONE: 'api/zone',
+        ROAD: 'api/road',
     })
     .constant('propiertiesMap',{
         PROJECTION: 'EPSG:4326',

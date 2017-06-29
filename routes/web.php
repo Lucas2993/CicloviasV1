@@ -30,11 +30,11 @@ Route::resource('api/zone','ZoneController', ['except' => ['create', 'edit', 'st
 
 Route::get('api/trip/closeToPoint/{latitude}/{longitude}', 'TripController@getCloseToPoint');
 
-Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'store', 'update']]);
+Route::resource('api/trip','TripController', ['except' => ['create', 'edit', 'update']]);
 
 Route::get('api/trip/toDistance/{longMin}/{longMax}', 'TripController@getToDistance');
 
-Route::get('api/trip/generateTrips/{quantity}/{max_distance}', 'TripController@generateTrips');
+Route::get('api/trip/generateTrips/{quantity}/{min_distance}/{max_distance}/{mode}', 'TripController@generateTrips');
 
 Route::get('api/trip/closeToCentrality/{latitude}/{longitude}', 'TripController@getCloseToCentrality');
 
@@ -45,3 +45,7 @@ Route::get('api/trip/getTripsByZone/{zone_id}', 'TripController@getTripsByZone')
 Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destination_zone_id}', 'TripController@getTripsByOriginDestinationZone');
 
 Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');
+
+Route::resource('api/road', 'RoadController',['except' => ['create', 'edit', 'store', 'update']]);
+
+Route::get('api/journey/getSimilarTripsJourney/{$long1}/{$lat1}/{$long2}/{$lat2}', 'JourneyController@getSimilarTripsJourney');

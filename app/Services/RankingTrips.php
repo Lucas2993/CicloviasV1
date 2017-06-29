@@ -656,11 +656,11 @@ class RankingTrips{
   // pondera un tramo a partir de un cjto de datos analizados
   private function ponderacion($frecMin, $frecMax, $totalUser, $frec, $densidad){
     // factodr de frecuencia
-    if($frecMax == $frecMin){
-      $facFrec = 1;
+    if($frecMax==$frecMin){
+      $facFrec =1;
     }
-    else {
-      $facFrec = ($frec - $frecMin)/($frecMax - $frecMin);
+    else{
+    $facFrec = ($frec - $frecMin)/($frecMax - $frecMin);
     }
     // factor de densidad
     $facDensidad = $densidad/$totalUser;

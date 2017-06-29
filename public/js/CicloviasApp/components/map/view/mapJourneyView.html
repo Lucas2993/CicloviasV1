@@ -1,9 +1,9 @@
 <!-- menu de opciones de trayectos -->
 <div class="panel-default" ng-controller="mapJourneyController">
-    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="false">
+    <div uib-accordion-group class="panel-primary" heading="Trayectos" is-open="openMenuJourney">
         <div>
             <label>
-              <input type="checkbox" ng-model="selectTrips" ng-change= "checkAllJourneys()" > Ver todos los recorridos
+              <input type="checkbox" ng-model="selectAllJourney" ng-change = "checkAllJourneys()" > Ver todos los trayectos
             </label>
         </div>
         <div class="checkbox" ng-repeat="journey in journeyJson | limitTo : pageSize : (currentPage - 1) * pageSize track by journey.id">
@@ -11,6 +11,11 @@
                 <input type="checkbox" checklist-model="journeyJson"  checklist-value="journey.id" ng-model="journey.selected" ng-change= "selectJourney(journey)"> Trayecto [[journey.id]]
             </label>
         </div>
+        <div class="text-center btn-group-sm">
+            <!-- <button type="button"  class="btn btn-default" ng-click="viewJourneyData()">Ver recorridos</button> -->
+            <button class="btn btn-primary" ng-click="resetLayer()">Limpiar</button>
+        </div>
+
         <div class="text-center">
             <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
             <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
