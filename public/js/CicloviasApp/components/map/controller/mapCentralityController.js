@@ -154,6 +154,7 @@
         }
 
         // ************************ Inicializacion de datos *****************************
+        generateCentralitiesPoints();
         findAllCentralities();
 
     } // fin Constructor

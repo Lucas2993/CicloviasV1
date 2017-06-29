@@ -29,9 +29,9 @@
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW
                                                 })
-												.when('/dashboard', {
-													templateUrl: base_route + path.DASHBOARD_VIEW
-												})
+																								.when('/dashboard', {
+																									templateUrl: base_route + path.DASHBOARD_VIEW
+																								})
                                                 .when('/setting', {
                                                     templateUrl: base_route + path.SETTING_VIEW
                                                 })

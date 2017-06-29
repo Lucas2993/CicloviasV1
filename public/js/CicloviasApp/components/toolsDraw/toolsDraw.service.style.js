@@ -23,6 +23,7 @@
             getStyleTemporalEditCentrality: getStyleTemporalEditCentrality,
             getStyleTripCloseToPointViolet: getStyleTripCloseToPointViolet,
             getStylePoint: getStylePoint,
+
         };
         return service;
 

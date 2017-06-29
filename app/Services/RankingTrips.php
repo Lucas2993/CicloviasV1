@@ -249,6 +249,10 @@ class RankingTrips{
     $tramosRankinged = array();
 
     $arrayIds = $idTrips;
+    // foreach ($variable as $key => $value) {
+      # code...
+      // echo("array : ".count($arrayIds));
+    // }
 
     // obtenemos los tramos interseccion con su frecuencia y densidad
     $tramosInterseccion = $this->getTramosRankngedBySetTrips($arrayIds);
@@ -390,8 +394,8 @@ class RankingTrips{
     }
     echo "frecTramo1: ".($tramosInterseccion[0])->frequency."\n";
     if ($this->tramosContinuos($tramosInterseccion[1], $tramosInterseccion[2])) {
-      echo "Los tramos 2 y 3 son CONTINUOS.\n";
-      echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
+      // echo "Los tramos 2 y 3 son CONTINUOS.\n";
+      // echo "Creando union de tramos 2 y 3: ".$this->createTextLineString($tramosInterseccion[1], $tramosInterseccion[2])."\n";
     }
 
     return $tramosInterseccion;
@@ -403,7 +407,9 @@ class RankingTrips{
     $rangoId = $this->getRangoId($idTrips);
     // echo "rango de ids(interseccion)): ".$rangoId."\n";
     // obtenemos los tramos interseccion con su frecuencia y densidad, puntos de inicio y fin
-    // $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+    //$query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+
+    //  $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsGeoJSON(tramos.geomInter) as tramo,
     $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsGeoJSON(tramos.geomInter) as tramo,
               		ST_X(ST_StartPoint(tramos.geomInter :: geometry)) as lonIni,ST_Y(ST_StartPoint(tramos.geomInter :: geometry)) as latIni,ST_X(ST_EndPoint(tramos.geomInter :: geometry)) as lonFin,ST_Y(ST_EndPoint(tramos.geomInter :: geometry)) as latFin
               FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
@@ -724,7 +730,7 @@ class RankingTrips{
   // private function createTextLineString($lngIni, $latIni, $lngFin, $latFin){
   //   $textLinestring = "LINESTRING(".$lngIni." ".$latIni.",".$lngFin." ".$latFin.")";
   private function createTextLineString($tramo1, $tramo2){
-    $textLinestring = "LINESTRING(".$tramo1->lonini." ".$tramo1->latini.",".$tramo2->lonfin." ".$tramo2->latfin.")";
+    $textLinestring = "GATO(".$tramo1->lonini." ".$tramo1->latini.",".$tramo2->lonfin." ".$tramo2->latfin.")";
     return $textLinestring;
   }
 }

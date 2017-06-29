@@ -78,6 +78,9 @@
                     if(data.length > 0){
                         vm.existsTrips = true;
                     }
+                    else {
+                        alert("No se encontraron recorridos.");
+                    }
                     console.log("Datos recuperados prom TRIPS de determinada centralidad con EXITO! = " + data);
                     // vm.selectTripByCentrality.checkbox = true;
                     vm.tripsLayerByCentrality.setVisible(true);

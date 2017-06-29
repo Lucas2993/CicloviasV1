@@ -44,7 +44,7 @@ Route::get('api/trip/getTripsByZone/{zone_id}', 'TripController@getTripsByZone')
 
 Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destination_zone_id}', 'TripController@getTripsByOriginDestinationZone');
 
-Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');
+Route::get('api/rankinged/{pondMin}/{pondMax}', 'TripsRankingedController@tramosRanking');
 
 Route::get('api/dashboard/amountTrips', 'TripController@getAmountTrips');
 

@@ -14,7 +14,6 @@
             // crea y devuelve un estilo de texto con el texto deseado
             function getRandomColor() {
                 var color = "#" + (Math.round(Math.random() * 0XFFFFFF)).toString(16);
-                console.log("color generado: "+color);
                 return color;
             };
 

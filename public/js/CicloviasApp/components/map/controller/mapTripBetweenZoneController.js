@@ -74,6 +74,9 @@
                     if (data.length > 0) {
                         vm.existTripsToShow = true;
                     }
+                    else{
+                        alert("No se encontraron recorridos.");
+                    }
                     addTripsBetweenZone();
                 })
                 .catch(function(err) {
