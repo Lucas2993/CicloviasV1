@@ -13,7 +13,7 @@
             viewFeature: viewFeature,
             addFeature: addFeature,
             removeFeature : removeFeature,
-
+            toogleAllFeatures : toogleAllFeatures,
         };
 
         return service;
@@ -47,6 +47,21 @@
             layer.getSource().addFeature(newFeature);
         }
 
+        // Este metodo hace un toogle entre todos los features
+        // TODO recordar que al refactorizar se debe renombrar el metodo "addZones" --> "addAll" en cada srvView
+        function toogleAllFeatures(isSelectedAllFeatures, featuresJson , layer ,srvView){
+          if (isSelectedAllFeatures ) {
+              isSelectedAllFeatures  = false;
+              layer.getSource().clear();
+          } else {
+              isSelectedAllFeatures  = true;
+              srvView.addAll(featuresJson, layer);
+          }
+          angular.forEach( featuresJson, function(zone) {
+              zone.selected = isSelectedAllFeatures ;
+          });
+          return isSelectedAllFeatures;
+        }
     } // FIn SrvViewtriP
 
 })()

@@ -10,6 +10,7 @@
 
         var service = {
             addTrips: addTrips,
+            removeTrips: removeTrips,
             viewTrip: viewTrip
         };
 
@@ -24,6 +25,13 @@
         function addTrips(tripsJson, layer) {
           for (var i = 0; i < tripsJson.length; i++) {
               srvViewFeature.addFeature(tripsJson[i],layer ,creatorStyle.getStyleTrip(creatorColor.getRandomColor(),3));
+          }
+        }
+
+        // agrega recorridos a partir de los datos recuperados del servidor a la capa recibida
+        function removeTrips(tripsJson, layer) {
+          for (var i = 0; i < tripsJson.length; i++) {
+              srvViewFeature.removeFeature(tripsJson[i],layer);
           }
         }
 

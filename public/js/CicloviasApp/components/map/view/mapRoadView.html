@@ -1,0 +1,38 @@
+<!-- menu de opciones de calles -->
+<div class="panel-default" ng-controller="mapRoadController">
+    <div uib-accordion-group class="panel-primary" heading="Calles" is-open="openMenuRoad">
+        <div>
+            <label>
+              <input type="checkbox" ng-model="selectRoads" ng-change= "checkAllRoads()" > Ver todas las calles
+            </label>
+            <label>Buscar :
+              <input id="searchText" ng-model="searchText">
+            </label>
+        </div>
+
+        <!-- Funcion original -->
+        <!-- <div class="checkbox" ng-repeat="road in roadJson | limitTo : pageSize : (currentPage - 1) * pageSize track by road.id ">
+            <label>
+                <input type="checkbox" checklist-model="roadJson"  checklist-value="road.id" ng-model="road.selected" ng-change= "selectRoad(road)"> [[road.name]]
+            </label>
+        </div> -->
+        <!-- fin funcion real -->
+        <!-- <div ng-init="roadJson"> -->
+        <table id="searchTextResults" >
+          <tr ng-repeat="road in roadJson | filter:searchText | limitTo : pageSize : (currentPage - 1) * pageSize track by road.id ">
+            <td><input type="checkbox" ng-model="road.selected" ng-change= "selectRoad(road)" > [[road.name]]</td>
+          </tr>
+        </table>
+
+        <div class="text-center btn-group-sm">
+            <button type="button"  class="btn btn-default" ng-click="viewRoadData()">Ver puntos</button>
+            <button type="button"  class="btn btn-default" ng-click="sendTrip()">Enviar recorrido</button>
+            <button class="btn btn-primary" ng-click="resetLayerRoad()">Limpiar</button>
+        </div>
+
+        <div class="text-center">
+            <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" num-pages="numPages" max-size="0" boundary-links="true" first-text="&laquo;" last-text="&raquo;"></ul>
+            <pre>Pagina: [[currentPage]] / [[numPages]]</pre>
+        </div>
+    </div>
+</div>

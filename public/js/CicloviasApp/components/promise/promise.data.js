@@ -17,8 +17,12 @@
             getTripsToDistance: getTripsToDistance,
             getTripsToCentrality: getTripsToCentrality,
             getTripsBetweenZones: getTripsBetweenZones,
+            getTripsRankingByZone: getTripsRankingByZone,
             // Journey
             getJourneys: getJourneys,
+            // roads
+            getRoads: getRoads,
+
 
             // Centralidades
             getCentralities: getCentralities,
@@ -26,6 +30,7 @@
             updateCentrality: updateCentrality,
             deleteCentrality: deleteCentrality,
             getDataDashboard: getDataDashboard
+            saveTrip : saveTrip,
         };
         return service;
 
@@ -39,7 +44,7 @@
                 url: path.ZONE
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise ZONES: ' + res.data);
+                    console.log('datos de promise ZONES: ' + res.data.length);
                     console.log('datos de promise ZONES color: ' + ((res.data)[0]).color);
                 },
                 function errorCallback(err) {
@@ -59,7 +64,7 @@
                 url: path.CENTRALITY
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise CENTRALITY: ');
+                    console.log('datos de promise CENTRALITY: '+ res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -76,6 +81,26 @@
                 method: 'POST',
                 url: path.CENTRALITY,
                 data: newCentrality
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    // console.log('datos de promise CENTRALITY: '+res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+
+            return promise;
+        };
+
+        function saveTrip(listPoint) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'POST',
+                url: path.TRIP,
+                data: listPoint
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     // console.log('datos de promise CENTRALITY: '+res.data);
@@ -135,7 +160,7 @@
                 url: path.TRIP
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise TRIP: ' + res.data);
+                    console.log('datos de promise TRIP: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -153,7 +178,25 @@
                 url: path.JOURNEY
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise JOURNEY: ' + res.data);
+                    console.log('datos de promise JOURNEY: ' + res.data.length);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getRoads() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.ROAD
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise JOURNEY: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -171,7 +214,7 @@
                 url: path.TRIP + '/closeToPoint/' + point.latitude + '/' + point.longitude
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise TRIP: ' + res.data);
+                    console.log('datos de promise TRIP-Close-TO_Point: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -189,106 +232,13 @@
                 url: path.TRIPS_RANKING
             }).then(function successCallback(res) {
                 defered.resolve(res.data);
-                console.log('datos de promise TRIPS_RANKINGED: ' + res.data);
+                console.log('datos de promise TRIPS_RANKINGED: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
                 }
             );
             return promise;
-            // var respuestaServidor = [
-            //     // gales ruperto gim
-            //     {
-            //         "id": 1,
-            //         "name": "Trayeco 1",
-            //         "ranking": "700",
-            //         "pointIni": {
-            //             "latitude": -42.78310326285499,
-            //             "longitude": -65.07063663717577
-            //         },
-            //         "pointFinal": {
-            //             "latitude": -42.78169277769997,
-            //             "longitude": -65.0664094757683
-            //         }
-            //     },
-            //     // gales periodista
-            //     {
-            //         "id": 2,
-            //         "name": "Trayeco 2",
-            //         "ranking": "1000",
-            //         "pointIni": {
-            //             "latitude": -42.78169277769997,
-            //             "longitude": -65.0664094757683
-            //         },
-            //         "pointFinal": {
-            //             "latitude": -42.787645535040284,
-            //             "longitude": -65.06263292547533
-            //         }
-            //     },
-            //     // periodista alem
-            //     {
-            //         "id": 3,
-            //         "name": "Trayeco 3",
-            //         "ranking": "1200",
-            //         "pointIni": {
-            //             "latitude": -42.787645535040284,
-            //             "longitude": -65.06263292547533
-            //         },
-            //         "pointFinal": {
-            //             "latitude": -42.78406292559168,
-            //             "longitude": -65.05197919126817
-            //         }
-            //     }
-            //     //alem buenos aires
-            // ];
-            //
-            // var res2 = [{
-            //         "id": 0,
-            //         "name": "Trayecto 1",
-            //         "description": "El trayecto 1",
-            //         "ponderacion": 5,
-            //         "geom": {
-            //             "type": "LineString",
-            //             "coordinates": [
-            //                 [-65.07063663717577, -42.78310326285499],
-            //                 [-65.0664094757683, -42.78169277769997]
-            //             ]
-            //         },
-            //         "created_at": "2017-05-26 23:21:42",
-            //         "updated_at": "2017-05-26 23:21:42"
-            //     },
-            //     {
-            //         "id": 1,
-            //         "name": "Trayecto 2",
-            //         "description": "El trayecto 2",
-            //         "ponderacion": 7,
-            //         "geom": {
-            //             "type": "LineString",
-            //             "coordinates": [
-            //                 [-65.0664094757683, -42.78169277769997],
-            //                 [-65.06263292547533, -42.787645535040284]
-            //             ]
-            //         },
-            //         "created_at": "2017-05-26 23:21:42",
-            //         "updated_at": "2017-05-26 23:21:42"
-            //     },
-            //     {
-            //         "id": 2,
-            //         "name": "Trayecto 3",
-            //         "description": "El trayecto 3",
-            //         "ponderacion": 1,
-            //         "geom": {
-            //             "type": "LineString",
-            //             "coordinates": [
-            //                 [-65.06263292547533, -42.787645535040284],
-            //                 [-65.05197919126817, -42.78406292559168],
-            //             ]
-            //         },
-            //         "created_at": "2017-05-26 23:21:42",
-            //         "updated_at": "2017-05-26 23:21:42"
-            //     }
-            // ] // fin res2
-            // return res2;
         };
 
         function getTripsToDistance(longMin, longMax) {
@@ -300,7 +250,7 @@
                 url: path.TRIP + '/toDistance/' + longMin + '/' + longMax
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de DISTANCE TRIP: ' + res.data);
+                    console.log('datos de promise de DISTANCE TRIP: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -318,7 +268,7 @@
                 url: path.TRIP + '/getTripsByOriginDestinationZone/' + idOrigin + '/' + idDestination
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de Trips_BetweentZones: ' + res.data);
+                    console.log('datos de promise de Trips_BetweentZones: ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
@@ -327,6 +277,23 @@
             return promise;
         };
 
+        function getTripsRankingByZone(idZone){
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TRIP + '/getTripsByZone/' + idZone
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise de Trips_ByZone: ' + res.data);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        }
 
         function getTripsToCentrality(latitude, longitude) {
             var defered = $q.defer();
@@ -337,7 +304,7 @@
                 url: path.TRIP + '/closeToCentrality/' + latitude + '/' + longitude
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
-                    console.log('datos de promise de CENTRALITY TRIP: ' + res.data);
+                    console.log('datos de promise de CENTRALITY : ' + res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)

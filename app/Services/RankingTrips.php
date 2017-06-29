@@ -233,48 +233,93 @@ class RankingTrips{
     return $tramosRankinged;
   }
 
+  // devuelve los tramos interseccion de un cjto de recorridos, null en el caso de que no existan
+  // tramos interseccion
   public function getTramosRanking($idTrips){
     // cjto de recorridos a analizar
     // $arrayIds = array(4,5,6,7,8);
     // $arrayIds = array(4,5,6);
 
+    // si no hay recorridos para analizar
+    if(empty($idTrips)){
+      return array();
+    }
+
+    // $tramosRankinged = null;
+    $tramosRankinged = array();
+
     $arrayIds = $idTrips;
 
     // obtenemos los tramos interseccion con su frecuencia y densidad
     $tramosInterseccion = $this->getTramosRankngedBySetTrips($arrayIds);
-    echo "Cant de tramos interseccion ponderados(nuevo): ".count($tramosInterseccion)."\n";
+    // echo "Cant de tramos interseccion ponderados(nuevo): ".count($tramosInterseccion)."\n";
 
-    // obtenemos la cantidad de usuarios distintos
-    $userTotal = $this->getDistinctUserBySetTrips($arrayIds);
-    echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
+    // si obtenemos trayectos interseccion realizamos su ponderacion
+    if((count($tramosInterseccion) > 0)){
+      // obtenemos la cantidad de usuarios distintos
+      $userTotal = $this->getDistinctUserBySetTrips($arrayIds);
+      // echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
 
-    // obtenemos la frec min y max del cjto de recorridos
-    $frequency = $this->getFreqMinMaxBySetTrips($arrayIds);
-    $min_frec = $frequency[0];
-    $max_frec = $frequency[1];
+      // obtenemos la frec min y max del cjto de recorridos
+      $frequency = $this->getFreqMinMaxBySetTrips($arrayIds);
+      $min_frec = $frequency[0];
+      $max_frec = $frequency[1];
 
-    echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
+      // echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
 
-    // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
-    // con sus datos para devolverlos desde un servicio
-    $tramosRankinged = array();
-    $idTramosRankinged = 1;
-    foreach ($tramosInterseccion as $tramo) {
-      // el this lo usamos para llamar una funcion privada
-      $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
-      // creamos el tramo con los datos correspondientes
-      $auxTramo = new \stdClass();
-      $auxTramo->id = $idTramosRankinged;
-      $auxTramo->geom = $tramo->tramo;
-      $auxTramo->ranking = $peso;
-      $auxTramo->frequency = $tramo->frequency;
-      $auxTramo->density = $tramo->idu;
-      // agregamos el tramo a la lista que se va a devolver
-      array_push($tramosRankinged,$auxTramo);
-      $idTramosRankinged += 1;
-      // echo"PESO ponderacion: ".$peso."\n";
+      // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
+      // con sus datos para devolverlos desde un servicio
+      // $tramosRankinged = array();
+      $idTramosRankinged = 1;
+      foreach ($tramosInterseccion as $tramo) {
+        // el this lo usamos para llamar una funcion privada
+        $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
+        // creamos el tramo con los datos correspondientes
+        $auxTramo = new \stdClass();
+        $auxTramo->id = $idTramosRankinged;
+        $auxTramo->geom = $tramo->tramo;
+        $auxTramo->ranking = $peso;
+        $auxTramo->frequency = $tramo->frequency;
+        $auxTramo->density = $tramo->idu;
+        // agregamos el tramo a la lista que se va a devolver
+        array_push($tramosRankinged,$auxTramo);
+        $idTramosRankinged += 1;
+        // echo"PESO ponderacion: ".$peso."\n";
+      }
+      // echo "cant de tramos ponderados = ".count($tramosRankinged)."\n";
     }
-    // echo "cant de tramos ponderados = ".count($tramosRankinged)."\n";
+
+    // // obtenemos la cantidad de usuarios distintos
+    // $userTotal = $this->getDistinctUserBySetTrips($arrayIds);
+    // // echo "cant de usuarios distintos(nuevo): ".$userTotal."\n";
+    //
+    // // obtenemos la frec min y max del cjto de recorridos
+    // $frequency = $this->getFreqMinMaxBySetTrips($arrayIds);
+    // $min_frec = $frequency[0];
+    // $max_frec = $frequency[1];
+    //
+    // // echo "Frec min (nuevo): ".$min_frec." - max (nuevo): ".$max_frec;
+    //
+    // // vamos asignando la ponderacion a los tramos interseccion y creando los trayectos
+    // // con sus datos para devolverlos desde un servicio
+    // $tramosRankinged = array();
+    // $idTramosRankinged = 1;
+    // foreach ($tramosInterseccion as $tramo) {
+    //   // el this lo usamos para llamar una funcion privada
+    //   $peso = $this->ponderacion($min_frec, $max_frec, $userTotal, $tramo->frequency,$tramo->idu);
+    //   // creamos el tramo con los datos correspondientes
+    //   $auxTramo = new \stdClass();
+    //   $auxTramo->id = $idTramosRankinged;
+    //   $auxTramo->geom = $tramo->tramo;
+    //   $auxTramo->ranking = $peso;
+    //   $auxTramo->frequency = $tramo->frequency;
+    //   $auxTramo->density = $tramo->idu;
+    //   // agregamos el tramo a la lista que se va a devolver
+    //   array_push($tramosRankinged,$auxTramo);
+    //   $idTramosRankinged += 1;
+    //   // echo"PESO ponderacion: ".$peso."\n";
+    // }
+    // // echo "cant de tramos ponderados = ".count($tramosRankinged)."\n";
 
     return $tramosRankinged;
   }
@@ -356,9 +401,10 @@ class RankingTrips{
   private function getTramosRankngedBySetTrips($idTrips){
     // $rangoId = "(4,5,6,7,8)";
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango de ids(interseccion)): ".$rangoId."\n";
+    // echo "rango de ids(interseccion)): ".$rangoId."\n";
     // obtenemos los tramos interseccion con su frecuencia y densidad, puntos de inicio y fin
-    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+    // $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsText(tramos.geomInter) as tramo,
+    $query = "SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, ST_AsGeoJSON(tramos.geomInter) as tramo,
               		ST_X(ST_StartPoint(tramos.geomInter :: geometry)) as lonIni,ST_Y(ST_StartPoint(tramos.geomInter :: geometry)) as latIni,ST_X(ST_EndPoint(tramos.geomInter :: geometry)) as lonFin,ST_Y(ST_EndPoint(tramos.geomInter :: geometry)) as latFin
               FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
               	FROM trips t
@@ -451,7 +497,7 @@ class RankingTrips{
 
   private function getDistinctUserBySetTrips($idTrips){
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango(UserDist): ".$rangoId."\n";
+    // echo "rango(UserDist): ".$rangoId."\n";
     // cant de usuarios obtenidos de la DB
     $query = "SELECT count(t.id) as cantUser
               FROM trips t
@@ -537,7 +583,7 @@ class RankingTrips{
 
   private function getFreqMinMaxBySetTrips($idTrips){
     $rangoId = $this->getRangoId($idTrips);
-    echo "rango(freq): ".$rangoId."\n";
+    // echo "rango(freq): ".$rangoId."\n";
     $query = "SELECT min((tramosRanking.frequency):: int) as minFrec, max((tramosRanking.frequency):: int) as maxFrec
               FROM(SELECT count(trips.idUser) as idU, SUM((trips.frec)::int) as frequency, tramos.geomInter as tramo
                 FROM (SELECT t.user as idUser, t.frequency as frec, t.geom as geom
@@ -610,7 +656,12 @@ class RankingTrips{
   // pondera un tramo a partir de un cjto de datos analizados
   private function ponderacion($frecMin, $frecMax, $totalUser, $frec, $densidad){
     // factodr de frecuencia
+    if($frecMax==$frecMin){
+      $facFrec =1;
+    }
+    else{
     $facFrec = ($frec - $frecMin)/($frecMax - $frecMin);
+    }
     // factor de densidad
     $facDensidad = $densidad/$totalUser;
     $peso = intval(70*$facFrec + 30*$facDensidad);
@@ -634,6 +685,9 @@ class RankingTrips{
       // echo "Dato de array recibido: ".($idTrips[$i])."\n";
       // echo "Rdo rango: ".$rangoId."\n";
       $ultimoId = $i;
+    }
+    if(count($idTrips) == 1){
+      $ultimoId = -1;
     }
     // agregamos el ultimo dato al rango
     $rangoId .= $idTrips[$ultimoId + 1].")";

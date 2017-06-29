@@ -9,10 +9,11 @@
             'srvLayers',
             'dataServer',
             'srvViewTrip',
+            'srvModelTrip',
             MapTripController
         ]);
 
-    function MapTripController(vm, creatorMap, srvLayers, dataServer, srvViewTrip) {
+    function MapTripController(vm, creatorMap, srvLayers, dataServer, srvViewTrip,srvModelTrip) {
         // ********************************** VARIABLES PUBLICAS ************************
         // Mapa
         vm.map = creatorMap.getMap();
@@ -60,18 +61,22 @@
 
         // ****************************** FUNCIONES PRIVADAS ****************************
         function findAllTrips() {
+          if(!srvModelTrip.isTripsWanted()){
             dataServer.getTrips()
                 .then(function(data) {
                     // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
                     vm.tripsJson = data;
                     vm.totalItems = vm.tripsJson.length;
-                    console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data);
+                    srvModelTrip.setTripsWanted(true);
+                    console.log("Datos recuperados TRIPS(privado) con EXITO! = " + data.length);
                     // proceso y generacion de capa de recorridos
-                    generateTrips();
+
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS");
                 })
+          }
+
         }
 
         function generateTrips() {
@@ -80,6 +85,7 @@
         }
 
         // ************************ Inicializacion de datos *****************************
+        generateTrips();
         findAllTrips();
 
     } // fin Constructor

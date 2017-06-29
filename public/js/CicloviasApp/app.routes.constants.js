@@ -8,5 +8,6 @@
         MAP_VIEW: 'js/CicloviasApp/components/map/view/mapView.html',
         HOME_VIEW: 'js/CicloviasApp/components/home/homeView.html',
         DASHBOARD_VIEW: 'js/CicloviasApp/components/dashboard/dashboardView.html'
+        SETTING_VIEW: 'js/CicloviasApp/components/setting/settingView.html'
     });
 })()

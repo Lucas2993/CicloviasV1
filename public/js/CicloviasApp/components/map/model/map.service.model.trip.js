@@ -10,6 +10,7 @@
 
         var tripJson = [];
         var tripLayer = null;
+        var tripsWanted = false;
 
         var service = {
             getTrips: getTrips,
@@ -17,7 +18,10 @@
             getTripsLayer: getTripsLayer,
             setTripsLayer: setTripsLayer,
             filterTrips: filterTrips,
-            getTrip: getTrip
+            getTrip: getTrip,
+            isTripsWanted: isTripsWanted,
+            setTripsWanted: setTripsWanted,
+
         };
 
         return service;
@@ -54,6 +58,15 @@
             console.log("Cant de centralidades ANTES de borrar: "+tripJson.length);
             tripJson = tripJson.filter((item) => item.id !== id);
             console.log("Cant de centralidades DESPUES de borrar: "+tripJson.length);
+        }
+
+        function isTripsWanted() {
+          return tripsWanted;
+        }
+
+        // Verdadero cuando los recorridos ya fueron buscados en el servidor
+        function setTripsWanted( value ){
+          tripsWanted = value;
         }
     }
 

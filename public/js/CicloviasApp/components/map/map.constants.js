@@ -10,6 +10,7 @@
         JOURNEY: 'api/journey',
         ZONE: 'api/zone',
         DASHBOARD: 'api/dashboard'
+        ROAD: 'api/road',
     })
     .constant('propiertiesMap',{
         PROJECTION: 'EPSG:4326',

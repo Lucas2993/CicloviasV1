@@ -40,10 +40,13 @@
         vm.openMenuTripFinder = false;
         // Modelo para usar con el checkbox (es necesario declararlo asi).
         vm.selectTripCloseToPoint = {
-            checkbox: true
+            checkbox: false
         }
         // Indica si la capa de recorridos cercanos a un punto esta creada.
         vm.isPointCreated = false;
+        vm.pointSelected = false;
+        // determina si hay recorridos para mostrar en el mapa
+        vm.existTripsToShow = false;
 
         // ************************DECLARACION DE FUNCIONES PUBLICAS ********************
         // Este metodo se encarga de obtener todos los recorridos cercanos a un
@@ -70,10 +73,8 @@
         // mapa, realiza una consulta por los recorridos mas cercanos al punto.
         function getTripsCloseToSelectedPoint() {
             console.log("isPointCreated : " + vm.isPointCreated);
-            console.log("vm.selectTripCloseToPoint.checkbox : " + vm.selectTripCloseToPoint.checkbox);
             // Si la capa ya fue creada anteriormente se la elimina para poder crear una nueva actualizada.
             if (vm.isPointCreated) {
-                // vm.map.removeLayer(vm.layerTripsCloseToPoint);
                 vm.layerTripsCloseToPoint.getSource().clear();
                 findTripsCloseToSelectedPoint();
             }
@@ -99,7 +100,13 @@
 
         // Elimina todos los recorridos de la capa de recorridos cercanos.
         function resetLayerCloseToPoint() {
+            temporalLayer.getSource().clear();
             vm.layerTripsCloseToPoint.getSource().clear();
+            vm.selectedPoint.longitude = "";
+            vm.selectedPoint.latitude = "";
+            vm.selectTripCloseToPoint.checkbox = false;
+            vm.existTripsToShow = false;
+            vm.isPointCreated = false;
         }
 
         // *******************************FUNCIONES PRIVADAS ****************************
@@ -110,6 +117,10 @@
             dataServer.getTripsCloseToPoint(vm.selectedPoint)
                 .then(function(data) {
                     vm.tripsclosetopointJson = data;
+                    console.log("datos obtenidos: "+vm.tripsclosetopointJson.length);
+                    if(vm.tripsclosetopointJson.length > 0){
+                        vm.existTripsToShow = true;
+                    }
                     console.log("Datos recuperados prom TRIPS cercanos a un punto con EXITO! = " + data);
                     viewTripsCloseToPoint();
                 })
@@ -150,7 +161,9 @@
                 enableEventClick();
             } else {
                 // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
-                temporalLayer.getSource().clear();
+                console.log("Se limpio la capa de trip FINDER.\n");
+                resetLayerCloseToPoint();
+                adminMenu.setActiveTripFinder(false);
             }
         });
 
@@ -158,7 +171,6 @@
         function enableEventClick() {
             adminMenu.disableAll();
             adminMenu.setActiveTripFinder(true);
-            console.log('Entro a actualizacion de eventos TRIPS_FINDER');
         }
         // ************************ Inicializacion de datos *****************************
         generateLayer();

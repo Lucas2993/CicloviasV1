@@ -10,6 +10,7 @@
 
         var zoneJson = [];
         var zoneLayer = null;
+        var zonesWanted = false;
 
         var service = {
             getZones: getZones,
@@ -17,7 +18,9 @@
             getZonesLayer: getZonesLayer,
             setZonesLayer: setZonesLayer,
             filterZone: filterZone,
-            getZone: getZone
+            getZone: getZone,
+            isZonesWanted: isZonesWanted,
+            setZonesWanted: setZonesWanted
         };
 
         return service;
@@ -56,6 +59,14 @@
             console.log("Cant de zonas DESPUES de borrar: "+zoneJson.length);
         }
 
+        function isZonesWanted(){
+          return zonesWanted;
+        }
+
+        // Setea en verdadero cuando las zonas ya fueron buscadas en el servidor.
+        function setZonesWanted( value ){
+          zonesWanted = value
+        }
     }
 
 })()

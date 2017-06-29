@@ -11,14 +11,16 @@
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ************************* VARIABLES PRIVADAS *********************************
+        var roads = false;
         var centralities = false;
         var editCentralities = false;
         var tripFinder = false;
         var tripsRanking = false;
         var tripsToDistance = false;
-        var journey = false;
+        var journeys = false;
         var tripsToCentrality = false;
         var tripsCiclovias = false;
+        var tripsBetweenZones = false;
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -26,19 +28,25 @@
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ******************** Funciones PUBLICAS del servicio *************************
         var service = {
+            activeRoads: activeRoads,
             activeCentralities: activeCentralities,
+            activeJourneys: activeJourneys,
             activeEditCentralities: activeEditCentralities,
             activeTripFinder: activeTripFinder,
             activeTripsRanking: activeTripsRanking,
             activeTripsToDistance: activeTripsToDistance,
             activeTripsCiclovias: activeTripsCiclovias,
+            activeTripsBetweenZones: activeTripsBetweenZones,
             activeTripsToCentrality: activeTripsToCentrality,
+            setActiveRoads: setActiveRoads,
             setActiveCentralities: setActiveCentralities,
+            setActiveJourneys: setActiveJourneys,
             setActiveEditCentralities: setActiveEditCentralities,
             setActiveTripFinder: setActiveTripFinder,
             setActiveTripsRanking: setActiveTripsRanking,
             setActiveTripsToDistance: setActiveTripsToDistance,
             setActiveTripsCiclovias: setActiveTripsCiclovias,
+            setActiveTripsBetweenZones: setActiveTripsBetweenZones,
             setActiveTripsToCentrality: setActiveTripsToCentrality,
             disableAll: disableAll
         };
@@ -46,11 +54,19 @@
 
         // ******************* GETTERS *******************
         // ***********************************************
+        function activeRoads() {
+            return roads;
+        };
+
         function activeCentralities() {
             return centralities;
         };
 
-        function activeEditCentralities(){
+        function activeJourneys() {
+            return journeys;
+        };
+
+        function activeEditCentralities() {
             return editCentralities;
         }
 
@@ -58,29 +74,41 @@
             return tripFinder;
         };
 
-        function activeTripsRanking(){
+        function activeTripsRanking() {
             return tripsRanking;
         }
 
-        function activeTripsToDistance(){
+        function activeTripsToDistance() {
             return tripsToDistance;
         }
 
-        function activeTripsToCentrality(){
+        function activeTripsToCentrality() {
             return tripsToCentrality;
         }
-        function activeTripsCiclovias(){
+
+        function activeTripsCiclovias() {
             return tripsCiclovias;
         }
 
+        function activeTripsBetweenZones() {
+            return tripsBetweenZones;
+        }
 
         // ******************* SETTERS *******************
         // ***********************************************
+        function setActiveJourneys(activated) {
+            journeys = activated;
+        };
+
+        function setActiveRoads(activated) {
+            roads = activated;
+        };
+
         function setActiveCentralities(activated) {
             centralities = activated;
         };
 
-        function setActiveEditCentralities(activated){
+        function setActiveEditCentralities(activated) {
             editCentralities = activated;
         }
 
@@ -88,25 +116,30 @@
             tripFinder = activated;
         };
 
-        function setActiveTripsRanking(activated){
+        function setActiveTripsRanking(activated) {
             tripsRanking = activated;
         }
 
-        function setActiveTripsToDistance(activated){
+        function setActiveTripsToDistance(activated) {
             tripsToDistance = activated;
         }
 
-        function setActiveTripsToCentrality(activated){
+        function setActiveTripsToCentrality(activated) {
             tripsToCentrality = activated;
         }
-        function setActiveTripsCiclovias(activated){
+
+        function setActiveTripsCiclovias(activated) {
             tripsCiclovias = activated;
         }
 
+        function setActiveTripsBetweenZones(activated) {
+            tripsBetweenZones = activated;
+        }
 
         // ***********************************************
         // ************* OTRAS FUNCIONES *****************
-        function disableAll(){
+        function disableAll() {
+            setActiveJourneys(false);
             setActiveCentralities(false);
             setActiveEditCentralities(false);
             setActiveTripFinder(false);
@@ -114,6 +147,8 @@
             setActiveTripsToDistance(false);
             setActiveTripsToCentrality(false);
             setActiveTripsCiclovias(false);
+            setActiveTripsBetweenZones(false);
+            setActiveRoads(false);
         }
 
     }

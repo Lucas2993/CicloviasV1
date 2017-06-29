@@ -64,11 +64,10 @@
 
     <!-- Controlador de Eventos -->
     <script src="{{ URL::asset('js/CicloviasApp/components/events/events.createPoint.js') }}"></script>
-    <!-- <script src="{{ URL::asset('js/CicloviasApp/components/map/mapTripByDistanceController.js') }}"></script> -->
-    <script src="{{ URL::asset('js/CicloviasApp/components/map/map.trip.ciclovias.js') }}"></script>
 
     <!-- Controladores de mapa -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripByCentralityController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapRoadController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapCentralityController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapCentralityEditController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapJourneyController.js') }}"></script>
@@ -78,18 +77,26 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripRankingController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapZoneController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripBetweenZoneController.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/controller/mapTripsCicloviasByZoneController.js') }}"></script>
 
     <!-- Modelo -->
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.point.of.linestring.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.road.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.trip.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.cicloviasByZone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.journey.js') }}"></script>
+
 
     <!-- Vista -->
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.road.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.feature.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.trip.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.journey.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.point.of.linestring.js') }}"></script>
 
     <!-- Herramientas de dibujo -->
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>
@@ -102,6 +109,7 @@
     <!-- Administradores -->
     <script src="{{ URL::asset('js/CicloviasApp/components/layers/layers.administrator.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/menu/menu.administrator.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/menu/menu.observer.cicloviasByZone.js') }}"></script>
 
     <!-- Constantes de la aplicacion -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>
