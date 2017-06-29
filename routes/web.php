@@ -46,6 +46,16 @@ Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destinati
 
 Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');
 
+Route::get('api/dashboard/amountTrips', 'TripController@getAmountTrips');
+
+Route::get('api/dashboard/rankingCentralitiesByTrips', 'CentralityController@rankingCentralitiesByTrips');
+
+Route::get('api/dashboard/centralitiesByZone', 'CentralityController@countCentralitiesByZone');
+
+Route::get('api/dashboard/tripsByLength', 'TripController@getTripsByLength');
+
+Route::get('api/dashboard/rankingZoneCrossTrips', 'ZoneController@getRankingZoneCrossTrips');
+
 Route::resource('api/road', 'RoadController',['except' => ['create', 'edit', 'store', 'update']]);
 
 Route::get('api/journey/getSimilarTripsJourney/{$long1}/{$lat1}/{$long2}/{$lat2}', 'JourneyController@getSimilarTripsJourney');

@@ -30,6 +30,9 @@
     <script src="{{ URL::asset('js/assets/libs/bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.min.js') }}"></script>
     <script src="{{ URL::asset('js/assets/libs/ol3-popup.js') }}"></script>
 
+    <!--Angular Chart -->
+    <script src="{{ URL::asset('js/assets/libs/bower_components/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{ URL::asset('js/assets/libs/bower_components/angular-chart.js/dist/angular-chart.min.js') }}"></script>
 
     <!-- UI-Bootstrap -->
     <script src="{{ URL::asset('js/assets/libs/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
@@ -50,6 +53,8 @@
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarModule.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/navigationbar/navigationbarController.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/shared/pagefooter/pagefooterModule.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/dashboard/dashboardModule.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/dashboard/dashboardController.js') }}"></script>
 
     <!-- Modulo de mapa -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.module.js') }}"></script>
@@ -114,6 +119,6 @@
   <body>
     <navigation></navigation>
     <div class="" ng-view=""></div>
-    <footer></footer>
+    <footer style="position: fixed;"></footer>
   </body>
 </html>

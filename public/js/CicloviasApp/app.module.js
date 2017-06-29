@@ -12,7 +12,8 @@
         'navigationbar',
         'pagefooter',
         'routes',
-        'mapModule'
+        'mapModule',
+        'dashboardModule'
     ]).config(['$interpolateProvider', function($interpolateProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]');

@@ -6,6 +6,7 @@ use Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use Phaza\LaravelPostgis\Geometries\Point;
 
@@ -146,3 +147,35 @@ class CentralityController extends Controller
         return $typesCentralitiesResults;
     }
 }
+
+    /*
+    * Función destinada a la genereción de datos para el dashboard del sistema.
+    * Devuelve la cantidades de centralidades por zona.
+    */
+    public function countCentralitiesByZone(){
+      $query = 'select t1.id as id_zone, t1.name as zone, count(t2.id) as centralidades
+                from zones t1 left join centralities t2 on ST_Contains(t1.geom::geometry, t2.geom::geometry)
+                group by t1.id, t1.name';
+
+      $result = DB::select($query);
+
+      return $result;
+    }
+
+    /*
+    * Función destinada a la genereción de datos para el dashboard del sistema.
+    * Devuelve ranking de las diez primeras centralidades según la cantidad de recorridos que pasan a menos de 300 mts.
+    */
+    public function rankingCentralitiesByTrips(){
+      $query = 'select t1.id as id_centrality, t1.name as centrality, count(t2.id) as cant_trips
+                from centralities t1, trips t2
+                where ST_DWithin(t1.geom, t2.geom, 300)
+                group by t1.id, t1.name
+                order by count(t2.id) desc
+                limit 10';
+
+      $result = DB::select($query);
+
+      return $result;
+    }
+}//CentralityController

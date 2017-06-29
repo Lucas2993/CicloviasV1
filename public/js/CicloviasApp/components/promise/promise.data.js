@@ -30,8 +30,8 @@
             saveCentrality: saveCentrality,
             updateCentrality: updateCentrality,
             deleteCentrality: deleteCentrality,
+            getDataDashboard: getDataDashboard,
             saveTrip : saveTrip,
-
         };
         return service;
 
@@ -331,5 +331,22 @@
             );
             return promise;
         };
+
+        function getDataDashboard(servRest){
+          var defered = $q.defer();
+          var promise = defered.promise;
+
+          $http({
+            method: 'GET',
+            url: path.DASHBOARD + servRest
+          }).then( function successCallback(res){
+              defered.resolve(res.data);
+            },
+            function errorCallback(err){
+              defered.reject(err);
+            }
+          );
+          return promise;
+        }
     }
 })()
