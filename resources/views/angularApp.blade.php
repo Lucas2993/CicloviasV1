@@ -119,6 +119,6 @@
   <body>
     <navigation></navigation>
     <div class="" ng-view=""></div>
-    <footer></footer>
+    <footer style="position: fixed;"></footer>
   </body>
 </html>
