@@ -12,6 +12,7 @@
             viewZone: viewZone,
             addAll: addAll,
             removeZone: removeZone,
+            removeAll: removeAll,
             addZone: addZone,
             toogleAllZones : toogleAllZones
         };
@@ -47,6 +48,14 @@
         function addZone(zoneJson, layer, color ) {
           var style = creatorStyle.getStylePolygon(color, creatorStyle.getStyleText(zoneJson.name));
           srvViewFeature.addFeature(zoneJson,layer,style);
+        }
+
+        // borra todas las zonas de una capa
+        function removeAll(zonesJson, layer) {
+            var style;
+            for (var i = 0; i < zonesJson.length; i++) {
+                srvViewFeature.removeFeature(zonesJson[i], layer);
+            }
         }
 
         function toogleAllZones(isSelectedAllFeatures, featuresJson , layer ){

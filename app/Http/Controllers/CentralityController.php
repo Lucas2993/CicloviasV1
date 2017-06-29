@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use Phaza\LaravelPostgis\Geometries\Point;
 
@@ -37,6 +38,7 @@ class CentralityController extends Controller
     public function store(Request $request){
         $v = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
+                'type' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'latitude' => 'required|numeric|min:-85|max:85',
                 'longitude' => 'required|numeric|min:-180|max:180',
@@ -57,6 +59,7 @@ class CentralityController extends Controller
 
         $centrality = new Centrality();
         $centrality->name = $params['name'];
+        $centrality->type = $params['type'];
         $centrality->location = $params['location'];
 
         $point = new Point($params['latitude'], $params['longitude']);
@@ -87,6 +90,7 @@ class CentralityController extends Controller
     public function update($id, Request $request){
         $v = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
+                'type' => 'required|string|max:255',
                 'location' => 'required|string|max:255',
                 'latitude' => 'required|numeric|min:-85|max:85',
                 'longitude' => 'required|numeric|min:-180|max:180',
@@ -106,6 +110,7 @@ class CentralityController extends Controller
         $centrality = Centrality::find($id);
 
         $centrality->name = $request->input('name');
+        $centrality->type = $request->input('type');
         $centrality->location = $request->input('location');
         $centrality->geom = new Point($request->input('latitude'), $request->input('longitude'));
         $centrality->save();
@@ -124,4 +129,35 @@ class CentralityController extends Controller
         Centrality::destroy($id);
         return $centrality;
     }
-}
+
+    /*
+    * Función destinada a la genereción de datos para el dashboard del sistema.
+    * Devuelve la cantidades de centralidades por zona.
+    */
+    public function countCentralitiesByZone(){
+      $query = 'select t1.id as id_zone, t1.name as zone, count(t2.id) as centralidades
+                from zones t1 left join centralities t2 on ST_Contains(t1.geom::geometry, t2.geom::geometry)
+                group by t1.id, t1.name';
+
+      $result = DB::select($query);
+
+      return $result;
+    }
+
+    /*
+    * Función destinada a la genereción de datos para el dashboard del sistema.
+    * Devuelve ranking de las diez primeras centralidades según la cantidad de recorridos que pasan a menos de 300 mts.
+    */
+    public function rankingCentralitiesByTrips(){
+      $query = 'select t1.id as id_centrality, t1.name as centrality, count(t2.id) as cant_trips
+                from centralities t1, trips t2
+                where ST_DWithin(t1.geom, t2.geom, 300)
+                group by t1.id, t1.name
+                order by count(t2.id) desc
+                limit 10';
+
+      $result = DB::select($query);
+
+      return $result;
+    }
+}//CentralityController

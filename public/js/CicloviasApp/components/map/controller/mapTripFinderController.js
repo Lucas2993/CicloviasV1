@@ -163,6 +163,7 @@
                 // antes de pasar a otro menu limpiamos los puntos graficados en el mapa
                 console.log("Se limpio la capa de trip FINDER.\n");
                 resetLayerCloseToPoint();
+                adminMenu.setActiveTripFinder(false);
             }
         });
 

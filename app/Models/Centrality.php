@@ -21,7 +21,7 @@ class Centrality extends Model{
     *
     */
     protected $fillable = [
-        'name', 'location'
+        'name', 'type', 'location'
     ];
 
     protected $postgisFields = [

@@ -99,7 +99,7 @@
             // vm.zoneslayer.getSource().clear();
 
             vm.tripLayer.getSource().clear();
-
+            vm.zoneslayer.getSource().clear();
             vm.selectedOrigin = undefined;
             vm.selectedDestination = undefined;
             vm.existTripsToShow = false;
@@ -112,6 +112,7 @@
 
         // Muesta la zona de origen en el mapa :Publico
         function selectZoneOrigin() {
+            console.log("origen: "+vm.selectedOrigin+" - destino: "+vm.selectedDestination);
             selectZone(vm.selectedOrigin, vm.selectedDestination, 'green', 'red');
         }
         // Muesta la zona de destino en el mapa :Publico
