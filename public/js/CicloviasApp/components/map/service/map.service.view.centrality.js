@@ -18,7 +18,7 @@
 
         // Este metodo hace un toogle de una centralidad
         function viewCentrality(centralityJson, layer) {
-            
+
             srvViewFeature.viewFeature(centralityJson, layer,creatorStyle.getStylePoint() );
         }
 
