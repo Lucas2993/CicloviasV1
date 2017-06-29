@@ -77,6 +77,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.centrality.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.trip.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.zone.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.cicloviasByZone.js') }}"></script>
 
     <!-- Vista -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.centrality.js') }}"></script>
@@ -96,6 +97,7 @@
     <!-- Administradores -->
     <script src="{{ URL::asset('js/CicloviasApp/components/layers/layers.administrator.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/menu/menu.administrator.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/menu/menu.observer.cicloviasByZone.js') }}"></script>
 
     <!-- Constantes de la aplicacion -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/map.constants.js') }}"></script>

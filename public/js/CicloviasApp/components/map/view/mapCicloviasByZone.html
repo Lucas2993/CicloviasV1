@@ -1,24 +1,34 @@
 <!-- menu de opciones de trayectos -->
 <div class="panel-default"  ng-controller="tripsCicloviasByZoneController">
+<!-- <div class="panel-default"  ng-controller="tripsCicloviasByZoneObserver"> -->
     <div uib-accordion-group class="panel-primary" heading="Ciclovias por Zona" is-open="openMenuTripsCiclovia">
-      <form>
-        <div class="text-center form-group">
-            <label>
-              <input type="checkbox" ng-disabled="" ng-model="algo" ng-change="viewLayerZones()" > Mostrar todas las zonas
-            </label>
-            <div class="text-center form-group" ng-hide="selectedZone.name">
-                <label>Seleccione una zona...</label>
+        <div class="panel-body" ng-controller="tripsCicloviasByZoneController">
+          <form>
+            <div class="text-center form-group">
+                <div class="text-center form-group">
+                    <label>Ingrese el nombre de la zona o seleccionela desde el mapa (clickeando el boton verde)</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" ng-model="zoneSelected" placeholder="Zona" uib-typeahead="zone as zone.name for zone in getZones() | filter:{name:$viewValue} | limitTo:8" typeahead-on-select="viewSelectZone()" class="form-control">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" ng-hide="" uib-tooltip="Seleccionar zona desde el mapa" ng-disabled="" ng-click="selectZoneFromMap()">
+                            <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div class="">
+                    <label><input type="checkbox" ng-disabled="!isZoneSelected" ng-model="viewZone" ng-change="viewZoneSelected()" > Ocultar zona seleccionada </label>
+                </div>
+                <!-- <div class="">
+                    <label><input type="checkbox" ng-disabled="!journeisFounded" ng-model="viewJournies" ng-change="viewJourniesFounded()" > Ocultar trayectos recuperados </label>
+                </div> -->
             </div>
-            <div class="text-center form-group" ng-show="selectedZone.name">
-                <label>Zona seleccionada:</label>
-                <p>Nombre: [[selectedZone.name == '' ? 'No seleccionado' : selectedZone.name]]</p>
-                <label><input type="checkbox" ng-model="isZoneSelected" ng-change="viewZoneSelected()" > Ver zona seleccionada </label>
+            <div class="text-center btn-group-sm">
+              <button class="btn btn-primary" ng-disabled="" ng-click="findTripsByZone()">Buscar trayectos</button>
+              <button class="btn btn-primary" ng-click="resetLayer()">Limpiar</button>
             </div>
+          </form>
         </div>
-        <div class="text-center btn-group-sm">
-          <button class="btn btn-primary" ng-disabled="" ng-click="findTripsByZone()">Buscar trayectos</button>
-          <button class="btn btn-primary" ng-click="resetLayer()">Limpiar</button>
-        </div>
-      </form>
     </div>
 </div>

@@ -12,12 +12,13 @@
             'srvViewZone',
             'srvModelZone',
             'srvViewTrip',
+            'srvModelCicloviasByZone',
             'adminLayers',
             'adminMenu',
             TripsCicloviasController
         ]);
 
-    function TripsCicloviasController(vm, creatorMap, srvLayers, dataServer, srvViewZone, srvModelZone, srvViewTrip, adminLayers, adminMenu) {
+    function TripsCicloviasController(vm, creatorMap, srvLayers, dataServer, srvViewZone, srvModelZone, srvViewTrip, srvModelCicloviasByZone, adminLayers, adminMenu) {
 
         // ********************* declaracion de variables y metodos *********************
 
@@ -27,28 +28,26 @@
         // datos del servidor
         vm.tripsCicloviasJson = [];
         // capa de recorridos
-        vm.layerTripsByZone;
+        vm.layerTripsCiclovias;
+        // vm.layerTripsCicloviasLocal;
         // zonas recuperadas de la DB
         vm.zonesJson;
         // zone seleccionada
-        // vm.selectedZone = undefined;
-        vm.selectedZone = {
-            id: 0,
-            name: ''
-        }
-        //
-        vm.isZoneSelected = false;
+        vm.zoneSelected = "";
+        var zoneAdded = false;
+        // vm.selectedZone = {
+        //     id: 0,
+        //     name: ''
+        // }
 
         // ===============>>>>>> FLAGS <<<<<===============
         // indica si el menu se encuentra abierto o cerrado
         vm.openMenuTripsCiclovia = false;
         vm.isZoneSelected = false;
+        vm.journiesFounded = false;
 
         // **************************** FUNCIONES ****************************
         // permite la visualizacion de la capa de tramos ponderados (segun el estado del checkbox)
-        vm.viewLayerTripsCiclovia = viewLayerTripsCiclovia;
-        // permite la visualizacion de la capa de zonas
-        vm.viewLayerZones = viewLayerZones;
         vm.viewZoneSelected = viewZoneSelected;
 
         vm.findTripsByZone = findTripsByZone;
@@ -56,7 +55,6 @@
         vm.selectZone = selectZone;
         vm.resetLayer = resetLayer;
 
-        // vm.findTripsRanking = findTripsRanking;
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -64,8 +62,6 @@
         // ********************************** PRIVADO ***********************************
         // MENU: deshabilita los eventos de los demas menues y habilita los correspondientes a este
         var enableEventClick;
-        // recupera los datos del servidor y los guarda en una variable
-        var findTripsCiclovias;
         // variable para visualizar un solo popup en el mapa
         var popup = null;
         // refleja la visualizacion de las zonas
@@ -77,11 +73,13 @@
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // ************************ Descripcion de las funciones ************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // recupera todas las zonas del sistema
+        vm.getZones = getZones;
+        vm.viewSelectZone = viewSelectZone;
+        vm.selectZoneFromMap = selectZoneFromMap;
+        vm.viewJourniesFounded = viewJourniesFounded;
 
         // ********************** PUBLICAS **********************
-        function viewLayerTripsCiclovia() {
-            adminLayers.viewLayer(vm.layerTripsByZone);
-        }
 
         // permite la visualizacion o no de una zona
         function selectZone(zone) {
@@ -90,23 +88,88 @@
 
         function viewZoneSelected(){
             // buscar los datos json de la zona
-            var zone = getZoneJsonSelected(vm.selectedZone.id);
-            console.log(zone);
-            srvViewZone.viewZone(zone, vm.zonesLayer);
+            if(zoneAdded){
+                srvViewZone.removeZone(vm.zoneSelected, vm.zoneslayer);
+                zoneAdded = false;
+            }
+            else{
+                srvViewZone.addZone(vm.zoneSelected, vm.zoneslayer, "green");
+                zoneAdded = true;
+            }
         }
 
-        // muestra u oculta la visualizacion de todas las zonas
-        function viewLayerZones(){
-            if (allZonesShow) {
-                allZonesShow = false;
+        function selectZoneFromMap(){
+            // mostramos todas las zonas
+            allZonesShow = true;
+            // si ya se habia seleccionado una zona se borra y se setea el flag correspondientes
+            if(vm.isZoneSelected){
+                srvViewZone.removeZone(vm.zoneSelected, vm.zoneslayer);
                 vm.isZoneSelected = false;
-                vm.zonesLayer.getSource().clear();
-            } else {
-                allZonesShow = true;
-                vm.isZoneSelected = true;
-                srvViewZone.addZones(vm.zonesJson, vm.zonesLayer);
             }
-            // console.log("Cant de zonas: "+srvModelZone.getZones().length);
+            // se muestran todas las zonas
+            srvViewZone.addAll(getZones(), vm.zonesLayer);
+            // controlamos la seleccion de una zona
+            vm.map.on('click', function(evt) {
+                // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
+                if(adminMenu.activeTripsCiclovias()){
+                    console.log("Se hizo click en el mapa.");
+                    // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
+                    vm.callbackZonesOnClick(evt.pixel);
+                    if(vm.zoneSelected.id == 0){
+                        console.log("No se selecciona ninguna zona");
+                    }
+                }
+            });
+        }
+
+        function viewJourniesFounded(){
+            adminLayers.viewLayer(vm.layerTripsCiclovias);
+            adminLayers.viewLayer(srvModelCicloviasByZone.getCicloviasByZoneLayer());
+        }
+
+        // Modificacion y borrado de una centralidad.
+        vm.callbackZonesOnClick = function(pixel) {
+            // Determina que elemento se clickeo (indicador de centralidad).
+            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+                // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
+                vm.searchZone(feature);
+            })
+        }
+
+        // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
+        vm.searchZone = function(zone) {
+            if(!vm.isZoneSelected){
+                vm.zoneSelected = srvModelZone.getZone(zone.getId());
+                vm.isZoneSelected = true;
+                srvViewZone.removeAll(getZones(), vm.zonesLayer);
+                srvViewZone.addZone(vm.zoneSelected, vm.zoneslayer, 'green');
+                // srvViewZone.addZone(vm.selectedZone, vm.zoneslayer, 'green');
+                zoneAdded = true;
+                // console.log("Zona seleccionada 1: "+vm.selectedZone.name+"isSelect:"+vm.isZoneSelected);
+            }
+            // se refrescan los datos de la zona en la vista
+            vm.$apply();
+        }
+
+        // metodo utilizado por el typeahead
+        function getZones() {
+            return srvModelZone.getZones();
+        }
+
+        function viewSelectZone() {
+            viewSelectedZone(vm.zoneSelected, 'green');
+            console.log("Entro al metodo de arriba\n");
+        }
+
+        // permite la visualizacion de las zona seleccionadas
+        function viewSelectedZone(selectedZone, color) {
+            if(vm.zoneslayer != undefined){
+                vm.zoneslayer.getSource().clear();
+            }
+            srvViewZone.addZone(selectedZone, vm.zoneslayer, color);
+            zoneAdded = true;
+            vm.isZoneSelected = true;
+            console.log("Se agrego la zona al la cap\n");
         }
 
         // // ################## OBSERVADORAS ##################
@@ -126,67 +189,66 @@
         });
 
         // Se captura el evento dentro del mapa.
-        vm.map.on('click', function(evt) {
+        vm.map.on('pointermove', function(evt) {
             // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
-            if(adminMenu.activeTripsCiclovias()){
-                console.log("Se hizo click en el mapa.");
-                // Este metodo se encarga de detectar si se hace click en un indicador de una centralidad.
-                vm.callbackZonesOnClick(evt.pixel);
-                if(vm.selectedZone.id == 0){
-                    console.log("No se selecciona ninguna zona");
+            if (adminMenu.activeTripsCiclovias()) {
+                // buscamos si se clickeo en un marcador
+                var featureFound = vm.map.forEachFeatureAtPixel(evt.pixel,
+                    function(feature) {
+                        return feature;
+                    });
+
+                // si se clickea en un marcador, se crea y muestra el popup cn el dato
+                if ((featureFound)&&(featureFound.getGeometry().getType() != 'Polygon')) {
+                    console.log("FEATURE type:");
+                    // console.log(featureFound.getGeometry().getType());
+                    var coordinates = featureFound.getGeometry().getCoordinates();
+                    // console.log(coordinates);
+                    // se borra el popup anterior
+                    if (popup != null) {
+                        popup.container.style.display = 'none';
+                    }
+                    popup = new ol.Overlay.Popup({
+                        positioning: 'center-center',
+                        stopEvent: false,
+                        offset: [0, -5],
+                        autoPan: false
+                        // idFeature: 2
+                    });
+                    vm.map.addOverlay(popup);
+                    // console.log("Entro a mostrar frec.\n");
+                    // console.log(vm.tripsCicloviasJson);
+                    console.log("Entro a mostrar model frec\n");
+                    console.log(srvModelCicloviasByZone.getCicloviasByZone());
+                    // popup.show(evt.coordinate, vm.tripsCicloviasJson[featureFound.getId() - 1].frequency);
+                    popup.show(evt.coordinate, (srvModelCicloviasByZone.getCicloviasByZone())[featureFound.getId() - 1].frequency);
+                    //TODO modificar cuand lea desde el servidor
+                    // console.log("Entro a mostrar frec.\n");
+                    // console.log(vm.tripsCicloviasJson);
                 }
             }
         });
 
-        // Modificacion y borrado de una centralidad.
-        vm.callbackZonesOnClick = function(pixel) {
-            // Determina que elemento se clickeo (indicador de centralidad).
-            vm.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
-                // Se obtienen los datos de coordenadas del indicador y se busca si corresponde a una centralidad.
-                vm.searchZone(feature);
-            })
-        }
+        // ****************************************************************
+        // *************************** PRIVADAS ***************************
 
-        // Se realiza la busqueda de la centralidad a la que pertenece el punto dado.
-        vm.searchZone = function(zone) {
-            vm.selectedZone = srvModelZone.getZone(zone.getId());
-            vm.isZoneSelected = true;
-            // se refrescan los datos de la zona en la vista
-            vm.$apply();
-            console.log("Zona seleccionada: "+vm.selectedZone.name);
-        }
-
-        // ********************** PRIVADAS **********************
-        // Busca todas los recorridos de la BD ************** terminar
-
-        // Busca todas las zonas de la BD
-        function findAllZones() {
-            console.log("Entro a findAllZones()\n");
-            dataServer.getZones()
-                .then(function(data) {
-                    // una vez obtenida la respuesta del servidor realizamos las sigientes acciones
-                    vm.zonesJson = data;
-                    // vm.totalItems = vm.zonesJson.length;
-                    console.log("Datos recuperados prom ZONES con EXITO! = " + data);
-                    srvModelZone.setZones(vm.zonesJson);
-                    srvModelZone.setZonesLayer(vm.zonesLayer);
-                })
-                .catch(function(err) {
-                    console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar las ZONES");
-                })
-        }
-
-        // Modificado por JLDEVIA el 28/05/2017. S.U: Adaptación visual a spatial-data.
         function findTripsByZone() {
-            dataServer.getTripsRankingByZone(vm.selectedZone.id)
+            dataServer.getTripsRankingByZone(vm.zoneSelected.id)
                 .then(function(data) {
                     vm.tripsCicloviasJson = data;
                     console.log("Trips recuperados POSIBLES_CICLOVIAS:");
                     console.log(data);
-                    // proceso y genracion de capa de recorridos
-                    // vm.layerTripsByZone = srvLayers.getLayerTrips(vm.tripsCicloviasJson);
-                    // vm.map.addLayer(vm.layerTripsByZone);
-                    generateTripsByZone();
+                    if(vm.tripsCicloviasJson.length > 0){
+                        // proceso y genracion de capa de recorridos
+                        generateTripsByZone();
+                        vm.journeisFounded = true;
+                    }
+                    else{
+                        console.log("No se encontraron trayectos de la zona.\n");
+                        alert("No se encontraron trayectos de la zona!");
+                    }
+                    // // proceso y genracion de capa de recorridos
+                    // generateTripsByZone();
                 })
                 .catch(function(err) {
                     console.log("ERRRROOORR!!!!!!!!!! ---> Al cargar los TRIPS CICLOVIAS");
@@ -194,23 +256,20 @@
         }
 
         function generateTripsByZone() {
-            vm.layerTripsCiclovias = srvLayers.getLayer(null);
-            vm.map.addLayer(vm.layerTripsCiclovias);
-            // srvViewTrip.viewTrip(vm.tripsCicloviasJson, vm.layerTripsCiclovias);
-            srvViewTrip.addTrips(vm.tripsCicloviasJson, vm.layerTripsCiclovias);
-            console.log("Capa de trayectos ponderados: "+vm.layerTripsCiclovias.getVisible());
-        }
+            // vm.layerTripsCiclovias = srvLayers.getLayer(null);
+            // vm.map.addLayer(vm.layerTripsCiclovias);
+            // srvViewTrip.addTrips(vm.tripsCicloviasJson, vm.layerTripsCiclovias);
 
-        // recupera los datos json de la zona seleccionada
-        function getZoneJsonSelected(idZone){
-            var zoneJson;
-            for (var i = 0; i < vm.zonesJson.length; i++) {
-                if((vm.zonesJson[i]).id == idZone){
-                    console.log("id: "+(vm.zonesJson[i]).id);
-                    zoneJson = vm.zonesJson[i];
-                    return zoneJson;
-                }
-            }
+            console.log("Se genero la capa de TRIP ZONE\n");
+
+            vm.layerTripsCicloviasLocal = srvLayers.getLayer(null);
+            // vm.map.addLayer(vm.layerTripsCicloviasLocal);
+            // srvViewTrip.addTrips(vm.tripsCicloviasJson, vm.layerTripsCicloviasLocal);
+            srvModelCicloviasByZone.setCicloviasByZone(vm.tripsCicloviasJson);
+            srvModelCicloviasByZone.setCicloviasByZoneLayer(vm.layerTripsCicloviasLocal);
+            srvViewTrip.addTrips(srvModelCicloviasByZone.getCicloviasByZone(), srvModelCicloviasByZone.getCicloviasByZoneLayer());
+            vm.map.addLayer(srvModelCicloviasByZone.getCicloviasByZoneLayer());
+            // console.log("Capa de trayectos ponderados: "+vm.layerTripsCiclovias.getVisible());
         }
 
         function enableEventClick(){
@@ -227,16 +286,30 @@
         // resetea los datos del menu
         function resetLayer(){
             allZonesShow = false;
-            // vm.selectedZone = undefined;
-            vm.selectedZone = {
-                id: 0,
-                name: ''
-            }
+            vm.isZoneSelected = false;
+            vm.journeisFounded = false;
+            srvViewZone.removeZone(vm.zoneSelected, vm.zoneslayer);
             vm.zonesLayer.getSource().clear();
-            vm.layerTripsCiclovias.getSource().clear();
+            if(vm.layerTripsCiclovias != undefined){
+                vm.layerTripsCiclovias.getSource().clear();
+            }
+            if(srvModelCicloviasByZone.getCicloviasByZoneLayer()){
+                srvModelCicloviasByZone.getCicloviasByZoneLayer().getSource().clear();
+            }
+            // if (srvModelZone.getZ) {
+            //
+            // }
+            // srvViewZone.removeZone(vm.zoneSelected, vm.zoneslayer);
+            vm.zoneSelected = "";
+            vm.$apply;
+            zoneAdded = false;
+            console.log("Aca m llamo el LIDER\n");
         }
 
-
+        function generateLayerZones(){
+            vm.zoneslayer = srvLayers.getLayer(null);
+            vm.map.addLayer(vm.zoneslayer);
+        }
 
         // ******************************************************************************
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -245,11 +318,13 @@
         // ************************ Inicializacion de datos *****************************
         // ******************************************************************************
         // al crear el controlador ejecutamos esta funcion
-        // findTripsCiclovias();
-        // vm.viewLayerTripsCiclovia();
         createLayerZone(vm.zonesJson);
-        findAllZones();
-        // srvViewZone.addZones(vm.zonesJson, vm.zonesLayer);
+        generateLayerZones();
+
+        console.log("************************ Se creo un controlador ********************************\n");
+
+        // recuperamos la capa unica de ciclovias por zona
+        vm.layerTripsCiclovias = srvModelCicloviasByZone.getCicloviasByZoneLayer();
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     } // fin Constructor

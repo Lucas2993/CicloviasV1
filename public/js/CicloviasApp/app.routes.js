@@ -29,6 +29,9 @@
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW
                                                 })
+                                                .when('/setting', {
+                                                    templateUrl: base_route + path.SETTING_VIEW
+                                                })
                                                 .otherwise({
                                                     redirectTo: '/home'
                                                 });
