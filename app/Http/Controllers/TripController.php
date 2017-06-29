@@ -794,23 +794,23 @@ class TripController extends Controller{
 
     public function getTripsByLength(){
       $query = "select res.*
-                from (select count(*) as cant_trips, '[0-299]' as rango
+                from (select count(*) as cant_trips, '[0-749]' as rango
                       from trips
-                      where ST_Length(geom) < 300
+                      where ST_Length(geom) < 750
                       union
-                      select count(*) as cant_trips, '[300-599]' as rango
+                      select count(*) as cant_trips, '[750-1499]' as rango
                       from trips
-                      where  300 <= ST_Length(geom)
-                      and ST_Length(geom) < 600
+                      where  750 <= ST_Length(geom)
+                      and ST_Length(geom) < 1500
                       union
-                      select count(*) as cant_trips, '[600-899]' as rango
+                      select count(*) as cant_trips, '[1500-2999]' as rango
                       from trips
-                      where  600 <= ST_Length(geom)
-                      and ST_Length(geom) < 900
+                      where  1500 <= ST_Length(geom)
+                      and ST_Length(geom) < 3000
                       union
-                      select count(*) as cant_trips, '[900-*]' as rango
+                      select count(*) as cant_trips, '[3000-*]' as rango
                       from trips
-                      where  900 <= ST_Length(geom)) res
+                      where  3000 <= ST_Length(geom)) res
                       order by rango";
 
       $result = DB::select($query);
