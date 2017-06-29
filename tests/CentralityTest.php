@@ -10,6 +10,7 @@ use Phaza\LaravelPostgis\Geometries\Point;
 use Phaza\LaravelPostgis\Geometries\Polygon;
 use Phaza\LaravelPostgis\PostgisConnection;
 
+use App\Http\Controllers\CentralityController;
 use App\Models\Centrality;
 
 class CentralityTest extends TestCase
@@ -127,5 +128,12 @@ class CentralityTest extends TestCase
         $this->assertTrue($centrality->name != $new_centrality->name);
         // Se descartan los cambios realizados.
         Centrality::destroy($centrality->id);
+    }
+
+    public function testTypesCentralities(){
+        $typesCentralities = (new CentralityController)->getTypesCentralities();
+        $countstrip = count($typesCentralities);
+
+        $this->assertTrue($countstrip == 13);
     }
 }

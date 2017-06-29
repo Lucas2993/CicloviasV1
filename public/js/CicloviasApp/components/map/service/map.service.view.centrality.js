@@ -4,9 +4,9 @@
     'use strict';
     // se hace referencia al modulo mapModule ya creado (esto esta determinado por la falta de [])
     angular.module('mapModule')
-        .service('srvViewCentrality', ['srvViewFeature','creatorStyle', SrvViewCentrality]);
+        .service('srvViewCentrality', ['srvViewFeature','creatorStyle', 'srvPathImageTypeCentrality', SrvViewCentrality]);
 
-    function SrvViewCentrality(srvViewFeature,creatorStyle) {
+    function SrvViewCentrality(srvViewFeature,creatorStyle, servPathIcons) {
 
         var service = {
             viewCentrality: viewCentrality,
@@ -18,13 +18,16 @@
 
         // Este metodo hace un toogle de una centralidad
         function viewCentrality(centralityJson, layer) {
-            srvViewFeature.viewFeature(centralityJson, layer,creatorStyle.getStylePoint() );
+            var typeCentrality = servPathIcons.getPathType(centralityJson.type);
+            srvViewFeature.viewFeature(centralityJson, layer,creatorStyle.getStyleCentrality(typeCentrality));
         }
 
         // agrega centralidades a partir de los datos recuperados del servidor a la capa recibida
         function addCentralities(centralitiesJson, layer) {
+            var typeCentrality;
             for (var i = 0; i < centralitiesJson.length; i++) {
-                srvViewFeature.addFeature(centralitiesJson[i],layer ,creatorStyle.getStylePoint());
+                typeCentrality = servPathIcons.getPathType(centralitiesJson[i].type);
+                srvViewFeature.addFeature(centralitiesJson[i], layer,creatorStyle.getStyleCentrality(typeCentrality));
             }
         }
 

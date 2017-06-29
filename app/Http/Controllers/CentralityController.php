@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use Phaza\LaravelPostgis\Geometries\Point;
@@ -127,5 +128,21 @@ class CentralityController extends Controller
         $centrality = Centrality::find($id);
         Centrality::destroy($id);
         return $centrality;
+    }
+
+    public function getTypesCentralities(){
+        $query =   "SELECT distinct(c.type)
+                    FROM centralities c";
+
+        $typesCentralitiesQuery= DB::raw($query);
+
+        $resultQuery = DB::select($typesCentralitiesQuery);
+
+        $typesCentralitiesResults = array();
+        foreach ($resultQuery as $single_result) {
+            array_push($typesCentralitiesResults, $single_result);
+        }
+        // echo "cant de tipos de centralidad: ".count($typesCentralitiesResults);
+        return $typesCentralitiesResults;
     }
 }

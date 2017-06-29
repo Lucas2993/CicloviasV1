@@ -83,7 +83,6 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.cicloviasByZone.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/model/map.service.model.journey.js') }}"></script>
 
-
     <!-- Vista -->
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.road.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.centrality.js') }}"></script>
@@ -92,6 +91,7 @@
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.journey.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.zone.js') }}"></script>
     <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.view.point.of.linestring.js') }}"></script>
+    <script src="{{ URL::asset('js/CicloviasApp/components/map/service/map.service.image.centralities.js') }}"></script>
 
     <!-- Herramientas de dibujo -->
     <script src="{{ URL::asset('js/CicloviasApp/components/toolsDraw/toolsDraw.service.style.js') }}"></script>

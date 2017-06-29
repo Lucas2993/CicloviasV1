@@ -11,7 +11,9 @@
             getStyleText: getStyleText,
             getStyleBorder: getStyleBorder,
             getStyleFill: getStyleFill,
-            getStylePoint: getStylePoint,
+            // getStylePoint: getStylePoint,
+            getStylePointCentrality: getStylePointCentrality,
+            getStyleCentrality: getStyleCentrality,
             getStyleTrip: getStyleTrip,
             getStylePolygon: getStylePolygon,
             getStyleJourney: getStyleJourney,
@@ -49,7 +51,8 @@
             return style;
         };
 
-        function getStylePoint() {
+        // function getStylePoint() {
+        function getStylePointCentrality(){
             var stylePoint = new ol.style.Style({
                 image: new ol.style.Icon(({
                     anchor: [0.5, 0, 5],
@@ -57,9 +60,20 @@
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'pixels',
                     src: 'https://openlayers.org/en/v4.1.0/examples/data/icon.png'
-                    // src: 'https://openlayers.org/en/v4.1.0/examples/data/dot.png'
-                    //, imgSize: [15, 25]
-                    // , size: [15, 25]
+                }))
+            });
+
+            return stylePoint;
+        };
+
+        function getStyleCentrality(pathImage){
+            var stylePoint = new ol.style.Style({
+                image: new ol.style.Icon(({
+                    anchor: [0.5, 0, 5],
+                    anchorOrigin: 'bottom-right',
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'pixels',
+                    src: pathImage
                 }))
             });
 
