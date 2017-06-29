@@ -21,7 +21,9 @@
     "angular-sanitize": "1.5.8",
     "angular": "1.5.8",
     "angular-openlayers-directive": "^1.19.3",
-    "bootstrap": "3.3.7"
+    "bootstrap": "3.3.7",
+    "chart.js": "^2.6.0",
+    "angular-chart.js": "^1.1.1"
   },
   "resolutions": {
     "angular": "1.5.8"

@@ -546,4 +546,39 @@ class TripController extends Controller{
 
         return $trips;
     }
+
+    public function getAmountTrips(){
+      $query = 'select count(*) as cant_trips
+                  from trips';
+
+      $result = DB::select($query);
+
+      return $result;
+    }
+
+    public function getTripsByLength(){
+      $query = "select res.*
+                from (select count(*) as cant_trips, '[0-299]' as rango
+                      from trips
+                      where ST_Length(geom) < 300
+                      union
+                      select count(*) as cant_trips, '[300-599]' as rango
+                      from trips
+                      where  300 <= ST_Length(geom)
+                      and ST_Length(geom) < 600
+                      union
+                      select count(*) as cant_trips, '[600-899]' as rango
+                      from trips
+                      where  600 <= ST_Length(geom)
+                      and ST_Length(geom) < 900
+                      union
+                      select count(*) as cant_trips, '[900-*]' as rango
+                      from trips
+                      where  900 <= ST_Length(geom)) res
+                      order by rango";
+
+      $result = DB::select($query);
+
+      return $result;
+    }
 }

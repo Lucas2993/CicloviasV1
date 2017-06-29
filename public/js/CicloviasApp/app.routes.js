@@ -29,6 +29,9 @@
                                                 .when('/home', {
                                                     templateUrl: base_route + path.HOME_VIEW
                                                 })
+																								.when('/dashboard', {
+																									templateUrl: base_route + path.DASHBOARD_VIEW
+																								})
                                                 .otherwise({
                                                     redirectTo: '/home'
                                                 });

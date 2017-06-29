@@ -43,3 +43,13 @@ Route::get('api/journey/getJourneysByZone/{zone_id}', 'JourneyController@getJour
 Route::get('api/trip/getTripsByOriginDestinationZone/{origin_zone_id}/{destination_zone_id}', 'TripController@getTripsByOriginDestinationZone');
 
 Route::get('api/rankinged', 'TripsRankingedController@tramosRanking');
+
+Route::get('api/dashboard/amountTrips', 'TripController@getAmountTrips');
+
+Route::get('api/dashboard/rankingCentralitiesByTrips', 'CentralityController@rankingCentralitiesByTrips');
+
+Route::get('api/dashboard/centralitiesByZone', 'CentralityController@countCentralitiesByZone');
+
+Route::get('api/dashboard/tripsByLength', 'TripController@getTripsByLength');
+
+Route::get('api/dashboard/rankingZoneCrossTrips', 'ZoneController@getRankingZoneCrossTrips');

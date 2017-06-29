@@ -3,7 +3,7 @@
 
     angular.module('navigationbar')
         .controller('NavController', ['$scope','creatorMap', NavController]);
-        
+
     function NavController(vm,creatorMap) {
 
         vm.desactive = function() {
