@@ -11,6 +11,8 @@
         ZONE: 'api/zone',
         DASHBOARD: 'api/dashboard',
         ROAD: 'api/road',
+        TYPES_CENTRALITY: 'api/centralityTypes',
+        ICON_CENTRALITY: 'js/CicloviasApp/components/icons'
     })
     .constant('propiertiesMap',{
         PROJECTION: 'EPSG:4326',

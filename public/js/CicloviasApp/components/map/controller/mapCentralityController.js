@@ -14,7 +14,7 @@
             MapCentralityController
         ]);
 
-    function MapCentralityController(vm, creatorMap, srvLayers, srvModelCentrality, dataServer, srvViewCentrality, adminMenu) {
+        function MapCentralityController(vm, creatorMap, srvLayers, srvModelCentrality, dataServer, srvViewCentrality, adminMenu) {
 
         // ********************************** VARIABLES PUBLICAS ************************
         // Mapa
@@ -154,6 +154,7 @@
         }
 
         // ************************ Inicializacion de datos *****************************
+        generateCentralitiesPoints();
         findAllCentralities();
 
     } // fin Constructor

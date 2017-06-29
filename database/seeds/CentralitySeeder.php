@@ -537,7 +537,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad41 = new Centrality;
         $centralidad41->name = 'UNPSJB';
-        $centralidad41->type = 'Educacion Universitaria';
+        $centralidad41->type = 'Educacion_Universitaria';
         $centralidad41->location = 'Bv. Almirante Brown 3051';
         $centralidad41->geom = new Point(-42.785667, -65.005941);
 
@@ -576,7 +576,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad44 = new Centrality;
         $centralidad44->name = 'UTN';
-        $centralidad44->type = 'Educacion Universitaria';
+        $centralidad44->type = 'Educacion_Universitaria';
         $centralidad44->location = 'Av. del Trabajo 1536';
         $centralidad44->geom = new Point(-42.768933176994324, -65.05462735891342);
 
@@ -589,7 +589,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad45 = new Centrality;
         $centralidad45->name = 'Universidad de Comahue';
-        $centralidad45->type = 'Educacion Universitaria';
+        $centralidad45->type = 'Educacion_Universitaria';
         $centralidad45->location = 'Av Julio Argentino Roca 743';
         $centralidad45->geom = new Point(-42.771245, -65.03009);
 
@@ -980,7 +980,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad75 = new Centrality;
         $centralidad75->name = 'Municipalidad de Puerto Madryn';
-        $centralidad75->type = 'Edificio Publico';
+        $centralidad75->type = 'Edificio_Publico';
         $centralidad75->location = 'Belgrano 206';
         $centralidad75->geom = new Point(-42.767802, -65.035842);
 
@@ -993,7 +993,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad76 = new Centrality;
         $centralidad76->name = 'Muni Cerca 1';
-        $centralidad76->type = 'Edificio Publico';
+        $centralidad76->type = 'Edificio_Publico';
         $centralidad76->location = 'Juan Muzzio 1106 y W. Jones';
         $centralidad76->geom = new Point(-42.770004, -65.048827);
 
@@ -1006,7 +1006,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad77 = new Centrality;
         $centralidad77->name = 'Muni Cerca 2';
-        $centralidad77->type = 'Edificio Publico';
+        $centralidad77->type = 'Edificio_Publico';
         $centralidad77->location = 'España 1986';
         $centralidad77->geom = new Point(-42.779831, -65.057018);
 
@@ -1019,7 +1019,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad78 = new Centrality;
         $centralidad78->name = 'Muni Cerca 3';
-        $centralidad78->type = 'Edificio Publico';
+        $centralidad78->type = 'Edificio_Publico';
         $centralidad78->location = 'Lavalle y Juan B. Justo';
         $centralidad78->geom = new Point(-42.783953, -65.033382);
 
@@ -1032,7 +1032,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad79 = new Centrality;
         $centralidad79->name = 'Escuela Municipal N 1 Victor Moron';
-        $centralidad79->type = 'Edificio Publico';
+        $centralidad79->type = 'Edificio_Publico';
         $centralidad79->location = 'Anita Jones 44 B. 21 de Enero';
         $centralidad79->geom = new Point(-42.756251, -65.058715);
 
@@ -1045,7 +1045,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad80 = new Centrality;
         $centralidad80->name = 'Escuela Municipal N 3 C. B. De Padilla Esc. Verde';
-        $centralidad80->type = 'Edificio Publico';
+        $centralidad80->type = 'Edificio_Publico';
         $centralidad80->location = 'Albarracin Norte 2982 - B San Miguel';
         $centralidad80->geom = new Point(-42.785315, -65.066941);
 
@@ -1058,7 +1058,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad81 = new Centrality;
         $centralidad81->name = 'CDI N 1 Piedra Libre';
-        $centralidad81->type = 'Edificio Publico';
+        $centralidad81->type = 'Edificio_Publico';
         $centralidad81->location = 'Juan Muzzio y Necochea. B Perito Moreno';
         $centralidad81->geom = new Point(-42.76175,  -65.044995);
 
@@ -1071,7 +1071,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad82 = new Centrality;
         $centralidad82->name = 'CDI N 2 Paraiso de Colores';
-        $centralidad82->type = 'Edificio Publico';
+        $centralidad82->type = 'Edificio_Publico';
         $centralidad82->location = 'Anita Jones 20 - B. 21 de Enero';
         $centralidad82->geom = new Point(-42.756476, -65.058729);
 
@@ -1084,7 +1084,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad83 = new Centrality;
         $centralidad83->name = 'CDI N 3 Abracadabra';
-        $centralidad83->type = 'Edificio Publico';
+        $centralidad83->type = 'Edificio_Publico';
         $centralidad83->location = 'Gualjaina s/n e/Tecka y El: Maiten B. Pujol';
         $centralidad83->geom = new Point(-42.759644, -65.060376);
 
@@ -1097,7 +1097,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad84 = new Centrality;
         $centralidad84->name = 'CDI N 4 Pichi Nekum';
-        $centralidad84->type = 'Edificio Publico';
+        $centralidad84->type = 'Edificio_Publico';
         $centralidad84->location = 'Albarracin Sur 2985 B. San Miguel';
         $centralidad84->geom = new Point(-42.785323, -65.066951);
 
@@ -1110,7 +1110,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad85 = new Centrality;
         $centralidad85->name = 'CDI N 8 Acuarela';
-        $centralidad85->type = 'Edificio Publico';
+        $centralidad85->type = 'Edificio_Publico';
         $centralidad85->location = 'La Rioja 725';
         $centralidad85->geom = new Point(-42.779007, -65.054161);
 
@@ -1123,7 +1123,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad86 = new Centrality;
         $centralidad86->name = 'Club Municipal de Ciencias';
-        $centralidad86->type = 'Edificio Publico';
+        $centralidad86->type = 'Edificio_Publico';
         $centralidad86->location = 'Juan Muzzio y Necochea';
         $centralidad86->geom = new Point(-42.761937, -65.045162);
 
@@ -1136,7 +1136,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad87 = new Centrality;
         $centralidad87->name = 'Subsecretaria de Desarrollo Comunitario';
-        $centralidad87->type = 'Edificio Publico';
+        $centralidad87->type = 'Edificio_Publico';
         $centralidad87->location = 'Bouchard y 9 de Julio';
         $centralidad87->geom = new Point(-42.773154, -65.048568);
 
@@ -1149,7 +1149,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad88 = new Centrality;
         $centralidad88->name = 'Gimnasio Municipal I';
-        $centralidad88->type = 'Edificio Publico';
+        $centralidad88->type = 'Edificio_Publico';
         $centralidad88->location = 'Sarmiento 1235';
         $centralidad88->geom = new Point(-42.774204, -65.048274);
 
@@ -1162,7 +1162,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad89 = new Centrality;
         $centralidad89->name = 'Gimansio Municipal II';
-        $centralidad89->type = 'Edificio Publico';
+        $centralidad89->type = 'Edificio_Publico';
         $centralidad89->location = 'Berwyn y Pasaje Evita';
         $centralidad89->geom = new Point(-42.760866, -65.045612);
 
@@ -1175,7 +1175,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad90 = new Centrality;
         $centralidad90->name = 'Biblioteca Popular Agustin Pujol';
-        $centralidad90->type = 'Edificio Publico';
+        $centralidad90->type = 'Edificio_Publico';
         $centralidad90->location = 'Anita Jones 44';
         $centralidad90->geom = new Point(-42.756221, -65.058597);
 
@@ -1422,7 +1422,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad109 = new Centrality;
         $centralidad109->name = 'Centro de Gestion Barrial N I';
-        $centralidad109->type = 'Edificio Publico';
+        $centralidad109->type = 'Edificio_Publico';
         $centralidad109->location = 'Albarracin y Tomas Mate';
         $centralidad109->geom = new Point(-42.78258, -65.061032);
 
@@ -1435,7 +1435,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad110 = new Centrality;
         $centralidad110->name = 'Centro de Gestion Barrial N II';
-        $centralidad110->type = 'Edificio Publico';
+        $centralidad110->type = 'Edificio_Publico';
         $centralidad110->location = 'Rio Mayo y El Maiten';
         $centralidad110->geom = new Point(-42.757984, -65.063081);
 
@@ -1448,7 +1448,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad111 = new Centrality;
         $centralidad111->name = 'Centro de Gestion Barrial N 4 Sede Junta Vecinal B. Peron';
-        $centralidad111->type = 'Edificio Publico';
+        $centralidad111->type = 'Edificio_Publico';
         $centralidad111->location = 'Albarracin 3445';
         $centralidad111->geom = new Point(-42.785572, -65.068821);
 
@@ -1526,7 +1526,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad117 = new Centrality;
         $centralidad117->name = 'Junta Vecinal Desembarco';
-        $centralidad117->type = 'Edificio Publico';
+        $centralidad117->type = 'Edificio_Publico';
         $centralidad117->location = 'Roca y Libertad';
         $centralidad117->geom = new Point(-42.78738, -65.019868);
 
@@ -1539,7 +1539,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad118 = new Centrality;
         $centralidad118->name = 'Junta Vecinal El Porvenir';
-        $centralidad118->type = 'Edificio Publico';
+        $centralidad118->type = 'Edificio_Publico';
         $centralidad118->location = 'Roberto Gomez y Juan XXIII';
         $centralidad118->geom = new Point(-42.757583, -65.047681);
 
@@ -1552,7 +1552,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad119 = new Centrality;
         $centralidad119->name = 'Junta Vecinal Fontana';
-        $centralidad119->type = 'Edificio Publico';
+        $centralidad119->type = 'Edificio_Publico';
         $centralidad119->location = 'Buenos Aires entre España y Gales';
         $centralidad119->geom = new Point(-42.778528, -65.055391);
 
@@ -1565,7 +1565,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad120 = new Centrality;
         $centralidad120->name = 'Junta Vecinal Galina';
-        $centralidad120->type = 'Edificio Publico';
+        $centralidad120->type = 'Edificio_Publico';
         $centralidad120->location = 'Dorrego 1288';
         $centralidad120->geom = new Point(-42.788311, -65.040303);
 
@@ -1578,7 +1578,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad121 = new Centrality;
         $centralidad121->name = 'Junta Vecinal Guemes';
-        $centralidad121->type = 'Edificio Publico';
+        $centralidad121->type = 'Edificio_Publico';
         $centralidad121->location = 'Ferrocarril Patagonico y Pasaje Becker';
         $centralidad121->geom = new Point(-42.772205, -65.052839);
 
@@ -1591,7 +1591,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad122 = new Centrality;
         $centralidad122->name = 'Junta Vecinal Piedra Buena';
-        $centralidad122->type = 'Edificio Publico';
+        $centralidad122->type = 'Edificio_Publico';
         $centralidad122->location = 'Lewis Jones 528';
         $centralidad122->geom = new Point(-42.781608, -65.032336);
 
@@ -1604,7 +1604,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad123 = new Centrality;
         $centralidad123->name = 'Junta Vecinal Roque Gonzales';
-        $centralidad123->type = 'Edificio Publico';
+        $centralidad123->type = 'Edificio_Publico';
         $centralidad123->location = 'Albarracin y Alberdi';
         $centralidad123->geom = new Point(-42.783008, -65.061548);
 
@@ -1617,7 +1617,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad124 = new Centrality;
         $centralidad124->name = 'Junta Vecinal Ruca Hue';
-        $centralidad124->type = 'Edificio Publico';
+        $centralidad124->type = 'Edificio_Publico';
         $centralidad124->location = 'Patricias Argentina y Fuerte San Jose';
         $centralidad124->geom = new Point(-42.766393, -65.048398);
 
@@ -1721,7 +1721,7 @@ class CentralitySeeder extends Seeder
 
         $centralidad132 = new Centrality;
         $centralidad132->name = 'Pista de Atletismo';
-        $centralidad132->type = 'Espacio Publico';
+        $centralidad132->type = 'Espacio_Publico';
         $centralidad132->location = 'Mariano Moreno ';
         $centralidad132->geom = new Point(-42.77671694755554, -65.03405749797821);
 

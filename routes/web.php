@@ -59,3 +59,5 @@ Route::get('api/dashboard/rankingZoneCrossTrips', 'ZoneController@getRankingZone
 Route::resource('api/road', 'RoadController',['except' => ['create', 'edit', 'store', 'update']]);
 
 Route::get('api/journey/getSimilarTripsJourney/{$long1}/{$lat1}/{$long2}/{$lat2}', 'JourneyController@getSimilarTripsJourney');
+
+Route::get('api/centralityTypes', 'CentralityController@getTypesCentralities');

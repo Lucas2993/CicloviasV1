@@ -86,6 +86,9 @@
                     if (data.length > 0) {
                         vm.enableChecbox = true;
                     }
+                    else{
+                        alert("No se encontraron recorridos.");
+                    }
                     console.log("Tramos Ranking recuperados prom con EXITO! = " + data);
                     viewTripsRanking();
                 })

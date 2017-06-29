@@ -26,6 +26,7 @@
 
             // Centralidades
             getCentralities: getCentralities,
+            getTypesCentrality: getTypesCentrality,
             saveCentrality: saveCentrality,
             updateCentrality: updateCentrality,
             deleteCentrality: deleteCentrality,
@@ -65,6 +66,24 @@
             }).then(function successCallback(res) {
                     defered.resolve(res.data);
                     console.log('datos de promise CENTRALITY: '+ res.data.length);
+                },
+                function errorCallback(err) {
+                    defered.reject(err)
+                }
+            );
+            return promise;
+        };
+
+        function getTypesCentrality(){
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http({
+                method: 'GET',
+                url: path.TYPES_CENTRALITY
+            }).then(function successCallback(res) {
+                    defered.resolve(res.data);
+                    console.log('datos de promise TYPES_CENTRALITY: '+ res.data.length);
                 },
                 function errorCallback(err) {
                     defered.reject(err)
