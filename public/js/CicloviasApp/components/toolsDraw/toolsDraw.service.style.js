@@ -11,7 +11,7 @@
             getStyleText: getStyleText,
             getStyleBorder: getStyleBorder,
             getStyleFill: getStyleFill,
-            getStylePoint: getStylePoint,
+            getStyleCentrality: getStyleCentrality,
             getStyleTrip: getStyleTrip,
             getStylePolygon: getStylePolygon,
             getStyleJourney: getStyleJourney,
@@ -21,6 +21,7 @@
             getStyleTemporalEditCentrality: getStyleTemporalEditCentrality,
             getStyleTripCloseToPointViolet: getStyleTripCloseToPointViolet,
             getStylePoint: getStylePoint,
+
         };
         return service;
 
@@ -49,7 +50,7 @@
             return style;
         };
 
-        function getStylePoint() {
+        function getStyleCentrality() {
             var stylePoint = new ol.style.Style({
                 image: new ol.style.Icon(({
                     anchor: [0.5, 0, 5],
